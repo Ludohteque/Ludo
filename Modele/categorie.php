@@ -7,15 +7,27 @@ class categorie {
     private $table = "Categorie";
     private $clePrimaire = "id_categorie";
     
-    function __construct ($nomCat) {
-        $req = "INSERT INTO ".$this->table." values('',".$nomCat.");";
-        PdoLudo::$monPdo->exec($req);
+    function __construct($nomCat) {
+        $this->nomCat = $nomCat;
     }
-    
-    function lireCatId ($idcatenv) {
-        $req = "SELECT ".$nomcat." FROM ".$table." WHERE ".$idcat." LIKE ".$idcatenv.";";
-        PdoLudo::$monPdo->exec($req);
+
+    function getIdCat() {
+        return $this->idCat;
     }
+
+    function getNomCat() {
+        return $this->nomCat;
+    }
+
+    function setIdCat($idCat) {
+        $this->idCat = $idCat;
+    }
+
+    function setNomCat($nomCat) {
+        $this->nomCat = $nomCat;
+    }
+
+
     
 }
 

@@ -5,7 +5,7 @@ namespace Exemplaire;
 	class Exemplaire {
 		
 		private $table = "exemplaire";
-		private $clePrimaire = "idExemplaire"
+		private $clePrimaire = "idExemplaire";
 		
 		private $idUser;
 		private $idJeu;

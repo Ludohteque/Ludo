@@ -14,8 +14,8 @@ public class categorie {
         \Main\Connexions\connexion->exec($requete);
     }
     
-    function lireCatNom ($nomcatenv) {
-        $requete = "SELECT ".$nomcat." FROM ".$table." WHERE ".$idcat." LIKE ".$idcatenv.";"
+    function lireCatId ($nomcatenv) {
+        $requete = "SELECT ".$idcat." FROM ".$table." WHERE ".$nomcat." LIKE ".$nomcatenv.";"
         \Main\Connexions\connexion->connect($base);
         \Main\Connexions\connexion->exec($requete);
     }

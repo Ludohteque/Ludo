@@ -1,26 +1,19 @@
 <?php
 
-class Jeu {
+class Jeu extends Produit {
 
     
-        private $table = "jeu";
-        private $clePrimaire = "id_jeu";
         
         //attributs
 	private $idJeu;
-	private $nomJeu;
 	private $nbJoueurs;
 	private $idAge;
-	private $note;
 	private $idCat;
-	private $descriptif;
-	private $estValide;
-        private $inventaire;
         private $idDuree;
         private $dateAjout;
         
-        function __construct($nomJeu, $nbJoueurs, $idAge, $note, $idCat, $descriptif, $inventaire, $idDuree, $dateAjout) {
-            $this->nomJeu = $nomJeu;
+        function __construct($nomJeu, $nbJoueurs, $idAge, $idCat, $descriptif, $inventaire, $idDuree, $dateAjout) {
+            parent::__construct($nom, $descriptif, $etat);
             $this->nbJoueurs = $nbJoueurs;
             $this->idAge = $idAge;
             $this->note = $note;

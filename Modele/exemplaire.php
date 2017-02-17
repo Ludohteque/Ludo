@@ -3,6 +3,10 @@
 namespace Exemplaire;
 
 	class Exemplaire {
+		
+		private $table = "exemplaire";
+		private $clePrimaire = "idExemplaire"
+		
 		private $idUser;
 		private $idJeu;
 		private $idExemplaire;
@@ -18,20 +22,21 @@ namespace Exemplaire;
 			$this->dispo = $disponibilité;
 			
 		}
-		function user() {
+		function getUser() {
 			return $this->user;
 		}
-		function jeu() {
+		function getInfosJeuParId() {
 			return $this->jeu;
 		}
-		function exemplaire() {
+		function getExemplaire() {
 			return  $this->exemp;
 		}
-		function commentaire() {
+		function getCommentaire() {
 			return $this->com;
 		}
-		function disponibilite() {
+		function getDisponibilite() {
 			return $this->dispo;			
 		}
 		
 ?>
+

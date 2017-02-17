@@ -28,17 +28,17 @@ namespace User;
 			return $this->pseudo;			
 		}
 		
-		function  getIdUserParVille() {
+		function  getIdUserVille() {
 			return $this->ville;
 		}
 		
-		function getIdUserParMAil() {
+		function getIdUserMAil() {
 			return $this->mail;
 		}
-		function getIdUserParTelephone() {
+		function getIdUserTelephone() {
 			return $this->tel;
 		}
-		function getIdUserParMotDePasse() {
+		function getIdUserMotDePasse() {
 			return $this->mdp;
 		}
 		function getIdUserIfAdmin() {
@@ -47,9 +47,5 @@ namespace User;
 		function getIdUserIfBureau() {
 			$this->bureau=true;
 		}
-	
-
 }	
-
-
 ?>

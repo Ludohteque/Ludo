@@ -4,52 +4,65 @@ namespace User;
 	class user{
 		
 		private $table = "user";
-		private $clePrimaire = "pseudo";
+		private $clePrimaire = "idUser";
 		
-		private $pseudo;
+		private $idUser;
+                private $pseudo;
 		private $ville;
 		private $mail;
 		private $tel;
 		private $mdp;
+                private $noteUser;
 		private $admin = false;
 		private $bureau = false;
 		
 		
-		function __construct($pseudo, $ville, $mail, $tel, $mdp) {
+		function __construct($pseudo, $ville, $mail, $tel, $mdp, $noteUser) {
 			$this->pseudo = $pseudo;
 			$this->ville = $ville;
 			$this->mail = $mail;
 			$this->tel = $tel;
 			$this->mdp = $mdp;
+                        $this->noteUser = $noteUser;
 
 		}
-		
-		function getIdUserParPseudo() {
-			return $this->pseudo;			
+                function getUserById($Iduser) {
+                    return $this->idUser;
+                }		
+		function getIdUserByPseudo($pseudo) {
+                    return $this->idUser;			
 		}
-		
+
+                function getUserByJeu($idJeu) {
+                    return $this->idUser;
+                }
+                
 		function  getIdUserVille() {
-			return $this->ville;
+                    return $this->ville;
 		}
 		
-		function getIdUserMAil() {
-			return $this->mail;
+		function getUserMAil() {
+                    return $this->mail;
 		}
-		function getIdUserTelephone() {
-			return $this->tel;
+		function getUserTelephone() {
+                    return $this->tel;
 		}
-		function getIdUserMotDePasse() {
-			return $this->mdp;
+		function getUserMotDePasse() {
+                    return $this->mdp;
 		}
-		function getIdUserIfAdmin() {
-			return $this->admin;
+		function getUserIfAdmin() {
+                    return $this->admin;
 		}
-		function getIdUserIfBureau() {
-			return $this->bureau;
+		function getUserIfBureau() {
+                    return $this->bureau;
 		}
-	
-
-}	
+                function setUser($idUser) {
+                    $this-> idUser = $idUser;
+                }
+                function setNoteUser($noteUser) {
+                    $this->noteUser = $noteUser;
+                }
+        }
 
 
 ?>

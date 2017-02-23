@@ -16,13 +16,13 @@ switch($action){
 		$login = $_REQUEST['login'];
 		$mdp = $_REQUEST['mdp'];
                 $mdp = md5($mdp);
-		$visiteur = $pdo->getInfosJoueur($login, $mdp);
-                $comptable = $pdo->getInfosAdmin($login, $mdp);
+		$joueur = $pdo->getInfosJoueur($login, $mdp);
+                $admin = $pdo->getInfosAdmin($login, $mdp);
 		if(!is_array( $joueur) && !is_array($admin)){
 			ajouterErreur("Login ou mot de passe incorrect");
 			include("Vue/v_erreurs.php");
 			include("Vue/v_connexion.php");
-		} else if (is_array($joueur)) {
+		} else if (is_array($donneesForm)) {
 			$id = $joueur['id'];
 			$nom =  $joueur['nom'];
 			$prenom = $joueur['prenom'];

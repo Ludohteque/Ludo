@@ -9,6 +9,7 @@
 		<label for="prenom">Mot de passe :</label>
 		<input id="passe" type="text" />
 	</p>
+        </br>
 	<p class="pform">
 		<a class="submit" id="go">Envoyer</a>
 	</p>

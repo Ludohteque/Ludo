@@ -31,6 +31,7 @@ class Connexion{
 	{
 		return $this->PDOInstance->query($query);
 	}
+        
 }
 //On fait l'appel a getInstance comme ça:
 

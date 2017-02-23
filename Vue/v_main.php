@@ -1,7 +1,7 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <?php include('Vue/v_actus.php'); ?>
     
-    
+    <div id="tableContainer"> <!-- table contenant la liste de ses propres jeux -->
         <table class="table table-hover table-condensed" id="listPropreJeux">
                 <tr style="background-color: white;">
                     <th style="text-align:center;">Jeu</th>
@@ -29,6 +29,7 @@
                 </tr>
         </table>
       </div>
+    </div>
         <div id="en blanc">
             
         </div>

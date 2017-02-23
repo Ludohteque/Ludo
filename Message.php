@@ -23,6 +23,7 @@ namespace Message;
 			$this->expe = $idExpediteur;
 			$this->dest = $idDestinataire;
 			$this->sujet = $sujet;
+			
 		}
 		
 
@@ -46,14 +47,17 @@ namespace Message;
 		}
 		
 		function getEmprunt() {
-			return true;
+			$this-> emprunt = $emprunt;
+			return $this->emprunt;
 		}
 		
 		function getMessagesAjout() {
-			return true;
+			$this-> ajout = $ajout;
+			return $this->ajout;
 		}
 		function getMessagesSignalement() {
-			return true;
+			$this-> sugnalement = $signalement;
+			return $this->signalement;
 		}
 	}
 	

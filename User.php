@@ -42,9 +42,11 @@ namespace User;
 			return $this->mdp;
 		}
 		function getIdUserIfAdmin() {
+			$this->admin = $admin;
 			return $this->admin;
 		}
 		function getIdUserIfBureau() {
+			$this->bureau = $bureau; 
 			return $this->bureau;
 		}
 	

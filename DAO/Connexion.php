@@ -5,7 +5,7 @@ class Connexion{
 	private $PDOInstance = null;
 	private static $instance = null;
 
-	const DEFAULT_SQL_DTB = 'test2';
+	const DEFAULT_SQL_DTB = 'ludotheque';
 	const DEFAULT_SQL_HOST = 'localhost';
 	const DEFAULT_SQL_USER = 'root';
 	const DEFAULT_SQL_PASS = '';

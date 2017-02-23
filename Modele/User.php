@@ -13,8 +13,8 @@ namespace User;
 		private $tel;
 		private $mdp;
                 private $noteUser;
-		private $admin = false;
-		private $bureau = false;
+		private $Isadmin = false;
+		private $Isbureau = false;
 		
 		
 		function __construct($pseudo, $ville, $mail, $tel, $mdp, $noteUser) {
@@ -51,10 +51,10 @@ namespace User;
                     return $this->mdp;
 		}
 		function getUserIfAdmin() {
-                    return $this->admin;
+                    return $this->Isadmin;
 		}
 		function getUserIfBureau() {
-                    return $this->bureau;
+                    return $this->Isbureau;
 		}
                 function setUser($idUser) {
                     $this-> idUser = $idUser;

@@ -2,7 +2,7 @@
 
 class Commentaire {
     
-    private $table = "commentaire";
+    private $table = "Commentaire";
     private $clePrimaire = "id_comm";
     
     private $idComm;

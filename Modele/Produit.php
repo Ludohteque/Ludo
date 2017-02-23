@@ -2,7 +2,7 @@
 
 class Produit {
     
-    private $table = "produit";
+    private $table = "Produit";
     private $clePrimaire = "id_produit";
     
     protected $idProduit;

@@ -1,6 +1,6 @@
 <?php
 
-class categorie {
+class Categorie {
     
     private $idCat;
     private $nomCat;

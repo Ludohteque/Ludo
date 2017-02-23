@@ -1,7 +1,7 @@
 <?php
 
 class Message {
-    private $table = "message";
+    private $table = "Message";
     private $clePrimaire = "id_message";
 
     private $idMessage;

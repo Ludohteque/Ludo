@@ -47,16 +47,13 @@ class message {
 	}
 
 	function getEmprunt() {
-		$this-> emprunt = $emprunt;
 		return $this->emprunt;
 	}
 
 	function getMessagesAjout() {
-		$this-> ajout = $ajout;
 		return $this->ajout;
 	}
 	function getMessagesSignalement() {
-		$this-> sugnalement = $signalement;
 		return $this->signalement;
 	}
 }

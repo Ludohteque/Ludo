@@ -11,6 +11,7 @@ class Jeu extends Produit {
 	private $idCat;
         private $idDuree;
         private $dateAjout;
+        private $lesCommentaires;
         
         function __construct($nomJeu, $nbJoueurs, $idAge, $idCat, $descriptif, $inventaire, $idDuree, $dateAjout) {
             parent::__construct($nom, $descriptif, $etat);
@@ -68,6 +69,13 @@ class Jeu extends Produit {
         function getDateAjout() {
             return $this->dateAjout;
         }
+        function getLesCommentaires() {
+            return $this->lesCommentaires;
+        }
+
+        function setLesCommentaires($lesCommentaires) {
+            $this->lesCommentaires = $lesCommentaires;
+        }
 
         function setIdJeu($idJeu) {
             $this->idJeu = $idJeu;
@@ -112,14 +120,6 @@ class Jeu extends Produit {
         function setDateAjout($dateAjout) {
             $this->dateAjout = $dateAjout;
         }
-
-
-
-
-
-	
-
-	
 
 }
 

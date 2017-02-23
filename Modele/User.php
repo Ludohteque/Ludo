@@ -3,7 +3,7 @@ namespace User;
 
 	class user{
 		
-		private $table = "use";
+		private $table = "user";
 		private $clePrimaire = "pseudo";
 		
 		private $pseudo;
@@ -42,10 +42,14 @@ namespace User;
 			return $this->mdp;
 		}
 		function getIdUserIfAdmin() {
-			$this->admin=true;
+			return $this->admin;
 		}
 		function getIdUserIfBureau() {
-			$this->bureau=true;
+			return $this->bureau;
 		}
+	
+
 }	
+
+
 ?>

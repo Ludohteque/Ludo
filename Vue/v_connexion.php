@@ -1,15 +1,23 @@
-<div id="contenu">
-    <h2>Identification utilisateur</h2>
-    <form method="POST" action="index.php?uc=connexion&action=valideConnexion">
-        <p>
-          <label for="nom">Login</label> <!-- label[for=email] {} dans les css-->
-           <input id="login" type="text" name="login"  size="30" maxlength="45">
-        </p>
-        <p>
-            <label for="mdp">Mot de passe</label>
-            <input id="mdp"  type="password"  name="mdp" size="30" maxlength="45">
-        </p>
-            <input type="submit" value="Valider" name="valider">
-            <input type="reset" value="Annuler" name="annuler">
-    </form>
+<?php include('v_header.php'); ?>
+<form id="start" action="POST">
+	<h4 class="titreformulaire">Identification Joueur</h4>
+	<p class="pform">
+		<label for="nom">Login :</label>
+		<input id="name" type="text" />
+	</p>
+	<p class="pform">
+		<label for="prenom">Mot de passe :</label>
+		<input id="passe" type="text" />
+	</p>
+        </br>
+	<p class="pform">
+		<a class="submit" id="go">Envoyer</a>
+	</p>
+</form>
 </div>
+<div id="titre"></div>
+
+<?php
+include('v_footer.php');   
+
+?>

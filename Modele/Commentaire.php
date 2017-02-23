@@ -1,6 +1,6 @@
 <?php
 
-class Commentaire {
+class Commentaire extends Jeu {
     
     private $table = "Commentaire";
     private $clePrimaire = "id_comm";

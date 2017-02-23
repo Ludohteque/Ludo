@@ -11,31 +11,31 @@ namespace Exemplaire;
 		private $idJeu;
 		private $idExemplaire;
 		private $commentaire;
-		private $disponibilité;
+		private $disponibilite;
 		private $requette;
 		
 	}	
-		function __construct($idJeu, $idExemplaire ,$commentaire, $disponibilité ){
-			$this->jeu = $idJeu;
-			$this->exemp = $idExemplaire;
-			$this->com = $commentaire;
-			$this->dispo = $disponibilité;
+		function __construct($idJeu, $idExemplaire ,$commentaire, $disponibilite ){
+			$this->idJeu = $idJeu;
+			$this->idExemplaire = $idExemplaire;
+			$this->commentaire = $commentaire;
+			$this->disponibilite = $disponibilite;
 			
 		}
 		function getUser() {
 			return $this->user;
 		}
 		function getInfosJeuParId() {
-			return $this->jeu;
+			return $this->idJeu;
 		}
 		function getExemplaire() {
-			return  $this->exemp;
+			return  $this->idExemplaire;
 		}
 		function getCommentaire() {
-			return $this->com;
+			return $this->commentaire;
 		}
 		function getDisponibilite() {
-			return $this->dispo;			
+			return $this->disponibilite;			
 		}
 		
 ?>

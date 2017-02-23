@@ -1,63 +1,27 @@
-<!Doctype HTML>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <link rel="icon" type="image/ico" href="img/favicon.ico" />
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://fonts.googleapis.com/css?family=Kavoon|Open+Sans" rel="stylesheet">
-        <link rel="apple-touch-icon" href="apple-touch-icon.png">
-
-        <link rel="stylesheet" href="vue/css/bootstrap.min.css">
-        <style>
-            body {
-                padding-top: 50px;
-                padding-bottom: 20px;
-            }
-        </style>
-        <link href="https://fonts.googleapis.com/css?family=Eczar" rel="stylesheet">
-        <link rel="stylesheet" href="vue/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="vue/css/main.css">
-        <script src="vue/js/jssor.slider-22.1.8.min.js"></script>
-        <script src="vue/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-    </head>
-    <body>
-        <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-        <?php include('Vue/v_header.php'); ?>
-        <?php include('Vue/v_main.php'); ?>
-        <?php include('Vue/v_footer.php'); ?>
-        
-        
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
-
-    <script src="vue/js/vendor/bootstrap.min.js"></script>
-
-    <script src="vue/js/main.js"></script>
-
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-    <script>
-        (function (b, o, i, l, e, r) {
-            b.GoogleAnalyticsObject = l;
-            b[l] || (b[l] =
-                    function () {
-                        (b[l].q = b[l].q || []).push(arguments)
-                    });
-            b[l].l = +new Date;
-            e = o.createElement(i);
-            r = o.getElementsByTagName(i)[0];
-            e.src = '//www.google-analytics.com/analytics.js';
-            r.parentNode.insertBefore(e, r)
-        }(window, document, 'script', 'ga'));
-        ga('create', 'UA-XXXXX-X', 'auto');
-        ga('send', 'pageview');
-    </script>
-</body>
-</html>
+<?php 
+//$estConnecte = estConnecte();
+?>
+<?php
+/*$estConnecte = estConnecte();*/
+if(!isset($_REQUEST['uc'])){
+     $_REQUEST['uc'] = 'accueil';
+}	 
+$uc = $_REQUEST['uc'];
+switch($uc){
+	case 'accueil':{
+                include('Vue/v_header.php');
+		include("Vue/v_main.php");
+                include('Vue/v_footer.php');
+                break;
+	}
+	case 'connexion' :{
+		include("Controleur/c_connexion.php");break;
+	}
+	case 'inscription' :{
+		include("Controleur/c_inscription.php");break; 
+	}
+        case 'dashboard' :{
+                include("Controleur/c_dashboard.php");break;
+        }
+}
+?>

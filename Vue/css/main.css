@@ -1,0 +1,125 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+
+body {
+    background-color: #f9c563;
+    font-family: 'Kavoon', serif;
+}
+
+
+.navbar-inverse {
+    background-image: linear-gradient(to bottom,gray 0,black 100%);
+    color: #f9c563;  
+}
+
+
+.navbar-inverse .navbar-brand {
+    color: #c12e2a;
+    -webkit-text-stroke: 1px lightgray;
+}
+
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a {
+    text-shadow: 0 -1px 0 graytext;
+}
+
+.navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus {
+    color: violet;
+    background-color: transparent;
+}
+
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+    border-color: #eb9316;
+}
+
+#welc {
+    color: white;
+}
+
+#mainlist > table{
+    margin-left: 20%;
+    margin-right: 20%;
+    width: 60%;
+}
+
+.table>tbody>tr>th {
+    border-color: red;
+    border-width: 5px;
+}
+
+table {
+    box-shadow: 8px 8px 7px rgba(0, 0, 0, .3);
+    font-family: Open sans , serif;
+    font-weight: bold;
+}
+
+.jumbotron {
+    background-color: #669999;
+    border-bottom: 5px;
+    border-bottom-style: dashed;
+    border-bottom-color: red;
+}
+
+.btn-primary {
+    background-position: 0 0;
+    background-image: linear-gradient(to bottom,lightgray 0,gray 100%);
+    box-shadow: 8px 8px 7px rgba(0, 0, 0, .3);
+    text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.36);
+    font-family: Open sans, serif;
+}
+
+.btn-primary:hover {
+    background-position: 0 0;
+    background-image: linear-gradient(to bottom,darkgray 0,gray 100%);
+}
+
+.btn-primary:focus {
+    background-position: 0 0;
+    background-image: linear-gradient(to bottom,darkgray 0,gray 100%);
+}
+
+.slidertitle {
+    font-size:50px;
+    color:red;
+    -webkit-text-stroke: 1px white;
+    text-shadow: 8px 8px 7px rgba(0, 0, 0, .7);
+}
+
+.slidertext {
+    font-size:24px;
+    color:white;
+    text-shadow: 8px 8px 7px rgba(0, 0, 0, .7);
+}
+
+.container > h1 {
+    text-shadow: 8px 8px 7px rgba(0, 0, 0, .3);
+}
+
+.container > p {
+    text-shadow: 8px 8px 7px rgba(0, 0, 0, .3);
+}
+
+#jssor_1 {
+    box-shadow: 8px 8px 7px rgba(0, 0, 0, .3);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

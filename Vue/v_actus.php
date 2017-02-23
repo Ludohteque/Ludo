@@ -55,7 +55,7 @@
                 /* size of bullet elment */
                 width: 16px;
                 height: 16px;
-                background: url('img/b05.png') no-repeat;
+                background: url('Vue/img/b05.png') no-repeat;
                 overflow: hidden;
                 cursor: pointer;
             }
@@ -82,7 +82,7 @@
                 width: 40px;
                 height: 58px;
                 cursor: pointer;
-                background: url('img/a22.png') center center no-repeat;
+                background: url('Vue/img/a22.png') center center no-repeat;
                 overflow: hidden;
             }
             .jssora22l { background-position: -10px -31px; }
@@ -98,7 +98,7 @@
             <!-- Loading Screen -->
             <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
                 <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
-                <div style="position:absolute;display:block;background:url('img/loading.gif') no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
+                <div style="position:absolute;display:block;background:url('Vue/img/loading.gif') no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
             </div>
             <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:1300px;height:500px;overflow:hidden;">
                 <div>

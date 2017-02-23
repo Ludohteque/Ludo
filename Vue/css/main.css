@@ -12,7 +12,6 @@ body {
 
 
 .navbar-inverse {
-    background-image: linear-gradient(to bottom,gray 0,black 100%);
     color: #f9c563;  
 }
 
@@ -51,13 +50,26 @@ body {
 }
 
 table {
-    box-shadow: 8px 8px 7px rgba(0, 0, 0, .3);
+    box-shadow: 8px 8px 4px rgba(0, 0, 0, .1);
     font-family: Open sans , serif;
     font-weight: bold;
+    text-align: auto;
+}
+#listPropreJeux {
+    position: relative;
+    margin: auto;
+    left: 2%;
+    text-align: center;
 }
 
+/*#tableContainer {
+    position: relative;
+    margin: auto;
+    text-align: center;
+}*/
+
 .jumbotron {
-    background-color: #669999;
+    background-color: whitesmoke;
     border-bottom: 5px;
     border-bottom-style: dashed;
     border-bottom-color: red;
@@ -94,16 +106,20 @@ table {
     text-shadow: 8px 8px 7px rgba(0, 0, 0, .7);
 }
 
+.container {
+    text-align: center;
+}
+
 .container > h1 {
-    text-shadow: 8px 8px 7px rgba(0, 0, 0, .3);
+    text-shadow: 8px 8px 4px rgba(0, 0, 0, .1);
 }
 
 .container > p {
-    text-shadow: 8px 8px 7px rgba(0, 0, 0, .3);
+    text-shadow: 8px 8px 4px rgba(0, 0, 0, .1);
 }
 
 #jssor_1 {
-    box-shadow: 8px 8px 7px rgba(0, 0, 0, .3);
+    box-shadow: 8px 8px 4px rgba(0, 0, 0, .1);
 }
 
 

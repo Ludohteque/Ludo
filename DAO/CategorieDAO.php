@@ -8,8 +8,7 @@ class CategorieDAO extends DAO{
     public function create($obj) {
         
         $nomCat=$obj->getNomCat();
-        
-    	$req = Connexion::getInstance()->prepare("INSERT INTO ".$this->table." (nom_cat)". "VALUES (?)");
+    	$stmt = Connexion::prepare("INSERT INTO ".CategorieDAO::$table." (nom_cat)". "VALUES (?)");
        	$req->bindParam(1, $nomCat);    	
     	$req->execute();        
     }
@@ -17,39 +16,40 @@ class CategorieDAO extends DAO{
         
     protected function delete($obj) {
         $nom_categorie=$obj->getNomCat();
-        $stmt = Connexion::getInstance()->prepare("DELETE FROM ".$this->table." WHERE ".$this->clePrimaire." = ".$nom_categorie.";");
-        $stmt->execute();
+        $stmt = Connexion::prepare("DELETE FROM ".CategorieDAO::$table." WHERE ".CategorieDAO::clePrimaire." = ".$nom_categorie.";");        $stmt->execute();
     }
 
     protected function find($id) {
-        $stmt = Connexion::getInstance()->prepare("SELECT * FROM ".$this->table." WHERE ".$this->clePrimaire." = ".$id.";");
+        $stmt = Connexion::prepare("SELECT * FROM ".CategorieDAO::$table." WHERE ".CategorieDAO::clePrimaire." = ".$id.";");
+
         $stmt->execute();
         $d = $stmt->fetch();
-        $categorie = new categorie($d["nom_categorie"]);
+        $categorie = new Categorie($d["nom_categorie"]);
             
-        return $categorie;
-        
+        return $categorie;        
+    }
+    public function findParCategorie($categorie) {
+        $stmt = Connexion::prepare("SELECT * FROM ".CategorieDAO::$table." WHERE categorie = ".$categorie.";");
+        $stmt->execute();
+        $d = $stmt->fetch();
+        $user=new Categorie($d["nom_categorie"]);
+            
+        return $nomCat->getNomCat();
     }
 
 
     protected function update($obj) {
-        $stmt = Connexion::getInstance()->prepare("UPDATE ".$this->table." SET nom_categorie='?' ; ");
-        
+        $stmt = Connexion::prepare("UPDATE ".CategorieDAO::$table." SET nom_categorie='?', WHERE id='?' ; ");        
         $stmt->bindParam(1, $obj->getnomCat());
         
         $stmt->execute(); 
         
     }
-    
-    protected function categorieExist($obj){
+    public function categorieExist($categorie){
         $succes=false;
         
-        $categorieCourant=$obj->getnomCat();
-        
-        $objAComparer=self::find($categorieCourant);
-        $categorieAComparer=$objAComparer->getPseudo();
-        
-        if($categorieCourant==$objAComparer){
+        $categorieAComparer=self::findParCategorie($categorie);
+        if($pseudoAComparer!==null){
             $succes=true;
         }
         return $succes;

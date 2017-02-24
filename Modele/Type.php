@@ -1,8 +1,8 @@
 <?php
 
-namespace collection;
+namespace type;
 
-class Collection {
+class Type {
     
     private $listTypeProduit;
     

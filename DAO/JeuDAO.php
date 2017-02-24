@@ -14,21 +14,23 @@ class JeuDAO extends DAO {
         $stmt->bindParam(3, $obj->getEtat());
         $stmt->execute();
         $id = Connexion::getInstance()->lastInsertId();
-        $stmt = Connexion::getInstance()->prepare("insert into ".$this->tableFille." (id_jeu, id_age, id_categorie, id_duree, nb_joueurs) values (?,?,?,?,?);");
-        $stmt->bindParam(1, $id);
-        $stmt->bindParam(2, $obj->getIdAge());
-        $stmt->bindParam(3, $obj->getIdCat());
-        $stmt->bindParam(4, $obj->getIdDuree());
-        $stmt->bindParam(5, $obj->getNbJoueurs());
-        $stmt->execute();
+        
+        $stmt2 = Connexion::getInstance()->prepare("insert into ".$this->tableFille." (id_jeu, id_age, id_categorie, id_duree, nb_joueurs) values (?,?,?,?,?);");
+        $stmt2->bindParam(1, $id);
+        $stmt2->bindParam(2, $obj->getIdAge());
+        $stmt2->bindParam(3, $obj->getIdCat());
+        $stmt2->bindParam(4, $obj->getIdDuree());
+        $stmt2->bindParam(5, $obj->getNbJoueurs());
+        $stmt2->execute();
         $obj->setIdJeu($id);
     }
 
     protected function delete($obj) {
         $stmt = Connexion::getInstance()->prepare("delete from ".$this->tableFille." where ".$this->clePrimaireFille." = ".$obj->getIdJeu().";");
         $stmt->execute();
-        $stmt = Connexion::getInstance()->prepare("delete from ".$this->tableMere." where ".$this->clePrimaireMere." = ".$obj->getIdJeu().";");
-        $stmt->execute();
+        
+        $stmt2 = Connexion::getInstance()->prepare("delete from ".$this->tableMere." where ".$this->clePrimaireMere." = ".$obj->getIdJeu().";");
+        $stmt2->execute();
     }
 
     protected function find($id) {
@@ -40,19 +42,19 @@ class JeuDAO extends DAO {
     }
 
     protected function update($obj) {
-        $id = $ob->getIdJeu();
+        $id = $obj->getIdJeu();
         $stmt = Connexion::getInstance()->prepare("update ".$this->tableFille." set id_age=?, nb_joueurs=?, id_categorie=?, id_duree=?, descriptif=? where ".$this->clePrimaireFille."=".$id.";");
         $stmt->bindParam(1, $obj->getIdAge());
         $stmt->bindParam(2, $obj->getNbJoueurs());
         $stmt->bindParam(3, $obj->getIdCat());
         $stmt->bindParam(4, $obj->getIdDuree());
         $stmt->bindParam(5, $obj->getDescriptif());
-        $stmt = Connexion::getInstance()->prepare("update ".$this->tableMere." set nom=?, etat=?, note=?, descriptif=?, date_ajout=? where ".$this->clePrimaireMere."=".$id.";");
-        $stmt->bindParam(1, $obj->getNom());
-        $stmt->bindParam(2, $obj->getEtat());
-        $stmt->bindParam(3, $obj->getNote());
-        $stmt->bindParam(4, $obj->getDescriptif());
-        $stmt->bindParam(5, $obj->getDateAjout());
+        $stmt2 = Connexion::getInstance()->prepare("update ".$this->tableMere." set nom=?, etat=?, note=?, descriptif=?, date_ajout=? where ".$this->clePrimaireMere."=".$id.";");
+        $stmt2->bindParam(1, $obj->getNom());
+        $stmt2->bindParam(2, $obj->getEtat());
+        $stmt2->bindParam(3, $obj->getNote());
+        $stmt2->bindParam(4, $obj->getDescriptif());
+        $stmt2->bindParam(5, $obj->getDateAjout());
     }
 
 }

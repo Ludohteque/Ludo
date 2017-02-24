@@ -7,15 +7,9 @@ class DureeDAO extends DAO {
     
     public function create($obj) {
         
-        $dureeMin=$obj->getDureeMin();
-    	$dureeMax=$obj->getDureeMax();
-    	$listTranche=$obj->getListTranche();
-        
-        
-        $req = Connexion::getInstance()->prepare("INSERT INTO ".$this->table." (dureeMin, dureeMax, listTranche) VALUES (?, ?, ?)");
-       	$req->bindParam(1, $dureeMin);
-    	$req->bindParam(2, $dureeMax);
-    	$req->bindParam(3, $listTranche); 
+        $req = Connexion::getInstance()->prepare("INSERT INTO ".$this->table." (dureeMin, dureeMax) VALUES (?, ?)");
+       	$req->bindParam(1, $obj->getDureeMin());
+    	$req->bindParam(2, $obj->getDureeMax());
         
     	$req->execute();
     }
@@ -27,19 +21,19 @@ class DureeDAO extends DAO {
         $req->execute();
     }
     public function find($id) {        
-    	$req = Connexion::getInstance()->prepare("SELECT * FROM ".$this->table." WHERE ".$this->clePrimaire." = ".";");
+    	$req = Connexion::getInstance()->prepare("SELECT * FROM ".$this->table." WHERE ".$this->clePrimaire." = ".$id.";");
         $req->execute();
+        
     }
 
     public function update($obj) {
         
- $stmt = Connexion::getInstance()->prepare("UPDATE ".$this->table." SET duree_min='?', duree_max='?', listTanche='?'  WHERE id='?' ; ");       
-       	$req->bindParam(1, $dureeMin);
-    	$req->bindParam(2, $dureeMax);
-    	$req->bindParam(3, $listTranche);
-        $stmt->bindParam(11, $obj->getId_duree());
+        $stmt = Connexion::getInstance()->prepare("UPDATE ".$this->table." SET duree_min='?', duree_max='?'  WHERE id='?' ; ");       
+       	$stmt->bindParam(1, $obj->getDureeMin());
+    	$stmt->bindParam(2, $obj->getDureeMax());
+        $stmt->bindParam(3, $obj->getIdDuree());
         
-        $req->execute();
+        $stmt->execute();
         
     }
 

@@ -8,6 +8,8 @@
 body {
     background-color: whitesmoke;
     font-family: 'Kavoon', serif;
+    padding-top: 50px;
+    padding-bottom: 20px;
 }
 
 /*.contenuForm {

@@ -1,12 +1,12 @@
 <?php
 session_start();
-/*$estConnecte = estConnecte();*/
 require_once('DAO/Connexion.php');
-require_once('DAO/DAO.php');
-if(!isset($_REQUEST['uc'])){
-     $_REQUEST['uc'] = 'accueil';
+require_once ('DAO/DAO.php');
+/*$estConnecte = estConnecte();*/
+if(!isset($_GET['uc'])){
+     $_GET['uc'] = 'accueil';
 }	 
-$uc = $_REQUEST['uc'];
+$uc = $_GET['uc'];
 switch($uc){
 	case 'accueil':{
                 include('DAO/JeuDAO.php');

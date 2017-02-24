@@ -102,19 +102,19 @@
             </div>
             <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:1300px;height:500px;overflow:hidden;">
                 <div>
-                    <img data-u="image" src="vue/img/slider_4.jpg" />
+                    <img data-u="image" src="Vue/img/slider_4.jpg" />
                     <div style="position:absolute;top:30px;left:30px;width:480px;height:120px;z-index:0;line-height:60px;"><span class="slidertitle">LES ACTUS !!!!</span></div>
                     <div style="position:absolute;top:300px;left:30px;width:480px;height:120px;z-index:0;line-height:38px;"><span class="slidertext">Toutes les actus de la ludothèque, facilement, simplement, avec du texte, des photos, des boutons si on veut... Génial !!!</span></div>
                 </div>
                 <a data-u="any" href="http://www.jssor.com" style="display:none">Full Width Slider</a>
                 <div>
-                    <img data-u="image" src="vue/img/slider_1.jpg" />
+                    <img data-u="image" src="Vue/img/slider_1.jpg" />
                 </div>
                 <div>
-                    <img data-u="image" src="vue/img/slider_2.jpg" />
+                    <img data-u="image" src="Vue/img/slider_2.jpg" />
                 </div>
                 <div>
-                    <img data-u="image" src="vue/img/slider_3.jpg" />
+                    <img data-u="image" src="Vue/img/slider_3.jpg" />
                 </div>
             </div>
             <!-- Bullet Navigator -->

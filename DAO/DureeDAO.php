@@ -5,7 +5,7 @@ class DureeDAO extends DAO {
     private $table = "duree";
     private $clePrimaire = "id_duree";
     
-    protected function create($obj) {
+    public function create($obj) {
         
         $dureeMin=$obj->getDureeMin();
     	$dureeMax=$obj->getDureeMax();
@@ -20,18 +20,18 @@ class DureeDAO extends DAO {
     	$req->execute();
     }
 
-    protected function delete($obj) {
+    public function delete($obj) {
         $id_duree=$obj->getIdDuree();
         
     	$req = Connexion::getInstance()->prepare("DELETE FROM ".$this->table." WHERE ".$this->clePrimaire." = ".$id_duree.";");
         $req->execute();
     }
-    protected function find($id) {        
+    public function find($id) {        
     	$req = Connexion::getInstance()->prepare("SELECT * FROM ".$this->table." WHERE ".$this->clePrimaire." = ".";");
         $req->execute();
     }
 
-    protected function update($obj) {
+    public function update($obj) {
         
  $stmt = Connexion::getInstance()->prepare("UPDATE ".$this->table." SET duree_min='?', duree_max='?', listTanche='?'  WHERE id='?' ; ");       
        	$req->bindParam(1, $dureeMin);

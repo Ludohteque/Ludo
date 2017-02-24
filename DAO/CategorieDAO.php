@@ -5,21 +5,21 @@ class CategorieDAO extends DAO{
     private $table = "categorie";
     private $clePrimaire = "id_categorie";
 
-    protected function create($obj) {
+    public function create($obj) {
         
 
         
     }
 
-    protected function delete($obj) {
+    public function delete($obj) {
         
     }
 
-    protected function find($id) {
+    public function find($id) {
         
     }
 
-    protected function update($obj) {
+    public function update($obj) {
         
     }
 

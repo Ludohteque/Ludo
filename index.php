@@ -1,13 +1,18 @@
 <?php
 session_start();
 /*$estConnecte = estConnecte();*/
+require_once('DAO/Connexion.php');
+require_once('DAO/DAO.php');
 if(!isset($_REQUEST['uc'])){
      $_REQUEST['uc'] = 'accueil';
 }	 
 $uc = $_REQUEST['uc'];
 switch($uc){
 	case 'accueil':{
+                include('DAO/JeuDAO.php');
+                $jeuDAO = new JeuDAO();
                 
+                $lesDerniersJeux = $jeuDAO->getDerniersJeux();
 		include("Vue/v_main.php");
              
                 break;

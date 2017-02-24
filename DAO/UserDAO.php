@@ -104,4 +104,8 @@ class UserDAO extends DAO {
         session_destroy();
     }
     
+    public function testConnexion() {
+        return isset($_SESSION[$nom]);
+    }
+    
 }

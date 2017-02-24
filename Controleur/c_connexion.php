@@ -28,6 +28,7 @@ switch($action){
 			$prenom = $joueur['prenom'];
 			connecter($id,$nom,$prenom);
 			include("Vue/v_mainjoueur.php");
+                        $_session[$nom];
 		} else {
                         $id = $admin['id'];
 			$nom =  $admin['nom'];

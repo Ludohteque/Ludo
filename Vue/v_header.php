@@ -42,8 +42,9 @@
         <div id="navbar" class="navbar-collapse collapse">
             <form class="navbar-form navbar-right" role="form">
                 <span id="welc">Bienvenue <script>$getNom();</script> !</span>
-                <button type="submit" class="btn btn-success" onclick="window.open('index.php?uc=inscription&action=demandeInscription')">S'enregistrer</button>
-                <button type="submit" class="btn btn-success" onclick="window.open('index.php?uc=connexion&action=demandeConnexion')">Se logger</button>
+                <a href="index.php?uc=inscription&action=demandeInscription">Ma Dashboard</a>
+                <a href="index.php?uc=inscription&action=demandeInscription">S'enregistrer</a>
+                <a href="index.php?uc=connexion&action=demandeConnexion">Se logger</a>
             </form>
         </div><!--/.navbar-collapse -->
     </div>

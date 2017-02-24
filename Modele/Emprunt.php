@@ -18,8 +18,15 @@ namespace emprunt;
             $this->id_emprunteur = $id_emprunteur;
             $this->id_exemplaire = $id_exemplaire;           ;
         }
-        
-        function getDateEmprunt() {
+        function getId_emprunts() {
+            return $this->id_emprunts;
+        }
+
+        function setId_emprunts($id_emprunts) {
+            $this->id_emprunts = $id_emprunts;
+        }
+
+                function getDateEmprunt() {
             return $this->date_emprunts;
         }
         function getDateRemise() {

@@ -32,7 +32,7 @@ class CommentaireDAO extends DAO{
         $stmt = Connexion::getInstance()->prepare("SELECT * FROM ".$this->table." WHERE ".$this->id." = ".$id_comm.";");
         $stmt->execute();
         $d = $stmt->fetch();
-        $user=new user($d["commentaire"], $d["id_jeu"], $d["id_user"]);
+        $user=new user($d["id_comm"], $d["commentaire"], $d["id_jeu"], $d["id_user"]);
             
         return $user;
    
@@ -40,7 +40,7 @@ class CommentaireDAO extends DAO{
   
     protected function update($obj) {
         
-        $stmt = Connexion::getInstance()->prepare("UPDATE ".$this->table." SET commentaire='?', id_jeu='?', id_user='?'; ");
+        $stmt = Connexion::getInstance()->prepare("UPDATE ".$this->table." SET commentaire='?', id_jeu='?', id_user='?'  WHERE id='?'; ");
         
         $stmt->bindParam(1, $obj->getCommentaire());
         $stmt->bindParam(2, $obj->$id_jeu());

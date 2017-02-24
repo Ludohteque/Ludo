@@ -9,9 +9,9 @@ if(!isset($_REQUEST['uc'])){
 $uc = $_REQUEST['uc'];
 switch($uc){
 	case 'accueil':{
-                include('Vue/v_header.php');
+                
 		include("Vue/v_main.php");
-                include('Vue/v_footer.php');
+             
                 break;
 	}
 	case 'connexion' :{

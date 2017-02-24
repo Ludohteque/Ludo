@@ -8,28 +8,21 @@ class UserDAO extends DAO {
     
     
     public function create($obj) {
-        
-    	$pseudo=$obj->getPseudo();
-    	$ville=$obj->getVille();
-    	$mail=$obj->getMail();
-    	$tel=$obj->getTel();
-    	$mdp=$obj->getMdp();
-    	
-    	
+       
     	$stmt = Connexion::getInstance()->prepare("INSERT INTO ".$this->table." (pseudo, ville, mail, tel, mdp) "
                 . "VALUES (?, ?, ?, ?, ?)");
     	
-    	$stmt->bindParam(1, $pseudo);
-    	$stmt->bindParam(2, $ville);
-    	$stmt->bindParam(3, $mail);
-    	$stmt->bindParam(4, $tel);
-    	$stmt->bindParam(5, $mdp);
+    	$stmt->bindParam(1, $obj->getPseudo());
+    	$stmt->bindParam(2, $obj->getVille());
+    	$stmt->bindParam(3, $obj->getMail());
+    	$stmt->bindParam(4, $obj->getTel());
+    	$stmt->bindParam(5, $obj->getMdp());
     	
     	$stmt->execute();
     }
 
     public function delete($obj) {
-        $idCourant=$obj->getId();
+        $idCourant=$obj->getIdUser();
     	
     	$stmt = Connexion::getInstance()->prepare("DELETE FROM ".$this->table." WHERE ".$this->id." = ".$idCourant.";");
         $stmt->execute();

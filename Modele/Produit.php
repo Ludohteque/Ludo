@@ -2,8 +2,6 @@
 
 class Produit {
     
-    private $table = "Produit";
-    private $clePrimaire = "id_produit";
     
     protected $idProduit;
     protected $nom;
@@ -12,11 +10,13 @@ class Produit {
     protected $isValide;
     protected $etat;
 
-    function __construct($nom, $descriptif, $etat, $note) {
+    function __construct($id, $nom, $descriptif, $etat, $note, $dateAjout) {
+        $this->idProduit = $id;
         $this->nom = $nom;
         $this->descriptif = $descriptif;
         $this->etat = $etat;
         $this->note = $note;
+        $this->dateAjout = $dateAjout;
     }
 
     function getIdProduit() {

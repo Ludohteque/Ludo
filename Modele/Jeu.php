@@ -3,7 +3,6 @@
 class Jeu extends Produit {
 
     
-        
         //attributs
 	private $idJeu;
 	private $nbJoueurs;
@@ -13,14 +12,13 @@ class Jeu extends Produit {
         private $dateAjout;
         private $lesCommentaires;
         
-        function __construct($nomJeu, $nbJoueurs, $idAge, $idCat, $descriptif, $idDuree, $dateAjout, $etat, $note) {
-            parent::__construct($nomJeu, $descriptif, $etat, $note);
+        function __construct($idJeu, $nomJeu, $nbJoueurs, $idAge, $idCat, $descriptif, $idDuree, $dateAjout, $etat, $note) {
+            parent::__construct($idJeu, $nomJeu, $descriptif, $etat, $note, $dateAjout);
             $this->nbJoueurs = $nbJoueurs;
             $this->idAge = $idAge;
             $this->idCat = $idCat;
-            $this->descriptif = $descriptif;
             $this->idDuree = $idDuree;
-            $this->dateAjout = $dateAjout;
+            
         }
         
 

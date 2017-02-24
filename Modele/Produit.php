@@ -12,10 +12,11 @@ class Produit {
     protected $isValide;
     protected $etat;
 
-    function __construct($nom, $descriptif, $etat) {
+    function __construct($nom, $descriptif, $etat, $note) {
         $this->nom = $nom;
         $this->descriptif = $descriptif;
         $this->etat = $etat;
+        $this->note = $note;
     }
 
     function getIdProduit() {

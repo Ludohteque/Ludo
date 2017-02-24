@@ -8,27 +8,40 @@ class JeuDAO extends DAO {
     private $clePrimaireFille = "id_jeu";
     
     protected function create($obj) {
-        $req = "insert into ".$this->tableMere." (nom, descriptif, etat) values(".$obj->getNom().",".$obj->getDescriptif().",".$obj->getEtat().");";
-	PdoLudo::$monPdo->query($req);
-        // TODO récupérer id du produit à insérer dans table jeu
-        $req = "insert into ".$this->tableFille." (nb_joueurs,id_age,id_categorie,inventaire,id_duree,date_ajout) values (".$obj->getNbJoueurs().","
-                .$obj->getIdAge.",".$obj->getIdCat.",".$obj->getInventaire.",".$obj->getIdDuree.",".$obj->getDateAjout().")";
-        PdoLudo::$monPdo->query($req);
+        $stmt = Connexion::getInstance()->prepare("insert into ".$this->tableMere." (nom, descriptif, etat) values (?,?,?);");
+        $stmt->bindParam(1, $obj->getNomJeu());
+        $stmt->bindParam(2, $obj->getDescriptif());
+        $stmt->bindParam(3, $obj->getEtat());
+        $stmt->execute();
+        $id = Connexion::getInstance()->lastInsertId();
+        $stmt = Connexion::getInstance()->prepare("insert into ".$this->tableFille." (id_jeu, id_age, id_categorie, id_duree, nb_joueurs) values (?,?,?,?,?);");
+        $stmt->bindParam(1, $id);
+        $stmt->bindParam(2, $obj->getIdAge());
+        $stmt->bindParam(3, $obj->getIdCat());
+        $stmt->bindParam(4, $obj->getIdDuree());
+        $stmt->bindParam(5, $obj->getNbJoueurs());
+        $stmt->execute();
+        $obj->setIdJeu($id);
     }
 
     protected function delete($obj) {
-        $req = "delete from ".$this->tableFille." where ".$this->clePrimaireFille." = ".$obj->getIdJeu().";";
-        PdoLudo::$monPdo->query($req);
-        $req = "delete from ".$this->tableMere." where ".$this->clePrimaireMere." = ".$obj->getIdProduit().";";
-        PdoLudo::$monPdo->query($req);
+        $stmt = Connexion::getInstance()->prepare("delete from ".$this->tableFille." where ".$this->clePrimaireFille." = ".$obj->getIdJeu().";");
+        $stmt->execute();
+        $stmt = Connexion::getInstance()->prepare("delete from ".$this->tableMere." where ".$this->clePrimaireMere." = ".$obj->getIdJeu().";");
+        $stmt->execute();
     }
 
-    protected function find($obj) {
-        //TODO
+    protected function find($id) {
+        $jeu = null;
+        $stmt = Connexion::getInstance()->prepare("select * from ".$this->tableFille." inner join ".$this->tableMere." on ".$this->tableFille.$this->clePrimaireFille."=".$this->tableMere.$this->clePrimaireMere." where ".$this->tableFille.".".$this->clePrimaireFille." = ".$id->getIdJeu().";");
+        $stmt->execute();
+        $result = $stmt->fetch();
+        $jeu = new Jeu($result['nom'], $result['nb_joueurs'], $result['id_age'], $result['id_categorie'], $result['descriptif'], $result['id_duree'], $result['date_ajout'], $result['etat'], $result['note']);
+        return $jeu;
     }
 
     protected function update($obj) {
-        //TODO
+        
     }
 
 }

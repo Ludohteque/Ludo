@@ -17,6 +17,10 @@ namespace duree;
             $this->dureeMin = $dureeMin;
             $this->listTranche = $listTranche;
         }
+        function getIdDuree() {
+            return $this->idDuree;
+            
+        }              
         
         function getDureeMin() {
             return $this->dureeMin;

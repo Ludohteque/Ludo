@@ -2,23 +2,33 @@
 
 namespace User;
 
-class user {
-	private $table = "user";
-	private $clePrimaire = "pseudo";
+class user {    
+    
+
+        private $id_user;
 	private $pseudo;
 	private $ville;
 	private $mail;
 	private $tel;
+	private $isAdmin;
 	private $mdp;
-	private $isAdmin = false;
-	private $isBureau = false;
+	private $isBureau;
+        private $noteUser;
+        private $nbBan;
+        private $enBan;
 	
-	function __construct($pseudo, $ville, $mail, $tel, $mdp) {
+	function __construct($id_user, $pseudo, $ville, $mail, $tel, $isAdmin, $isBureau, $mdp, $noteUser, $nbBan, $enBan) {
+                $this->id_user = $id_user;
 		$this->pseudo = $pseudo;
 		$this->ville = $ville;
 		$this->mail = $mail;
 		$this->tel = $tel;
+                $this->isAdmin = $isAdmin;
+                $this->isBureau = $isBureau;
 		$this->mdp = $mdp;
+                $this->noteUser = $noteUser;
+                $this->nbBan = $nbBan;
+                $this->enBan = $enBan;
 		
 	}
 	function getIdUserParPseudo() {
@@ -90,14 +100,14 @@ class user {
 		$this->mdp = $mdp;
 		return $this;
 	}
-	public function getIsAdmin() {
+	public function IsAdmin() {
 		return $this->isAdmin;
 	}
 	public function setIsAdmin($isAdmin) {
 		$this->isAdmin = $isAdmin;
 		return $this;
 	}
-	public function getIsBureau() {
+	public function IsBureau() {
 		return $this->isBureau;
 	}
 	public function setIsBureau($isBureau) {
@@ -105,7 +115,37 @@ class user {
 		return $this;
 	}
 	
-	
+	function getId_user() {
+        return $this->id_user;
+        }
+
+        function getNoteUser() {
+            return $this->noteUser;
+        }
+
+        function getNbBan() {
+            return $this->nbBan;
+        }
+
+        function getEnBan() {
+            return $this->enBan;
+        }
+
+        function setId_user($id_user) {
+            $this->id_user = $id_user;
+        }
+
+        function setNoteUser($noteUser) {
+            $this->noteUser = $noteUser;
+        }
+
+        function setNbBan($nbBan) {
+            $this->nbBan = $nbBan;
+        }
+
+        function setEnBan($enBan) {
+            $this->enBan = $enBan;
+        }
 	
 }
 

@@ -35,9 +35,7 @@ class Connexion{
 }
 //On fait l'appel a getInstance comme ça:
 
-/* include ('Connexion.php');
-
-foreach (Connexion::getInstance()->query('SELECT * FROM table1') as $membre)
+/* foreach (Connexion::getInstance()->query('SELECT * FROM table1') as $membre)
 {
 	echo '<pre>', print_r($membre) ,'</pre>';
 }

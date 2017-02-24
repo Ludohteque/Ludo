@@ -76,9 +76,43 @@ class UserDAO extends DAO {
         $stmt->execute(); 
         
     } 
-    protected function exist($obj){
+    protected function pseudoExist($obj){
+        $succes=false;
         
+        $pseudoCourant=$obj->getPseudo();
+        
+        $objAComparer=self::find($pseudoCourant);
+        $pseudoAComparer=$objAComparer->getPseudo();
+        
+        if($pseudoCourant==$pseudoAComparer){
+            $succes=true;
+        }
+        return $succes;
     }
+    protected function mailExist($obj){
+        $succes=false;
+        
+        $mailCourant=$obj->getMail();
+        
+        $objAComparer=self::find($mailCourant);
+        $mailAComparer=$objAComparer->getMail();
+        
+        if($mailCourant==$mailAComparer){
+            $succes=true;
+        }
+        return $succes;
+    }
+    protected function connect($idUser, $pseudo, $mdp){
+        $_SESSION['id_user']=$idUser;
+        $_SESSION['user']=$pseudo;
+        $_SESSION['mdp']=$mdp;
+    }
+    
+    protected function deconnect(){
+        $_SESSION=array();
+        session_destroy();
+    }
+    
 }
 
 ?>

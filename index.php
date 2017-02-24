@@ -1,7 +1,5 @@
-<?php 
-//$estConnecte = estConnecte();
-?>
 <?php
+session_start();
 /*$estConnecte = estConnecte();*/
 if(!isset($_REQUEST['uc'])){
      $_REQUEST['uc'] = 'accueil';

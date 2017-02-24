@@ -1,4 +1,5 @@
 <?php
+require_once('Modele/Produit.php');
 
 class Jeu extends Produit {
 
@@ -7,16 +8,13 @@ class Jeu extends Produit {
 	private $idJeu;
 	private $nbJoueurs;
 	private $idAge;
-	private $idCat;
         private $idDuree;
-        private $dateAjout;
         private $lesCommentaires;
         
-        function __construct($idJeu, $nomJeu, $nbJoueurs, $idAge, $idCat, $descriptif, $idDuree, $dateAjout, $etat, $note) {
+        function __construct($idJeu, $nomJeu, $nbJoueurs, $idAge, $descriptif, $idDuree, $dateAjout, $etat, $note) {
             parent::__construct($idJeu, $nomJeu, $descriptif, $etat, $note, $dateAjout);
             $this->nbJoueurs = $nbJoueurs;
             $this->idAge = $idAge;
-            $this->idCat = $idCat;
             $this->idDuree = $idDuree;
             
         }
@@ -41,11 +39,7 @@ class Jeu extends Produit {
         function getNote() {
             return $this->note;
         }
-
-        function getIdCat() {
-            return $this->idCat;
-        }
-
+        
         function getDescriptif() {
             return $this->descriptif;
         }
@@ -91,10 +85,6 @@ class Jeu extends Produit {
 
         function setNote($note) {
             $this->note = $note;
-        }
-
-        function setIdCat($idCat) {
-            $this->idCat = $idCat;
         }
 
         function setDescriptif($descriptif) {

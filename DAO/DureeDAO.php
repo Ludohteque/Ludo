@@ -33,18 +33,11 @@ class DureeDAO extends DAO {
 
     protected function update($obj) {
         
-        $corps=$obj->getCorps();
-    	$idExpediteur=$obj->getIdExpediteur();
-    	$idDestinataire=$obj->getIdDestinataire();
-    	$sujet=$obj->getSujet();
-    	$type=$obj->getType();
-        
-        $idMessage=$obj->getIdMessage();        
-    	$req = Connexion::getInstance()->prepare("UPDATE INTO ".$this->table." (dureeMin, dureeMax, listTranche) VALUES (?, ?, ?)");
-        
+ $stmt = Connexion::getInstance()->prepare("UPDATE ".$this->table." SET duree_min='?', duree_max='?', listTanche='?'  WHERE id='?' ; ");       
        	$req->bindParam(1, $dureeMin);
     	$req->bindParam(2, $dureeMax);
     	$req->bindParam(3, $listTranche);
+        $stmt->bindParam(11, $obj->getId_duree());
         
         $req->execute();
         

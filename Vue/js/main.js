@@ -69,7 +69,7 @@ function verifForm(f)
    var passeOK = verifPasse(f.passe);
    alert(pseudoOk+mdpIdent+mailIdent+telOk);
    if(mailIdent && mdpIdent && pseudoOk && mailOK && telOk && passeOK)
-   {alert('tout est ok');
+   {
        return true;}
    else
    {

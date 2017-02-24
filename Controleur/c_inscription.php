@@ -25,7 +25,6 @@ switch($action){
 		} else {
                     $user = new User(-1, $login, $ville, $mail, $phone, false, false, $mdp, 0, 0, false);
                     $userdao->create($user);
-                    var_dump($user);
                     include('Vue/v_main.php');
                 }
 		break;

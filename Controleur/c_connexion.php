@@ -3,18 +3,18 @@
  ?>
 
 <?php
-if(!isset($_REQUEST['action'])){
-	$_REQUEST['action'] = 'demandeConnexion';
+if(!isset($_POST['action'])){
+	$_POST['action'] = 'demandeConnexion';
 }
-$action = $_REQUEST['action'];
+$action = $_POST['action'];
 switch($action){
 	case 'demandeConnexion':{
 		include("Vue/v_connexion.php");
 		break;
 	}
 	case 'valideConnexion':{
-		$login = $_REQUEST['login'];
-		$mdp = $_REQUEST['mdp'];
+		$login = $_POST['login'];
+		$mdp = $_POST['mdp'];
                 $mdp = md5($mdp);
 		$joueur = $pdo->getInfosJoueur($login, $mdp);
                 $admin = $pdo->getInfosAdmin($login, $mdp);

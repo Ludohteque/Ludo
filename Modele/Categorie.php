@@ -1,11 +1,12 @@
 <?php
 
 class Categorie {
+   
+    private $table = "Categorie";
+    private $clePrimaire = "id_categorie";
     
     private $idCat;
     private $nomCat;
-    private $table = "Categorie";
-    private $clePrimaire = "id_categorie";
     
     function __construct($nomCat) {
         $this->nomCat = $nomCat;

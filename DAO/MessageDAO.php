@@ -10,9 +10,7 @@ class MessageDAO extends DAO {
     	$idExpediteur=$obj->getIdExpediteur();
     	$idDestinataire=$obj->getIdDestinataire();
     	$sujet=$obj->getSujet();
-    	$type=$obj->getType();        
-        
-        $req = execute();
+    	$type=$obj->getType();
         
     	$req = Connexion::getInstance()->prepare("INSERT INTO ".$this->table." (corps, idExpediteur, idDestinataire, sujet, type) VALUES (?, ?, ?, ?, ?)");
        	$req->bindParam(1, $corps);
@@ -38,8 +36,21 @@ class MessageDAO extends DAO {
 
     protected function update($obj) {
         
+        $corps=$obj->getCorps();
+    	$idExpediteur=$obj->getIdExpediteur();
+    	$idDestinataire=$obj->getIdDestinataire();
+    	$sujet=$obj->getSujet();
+    	$type=$obj->getType();
+        
         $idMessage=$obj->getIdMessage();        
-    	$req = Connexion::getInstance()->prepare("UPDATE FROM ".$this->table." WHERE ".$this->clePrimaire." = ".$idMessage.";");
+    	$req = Connexion::getInstance()->prepare("UPDATE INTO ".$this->table." (corps, idExpediteur, idDestinataire, sujet, type) VALUES (?, ?, ?, ?, ?)");
+        
+        $req->bindParam(1, $corps);
+    	$req->bindParam(2, $idExpediteur);
+    	$req->bindParam(3, $idDestinataire);
+    	$req->bindParam(4, $sujet);
+    	$req->bindParam(5, $type);
+        
         $req->execute();
         
     }

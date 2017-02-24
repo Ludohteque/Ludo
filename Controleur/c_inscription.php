@@ -16,7 +16,7 @@ switch($action){
                 $ville= $_POST('ville');
                 $mail = $_POST('mail');
                 $phone = $_POST('phone');
-		if(is_array( $joueur) && is_array($admin)){
+		if(is_array($joueur) && is_array($admin)){
 			ajouterErreur("Joueur déjà éxistant !!!");
 			include("Vue/v_erreurs.php");
 			include("Vue/v_connexion.php");

@@ -11,7 +11,7 @@
         </br>
 	<p class="pform">
 		<label for="passe">Et votre Mot de passe :</label>
-		<input id="passe" type="password" onblur="verifPasse(this)"/><span class="red">*</span>
+		<input id="passe" name="passe" type="password" onblur="verifPasse(this)"/><span class="red">*</span>
         </p>
         <p class="pform">
                 <label for="passe">Retapez votre Mot de passe :</label>
@@ -20,7 +20,7 @@
         </br>
         <p class="pform">
 		<label for="ville">Entrez votre ville :</label>
-		<input id="ville" type="text" onblur="verifVille(this)"/><span class="red">*</span>
+		<input id="ville" name="ville" type="text" onblur="verifVille(this)"/><span class="red">*</span>
 	</p>
         </br>
         <p class="pform">
@@ -34,7 +34,7 @@
         </br>
         <p class="pform">
             <label for="phone">Tapez votre numéro de téléphone :  </label>
-		<input id="phone" type="text" onblur="verifTel(this)"/><span class="red">*</span>
+		<input id="phone" name="phone" type="text" onblur="verifTel(this)"/><span class="red">*</span>
 	</p>
         <p id="right"><span class="red">*</span>Champs obligatoires !</p>
         </br>

@@ -5,7 +5,7 @@ class CategorieDAO extends DAO{
     private $table = "categorie";
     private $clePrimaire = "nom_categorie";
 
-    protected function create($obj) {
+    public function create($obj) {
         
         $nomCat=$obj->getNomCat();
         
@@ -14,6 +14,7 @@ class CategorieDAO extends DAO{
     	$req->execute();        
     }
 
+        
     protected function delete($obj) {
         $nom_categorie=$obj->getNomCat();
         $stmt = Connexion::getInstance()->prepare("DELETE FROM ".$this->table." WHERE ".$this->clePrimaire." = ".$nom_categorie.";");
@@ -29,6 +30,7 @@ class CategorieDAO extends DAO{
         return $categorie;
         
     }
+
 
     protected function update($obj) {
         $stmt = Connexion::getInstance()->prepare("UPDATE ".$this->table." SET nom_categorie='?' ; ");

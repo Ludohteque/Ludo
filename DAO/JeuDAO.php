@@ -7,7 +7,7 @@ class JeuDAO extends DAO {
     private $tableFille = "jeu";
     private $clePrimaireFille = "id_jeu";
     
-    protected function create($obj) {
+    public function create($obj) {
         $stmt = Connexion::getInstance()->prepare("insert into ".$this->tableMere." (nom, descriptif, etat) values (?,?,?);");
         $stmt->bindParam(1, $obj->getNomJeu());
         $stmt->bindParam(2, $obj->getDescriptif());
@@ -25,7 +25,7 @@ class JeuDAO extends DAO {
         $obj->setIdJeu($id);
     }
 
-    protected function delete($obj) {
+    public function delete($obj) {
         $stmt = Connexion::getInstance()->prepare("delete from ".$this->tableFille." where ".$this->clePrimaireFille." = ".$obj->getIdJeu().";");
         $stmt->execute();
         
@@ -33,7 +33,7 @@ class JeuDAO extends DAO {
         $stmt2->execute();
     }
 
-    protected function find($id) {
+    public function find($id) {
         $stmt = Connexion::getInstance()->prepare("select * from ".$this->tableFille." inner join ".$this->tableMere." on ".$this->tableFille.$this->clePrimaireFille."=".$this->tableMere.$this->clePrimaireMere." where ".$this->tableFille.".".$this->clePrimaireFille." = ".$id->getIdJeu().";");
         $stmt->execute();
         $result = $stmt->fetch();
@@ -41,7 +41,7 @@ class JeuDAO extends DAO {
         return $jeu;
     }
 
-    protected function update($obj) {
+    public function update($obj) {
         $id = $obj->getIdJeu();
         $stmt = Connexion::getInstance()->prepare("update ".$this->tableFille." set id_age=?, nb_joueurs=?, id_categorie=?, id_duree=?, descriptif=? where ".$this->clePrimaireFille."=".$id.";");
         $stmt->bindParam(1, $obj->getIdAge());

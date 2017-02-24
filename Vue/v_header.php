@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="Vue/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="Vue/css/main.css">
         <script src="Vue/js/main.js"</script>
+        <script src="Vue/js/vendor/jquery-1.11.2.min.js"></script>
         <script src="Vue/js/jssor.slider-22.1.8.min.js"></script>
         <script src="Vue/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </head>

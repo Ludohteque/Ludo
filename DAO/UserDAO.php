@@ -7,35 +7,28 @@ class UserDAO extends DAO {
     //verifuser(ifexist) et connect user
     
     
-    protected function create($obj) {
-        
-    	$pseudo=$obj->getPseudo();
-    	$ville=$obj->getVille();
-    	$mail=$obj->getMail();
-    	$tel=$obj->getTel();
-    	$mdp=$obj->getMdp();
-    	
-    	
+    public function create($obj) {
+       
     	$stmt = Connexion::getInstance()->prepare("INSERT INTO ".$this->table." (pseudo, ville, mail, tel, mdp) "
                 . "VALUES (?, ?, ?, ?, ?)");
     	
-    	$stmt->bindParam(1, $pseudo);
-    	$stmt->bindParam(2, $ville);
-    	$stmt->bindParam(3, $mail);
-    	$stmt->bindParam(4, $tel);
-    	$stmt->bindParam(5, $mdp);
+    	$stmt->bindParam(1, $obj->getPseudo());
+    	$stmt->bindParam(2, $obj->getVille());
+    	$stmt->bindParam(3, $obj->getMail());
+    	$stmt->bindParam(4, $obj->getTel());
+    	$stmt->bindParam(5, $obj->getMdp());
     	
     	$stmt->execute();
     }
 
-    protected function delete($obj) {
-        $idCourant=$obj->getId();
+    public function delete($obj) {
+        $idCourant=$obj->getIdUser();
     	
     	$stmt = Connexion::getInstance()->prepare("DELETE FROM ".$this->table." WHERE ".$this->id." = ".$idCourant.";");
         $stmt->execute();
     }
 
-    protected function find($id) {
+    public function find($id) {
         $stmt = Connexion::getInstance()->prepare("SELECT * FROM ".$this->table." WHERE ".$this->id." = ".$id.";");
         $stmt->execute();
         $d = $stmt->fetch();
@@ -46,7 +39,7 @@ class UserDAO extends DAO {
    
     }
     
-    protected function findParPseudo($pseudo) {
+    public function findParPseudo($pseudo) {
         $stmt = Connexion::getInstance()->prepare("SELECT * FROM ".$this->table." WHERE pseudo = ".$pseudo.";");
         $stmt->execute();
         $d = $stmt->fetch();
@@ -56,7 +49,7 @@ class UserDAO extends DAO {
         return $user;
     }
     
-    protected function update($obj) {
+    public function update($obj) {
         
         $stmt = Connexion::getInstance()->prepare("UPDATE ".$this->table." SET pseudo='?', ville='?', adr_mail='?', tel='?',"
                 . "is_admin='?', is_bureau='?', mdp='?', note_user='?', nbBan='?', enBan='?'  WHERE id='?' ; ");
@@ -76,7 +69,7 @@ class UserDAO extends DAO {
         $stmt->execute(); 
         
     } 
-    protected function pseudoExist($obj){
+    public function pseudoExist($obj){
         $succes=false;
         
         $pseudoCourant=$obj->getPseudo();
@@ -89,7 +82,7 @@ class UserDAO extends DAO {
         }
         return $succes;
     }
-    protected function mailExist($obj){
+    public function mailExist($obj){
         $succes=false;
         
         $mailCourant=$obj->getMail();
@@ -102,13 +95,13 @@ class UserDAO extends DAO {
         }
         return $succes;
     }
-    protected function connect($idUser, $pseudo, $mdp){
+    public function connect($idUser, $pseudo, $mdp){
         $_SESSION['id_user']=$idUser;
         $_SESSION['user']=$pseudo;
         $_SESSION['mdp']=$mdp;
     }
     
-    protected function deconnect(){
+    public function deconnect(){
         $_SESSION=array();
         session_destroy();
     }

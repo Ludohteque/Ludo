@@ -14,17 +14,12 @@
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
         <link rel="stylesheet" href="Vue/css/bootstrap.min.css">
-        <style>
-            body {
-                padding-top: 50px;
-                padding-bottom: 20px;
-            }
-        </style>
         <link href="https://fonts.googleapis.com/css?family=Eczar" rel="stylesheet">
         <link rel="stylesheet" href="Vue/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="Vue/css/main.css">
-        <script src="vue/js/jssor.slider-22.1.8.min.js"></script>
-        <script src="vue/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        <script src="Vue/js/main.js"</script>
+        <script src="Vue/js/jssor.slider-22.1.8.min.js"></script>
+        <script src="Vue/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 8]>

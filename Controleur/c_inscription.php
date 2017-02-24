@@ -1,30 +1,32 @@
 <?php
-if(!isset($_POST['action'])){
-	$_POST['action'] = 'demandeInscription';
+if(!isset($_GET['action'])){
+	$_GET['action'] = 'demandeInscription';
 }
-$action = $_POST['action'];
+$action = $_GET['action'];
 switch($action){
 	case 'demandeInscription':{
 		include("Vue/v_inscription.php");
 		break;
 	}
 	case 'valideInscription':{
+                require_once('Modele/User.php');
+                require_once ('DAO/UserDAO.php');
 		$login = $_POST['pseudo'];
 		$mdp = $_POST['passe'];
                 $mdp = md5($mdp);
-                $ville= $_POST('ville');
-                $mail = $_POST('mail');
-                $phone = $_POST('phone');
-		if(is_array( $joueur) && is_array($admin)){
+                $ville= $_POST['ville'];
+                $mail = $_POST['mail'];
+                $phone = $_POST['phone'];
+                $userdao = new UserDAO();
+		if($userdao->pseudoExist($login)){
 			ajouterErreur("Joueur déjà éxistant !!!");
 			include("Vue/v_erreurs.php");
-			include("Vue/v_inscription.php");
+			include("Vue/v_connexion.php");
 		} else {
-                    include('Modele/User.php');
-                    $user = new user($pseudo, $ville, $mail, $tel, $mdp, 0);
-                    include('DAO/UserDAO.php');
-                    $userdao = new UserDAO();
+                    $user = new User(-1, $login, $ville, $mail, $phone, false, false, $mdp, 0, 0, false);
                     $userdao->create($user);
+                    var_dump($user);
+                    include('Vue/v_main.php');
                 }
 		break;
 	}

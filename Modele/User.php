@@ -1,8 +1,7 @@
 <?php
 
-namespace User;
 
-class user {    
+class User {    
     
 
         private $id_user;

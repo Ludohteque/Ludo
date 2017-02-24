@@ -1,5 +1,6 @@
 <?php
 
+
 class UserDAO extends DAO {
 	
     private static $table="user";
@@ -7,7 +8,7 @@ class UserDAO extends DAO {
     //verifuser(ifexist) et connect user
     
     
-    protected function create($obj) {
+    public function create($obj) {
         
     	$pseudo=$obj->getPseudo();
     	$ville=$obj->getVille();
@@ -16,7 +17,7 @@ class UserDAO extends DAO {
     	$mdp=$obj->getMdp();
     	
     	
-    	$stmt = Connexion::getInstance()->prepare("INSERT INTO ".$this->table." (pseudo, ville, mail, tel, mdp) "
+    	$stmt = Connexion::prepare("INSERT INTO ".UserDAO::$table." (pseudo, ville, adr_mail, tel, mdp) "
                 . "VALUES (?, ?, ?, ?, ?)");
     	
     	$stmt->bindParam(1, $pseudo);
@@ -28,15 +29,14 @@ class UserDAO extends DAO {
     	$stmt->execute();
     }
 
-    protected function delete($obj) {
+    public function delete($obj) {
         $idCourant=$obj->getId();
-    	
-    	$stmt = Connexion::getInstance()->prepare("DELETE FROM ".$this->table." WHERE ".$this->id." = ".$idCourant.";");
+    	$stmt = Connexion::prepare("DELETE FROM ".UserDAO::$table." WHERE ".UserDAO::$id." = ".$idCourant.";");
         $stmt->execute();
     }
 
-    protected function find($id) {
-        $stmt = Connexion::getInstance()->prepare("SELECT * FROM ".$this->table." WHERE ".$this->id." = ".$id.";");
+    public function find($id) {
+        $stmt = Connexion::prepare("SELECT * FROM ".UserDAO::$table." WHERE ".UserDAO::$id." = ".$id.";");
         $stmt->execute();
         $d = $stmt->fetch();
         $user=new user($d["id_user"], $d["pseudo"], $d["ville"], $d["adr_mail"], $d["tel"], $d["is_admin"], $d["is_bureau"],
@@ -46,19 +46,19 @@ class UserDAO extends DAO {
    
     }
     
-    protected function findParPseudo($pseudo) {
-        $stmt = Connexion::getInstance()->prepare("SELECT * FROM ".$this->table." WHERE pseudo = ".$pseudo.";");
+    public function findParPseudo($pseudo) {
+        $stmt = Connexion::prepare("SELECT * FROM ".UserDAO::$table." WHERE pseudo = ".$pseudo.";");
         $stmt->execute();
         $d = $stmt->fetch();
-        $user=new user($d["id_user"], $d["pseudo"], $d["ville"], $d["adr_mail"], $d["tel"], $d["is_admin"], $d["is_bureau"],
+        $user=new User($d["id_user"], $d["pseudo"], $d["ville"], $d["adr_mail"], $d["tel"], $d["is_admin"], $d["is_bureau"],
                 $d["mdp"], $d["note_user"], $d["nbBan"], $d["enBan"]);
             
-        return $user;
+        return $user->getPseudo();
     }
     
-    protected function update($obj) {
+    public function update($obj) {
         
-        $stmt = Connexion::getInstance()->prepare("UPDATE ".$this->table." SET pseudo='?', ville='?', adr_mail='?', tel='?',"
+        $stmt = Connexion::prepare("UPDATE ".UserDAO::$table." SET pseudo='?', ville='?', adr_mail='?', tel='?',"
                 . "is_admin='?', is_bureau='?', mdp='?', note_user='?', nbBan='?', enBan='?'  WHERE id='?' ; ");
         
         $stmt->bindParam(1, $obj->getPseudo());
@@ -76,20 +76,16 @@ class UserDAO extends DAO {
         $stmt->execute(); 
         
     } 
-    protected function pseudoExist($obj){
+    public function pseudoExist($pseudo){
         $succes=false;
         
-        $pseudoCourant=$obj->getPseudo();
-        
-        $objAComparer=self::find($pseudoCourant);
-        $pseudoAComparer=$objAComparer->getPseudo();
-        
-        if($pseudoCourant==$pseudoAComparer){
+        $pseudoAComparer=self::findParPseudo($pseudo);
+        if($pseudoAComparer!==null){
             $succes=true;
         }
         return $succes;
     }
-    protected function mailExist($obj){
+    public function mailExist($obj){
         $succes=false;
         
         $mailCourant=$obj->getMail();
@@ -102,17 +98,15 @@ class UserDAO extends DAO {
         }
         return $succes;
     }
-    protected function connect($idUser, $pseudo, $mdp){
+    public function connect($idUser, $pseudo, $mdp){
         $_SESSION['id_user']=$idUser;
         $_SESSION['user']=$pseudo;
         $_SESSION['mdp']=$mdp;
     }
     
-    protected function deconnect(){
+    public function deconnect(){
         $_SESSION=array();
         session_destroy();
     }
     
 }
-
-?>

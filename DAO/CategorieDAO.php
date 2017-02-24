@@ -39,7 +39,7 @@ class CategorieDAO extends DAO{
         
     }
     
-        protected function categorieExist($obj){
+    protected function categorieExist($obj){
         $succes=false;
         
         $categorieCourant=$obj->getnomCat();

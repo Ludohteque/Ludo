@@ -32,16 +32,27 @@ class JeuDAO extends DAO {
     }
 
     protected function find($id) {
-        $jeu = null;
         $stmt = Connexion::getInstance()->prepare("select * from ".$this->tableFille." inner join ".$this->tableMere." on ".$this->tableFille.$this->clePrimaireFille."=".$this->tableMere.$this->clePrimaireMere." where ".$this->tableFille.".".$this->clePrimaireFille." = ".$id->getIdJeu().";");
         $stmt->execute();
         $result = $stmt->fetch();
-        $jeu = new Jeu($result['nom'], $result['nb_joueurs'], $result['id_age'], $result['id_categorie'], $result['descriptif'], $result['id_duree'], $result['date_ajout'], $result['etat'], $result['note']);
+        $jeu = new Jeu($result['idJeu'],$result['nom'], $result['nb_joueurs'], $result['id_age'], $result['id_categorie'], $result['descriptif'], $result['id_duree'], $result['date_ajout'], $result['etat'], $result['note']);
         return $jeu;
     }
 
     protected function update($obj) {
-        
+        $id = $ob->getIdJeu();
+        $stmt = Connexion::getInstance()->prepare("update ".$this->tableFille." set id_age=?, nb_joueurs=?, id_categorie=?, id_duree=?, descriptif=? where ".$this->clePrimaireFille."=".$id.";");
+        $stmt->bindParam(1, $obj->getIdAge());
+        $stmt->bindParam(2, $obj->getNbJoueurs());
+        $stmt->bindParam(3, $obj->getIdCat());
+        $stmt->bindParam(4, $obj->getIdDuree());
+        $stmt->bindParam(5, $obj->getDescriptif());
+        $stmt = Connexion::getInstance()->prepare("update ".$this->tableMere." set nom=?, etat=?, note=?, descriptif=?, date_ajout=? where ".$this->clePrimaireMere."=".$id.";");
+        $stmt->bindParam(1, $obj->getNom());
+        $stmt->bindParam(2, $obj->getEtat());
+        $stmt->bindParam(3, $obj->getNote());
+        $stmt->bindParam(4, $obj->getDescriptif());
+        $stmt->bindParam(5, $obj->getDateAjout());
     }
 
 }

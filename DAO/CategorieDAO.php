@@ -21,10 +21,10 @@ class CategorieDAO extends DAO{
     }
 
     protected function find($id) {
-        $stmt = Connexion::getInstance()->prepare("SELECT * FROM ".$this->table." WHERE ".$this->clePrimaire." = ".$nom_categorie.";");
+        $stmt = Connexion::getInstance()->prepare("SELECT * FROM ".$this->table." WHERE ".$this->clePrimaire." = ".$id.";");
         $stmt->execute();
         $d = $stmt->fetch();
-        $user=new user($d["nom_categorie"]);
+        $categorie = new categorie($d["nom_categorie"]);
             
         return $categorie;
         
@@ -37,6 +37,20 @@ class CategorieDAO extends DAO{
         
         $stmt->execute(); 
         
+    }
+    
+        protected function categorieExist($obj){
+        $succes=false;
+        
+        $categorieCourant=$obj->getnomCat();
+        
+        $objAComparer=self::find($categorieCourant);
+        $categorieAComparer=$objAComparer->getPseudo();
+        
+        if($categorieCourant==$objAComparer){
+            $succes=true;
+        }
+        return $succes;
     }
 
 }

@@ -4,7 +4,7 @@
 class User {    
     
 
-        private $id_user;
+        private $idUser;
 	private $pseudo;
 	private $ville;
 	private $mail;
@@ -16,8 +16,8 @@ class User {
         private $nbBan;
         private $enBan;
 	
-	function __construct($id_user, $pseudo, $ville, $mail, $tel, $isAdmin, $isBureau, $mdp, $noteUser, $nbBan, $enBan) {
-                $this->id_user = $id_user;
+	function __construct($idUser, $pseudo, $ville, $mail, $tel, $isAdmin, $isBureau, $mdp, $noteUser, $nbBan, $enBan) {
+                $this->id_user = $idUser;
 		$this->pseudo = $pseudo;
 		$this->ville = $ville;
 		$this->mail = $mail;
@@ -114,7 +114,7 @@ class User {
 		return $this;
 	}
 	
-	function getId_user() {
+	function getIdUser() {
         return $this->id_user;
         }
 
@@ -130,7 +130,7 @@ class User {
             return $this->enBan;
         }
 
-        function setId_user($id_user) {
+        function setIdUser($id_user) {
             $this->id_user = $id_user;
         }
 

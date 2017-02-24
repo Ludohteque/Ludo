@@ -11,16 +11,16 @@
         </br>
 	<p class="pform">
 		<label for="passe">Et votre Mot de passe :</label>
-		<input id="passe" name="passe" type="password" /><span class="red">*</span>
+		<input id="passe" type="password" onblur="verifPasse(this)"/><span class="red">*</span>
         </p>
         <p class="pform">
                 <label for="passe">Retapez votre Mot de passe :</label>
-		<input id="passe2" type="password" onblur="verifmdps()"/><span class="red">*</span>
+		<input id="passe2" type="password" onblur="verifpasse2(this)"/><span class="red">*</span>
 	</p>
         </br>
         <p class="pform">
 		<label for="ville">Entrez votre ville :</label>
-		<input id="ville" name="ville" type="text" /><span class="red">*</span>
+		<input id="ville" type="text" onblur="verifVille(this)"/><span class="red">*</span>
 	</p>
         </br>
         <p class="pform">
@@ -29,12 +29,12 @@
 	</p>
         <p class="pform">
 		<label for="mail">Retapez votre adresse mail :</label>
-		<input id="mail2" type="text" onblur="verifMailIdent()"/><span class="red">*</span>
+		<input id="mail2" type="text" onblur="isEmail(this)"/><span class="red">*</span>
 	</p>
         </br>
         <p class="pform">
             <label for="phone">Tapez votre numéro de téléphone :  </label>
-            <input id="phone" name="phone" type="text" /><span class="red">*</span>
+		<input id="phone" type="text" onblur="verifTel(this)"/><span class="red">*</span>
 	</p>
         <p id="right"><span class="red">*</span>Champs obligatoires !</p>
         </br>

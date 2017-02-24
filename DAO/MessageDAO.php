@@ -4,7 +4,7 @@ class MessageDAO extends DAO {
     private $table = "message";
     private $clePrimaire = "id_message";
         
-    protected function create($obj) {
+    public function create($obj) {
 
         $corps=$obj->getCorps();
     	$idExpediteur=$obj->getIdExpediteur();
@@ -22,19 +22,19 @@ class MessageDAO extends DAO {
     	$req->execute();
     }
 
-    protected function delete($obj) {
+    public function delete($obj) {
         $idMessage=$obj->getIdMessage();
         
     	$req = Connexion::getInstance()->prepare("DELETE FROM ".$this->table." WHERE ".$this->clePrimaire." = ".$idMessage.";");
         $req->execute();
     }
-    protected function find($obj) {
+    public function find($obj) {
         
     	$req = Connexion::getInstance()->prepare("SELECT * FROM ".$this->table." WHERE ".$this->clePrimaire." = ".";");
         $req->execute();
     }
 
-    protected function update($obj) {
+    public function update($obj) {
                
         $stmt = Connexion::getInstance()->prepare("UPDATE ".$this->table." SET corps='?', idExpediteur='?', idDestinataire='?', sujet='?',"
                 . "type='? WHERE id='?' ; ");        

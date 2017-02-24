@@ -3,19 +3,19 @@
 class TrancheAge extends DAO {
     
     
-    protected function create($obj) {
+    public function create($obj) {
         
     }
 
-    protected function delete($obj) {
+    public function delete($obj) {
         
     }
 
-    protected function find($obj) {
+    public function find($obj) {
         
     }
 
-    protected function update($obj) {
+    public function update($obj) {
         
     }
 

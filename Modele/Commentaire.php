@@ -5,15 +5,15 @@ class Commentaire extends Jeu {
     private $table = "Commentaire";
     private $clePrimaire = "id_comm";
     
-    private $idComm;
+    private $id_comm;
     private $commentaire;
-    private $idJeu;
-    private $idUser;
+    private $id_jeu;
+    private $id_user;
     
     function __construct($commentaire, $idJeu, $idUser) {
         $this->commentaire = $commentaire;
-        $this->idJeu = $idJeu;
-        $this->idUser = $idUser;
+        $this->id_jeu = $id_jeu;
+        $this->id_user = $id_user;
     }
 
     function getIdComm() {
@@ -25,11 +25,11 @@ class Commentaire extends Jeu {
     }
 
     function getIdJeu() {
-        return $this->idJeu;
+        return $this->id_jeu;
     }
 
     function getIdUser() {
-        return $this->idUser;
+        return $this->id_user;
     }
 
     function setIdComm($idComm) {
@@ -41,11 +41,11 @@ class Commentaire extends Jeu {
     }
 
     function setIdJeu($idJeu) {
-        $this->idJeu = $idJeu;
+        $this->id_jeu = $id_jeu;
     }
 
     function setIdUser($idUser) {
-        $this->idUser = $idUser;
+        $this->id_user = $id_user;
     }
 
 

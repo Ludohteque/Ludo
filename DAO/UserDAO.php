@@ -20,11 +20,11 @@ class UserDAO extends DAO {
     	$stmt = Connexion::prepare("INSERT INTO ".UserDAO::$table." (pseudo, ville, adr_mail, tel, mdp) "
                 . "VALUES (?, ?, ?, ?, ?)");
     	
-    	$stmt->bindParam(1, $pseudo);
-    	$stmt->bindParam(2, $ville);
-    	$stmt->bindParam(3, $mail);
-    	$stmt->bindParam(4, $tel);
-    	$stmt->bindParam(5, $mdp);
+    	$stmt->bindParam(1, $obj->getPseudo());
+    	$stmt->bindParam(2, $obj->getVille());
+    	$stmt->bindParam(3, $obj->getMail());
+    	$stmt->bindParam(4, $obj->getTel());
+    	$stmt->bindParam(5, $obj->getMdp());
     	
     	$stmt->execute();
     }

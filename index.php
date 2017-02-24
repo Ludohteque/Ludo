@@ -9,7 +9,10 @@ if(!isset($_GET['uc'])){
 $uc = $_GET['uc'];
 switch($uc){
 	case 'accueil':{
+                include('DAO/JeuDAO.php');
+                $jeuDAO = new JeuDAO();
                 
+                $lesDerniersJeux = $jeuDAO->getDerniersJeux();
 		include("Vue/v_main.php");
              
                 break;

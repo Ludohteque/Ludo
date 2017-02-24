@@ -6,6 +6,7 @@ class JeuDAO extends DAO {
     private $clePrimaireMere = "id_produit";
     private $tableFille = "jeu";
     private $clePrimaireFille = "id_jeu";
+    private $clederniere = "date_ajout";
     
     public function create($obj) {
         $stmt = Connexion::getInstance()->prepare("insert into ".$this->tableMere." (nom, descriptif, etat) values (?,?,?);");
@@ -55,6 +56,19 @@ class JeuDAO extends DAO {
         $stmt2->bindParam(3, $obj->getNote());
         $stmt2->bindParam(4, $obj->getDescriptif());
         $stmt2->bindParam(5, $obj->getDateAjout());
+    }
+    
+    public function getDerniersJeux() {
+        $stmt = Connexion::prepare("select * from ".UserDAO::tableMere." ORDER BY ".UserDAO::clederniere." DESC LIMIT 10");
+        $stmt->execute();
+        $result = $stmt->fetch();
+        $listeJeux = array();
+        foreach ($result as $value) {
+            $jeu = $value->fetch();
+            $newjeu = new Jeu($jeu['idJeu'],$jeu['nom'], $jeu['nb_joueurs'], $jeu['id_age'], $jeu['id_categorie'], $jeu['descriptif'], $jeu['id_duree'], $jeu['date_ajout'], $jeu['etat'], $jeu['note']);
+            $listeJeux .= $newjeu;
+            }
+        return $listeJeux;
     }
 
 }

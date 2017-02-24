@@ -1,8 +1,8 @@
 <?php
-if(!isset($_REQUEST['action'])){
-	$_REQUEST['action'] = 'demandeInscription';
+if(!isset($_POST['action'])){
+	$_POST['action'] = 'demandeInscription';
 }
-$action = $_REQUEST['action'];
+$action = $_POST['action'];
 switch($action){
 	case 'demandeInscription':{
 		include("Vue/v_inscription.php");
@@ -10,19 +10,21 @@ switch($action){
 	}
 	case 'valideInscription':{
 		$login = $_POST['pseudo'];
-		$mdp = $_REQUEST['passe'];
+		$mdp = $_POST['passe'];
                 $mdp = md5($mdp);
-                $ville= $_REQUEST('ville');
-                $mail = $_REQUEST('mail');
-                $phone = $_REQUEST('phone');
+                $ville= $_POST('ville');
+                $mail = $_POST('mail');
+                $phone = $_POST('phone');
 		if(is_array( $joueur) && is_array($admin)){
 			ajouterErreur("Joueur déjà éxistant !!!");
 			include("Vue/v_erreurs.php");
-			include("Vue/v_connexion.php");
+			include("Vue/v_inscription.php");
 		} else {
+                    include('Modele/User.php');
+                    $user = new user($pseudo, $ville, $mail, $tel, $mdp, 0);
                     include('DAO/UserDAO.php');
                     $userdao = new UserDAO();
-                    
+                    $userdao->create($user);
                 }
 		break;
 	}

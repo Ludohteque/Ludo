@@ -60,7 +60,6 @@ function isEmail(champ){
 
 function verifForm(f)
 {
-    
    var pseudoOk = verifPseudo(f.pseudo);
    var mdpIdent = verifmdps();
    //var mailOk = isEmail(f.email);

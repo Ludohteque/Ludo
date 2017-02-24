@@ -1,10 +1,12 @@
 <?php
 session_start();
+require_once('DAO/Connexion.php');
+require_once ('DAO/DAO.php');
 /*$estConnecte = estConnecte();*/
-if(!isset($_REQUEST['uc'])){
-     $_REQUEST['uc'] = 'accueil';
+if(!isset($_GET['uc'])){
+     $_GET['uc'] = 'accueil';
 }	 
-$uc = $_REQUEST['uc'];
+$uc = $_GET['uc'];
 switch($uc){
 	case 'accueil':{
                 

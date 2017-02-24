@@ -6,7 +6,7 @@
         </br>
 	<p class="pform">
 		<label for="pseudo">Choisissez votre Pseudo :</label>
-		<input id="pseudo" type="text" onblur="verifPseudo(this)"/><span class="red">*</span>
+		<input id="pseudo" name="pseudo" type="text" onblur="verifPseudo(this)"/><span class="red">*</span>
 	</p>
         </br>
 	<p class="pform">
@@ -25,7 +25,7 @@
         </br>
         <p class="pform">
 		<label for="mail">Entrez votre adresse mail :</label>
-		<input id="mail" type="text" onblur="isEmail(this)"/><span class="red">*</span>
+		<input id="mail" name="mail" type="text" onblur="isEmail(this)"/><span class="red">*</span>
 	</p>
         <p class="pform">
 		<label for="mail">Retapez votre adresse mail :</label>

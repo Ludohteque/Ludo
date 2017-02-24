@@ -1,6 +1,6 @@
 <?php
 
-class Connexion{
+class Connexion {
 
 	private $PDOInstance = null;
 	private static $instance = null;
@@ -11,11 +11,13 @@ class Connexion{
 	const DEFAULT_SQL_PASS = '';
 
 
-	private function __construct(){
+	public function __construct(){
 		try{
-			$this->PDOInstance = new PDO('mysql:dbname='.self::DEFAULT_SQL_DTB.';host='.self::DEFAULT_SQL_HOST,self::DEFAULT_SQL_USER ,self::DEFAULT_SQL_PASS);}
-			catch(PDOException $e){
-				echo 'La base de donnée n\'est pas disponible, merci de réessayer plus tard.';}
+			$this->PDOInstance = new PDO('mysql:dbname='.self::DEFAULT_SQL_DTB.';host='.self::DEFAULT_SQL_HOST,self::DEFAULT_SQL_USER ,self::DEFAULT_SQL_PASS);       
+                }
+		catch(PDOException $e){
+			echo 'La base de donnée n\'est pas disponible, merci de réessayer plus tard.';
+                }
 	}
 
 	public static function getInstance()
@@ -27,10 +29,12 @@ class Connexion{
 		return self::$instance;
 	}
 
-	public function query($query)
+	public static function prepare($query)
 	{
-		return $this->PDOInstance->query($query);
+		return Connexion::getInstance()->PDOInstance->prepare($query);
 	}
+        
+        
         
 }
 //On fait l'appel a getInstance comme ça:

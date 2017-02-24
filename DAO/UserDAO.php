@@ -1,5 +1,6 @@
 <?php
 
+
 class UserDAO extends DAO {
 	
     private static $table="user";
@@ -8,8 +9,15 @@ class UserDAO extends DAO {
     
     
     public function create($obj) {
-       
-    	$stmt = Connexion::getInstance()->prepare("INSERT INTO ".$this->table." (pseudo, ville, mail, tel, mdp) "
+        
+    	$pseudo=$obj->getPseudo();
+    	$ville=$obj->getVille();
+    	$mail=$obj->getMail();
+    	$tel=$obj->getTel();
+    	$mdp=$obj->getMdp();
+    	
+    	
+    	$stmt = Connexion::prepare("INSERT INTO ".UserDAO::$table." (pseudo, ville, adr_mail, tel, mdp) "
                 . "VALUES (?, ?, ?, ?, ?)");
     	
     	$stmt->bindParam(1, $obj->getPseudo());
@@ -22,14 +30,13 @@ class UserDAO extends DAO {
     }
 
     public function delete($obj) {
-        $idCourant=$obj->getIdUser();
-    	
-    	$stmt = Connexion::getInstance()->prepare("DELETE FROM ".$this->table." WHERE ".$this->id." = ".$idCourant.";");
+        $idCourant=$obj->getId();
+    	$stmt = Connexion::prepare("DELETE FROM ".UserDAO::$table." WHERE ".UserDAO::$id." = ".$idCourant.";");
         $stmt->execute();
     }
 
     public function find($id) {
-        $stmt = Connexion::getInstance()->prepare("SELECT * FROM ".$this->table." WHERE ".$this->id." = ".$id.";");
+        $stmt = Connexion::prepare("SELECT * FROM ".UserDAO::$table." WHERE ".UserDAO::$id." = ".$id.";");
         $stmt->execute();
         $d = $stmt->fetch();
         $user=new user($d["id_user"], $d["pseudo"], $d["ville"], $d["adr_mail"], $d["tel"], $d["is_admin"], $d["is_bureau"],
@@ -40,18 +47,18 @@ class UserDAO extends DAO {
     }
     
     public function findParPseudo($pseudo) {
-        $stmt = Connexion::getInstance()->prepare("SELECT * FROM ".$this->table." WHERE pseudo = ".$pseudo.";");
+        $stmt = Connexion::prepare("SELECT * FROM ".UserDAO::$table." WHERE pseudo = ".$pseudo.";");
         $stmt->execute();
         $d = $stmt->fetch();
-        $user=new user($d["id_user"], $d["pseudo"], $d["ville"], $d["adr_mail"], $d["tel"], $d["is_admin"], $d["is_bureau"],
+        $user=new User($d["id_user"], $d["pseudo"], $d["ville"], $d["adr_mail"], $d["tel"], $d["is_admin"], $d["is_bureau"],
                 $d["mdp"], $d["note_user"], $d["nbBan"], $d["enBan"]);
             
-        return $user;
+        return $user->getPseudo();
     }
     
     public function update($obj) {
         
-        $stmt = Connexion::getInstance()->prepare("UPDATE ".$this->table." SET pseudo='?', ville='?', adr_mail='?', tel='?',"
+        $stmt = Connexion::prepare("UPDATE ".UserDAO::$table." SET pseudo='?', ville='?', adr_mail='?', tel='?',"
                 . "is_admin='?', is_bureau='?', mdp='?', note_user='?', nbBan='?', enBan='?'  WHERE id='?' ; ");
         
         $stmt->bindParam(1, $obj->getPseudo());
@@ -69,15 +76,11 @@ class UserDAO extends DAO {
         $stmt->execute(); 
         
     } 
-    public function pseudoExist($obj){
+    public function pseudoExist($pseudo){
         $succes=false;
         
-        $pseudoCourant=$obj->getPseudo();
-        
-        $objAComparer=self::find($pseudoCourant);
-        $pseudoAComparer=$objAComparer->getPseudo();
-        
-        if($pseudoCourant==$pseudoAComparer){
+        $pseudoAComparer=self::findParPseudo($pseudo);
+        if($pseudoAComparer!==null){
             $succes=true;
         }
         return $succes;
@@ -107,5 +110,3 @@ class UserDAO extends DAO {
     }
     
 }
-
-?>

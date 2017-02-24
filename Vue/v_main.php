@@ -56,5 +56,6 @@
       </div>
 
       <hr id="barreH"> <!-- Balise de barre horizontale -->
-    </div> <!-- /container -->   
-    <?php include('Vue/v_footer.php'); ?>
+    </div> <!-- /container -->        
+    <?php 
+    include('Vue/v_footer.php'); ?>

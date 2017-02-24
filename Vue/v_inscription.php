@@ -1,20 +1,21 @@
-<?php include('v_header.php'); ?>
+<?php include('v_header.php');
+?>
 <div class="containform">
-    <form id="start" action="POST">
+    <form id="start" action="index.php?uc=inscription&action=valideInscription" method="POST" onsubmit="return verifForm(this)">
 	<h4 class="titreformulaire">Formulaire d'inscription du joueur :</h4>
         </br>
 	<p class="pform">
 		<label for="pseudo">Choisissez votre Pseudo :</label>
-		<input id="pseudo" type="text" /><span class="red">*</span>
+		<input id="pseudo" type="text" onblur="verifPseudo(this)"/><span class="red">*</span>
 	</p>
         </br>
 	<p class="pform">
 		<label for="passe">Et votre Mot de passe :</label>
-		<input id="passe" type="text" /><span class="red">*</span>
+		<input id="passe" type="password" /><span class="red">*</span>
         </p>
         <p class="pform">
                 <label for="passe">Retapez votre Mot de passe :</label>
-		<input id="passe2" type="text" /><span class="red">*</span>
+		<input id="passe2" type="password" onblur="verifmdps()"/><span class="red">*</span>
 	</p>
         </br>
         <p class="pform">
@@ -24,11 +25,11 @@
         </br>
         <p class="pform">
 		<label for="mail">Entrez votre adresse mail :</label>
-		<input id="mail" type="text" /><span class="red">*</span>
+		<input id="mail" type="text" onblur="isEmail(this)"/><span class="red">*</span>
 	</p>
         <p class="pform">
 		<label for="mail">Retapez votre adresse mail :</label>
-		<input id="mail2" type="text" /><span class="red">*</span>
+		<input id="mail2" type="text" onblur="verifMailIdent()"/><span class="red">*</span>
 	</p>
         </br>
         <p class="pform">
@@ -43,6 +44,7 @@
         </p>
 </form>
 </div>
+
 <div id="titre"></div>
 
 <?php

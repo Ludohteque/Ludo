@@ -1,5 +1,7 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    <?php include('Vue/v_actus.php'); ?>
+    <?php 
+    include('Vue/v_header.php');
+    include('Vue/v_actus.php'); ?>
     
     <div id="tableContainer"> <!-- table contenant la liste de ses propres jeux -->
         <table class="table table-hover table-condensed" id="listPropreJeux">
@@ -54,4 +56,5 @@
       </div>
 
       <hr id="barreH"> <!-- Balise de barre horizontale -->
-    </div> <!-- /container -->        
+    </div> <!-- /container -->   
+    <?php include('Vue/v_footer.php'); ?>

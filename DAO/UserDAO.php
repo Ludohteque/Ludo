@@ -42,13 +42,18 @@ class UserDAO extends DAO {
     }
     
     public function findParPseudo($pseudo) {
-        $stmt = Connexion::prepare("SELECT * FROM ".UserDAO::$table." WHERE pseudo = ".$pseudo.";");
+        $stmt = Connexion::prepare("SELECT * FROM ".UserDAO::$table." WHERE pseudo = '".$pseudo."';");
         $stmt->execute();
         $d = $stmt->fetch();
-        $user=new User($d["id_user"], $d["pseudo"], $d["ville"], $d["adr_mail"], $d["tel"], $d["is_admin"], $d["is_bureau"],
+        if ($d!=0) {
+            $nveauUser=new User($d["id_user"], $d["pseudo"], $d["ville"], $d["adr_mail"], $d["tel"], $d["is_admin"], $d["is_bureau"],
                 $d["mdp"], $d["note_user"], $d["nbBan"], $d["enBan"]);
-            
-        return $user->getPseudo();
+            $user=$nveauUser->getPseudo();
+        } else {
+            $user = null;
+        }
+        
+        return $user;
     }
     
     public function update($obj) {
@@ -73,7 +78,6 @@ class UserDAO extends DAO {
     } 
     public function pseudoExist($pseudo){
         $succes=false;
-        
         $pseudoAComparer=self::findParPseudo($pseudo);
         if($pseudoAComparer!==null){
             $succes=true;

@@ -59,7 +59,15 @@
                   <th>Jeu :</th>
                   <th>Note :</th>
               </tr>
-              <?php foreach ($lesDerniersJeux as $values) { }?>
+              <?php 
+              
+              //foreach ($lesDerniersJeux as $leJeu) { 
+                  
+              //}
+              
+              
+              
+              ?>
                         
                   
               

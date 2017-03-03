@@ -9,6 +9,7 @@ class Produit {
     protected $descriptif;
     protected $isValide;
     protected $etat;
+    protected $dateAjout;
 
     function __construct($id, $nom, $descriptif, $etat, $note, $dateAjout) {
         $this->idProduit = $id;

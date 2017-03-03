@@ -14,7 +14,6 @@
 		<a class="submit" id="go">Envoyer</a>
 	</p>
 </form>
-</div>
 <div id="titre"></div>
 
 <?php

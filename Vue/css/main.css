@@ -12,6 +12,13 @@ body {
     padding-bottom: 20px;
 }
 
+.grey {
+    background-color : lightgray;
+    height: 100%;
+    top: -5000px;
+    margin: 0 auto;
+}
+
 h5 {
     font-family: inherit;
     font-weight: 500;
@@ -309,14 +316,32 @@ input[type=reset]:focus,
 	left: 75%;
 }
 
-.tabs label {
-	background: #5ba4a4;
-	background: -moz-linear-gradient(top, #5ba4a4 0%, #4e8c8a 100%);
+
+
+/* Pour sauvegarde style initial....
+
+label.tab-label-4{
+background: #0033cc;
+    background: #0033cc;
+    background: -moz-linear-gradient(top, #5ba4a4 0%, #4e8c8a 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#5ba4a4), color-stop(100%,#4e8c8a));
 	background: -webkit-linear-gradient(top, #5ba4a4 0%,#4e8c8a 100%);
 	background: -o-linear-gradient(top, #5ba4a4 0%,#4e8c8a 100%);
 	background: -ms-linear-gradient(top, #5ba4a4 0%,#4e8c8a 100%);
 	background: linear-gradient(top, #5ba4a4 0%,#4e8c8a 100%);
+        color: #385c5b;
+}*/
+
+.tabs label {
+	background: #0033cc;
+    background: -moz-linear-gradient(top, #ccccff 0%, #b3b3ff 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ccccff), color-stop(100%,#b3b3ff));
+	background: -webkit-linear-gradient(top, #ccccff 0%,#b3b3ff 100%);
+	background: -o-linear-gradient(top, #ccccff 0%,#b3b3ff 100%);
+	background: -ms-linear-gradient(top, #ccccff 0%,#b3b3ff 100%);
+	background: linear-gradient(top, #ccccff 0%,#b3b3ff 100%);
+        color: #385c5b;
+	
 	font-size: 15px;
 	line-height: 40px;
 	height: 40px;
@@ -324,8 +349,8 @@ input[type=reset]:focus,
 	padding: 0 20px;
     float: left;
 	display: block;
-	width: 10%px;
-	color: #385c5b;
+	width: 20%;
+	
 	top: 0px;
 	letter-spacing: 1px;
 	text-transform: uppercase;
@@ -338,7 +363,7 @@ input[type=reset]:focus,
 
 .tabs label:after {
     content: '';
-	background: #fff;
+	background: lightgray;
 	position: absolute;
 	bottom: -8px;
 	left: 0;
@@ -372,11 +397,11 @@ input[type=reset]:focus,
     top: 0;
 }
 .tabs input:checked:hover + label:after{
-	background: #fff;
+	background: lightgray;
 }
 .tabs input:checked:hover + label ~ .clear-shadow {
     top: 0;
-	background: #fff;
+	background: lightgray;
 	-webkit-transition: none;
 	-moz-transition: none;
 	-o-transition: none;
@@ -417,7 +442,7 @@ input[type=reset]:focus,
 }
 
 .tabs input:checked + label {
-    background: #fff;
+    background: lightgray;
 	z-index: 6;
 	-webkit-transition: top linear 0.2s;
     -moz-transition: top linear 0.2s;
@@ -439,7 +464,7 @@ input[type=reset]:focus,
 }
 
 .content {
-    background: #fff;
+    background: lightgray;
 	position: relative;
     width: 100%;
 	height: 600px;

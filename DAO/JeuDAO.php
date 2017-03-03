@@ -58,17 +58,33 @@ class JeuDAO extends DAO {
         $stmt2->bindParam(5, $obj->getDateAjout());
     }
     
-    public function getDerniersJeux() {
+    public function getNouveautes() {
         $stmt = Connexion::prepare("select * from ".JeuDAO::$tableMere." inner join ".JeuDAO::$tableFille." on ".JeuDAO::$tableFille.".".JeuDAO::$clePrimaireFille."=".JeuDAO::$tableMere.".".JeuDAO::$clePrimaireMere." ORDER BY ".JeuDAO::$dateAjout." DESC LIMIT 10;");
         $stmt->execute();
         $result = $stmt->fetchAll();
         $listeJeux = array();
-        var_dump($result);
+        //var_dump($result);
         foreach ($result as $value) {
             $newjeu = new Jeu($value['id_jeu'],$value['nom'], $value['nb_joueurs'], $value['id_age'], $value['descriptif'], $value['id_duree'], $value['date_ajout'], $value['etat'], $value['note']);
-            $listeJeux .= $newjeu;
-            }
+            $listeJeux[] = $newjeu;
+        }
         return $listeJeux;
+    }
+    
+    public function getPopulaires() {
+        $stmt = Connexion::prepare("select * from ".JeuDAO::$tableMere." inner join ".JeuDAO::$tableFille." on ".JeuDAO::$tableFille.".".JeuDAO::$clePrimaireFille."=".JeuDAO::$tableMere.".".JeuDAO::$clePrimaireMere." ORDER BY note DESC LIMIT 10;");
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $listeJeux = array();
+        foreach ($result as $value) {
+            $newjeu = new Jeu($value['id_jeu'],$value['nom'], $value['nb_joueurs'], $value['id_age'], $value['descriptif'], $value['id_duree'], $value['date_ajout'], $value['etat'], $value['note']);
+            $listeJeux[] = $newjeu;
+        }
+        return $listeJeux;
+    }
+    
+    public function getDerniersEmprunt() {
+        
     }
 
 }

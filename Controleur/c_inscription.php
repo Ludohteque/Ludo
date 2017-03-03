@@ -19,10 +19,14 @@ switch($action){
                 $phone = $_POST['phone'];
                 $userdao = new UserDAO();
 		if($userdao->pseudoExist($login)){
-			ajouterErreur("Joueur déjà éxistant !!!");
-			include("Vue/v_erreurs.php");
-			include("Vue/v_connexion.php");
-		} else {
+                    ajouterErreur("Ce pseudo existe déjà.");
+                    include("Vue/v_erreurs.php");
+                    include("Vue/v_connexion.php");
+		} elseif ($userdao->mailExist($mail)) {
+                    ajouterErreur("Ce mail existe déjà.");
+                    include("Vue/v_erreurs.php");
+                    include("Vue/v_connexion.php");
+                }else {
                     $user = new User(-1, $login, $ville, $mail, $phone, false, false, $mdp, 0, 0, false);
                     $userdao->create($user);
                     include('Vue/v_main.php');

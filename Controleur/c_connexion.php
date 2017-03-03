@@ -15,7 +15,7 @@ switch($action){
                 
 		$login = $_POST['login'];
 		$mdp = $_POST['mdp'];
-                //$mdp = md5($mdp);
+                $mdp = md5($mdp);
                 $userDAO=new UserDAO();
 		$joueur = $userDAO->getInfosJoueur($login, $mdp);
                 

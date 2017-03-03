@@ -19,13 +19,8 @@ class Jeu extends Produit {
             
         }
         
-
         function getIdJeu() {
             return $this->idJeu;
-        }
-
-        function getNomJeu() {
-            return $this->nomJeu;
         }
 
         function getNbJoueurs() {
@@ -36,43 +31,16 @@ class Jeu extends Produit {
             return $this->idAge;
         }
 
-        function getNote() {
-            return $this->note;
-        }
-        
-        function getDescriptif() {
-            return $this->descriptif;
-        }
-
-        function getEstValide() {
-            return $this->estValide;
-        }
-
-        function getInventaire() {
-            return $this->inventaire;
-        }
-
         function getIdDuree() {
             return $this->idDuree;
         }
 
-        function getDateAjout() {
-            return $this->dateAjout;
-        }
         function getLesCommentaires() {
             return $this->lesCommentaires;
         }
 
-        function setLesCommentaires($lesCommentaires) {
-            $this->lesCommentaires = $lesCommentaires;
-        }
-
         function setIdJeu($idJeu) {
             $this->idJeu = $idJeu;
-        }
-
-        function setNomJeu($nomJeu) {
-            $this->nomJeu = $nomJeu;
         }
 
         function setNbJoueurs($nbJoueurs) {
@@ -83,29 +51,15 @@ class Jeu extends Produit {
             $this->idAge = $idAge;
         }
 
-        function setNote($note) {
-            $this->note = $note;
-        }
-
-        function setDescriptif($descriptif) {
-            $this->descriptif = $descriptif;
-        }
-
-        function setEstValide($estValide) {
-            $this->estValide = $estValide;
-        }
-
-        function setInventaire($inventaire) {
-            $this->inventaire = $inventaire;
-        }
-
         function setIdDuree($idDuree) {
             $this->idDuree = $idDuree;
         }
 
-        function setDateAjout($dateAjout) {
-            $this->dateAjout = $dateAjout;
+        function setLesCommentaires($lesCommentaires) {
+            $this->lesCommentaires = $lesCommentaires;
         }
+
+
 
 }
 

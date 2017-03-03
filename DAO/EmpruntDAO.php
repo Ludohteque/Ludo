@@ -1,4 +1,5 @@
 <?php
+require_once 'Modele/Emprunt.php';
 
 class EmpruntDAO extends DAO {
     
@@ -31,9 +32,7 @@ class EmpruntDAO extends DAO {
         $stmt->execute();
         $d = $stmt->fetch();
         $user=new user($d["date_emprunts"], $d["date_remise"], $d["id_emprunteur"], $d["id_exemplaire"]);
-            
         return $user;
-   
     }
 
     public function update($obj) {
@@ -48,7 +47,19 @@ class EmpruntDAO extends DAO {
         
         $stmt->execute(); 
         
-    } 
+    }
+    
+    public function getEmprunts() {
+        $stmt = Connexion::prepare("select * from emprunt ORDER BY date_emprunts DESC LIMIT 10;");
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $listeEmprunts = array();
+        foreach ($result as $value) {
+            $newemprunt = new Emprunt($value['date_emprunts'], $value['date_remise'], $value['id_emprunteur'], $value['id_exemplaire']);
+            $listeEmprunts[] = $newemprunt;
+        }
+        return $listeEmprunts;
+    }
         
     }
 

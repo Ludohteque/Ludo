@@ -1,17 +1,17 @@
-<?php include('Vue/v_header.php');?>
-<h2>Ma Dashboard :</h2>
+<?php include('v_header.php');?>
+<h5>Ma Dashboard :</h5>
     <section class="tabs">
 	            <input id="tab-1" type="radio" name="radio-set" class="tab-selector-1" checked="checked" />
-		        <label for="tab-1" class="tab-label-1">About</label>
+		        <label for="tab-1" class="tab-label-1">Mes jeux :</label>
 		
 	            <input id="tab-2" type="radio" name="radio-set" class="tab-selector-2" />
-		        <label for="tab-2" class="tab-label-2">Services</label>
+		        <label for="tab-2" class="tab-label-2">Mes prêts :</label>
 		
 	            <input id="tab-3" type="radio" name="radio-set" class="tab-selector-3" />
-		        <label for="tab-3" class="tab-label-3">Work</label>
+		        <label for="tab-3" class="tab-label-3">Mes emprunts :</label>
 			
 	            <input id="tab-4" type="radio" name="radio-set" class="tab-selector-4" />
-		        <label for="tab-4" class="tab-label-4">Contact</label>
+		        <label for="tab-4" class="tab-label-4">Mes demandes en cours :</label>
             
 			    <div class="clear-shadow"></div>
 			
@@ -26,7 +26,12 @@
 						<h2>Services</h2>
                         <p>Do you see any Teletubbies in here? Do you see a slender plastic tag clipped to my shirt with my name printed on it? Do you see a little Asian child with a blank expression on his face sitting outside on a mechanical helicopter that shakes when you put quarters in it? No? Well, that's what you see at a toy store. And you must think you're in a toy store, because you're here shopping for an infant named Jeb.</p>
 						<h3>Excellence</h3>
-						<p>Like you, I used to think the world was this great place where everybody lived by the same standards I did, then some kid with a nail showed me I was living in his world, a world where chaos rules not order, a world where righteousness is not rewarded. That's Cesar's world, and if you're not willing to play by his rules, then you're gonna have to pay the price. </p>
+						<p>Like you, 
+                                                    aaaaaaaaaaaaaaaaaaaa
+                                                    aaaaaaaaaaaaaaaaaaaaa
+                                                    </br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa
+                                                    </br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa</br>aaaaaaaaaaaaaaaaa
+                                                    aaaaaaaaaaaaaaI used to think the world was this great place where everybody lived by the same standards I did, then some kid with a nail showed me I was living in his world, a world where chaos rules not order, a world where righteousness is not rewarded. That's Cesar's world, and if you're not willing to play by his rules, then you're gonna have to pay the price. </p>
 				    </div>
 			        <div class="content-3">
 						<h2>Portfolio</h2>

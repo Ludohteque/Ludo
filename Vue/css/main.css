@@ -12,6 +12,17 @@ body {
     padding-bottom: 20px;
 }
 
+h5 {
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 30px;
+    text-align: center;
+}
+
 /*.contenuForm {
     display: block;
     position: absolute;
@@ -273,13 +284,13 @@ input[type=reset]:focus,
 .tabs {
     position: relative;
 	margin: 40px auto;
-	width: 750px;
+	width: 80%;
 }
 
 .tabs input {
 	position: absolute;
 	z-index: 1000;
-	width: 120px;
+	width: 10%;
 	height: 40px;
 	left: 0px;
 	top: 0px;
@@ -289,13 +300,13 @@ input[type=reset]:focus,
 	cursor: pointer;
 }
 .tabs input#tab-2{
-	left: 120px;
+	left: 25%;
 }
 .tabs input#tab-3{
-	left: 240px;
+	left: 50%;
 }
 .tabs input#tab-4{
-	left: 360px;
+	left: 75%;
 }
 
 .tabs label {
@@ -313,7 +324,7 @@ input[type=reset]:focus,
 	padding: 0 20px;
     float: left;
 	display: block;
-	width: 80px;
+	width: 10%px;
 	color: #385c5b;
 	top: 0px;
 	letter-spacing: 1px;
@@ -431,7 +442,7 @@ input[type=reset]:focus,
     background: #fff;
 	position: relative;
     width: 100%;
-	height: 370px;
+	height: 600px;
 	z-index: 5;
 	overflow: hidden;
     box-shadow: 0 -2px 3px -2px rgba(0,0,0,0.2), 0 2px 2px rgba(0,0,0,0.1);
@@ -444,7 +455,7 @@ input[type=reset]:focus,
 	left: 0;
 	bottom: 100%;
 	padding: 10px 40px;
-	overflow: hidden;
+	overflow: auto; /* Overflow du contenu des onglets */
 	z-index: 1;
     opacity: 0;
     -webkit-transition: all linear 0.1s;

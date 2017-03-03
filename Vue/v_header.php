@@ -36,15 +36,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php"><img src="vue/img/logo.png" width="30" height="30"/></a>
+            <a class="navbar-brand" href="index.php"><img src="Vue/img/logo.png" width="30" height="30"/></a>
             <a class="navbar-brand" href="#">Ludothèque</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <form class="navbar-form navbar-right" role="form">
-                <span id="welc">Bienvenue <script>$getNom();</script> !</span>
-                <a href="index.php?uc=inscription&action=demandeInscription">Ma Dashboard</a>
-                <a href="index.php?uc=inscription&action=demandeInscription">S'enregistrer</a>
-                <a href="index.php?uc=connexion&action=demandeConnexion">Se logger</a>
+                <span id="welc">Bienvenue <?php if(isset($_SESSION['prenom'])) { echo $_SESSION['prenom']; } ?> !</span>
+                <a class="btn btn-success" href="index.php?uc=inscription&action=demandeInscription">S'enregistrer</a>
+                <a class="btn btn-success" href="index.php?uc=connexion&action=demandeConnexion">Se logger</a>
+                <a class="btn btn-success" href="index.php?uc=dashboard&action=demandeDashboard">Ma Dashboard</a>
             </form>
         </div><!--/.navbar-collapse -->
     </div>

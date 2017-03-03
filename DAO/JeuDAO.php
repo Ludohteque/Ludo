@@ -2,11 +2,11 @@
 
 class JeuDAO extends DAO {
     
-    private $tableMere = "produit";
-    private $clePrimaireMere = "id_produit";
-    private $tableFille = "jeu";
-    private $clePrimaireFille = "id_jeu";
-    private $clederniere = "date_ajout";
+    private static $tableMere = "produit";
+    private static $clePrimaireMere = "id_produit";
+    private static $tableFille = "jeu";
+    private static $clePrimaireFille = "id_jeu";
+    private static $clederniere = "date_ajout";
     
     public function create($obj) {
         $stmt = Connexion::getInstance()->prepare("insert into ".$this->tableMere." (nom, descriptif, etat) values (?,?,?);");
@@ -59,9 +59,11 @@ class JeuDAO extends DAO {
     }
     
     public function getDerniersJeux() {
-        $stmt = Connexion::prepare("select * from ".UserDAO::tableMere." ORDER BY ".UserDAO::clederniere." DESC LIMIT 10");
+        //$stmt = Connexion::prepare("SELECT * FROM ".JeuDAO::$tableMere." ORDER BY ".JeuDAO::$clederniere." DESC LIMIT 10");
+        //$stmt = Connexion::prepare("SELECT * FROM produit");
+        $stmt = Connexion::prepare("select * from ".JeuDAO::$tableFille." inner join ".JeuDAO::$tableMere." on ".JeuDAO::$tableFille.JeuDAO::$clePrimaireFille."=".JeuDAO::$tableMere.JeuDAO::$clePrimaireMere." ORDER BY ".JeuDAO::$clederniere." DESC LIMIT 10;");
         $stmt->execute();
-        $result = $stmt->fetch();
+        $result = $stmt->fetchAll();
         $listeJeux = array();
         foreach ($result as $value) {
             $jeu = $value->fetch();

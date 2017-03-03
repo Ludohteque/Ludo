@@ -126,7 +126,7 @@ class UserDAO extends DAO {
     }
     
     public function estConnecte(){
-        if(isset($_SESSION['pseudo'])) { 
-            echo $_SESSION['pseudo']; }
+        return isset($_SESSION['pseudo']);
+            
     }
 }

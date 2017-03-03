@@ -5,14 +5,14 @@ if(!isset($_GET['action'])){
 }
 $action = $_GET['action'];
 
-
+require_once("DAO/UserDAO.php");
 switch($action){
 	case 'demandeConnexion':{
 		include("Vue/v_connexion.php");
 		break;
 	}
 	case 'valideConnexion':{
-                require_once("DAO/UserDAO.php");
+                
 		$login = $_POST['login'];
 		$mdp = $_POST['mdp'];
                 //$mdp = md5($mdp);
@@ -29,9 +29,10 @@ switch($action){
                     include_once 'Vue/v_connexion.php';
                 }
 		break;}
-        case 'deconnection':{
-            $_SESSION=array();
-            session_destroy();
+        case 'deconnexion':{
+            $userDAO=new UserDAO();
+            $userDAO->deconnect();
+            include("Vue/v_main.php");
             break;
         
         }

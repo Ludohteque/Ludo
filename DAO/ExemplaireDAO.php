@@ -30,14 +30,17 @@ class ExemplaireDAO extends DAO{
     }
      
     public function findParIdUser($idUser) {
+        $listeJeuxUser = array();
         $stmt = Connexion::prepare("SELECT * FROM ".self::$table." WHERE id_user = ".$idUser.";");
         $stmt->execute();
         $d = $stmt->fetch();
-        $exemplaire=new Exemplaire( $d["id_exemplaire"], $d["id_jeu"], $d["id_user"], $d["etat"], $d["disponibilite"]);
-            
-        return $exemplaire; 
-        
+        foreach ($d as $exemplaire) {
+            $exemplaire=new Exemplaire( $d["id_exemplaire"], $d["id_jeu"], $d["id_user"], $d["etat"], $d["disponibilite"]);
+            $listeJeuxUser[] = $exemplaire;
+        }
+        return $listeJeuxUser;
     }
+   
      
      
     public function delete($obj) {

@@ -15,7 +15,7 @@ switch($action){
                 require_once("DAO/UserDAO.php");
 		$login = $_POST['login'];
 		$mdp = $_POST['mdp'];
-                $mdp = md5($mdp);
+                //$mdp = md5($mdp);
                 $userDAO=new UserDAO();
 		$joueur = $userDAO->getInfosJoueur($login, $mdp);
                 var_dump($joueur);

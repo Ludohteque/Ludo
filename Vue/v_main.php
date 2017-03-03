@@ -5,7 +5,6 @@
     
     if (UserDAO::estConnecte()){include('Vue/v_tablemesjeux.php');} ?>
         <div id="en blanc">
-            
         </div>
     
 

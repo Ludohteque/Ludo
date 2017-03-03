@@ -2,8 +2,6 @@
 
 class Categorie {
    
-    private $table = "categorie";
-    private $clePrimaire = "nom_categorie";
 
     private $nomCat;
     

@@ -1,58 +1,52 @@
 <?php
 
-class Commentaire extends Jeu {
-    
-    private $table = "Commentaire";
-    private $clePrimaire = "id_comm";
-    
-    private $id_comm;
+class Commentaire {
+
+    private $idCommentaire;
     private $commentaire;
-    private $id_jeu;
-    private $id_user;
-    
-    function __construct($commentaire, $idJeu, $idUser) {
+    private $idJeu;
+    private $idUser;
+
+    function __construct($idCommentaire, $commentaire, $idJeu, $idUser) {
+
+        $this->idCommentaire = $idCommentaire;
         $this->commentaire = $commentaire;
-        $this->id_jeu = $id_jeu;
-        $this->id_user = $id_user;
+        $this->id_jeu = $idJeu;
+        $this->id_user = $idUser;
+    }
+    
+    
+    function getIdCommentaire() {
+        return $this->idCommentaire;
     }
 
-    function getIdComm() {
-        return $this->idComm;
+    function setIdCommentaire($idCommentaire) {
+        $this->idCommentaire = $idCommentaire;
     }
 
     function getCommentaire() {
         return $this->commentaire;
     }
-
-    function getIdJeu() {
-        return $this->id_jeu;
-    }
-
-    function getIdUser() {
-        return $this->id_user;
-    }
-
-    function setIdComm($idComm) {
-        $this->idComm = $idComm;
-    }
-
+    
     function setCommentaire($commentaire) {
         $this->commentaire = $commentaire;
     }
 
+    function getIdJeu() {
+        return $this->idJeu;
+    }
+    
     function setIdJeu($idJeu) {
-        $this->id_jeu = $id_jeu;
+        $this->idJeu = $idJeu;
+    }
+
+    function getIdUser() {
+        return $this->idUser;
     }
 
     function setIdUser($idUser) {
-        $this->id_user = $id_user;
+        $this->idUser = $idUser;
     }
-
-
-    
-
-    
-    
 }
 
 ?>

@@ -1,14 +1,13 @@
 <?php
 
-class Age {
+class TrancheAge {
     
-    private $table = "age";
-    private $clePrimaire = "id_age";
     private $idAge;
     private $ageMin;
     private $ageMax;
     
-    function __construct($ageMin, $ageMax) {
+    function __construct($idAge, $ageMin, $ageMax) {
+        $this->idAge = $idAge;
         $this->ageMin = $ageMin;
         $this->ageMax = $ageMax;
     }

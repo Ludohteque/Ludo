@@ -4,18 +4,22 @@ namespace evenement;
     
     class evenement {
         
-        private $table = "evenement";
-        private $clePrimaire = "id_evenement";
-        
+        private $idEvenement;
         private $evenement;
         private $lienImage;
-        private $idEvenement;
         
-        function __construct($evenement, $lienImage) {
+        
+        function __construct($idEvenement, $evenement, $lienImage) {
+            $this->idEvenement = $idEvenement;
             $this->evenement = $evenement;
             $this->lienImage = $lienImage;
         
         }
+        
+        function getIdEvenement() {
+            return $this->idEvenement;
+        }
+
         function getEvenement() {
             return $this->evenement;
         }
@@ -24,8 +28,8 @@ namespace evenement;
             return $this->lienImage;
         }
 
-        function getIdEvenement() {
-            return $this->idEvenement;
+        function setIdEvenement($idEvenement) {
+            $this->idEvenement = $idEvenement;
         }
 
         function setEvenement($evenement) {
@@ -36,12 +40,7 @@ namespace evenement;
             $this->lienImage = $lienImage;
         }
 
-        function setIdEvenement($idEvenement) {
-            $this->idEvenement = $idEvenement;
-        }
 
-
-        
         }
         
  ?>

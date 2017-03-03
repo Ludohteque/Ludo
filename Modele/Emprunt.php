@@ -3,53 +3,64 @@ namespace emprunt;
 
     class emprunt {
         
-        private $table = "emprunt";
-        private $clePrimaire = "id_emprunts";
         
-        private $id_emprunts;
-        private $date_emprunts;
-        private $date_remise;
-        private $id_emprunteur;
-        private $id_exemplaire;
+        private $idEmprunts;
+        private $dateEmprunts;
+        private $dateRemise;
+        private $idEmprunteur;
+        private $idExemplaire;
         
-        function __construct($date_emprunts, $date_remise, $id_emprunteur, $id_exemplaire) {
-            $this->date_emprunts = $date_emprunts;
-            $this->date_remise = $date_remise;
-            $this->id_emprunteur = $id_emprunteur;
-            $this->id_exemplaire = $id_exemplaire;           ;
+        function __construct($idEmprunts, $dateEmprunts, $dateRemise, $idEmprunteur, $idExemplaire) {
+            
+            $this->idEmprunts = $idEmprunts;
+            $this->dateEmprunts = $dateEmprunts;
+            $this->dateRemise = $dateRemise;
+            $this->idEmprunteur = $idEmprunteur;
+            $this->idExemplaire = $idExemplaire;    
         }
-        function getId_emprunts() {
-            return $this->id_emprunts;
+        
+        
+        function getIdEmprunts() {
+            return $this->idEmprunts;
         }
 
-        function setId_emprunts($id_emprunts) {
-            $this->id_emprunts = $id_emprunts;
+        function getDateEmprunts() {
+            return $this->dateEmprunts;
         }
 
-                function getDateEmprunt() {
-            return $this->date_emprunts;
-        }
         function getDateRemise() {
-            return $this->date_remise;
+            return $this->dateRemise;
         }
+
         function getIdEmprunteur() {
-            return $this->id_emprunteur;
+            return $this->idEmprunteur;
         }
+
         function getIdExemplaire() {
-            return $this->id_exemplaire;
+            return $this->idExemplaire;
         }
-        function setDateEmprunt($id_emprunts) {
-            $this->id_emprunts = $id_emprunts;
+
+        function setIdEmprunts($idEmprunts) {
+            $this->idEmprunts = $idEmprunts;
         }
-        function setDateRemise($date_remise) {
-            $this->date_remise = $date_remise;
+
+        function setDateEmprunts($dateEmprunts) {
+            $this->dateEmprunts = $dateEmprunts;
         }
-        function setIdEmprunteur($id_emprunteur) {
-            $this->id_emprunteur = $id_emprunteur;
+
+        function setDateRemise($dateRemise) {
+            $this->dateRemise = $dateRemise;
         }
-        function setIdExemplaire($IdExemplaire) {
-            $this->id_exemplaire = $IdExemplaire;
+
+        function setIdEmprunteur($idEmprunteur) {
+            $this->idEmprunteur = $idEmprunteur;
         }
+
+        function setIdExemplaire($idExemplaire) {
+            $this->idExemplaire = $idExemplaire;
+        }
+
+
     }
     
     ?>

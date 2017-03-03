@@ -20,7 +20,6 @@ namespace Exemplaire;
 			$this->idExemplaire = $idExemplaire;
 			$this->commentaire = $commentaire;
 			$this->disponibilite = $disponibilite;
-			
 		}
 		function getUser() {
 			return $this->user;

@@ -41,7 +41,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <form class="navbar-form navbar-right" role="form">
-                <span id="welc">Bienvenue <?php if(isset($_SESSION['prenom'])) { echo $_SESSION['prenom']; } ?> !</span>
+                <span id="welc">Bienvenue <?php UserDAO::estConnecte() ?> !</span>
                 <a class="btn btn-success" href="index.php?uc=inscription&action=demandeInscription">S'enregistrer</a>
                 <a class="btn btn-success" href="index.php?uc=connexion&action=demandeConnexion">Se logger</a>
                 <a class="btn btn-success" href="index.php?uc=dashboard&action=demandeDashboard">Ma Dashboard</a>

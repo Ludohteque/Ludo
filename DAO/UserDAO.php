@@ -44,13 +44,16 @@ class UserDAO extends DAO {
     }
     
     public function findParPseudo($pseudo) {
-        $stmt = Connexion::prepare("SELECT * FROM ".UserDAO::$table." WHERE pseudo = ".$pseudo.";");
+        $stmt = Connexion::prepare("SELECT * FROM ".UserDAO::$table." WHERE pseudo = '".$pseudo."';");
         $stmt->execute();
         $d = $stmt->fetch();
-        $user=new User($d["id_user"], $d["pseudo"], $d["ville"], $d["adr_mail"], $d["tel"], $d["is_admin"], $d["is_bureau"],
+        if ($d!=0) {
+            $user=new User($d["id_user"], $d["pseudo"], $d["ville"], $d["adr_mail"], $d["tel"], $d["is_admin"], $d["is_bureau"],
                 $d["mdp"], $d["note_user"], $d["nbBan"], $d["enBan"]);
-            
-        return $user->getPseudo();
+        } else {
+            $user = null;
+        }
+        return $user;
     }
     
     public function update($obj) {
@@ -80,22 +83,18 @@ class UserDAO extends DAO {
     } 
     public function pseudoExist($pseudo){
         $succes=false;
-        
-        $pseudoAComparer=self::findParPseudo($pseudo);
-        if($pseudoAComparer!==null){
+        $user=self::findParPseudo($pseudo);
+        if($user!==null){
             $succes=true;
         }
         return $succes;
     }
-    public function mailExist($obj){
+    public function mailExist($mail){
         $succes=false;
-        
-        $mailCourant=$obj->getMail();
-        
-        $objAComparer=self::find($mailCourant);
-        $mailAComparer=$objAComparer->getMail();
-        
-        if($mailCourant==$mailAComparer){
+        $stmt = Connexion::prepare("SELECT * FROM ".UserDAO::$table." WHERE $mail = '".$mail."';");
+        $stmt->execute();
+        $d = $stmt->fetch();
+        if($d != 0){
             $succes=true;
         }
         return $succes;

@@ -39,6 +39,9 @@ h5 {
     background-color: white;
 }*/
 
+.deconnect {
+    background-color: #5cb85c;
+}
 .navbar-inverse {
     color: #f9c563;  
 }

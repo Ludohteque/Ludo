@@ -1,41 +1,12 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <?php 
     include('Vue/v_header.php');
-    include('Vue/v_actus.php'); ?>
+    include('Vue/v_actus.php'); 
     
-    <div id="tableContainer"> <!-- table contenant la liste de ses propres jeux -->
-        <table class="table table-hover table-condensed" id="listPropreJeux">
-                <tr style="background-color: white;">
-                    <th style="text-align:center;">Jeu</th>
-                    <th style="text-align:center;">Age minimum</th>
-                    <th style="text-align:center;">Catégorie</th>
-                    <th style="text-align:center;">Photo</th>
-                    <th style="text-align:center;">Note</th>
-                </tr>
-                <tr>
-                    <td>
-                        
-                    </td>
-                    <td>
-                        
-                    </td>
-                    <td>
-                        
-                    </td>
-                    <td>
-                        
-                    </td>
-                    <td>
-                        
-                    </td>
-                </tr>
-        </table>
-      </div>
-    </div>
+    if (UserDAO::estConnecte()){include('Vue/v_tablemesjeux.php');} ?>
         <div id="en blanc">
             
         </div>
-    </div>
     
 
     <div class="container">
@@ -75,8 +46,7 @@
           </table>
         </div>
       </div>
-
-      <hr id="barreH"> <!-- Balise de barre horizontale -->
-    </div> <!-- /container -->        
+    </div>
+      <hr id="barreH"> <!-- Balise de barre horizontale --> <!-- /container -->        
     <?php 
     include('Vue/v_footer.php'); ?>

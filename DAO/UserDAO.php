@@ -36,7 +36,7 @@ class UserDAO extends DAO {
         $stmt = Connexion::prepare("SELECT * FROM ".UserDAO::$table." WHERE ".UserDAO::$id." = ".$id.";");
         $stmt->execute();
         $d = $stmt->fetch();
-        $user=new user($d["id_user"], $d["pseudo"], $d["ville"], $d["adr_mail"], $d["tel"], $d["is_admin"], $d["is_bureau"],
+        $user=new User($d["id_user"], $d["pseudo"], $d["ville"], $d["adr_mail"], $d["tel"], $d["is_admin"], $d["is_bureau"],
                 $d["mdp"], $d["note_user"], $d["nbBan"], $d["enBan"]);
             
         return $user;

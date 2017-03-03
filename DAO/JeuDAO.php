@@ -65,7 +65,7 @@ class JeuDAO extends DAO {
         $listeJeux = array();
         //var_dump($result);
         foreach ($result as $value) {
-            $newjeu = new Jeu($value['id_jeu'],$value['nom'], $value['nb_joueurs'], $value['id_age'], $value['descriptif'], $value['id_duree'], $value['date_ajout'], $value['etat'], $value['note']);
+            $newjeu = new Jeu($value['id_jeu'],$value['nom'], $value['id_nb_joueurs'], $value['id_age'], $value['descriptif'], $value['id_duree'], $value['date_ajout'], $value['etat'], $value['note']);
             $listeJeux[] = $newjeu;
         }
         return $listeJeux;
@@ -77,7 +77,7 @@ class JeuDAO extends DAO {
         $result = $stmt->fetchAll();
         $listeJeux = array();
         foreach ($result as $value) {
-            $newjeu = new Jeu($value['id_jeu'],$value['nom'], $value['nb_joueurs'], $value['id_age'], $value['descriptif'], $value['id_duree'], $value['date_ajout'], $value['etat'], $value['note']);
+            $newjeu = new Jeu($value['id_jeu'],$value['nom'], $value['id_nb_joueurs'], $value['id_age'], $value['descriptif'], $value['id_duree'], $value['date_ajout'], $value['etat'], $value['note']);
             $listeJeux[] = $newjeu;
         }
         return $listeJeux;

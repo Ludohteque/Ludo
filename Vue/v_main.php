@@ -5,6 +5,7 @@
     $jeuDAO = new JeuDAO();
     $lesNouveautes = $jeuDAO->getNouveautes();
     $lesPopulaires = $jeuDAO->getPopulaires();
+    $lesEmpruntes = $jeuDAO->getDerniersEmprunt();
     
     include('Vue/v_header.php');
     include('Vue/v_actus.php'); 
@@ -92,8 +93,26 @@
         </div>
         <div class="col-md-4">
           <h2>Derniers jeux empruntés</h2>
-          <p>Ici vont les derniers jeux empruntés .... Cékomssapicétou !!!<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-          
+          <p>Ici vont les derniers jeux empruntés .... Cékomssapicétou !!!<p>
+          <table class="jeuxaccueil">
+              <tr class="trjeuxmain">
+                  <th>Jeu</th>
+                  <th>Date d'emprunt</th>
+                  <th>Note</th>
+              </tr>
+              <?php 
+              foreach ($lesEmpruntes as $leJeu) { 
+                  ?>
+              <tr>
+                  <th><?php echo $leJeu['nom'];?></th>
+                  <th><?php echo $leJeu['date_emprunts'];?></th>
+                  <th><?php echo $leJeu['note'];?></th>
+              </tr>   
+                   <?php
+              } 
+              ?>
+          </table>
+          <a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div>
       </div>
 

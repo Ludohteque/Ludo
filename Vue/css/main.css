@@ -526,10 +526,38 @@ background: #0033cc;
 }
 
 
+/**-----------------------------------------------
+--------------------------------------------------
+-------------------MAIN TABLEAUX------------------
+--------------------------------------------------
+-------------------------------------------------*/
 
 
+.jeuxaccueil {
+    margin: auto;
+    box-shadow: none;
+    border: solid 1px gray;
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 10px;
+}
 
+.jeuxaccueil td, .jeuxaccueil th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
 
+.jeuxaccueil tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.trjeuxmain th {
+    text-align: center;
+    color: white;
+    background-color: #1565c0;
+    text-transform: uppercase;
+}
 
 
 

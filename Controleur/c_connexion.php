@@ -1,8 +1,4 @@
 <?php
-
- ?>
-
-<?php
 if(!isset($_POST['action'])){
 	$_POST['action'] = 'demandeConnexion';
 }

@@ -1,5 +1,5 @@
 <?php
-
+require_once 'Modele/User.php';
 
 class UserDAO extends DAO {
 	
@@ -56,20 +56,25 @@ class UserDAO extends DAO {
     
     public function update($obj) {
         
+        $pseudo=$obj->getPseudo(); $ville=$obj->getVille(); $mail=$obj->getMail();
+    	$tel=$obj->getTel(); $isAdmin=$obj->IsAdmin(); $isBureau=$obj->isBureau();
+    	$mdp=$obj->getMdp(); $noteUser=$obj->getNoteUser(); $nbBan=$obj->getNbBan();
+        $enBan=$obj->getEnBan(); $idUser=$obj->getId_user();
+        
         $stmt = Connexion::prepare("UPDATE ".UserDAO::$table." SET pseudo='?', ville='?', adr_mail='?', tel='?',"
                 . "is_admin='?', is_bureau='?', mdp='?', note_user='?', nbBan='?', enBan='?'  WHERE id='?' ; ");
         
-        $stmt->bindParam(1, $obj->getPseudo());
-        $stmt->bindParam(2, $obj->getVille());
-        $stmt->bindParam(3, $obj->getMail());
-        $stmt->bindParam(4, $obj->getTel());
-        $stmt->bindParam(5, $obj->IsAdmin());
-        $stmt->bindParam(6, $obj->isBureau());
-        $stmt->bindParam(7, $obj->getMdp());
-        $stmt->bindParam(8, $obj->getNoteUser());
-        $stmt->bindParam(9, $obj->getNbBan());
-        $stmt->bindParam(10, $obj->getEnBan());
-        $stmt->bindParam(11, $obj->getId_user());
+        $stmt->bindParam(1, $pseudo);
+        $stmt->bindParam(2, $ville);
+        $stmt->bindParam(3, $mail);
+        $stmt->bindParam(4, $tel);
+        $stmt->bindParam(5, $isAdmin);
+        $stmt->bindParam(6, $isBureau);
+        $stmt->bindParam(7, $mdp);
+        $stmt->bindParam(8, $noteUser);
+        $stmt->bindParam(9, $nbBan);
+        $stmt->bindParam(10, $enBan);
+        $stmt->bindParam(11, $idUser);
         
         $stmt->execute(); 
         
@@ -103,8 +108,17 @@ class UserDAO extends DAO {
         session_destroy();
     }
     
-    public function testConnexion() {
-        return isset($_SESSION[$nom]);
+    public function getInfosJoueur($login, $mdp){
+        $stmt = Connexion::prepare("SELECT * FROM ".UserDAO::$table." WHERE pseudo = '".$login."' AND mdp = '".$mdp."';");
+        $stmt->execute();
+        $d = $stmt->fetch();
+        if($d!=0){
+            $user=new User($d["id_user"], $d["pseudo"], $d["ville"], $d["adr_mail"], $d["tel"], $d["is_admin"], $d["is_bureau"],
+                $d["mdp"], $d["note_user"], $d["nbBan"], $d["enBan"]);
+        }else{
+            $user=null;
+        }  
+        return $user;
     }
     
 }

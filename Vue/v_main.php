@@ -5,44 +5,14 @@
     $jeuDAO = new JeuDAO();
     $lesNouveautes = $jeuDAO->getNouveautes();
     $lesPopulaires = $jeuDAO->getPopulaires();
+    $lesEmpruntes = $jeuDAO->getDerniersEmprunt();
     
     include('Vue/v_header.php');
     include('Vue/v_actus.php'); 
-    ?>
     
-    <div id="tableContainer"> <!-- table contenant la liste de ses propres jeux -->
-        <table class="table table-hover table-condensed" id="listPropreJeux">
-                <tr style="background-color: white;">
-                    <th style="text-align:center;">Jeu</th>
-                    <th style="text-align:center;">Age minimum</th>
-                    <th style="text-align:center;">Catégorie</th>
-                    <th style="text-align:center;">Photo</th>
-                    <th style="text-align:center;">Note</th>
-                </tr>
-                <tr>
-                    <td>
-                        
-                    </td>
-                    <td>
-                        
-                    </td>
-                    <td>
-                        
-                    </td>
-                    <td>
-                        
-                    </td>
-                    <td>
-                        
-                    </td>
-                </tr>
-        </table>
-      </div>
-    </div>
+    if (UserDAO::estConnecte()){include('Vue/v_tablemesjeux.php');} ?>
         <div id="en blanc">
-            
         </div>
-    </div>
     
 
     <div class="container">
@@ -92,12 +62,29 @@
         </div>
         <div class="col-md-4">
           <h2>Derniers jeux empruntés</h2>
-          <p>Ici vont les derniers jeux empruntés .... Cékomssapicétou !!!<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-          
+          <p>Ici vont les derniers jeux empruntés .... Cékomssapicétou !!!<p>
+          <table class="jeuxaccueil">
+              <tr class="trjeuxmain">
+                  <th>Jeu</th>
+                  <th>Date d'emprunt</th>
+                  <th>Note</th>
+              </tr>
+              <?php 
+              foreach ($lesEmpruntes as $leJeu) { 
+                  ?>
+              <tr>
+                  <th><?php echo $leJeu['nom'];?></th>
+                  <th><?php echo $leJeu['date_emprunts'];?></th>
+                  <th><?php echo $leJeu['note'];?></th>
+              </tr>   
+                   <?php
+              } 
+              ?>
+          </table>
+          <a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div>
       </div>
-
-      <hr id="barreH"> <!-- Balise de barre horizontale -->
-    </div> <!-- /container -->        
+    </div>
+      <hr id="barreH"> <!-- Balise de barre horizontale --> <!-- /container -->        
     <?php 
     include('Vue/v_footer.php'); ?>

@@ -39,8 +39,20 @@ h5 {
     background-color: white;
 }*/
 
-.deconnect {
-    background-color: #5cb85c;
+#deconnect {
+    background-image: -webkit-linear-gradient(top,red 0,darkred 100%);
+    background-image: -o-linear-gradient(top,red 0,darkred 100%);
+    background-image: -webkit-gradient(linear,left top,left bottom,from(red),to(darkred));
+    background-image: linear-gradient(to bottom,red 0,darkred 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#E90505', endColorstr='#993333', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    background-repeat: repeat-x;
+    border-color: darkred;
+}
+
+#deconnect:hover {
+    background-color: darkred;
+    background-position: 0 -15px;
 }
 .navbar-inverse {
     color: #f9c563;  
@@ -526,10 +538,38 @@ background: #0033cc;
 }
 
 
+/**-----------------------------------------------
+--------------------------------------------------
+-------------------MAIN TABLEAUX------------------
+--------------------------------------------------
+-------------------------------------------------*/
 
 
+.jeuxaccueil {
+    margin: auto;
+    box-shadow: none;
+    border: solid 1px gray;
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 10px;
+}
 
+.jeuxaccueil td, .jeuxaccueil th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
 
+.jeuxaccueil tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.trjeuxmain th {
+    text-align: center;
+    color: white;
+    background-color: #1565c0;
+    text-transform: uppercase;
+}
 
 
 

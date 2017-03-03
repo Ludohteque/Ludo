@@ -129,3 +129,5 @@
         <script type="text/javascript">jssor_1_slider_init();</script>
         <br>
         <p><a class="btn btn-primary btn-lg" href="#" role="button">HERE WE GO !!! &raquo;</a></p>
+      </div>
+</div>

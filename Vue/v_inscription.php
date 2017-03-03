@@ -43,7 +43,6 @@
                 <button class="reset" type="reset" id="gfy">Reset</button>
         </p>
 </form>
-</div>
 
 <div id="titre"></div>
 

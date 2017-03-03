@@ -1,8 +1,10 @@
 <?php
+
 require_once 'Modele/User.php';
 
 class UserDAO extends DAO {
 	
+    
     private static $table="user";
     private static $id="id_user";
     //verifuser(ifexist) et connect user
@@ -109,6 +111,7 @@ class UserDAO extends DAO {
     }
     
     public function getInfosJoueur($login, $mdp){
+        
         $stmt = Connexion::prepare("SELECT * FROM ".UserDAO::$table." WHERE pseudo = '".$login."' AND mdp = '".$mdp."';");
         $stmt->execute();
         $d = $stmt->fetch();
@@ -121,4 +124,8 @@ class UserDAO extends DAO {
         return $user;
     }
     
+    public function estConnecte(){
+        return isset($_SESSION['pseudo']);
+            
+    }
 }

@@ -14,7 +14,6 @@
 		<button class="submit" id="go">Envoyer</button>
 	</p>
 </form>
-</div>
 <div id="titre"></div>
 
 <?php

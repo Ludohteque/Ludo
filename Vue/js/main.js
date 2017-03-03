@@ -135,6 +135,16 @@ function verifTel(champ){
     }
 }
 
+$("#inscription").click(function() {
+    $("body").addClass("grey");
+});
+
+$("#connexion").click(function() {
+    $("body").addClass("grey");
+});
+
+
+
 
 
 

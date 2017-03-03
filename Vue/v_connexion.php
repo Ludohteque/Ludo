@@ -1,17 +1,17 @@
 <?php include('v_header.php'); ?>
-<form id="start" action="POST">
+<form id="start" method="POST" action="index.php?uc=connexion&action=valideConnexion" >
 	<h4 class="titreformulaire">Identification Joueur</h4>
 	<p class="pform">
 		<label for="nom">Login :</label>
-		<input id="name" type="text" />
+		<input id="name" name="login" type="text" />
 	</p>
 	<p class="pform">
 		<label for="prenom">Mot de passe :</label>
-		<input id="passe" type="text" />
+		<input id="passe" name="mdp" type="password" />
 	</p>
         </br>
 	<p class="pform">
-		<a class="submit" id="go">Envoyer</a>
+		<button class="submit" id="go">Envoyer</button>
 	</p>
 </form>
 <div id="titre"></div>

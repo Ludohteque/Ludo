@@ -115,7 +115,7 @@ include('Vue/v_actus.php');
             <a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div>
     </div>
-
+    
     <hr id="barreH"> <!-- Balise de barre horizontale -->
 </div> <!-- /container -->        
 <?php include('Vue/v_footer.php'); ?>

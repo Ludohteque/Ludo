@@ -43,7 +43,7 @@ class EmpruntDAO extends DAO {
         $stmt->bindParam(1, $obj->getDateEmprunt());
         $stmt->bindParam(2, $obj->getDateRemise());
         $stmt->bindParam(3, $obj->getIdEmprunteur());
-        $stmt->bindParam(4, $obj->$id_exemplaire());
+        $stmt->bindParam(4, $obj->getIdExemplaire());
         $stmt->bindParam(5, $obj->getId_emprunts());
         
         $stmt->execute(); 

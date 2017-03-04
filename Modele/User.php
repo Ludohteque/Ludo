@@ -50,7 +50,7 @@ class User {
             return $this->tel;
         }
 
-        function getIsAdmin() {
+        function IsAdmin() {
             return $this->isAdmin;
         }
 
@@ -58,7 +58,7 @@ class User {
             return $this->mdp;
         }
 
-        function getIsBureau() {
+        function IsBureau() {
             return $this->isBureau;
         }
 

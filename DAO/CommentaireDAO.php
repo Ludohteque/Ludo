@@ -29,22 +29,27 @@ class CommentaireDAO extends DAO{
     }
 
     protected function find($id) {
-        $stmt = Connexion::getInstance()->prepare("SELECT * FROM ".$this->table." WHERE ".$this->id." = ".$id_comm.";");
+        $stmt = Connexion::getInstance()->prepare("SELECT * FROM ".$this->table." WHERE ".$this->clePrimaire." = ".$id.";");
         $stmt->execute();
         $d = $stmt->fetch();
-        $user=new user($d["id_comm"], $d["commentaire"], $d["id_jeu"], $d["id_user"]);
+        $commentaire=new Commentaire($d["id_comm"], $d["commentaire"], $d["id_jeu"], $d["id_user"]);
             
-        return $user;
+        return $commentaire;
    
     }
   
     protected function update($obj) {
+        $commentaire = $obj->getCommentaire();
+        $idJeu = $obj->getIdJeu();
+        $idUser = $obj->getIdUser();
+        $idCommentaire = $obj->getIdCommentaire();
         
         $stmt = Connexion::getInstance()->prepare("UPDATE ".$this->table." SET commentaire='?', id_jeu='?', id_user='?'  WHERE id='?'; ");
         
-        $stmt->bindParam(1, $obj->getCommentaire());
-        $stmt->bindParam(2, $obj->$id_jeu());
-        $stmt->bindParam(3, $obj->$id_user());
+        $stmt->bindParam(1, $commentaire);
+        $stmt->bindParam(2, $idJeu);
+        $stmt->bindParam(3, $idUser);
+        $stmt->bindParam(4, $idCommentaire);
         
         $stmt->execute(); 
         

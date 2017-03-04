@@ -11,8 +11,8 @@ class Jeu extends Produit {
         private $idDuree;
         private $lesCommentaires;
         
-        function __construct($idJeu, $nomJeu, $nbJoueurs, $idAge, $descriptif, $idDuree, $dateAjout, $etat, $note) {
-            parent::__construct($idJeu, $nomJeu, $descriptif, $etat, $note, $dateAjout);
+        function __construct($idJeu, $nomJeu, $descriptif, $etat, $note, $dateAjout, $image, $nbJoueurs, $idAge, $idDuree) {
+            parent::__construct($idJeu, $nomJeu, $descriptif, $etat, $note, $dateAjout, $image);
             $this->nbJoueurs = $nbJoueurs;
             $this->idAge = $idAge;
             $this->idDuree = $idDuree;

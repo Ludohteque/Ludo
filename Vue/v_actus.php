@@ -108,7 +108,7 @@
                 </div>
                 <a data-u="any" href="http://www.jssor.com" style="display:none">Full Width Slider</a>
                 <div>
-                    <img data-u="image" src="Vue/img/slider_1.jpg" />
+                    <a><img data-u="image" src="Vue/img/slider_1.jpg" /></a>
                 </div>
                 <div>
                     <img data-u="image" src="Vue/img/slider_2.jpg" />

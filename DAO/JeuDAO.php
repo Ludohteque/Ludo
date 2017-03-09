@@ -1,5 +1,7 @@
 <?php
 
+
+require_once 'Modele/Jeu.php';
 class JeuDAO extends DAO {
     
     private static $tableMere = "produit";
@@ -27,15 +29,17 @@ class JeuDAO extends DAO {
     }
 
     public function delete($obj) {
-        $stmt = Connexion::getInstance()->prepare("delete from ".$this->tableFille." where ".$this->clePrimaireFille." = ".$obj->getIdJeu().";");
+        $stmt = Connexion::getInstance()->prepare("delete from ".self::tableFille." where ".self::clePrimaireFille." = ".$obj->getIdJeu().";");
         $stmt->execute();
         
-        $stmt2 = Connexion::getInstance()->prepare("delete from ".$this->tableMere." where ".$this->clePrimaireMere." = ".$obj->getIdJeu().";");
+        $stmt2 = Connexion::getInstance()->prepare("delete from ".self::tableMere." where ".self::clePrimaireMere." = ".$obj->getIdJeu().";");
         $stmt2->execute();
     }
 
     public function find($id) {
-        $stmt = Connexion::getInstance()->prepare("select * from ".$this->tableFille." inner join ".$this->tableMere." on ".$this->tableFille.$this->clePrimaireFille."=".$this->tableMere.$this->clePrimaireMere." where ".$this->tableFille.".".$this->clePrimaireFille." = ".$id->getIdJeu().";");
+        $stmt = Connexion::prepare("select * from ".self::$tableFille." "
+                . "inner join ".self::$tableMere." on ".self::$tableFille.".".self::$clePrimaireFille."=".self::$tableMere.".".self::$clePrimaireMere." "
+                . "where ".self::$tableFille.".".self::$clePrimaireFille." = ".$id.";");
         $stmt->execute();
         $result = $stmt->fetch();
         $jeu = new Jeu($result['id_jeu'],$result['nom'], $result['descriptif'], $result['etat'], $result['note'], $result['date_ajout'], $result['image'], $result['id_nb_joueurs'], $result['id_age'], $result['id_duree']);
@@ -71,6 +75,7 @@ class JeuDAO extends DAO {
         return $listeJeux;
     }
     
+    // renvoie une liste d'objet Jeu
     public function getPopulaires() {
         $stmt = Connexion::prepare("select * from ".JeuDAO::$tableMere." inner join ".JeuDAO::$tableFille." on ".JeuDAO::$tableFille.".".JeuDAO::$clePrimaireFille."=".JeuDAO::$tableMere.".".JeuDAO::$clePrimaireMere." ORDER BY note DESC LIMIT 10;");
         $stmt->execute();
@@ -85,7 +90,7 @@ class JeuDAO extends DAO {
     
     // renvoi une liste des jeux -paramètres des jeux acccessibles via $listeJeux['nom']- dernièrement empruntés
     public function getDerniersEmprunt() {
-        $stmt = Connexion::prepare("SELECT nom, date_emprunts, note FROM emprunt "
+        $stmt = Connexion::prepare("SELECT id_jeu, nom, date_emprunts, note FROM emprunt "
                 . "INNER JOIN exemplaire ON exemplaire.id_exemplaire=emprunt.id_exemplaire "
                 . "INNER JOIN ".JeuDAO::$tableFille." on ".JeuDAO::$tableFille.".".JeuDAO::$clePrimaireFille."= exemplaire.id_jeu "
                 . "INNER JOIN ".JeuDAO::$tableMere." on ".JeuDAO::$tableFille.".".JeuDAO::$clePrimaireFille."=".JeuDAO::$tableMere.".".JeuDAO::$clePrimaireMere." "

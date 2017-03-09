@@ -65,13 +65,11 @@ class ExemplaireDAO extends DAO{
     
     public function findMesJeux($id_user) {
         $listeJeuxUser = array();
-        $tuple=array();
-        $requete = "SELECT P.note, P.nom, JC.nom_categorie, TA.agemin, TA.agemax, P.image FROM ".self::$table." E INNER JOIN produit P ON E.id_jeu=P.id_produit INNER JOIN jeu J on P.id_produit=J.id_jeu INNER JOIN jeucategorie JC ON J.id_jeu=JC.id_jeu INNER JOIN trancheage TA ON J.id_age=TA.id_age WHERE E.id_user=".$iduser.";";
+        $requete = "SELECT P.note, P.nom, JC.nom_categorie, TA.agemin, TA.agemax, P.image FROM ".self::$table." E INNER JOIN produit P ON E.id_jeu=P.id_produit INNER JOIN jeu J on P.id_produit=J.id_jeu INNER JOIN jeucategorie JC ON J.id_jeu=JC.id_jeu INNER JOIN trancheage TA ON J.id_age=TA.id_age WHERE E.id_user=".$id_user.";";
         $stmt = Connexion::prepare($requete);
         $tuples = $stmt->fetchAll();
         foreach ($tuples as $jeu) {
-            $tuple[]=$jeu;
-            $listeJeuxUser[] = $tuple;
+            $listeJeuxUser[] = $jeu;
         }
         return $listeJeuxUser;        
     }

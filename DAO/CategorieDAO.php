@@ -21,7 +21,6 @@ class CategorieDAO extends DAO{
 
     protected function find($id) {
         $stmt = Connexion::prepare("SELECT * FROM ".CategorieDAO::$table." WHERE ".CategorieDAO::clePrimaire." = ".$id.";");
-
         $stmt->execute();
         $d = $stmt->fetch();
         $categorie = new Categorie($d["nom_categorie"]);

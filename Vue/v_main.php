@@ -9,41 +9,12 @@ $lesEmpruntes = $jeuDAO->getDerniersEmprunt();
 
 include('Vue/v_header.php');
 include('Vue/v_actus.php');
+
+if (UserDAO::estConnecte()) {
+    include('Vue/v_tablemesjeux.php');
+}
 ?>
-
-<div id="tableContainer"> <!-- table contenant la liste de ses propres jeux -->
-    <table class="table table-hover table-condensed" id="listPropreJeux">
-        <tr style="background-color: white;">
-            <th style="text-align:center;">Jeu</th>
-            <th style="text-align:center;">Age minimum</th>
-            <th style="text-align:center;">Catégorie</th>
-            <th style="text-align:center;">Photo</th>
-            <th style="text-align:center;">Note</th>
-        </tr>
-        <tr>
-            <td>
-
-            </td>
-            <td>
-
-            </td>
-            <td>
-
-            </td>
-            <td>
-
-            </td>
-            <td>
-
-            </td>
-        </tr>
-    </table>
-</div>
-</div>
-<div id="en blanc">
-
-</div>
-</div>
+<div id="en blanc"></div>
 
 
 <div class="container">
@@ -57,16 +28,16 @@ include('Vue/v_actus.php');
                     <th>Jeu</th>
                     <th>Note</th>
                 </tr>
-                <?php
-                foreach ($lesPopulaires as $leJeu) {
-                    ?>
+<?php
+foreach ($lesPopulaires as $leJeu) {
+    ?>
                     <tr>
-                        <th><a href='index.php?uc=jeu&action=affichage&id=<?php echo $leJeu->getIdJeu();?>'><?php echo $leJeu->getNom(); ?></a></th>
-                        <th><?php echo $leJeu->getNote(); ?></th>
+                        <td><a href='index.php?uc=jeu&action=affichage&id=<?php echo $leJeu->getIdJeu(); ?>'><?php echo $leJeu->getNom(); ?></a></td>
+                        <td><?php echo $leJeu->getNote(); ?></td>
                     </tr>   
-                    <?php
-                }
-                ?>
+    <?php
+}
+?>
             </table>
             <a class="btn btn-default" href="#" role="button">Voir plus &raquo;</a></p>
         </div>
@@ -78,16 +49,16 @@ include('Vue/v_actus.php');
                     <th>Jeu</th>
                     <th>Note</th>
                 </tr>
-                <?php
-                foreach ($lesNouveautes as $leJeu) {
-                    ?>
+<?php
+foreach ($lesNouveautes as $leJeu) {
+    ?>
                     <tr>
-                        <th><?php echo $leJeu->getNom(); ?></th>
-                        <th><?php echo $leJeu->getNote(); ?></th>
+                        <td><?php echo $leJeu->getNom(); ?></td>
+                        <td><?php echo $leJeu->getNote(); ?></td>
                     </tr>   
-                    <?php
-                }
-                ?>
+    <?php
+}
+?>
             </table>
             <a class="btn btn-default" href="#" role="button">Voir plus &raquo;</a>
         </div>
@@ -100,22 +71,22 @@ include('Vue/v_actus.php');
                     <th>Date d'emprunt</th>
                     <th>Note</th>
                 </tr>
-                <?php
-                foreach ($lesEmpruntes as $leJeu) {
-                    ?>
+<?php
+foreach ($lesEmpruntes as $leJeu) {
+    ?>
                     <tr>
-                        <th><?php echo $leJeu['nom']; ?></th>
-                        <th><?php echo $leJeu['date_emprunts']; ?></th>
-                        <th><?php echo $leJeu['note']; ?></th>
+                        <td><?php echo $leJeu['nom']; ?></td>
+                        <td><?php echo $leJeu['date_emprunts']; ?></td>
+                        <td><?php echo $leJeu['note']; ?></td>
                     </tr>   
-                    <?php
-                }
-                ?>
+    <?php
+}
+?>
             </table>
             <a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div>
     </div>
-    
+
     <hr id="barreH"> <!-- Balise de barre horizontale -->
 </div> <!-- /container -->        
 <?php include('Vue/v_footer.php'); ?>

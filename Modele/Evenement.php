@@ -1,8 +1,7 @@
 <?php
 
-namespace evenement;
     
-    class evenement {
+    class Evenement {
         
         private $idEvenement;
         private $evenement;

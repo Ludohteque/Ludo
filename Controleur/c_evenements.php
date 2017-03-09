@@ -5,7 +5,7 @@ if(!isset($_GET['action'])){
 
 $action = $_GET['action'];
 switch($action) {
-case "affichageUn":
+case "affichageEven":
         $id = $_GET['id'];
         $daoeven = new EvenementDAO();
         $even = $daoeven->find($id);

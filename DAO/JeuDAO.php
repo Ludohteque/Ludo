@@ -42,7 +42,7 @@ class JeuDAO extends DAO {
                 . "where ".self::$tableFille.".".self::$clePrimaireFille." = ".$id.";");
         $stmt->execute();
         $result = $stmt->fetch();
-        $jeu = new Jeu($result['id_jeu'],$result['nom'], $result['id_nb_joueurs'], $result['id_age'], $result['descriptif'], $result['id_duree'], $result['date_ajout'], $result['etat'], $result['note'], $result['image']);
+        $jeu = new Jeu($result['id_jeu'],$result['nom'], $result['descriptif'], $result['etat'], $result['note'], $result['date_ajout'], $result['image'], $result['id_nb_joueurs'], $result['id_age'], $result['id_duree']);
         return $jeu;
     }
 
@@ -69,7 +69,7 @@ class JeuDAO extends DAO {
         $listeJeux = array();
         //var_dump($result);
         foreach ($result as $value) {
-            $newjeu = new Jeu($value['id_jeu'],$value['nom'], $value['id_nb_joueurs'], $value['id_age'], $value['descriptif'], $value['id_duree'], $value['date_ajout'], $value['etat'], $value['note'], $value['image']);
+            $newjeu = new Jeu($value['id_jeu'],$value['nom'], $value['descriptif'], $value['etat'], $value['note'], $value['date_ajout'], $value['image'], $value['id_nb_joueurs'], $value['id_age'], $value['id_duree']);
             $listeJeux[] = $newjeu;
         }
         return $listeJeux;
@@ -82,7 +82,7 @@ class JeuDAO extends DAO {
         $result = $stmt->fetchAll();
         $listeJeux = array();
         foreach ($result as $value) {
-            $newjeu = new Jeu($value['id_jeu'],$value['nom'], $value['id_nb_joueurs'], $value['id_age'], $value['descriptif'], $value['id_duree'], $value['date_ajout'], $value['etat'], $value['note'], $value['image']);
+            $newjeu = new Jeu($value['id_jeu'],$value['nom'], $value['descriptif'], $value['etat'], $value['note'], $value['date_ajout'], $value['image'], $value['id_nb_joueurs'], $value['id_age'], $value['id_duree']);
             $listeJeux[] = $newjeu;
         }
         return $listeJeux;

@@ -11,12 +11,13 @@ class Produit {
     protected $dateAjout;
     protected $image;
 
-    function __construct($id, $nom, $descriptif, $etat, $note, $dateAjout, $image) {
-        $this->idProduit = $id;
-        $this->nom = $nom;
+    function __construct($idProduit, $note, $descriptif, $etat, $nom, $dateAjout, $image) {
+        
+        $this->idProduit = $idProduit;
+        $this->note = $note;
         $this->descriptif = $descriptif;
         $this->etat = $etat;
-        $this->note = $note;
+        $this->nom = $nom;
         $this->dateAjout = $dateAjout;
         $this->image = $image;
     }

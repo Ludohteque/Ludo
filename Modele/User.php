@@ -30,92 +30,36 @@ class User {
                 $this->enBan = $enBan;
 		
 	}
-	function getIdUserParPseudo() {
-		return $this->pseudo;
-	}
-	
-	function getIdUserVille() {
-		return $this->ville;
-	}
-	
-	function getIdUserMAil() {
-		return $this->mail;
-	}
-	
-	function getIdUserTelephone() {
-		return $this->tel;
-	}
-	
-	function getIdUserMotDePasse() {
-		return $this->mdp;
-	}
-	
-	function getIdUserIfAdmin() {
-		return $this->admin;
-	}
-	
-	function getIdUserIfBureau() {
-		return $this->bureau;
-	}
-	
-	public function getPseudo() {
-		return $this->pseudo;
-	}
-	
-	public function setPseudo($pseudo) {
-		$this->pseudo = $pseudo;
-		return $this;
-	}
-	
-	public function getVille() {
-		return $this->ville;
-	}
-	
-	public function setVille($ville) {
-		$this->ville = $ville;
-		return $this;
-	}
-	
-	public function getMail() {
-		return $this->mail;
-	}
-	
-	public function setMail($mail) {
-		$this->mail = $mail;
-		return $this;
-	}
-	
-	public function getTel() {
-		return $this->tel;
-	}
-	public function setTel($tel) {
-		$this->tel = $tel;
-		return $this;
-	}
-	public function getMdp() {
-		return $this->mdp;
-	}
-	public function setMdp($mdp) {
-		$this->mdp = $mdp;
-		return $this;
-	}
-	public function IsAdmin() {
-		return $this->isAdmin;
-	}
-	public function setIsAdmin($isAdmin) {
-		$this->isAdmin = $isAdmin;
-		return $this;
-	}
-	public function IsBureau() {
-		return $this->isBureau;
-	}
-	public function setIsBureau($isBureau) {
-		$this->isBureau = $isBureau;
-		return $this;
-	}
-	
 	function getIdUser() {
-        return $this->id_user;
+            return $this->idUser;
+        }
+
+        function getPseudo() {
+            return $this->pseudo;
+        }
+
+        function getVille() {
+            return $this->ville;
+        }
+
+        function getMail() {
+            return $this->mail;
+        }
+
+        function getTel() {
+            return $this->tel;
+        }
+
+        function IsAdmin() {
+            return $this->isAdmin;
+        }
+
+        function getMdp() {
+            return $this->mdp;
+        }
+
+        function IsBureau() {
+            return $this->isBureau;
         }
 
         function getNoteUser() {
@@ -130,8 +74,36 @@ class User {
             return $this->enBan;
         }
 
-        function setIdUser($id_user) {
-            $this->id_user = $id_user;
+        function setIdUser($idUser) {
+            $this->idUser = $idUser;
+        }
+
+        function setPseudo($pseudo) {
+            $this->pseudo = $pseudo;
+        }
+
+        function setVille($ville) {
+            $this->ville = $ville;
+        }
+
+        function setMail($mail) {
+            $this->mail = $mail;
+        }
+
+        function setTel($tel) {
+            $this->tel = $tel;
+        }
+
+        function setIsAdmin($isAdmin) {
+            $this->isAdmin = $isAdmin;
+        }
+
+        function setMdp($mdp) {
+            $this->mdp = $mdp;
+        }
+
+        function setIsBureau($isBureau) {
+            $this->isBureau = $isBureau;
         }
 
         function setNoteUser($noteUser) {
@@ -145,6 +117,8 @@ class User {
         function setEnBan($enBan) {
             $this->enBan = $enBan;
         }
+
+
 	
 }
 

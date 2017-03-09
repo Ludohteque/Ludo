@@ -23,15 +23,22 @@ class DureeDAO extends DAO {
     public function find($id) {        
     	$req = Connexion::getInstance()->prepare("SELECT * FROM ".$this->table." WHERE ".$this->clePrimaire." = ".$id.";");
         $req->execute();
+        $d = $req->fetch();
+        $duree=new Duree($d["id_duree"], $d["duree_min"], $d["duree_max"]);
+            
+        return $duree;
         
     }
 
     public function update($obj) {
+        $dureeMin = $obj->getDureeMin();
+        $dureeMax = $obj->getDureeMax();
+        $idDuree = $obj->getIdDuree();
         
         $stmt = Connexion::getInstance()->prepare("UPDATE ".$this->table." SET duree_min='?', duree_max='?'  WHERE id='?' ; ");       
-       	$stmt->bindParam(1, $obj->getDureeMin());
-    	$stmt->bindParam(2, $obj->getDureeMax());
-        $stmt->bindParam(3, $obj->getIdDuree());
+       	$stmt->bindParam(1, $dureeMin);
+    	$stmt->bindParam(2, $dureeMax);
+        $stmt->bindParam(3, $idDuree);
         
         $stmt->execute();
         

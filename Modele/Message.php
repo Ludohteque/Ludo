@@ -1,8 +1,6 @@
 <?php
 
 class Message {
-    private $table = "Message";
-    private $clePrimaire = "id_message";
 
     private $idMessage;
     private $corps;
@@ -14,7 +12,8 @@ class Message {
     private $ajout = false;
     private $signalement = false;
     
-    function __construct($corps, $idExpediteur, $idDestinataire, $sujet, $type) {
+    function __construct($idMessage, $corps, $idExpediteur, $idDestinataire, $sujet, $type) {
+        $this->idMessage = $idMessage;
         $this->corps = $corps;
         $this->idExpediteur = $idExpediteur;
         $this->idDestinataire = $idDestinataire;

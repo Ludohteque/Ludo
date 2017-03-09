@@ -32,7 +32,7 @@ class ExemplaireDAO extends DAO{
      
     public function findParIdUser($idUser) {
         $listeJeuxUser = array();
-        $stmt = Connexion::prepare("SELECT J. FROM ".self::$table." WHERE id_user = ".$idUser.";");
+        $stmt = Connexion::prepare("SELECT * FROM ".self::$table." WHERE id_user = ".$idUser.";");
         $stmt->execute();
         $d = $stmt->fetch();
         foreach ($d as $exemplaire) {
@@ -51,7 +51,7 @@ class ExemplaireDAO extends DAO{
     public function update($obj) {
     }
     
-    public function findUserExemplaires($user){
+    public function findUserExemplaires($idUser){
         $listeJeuxUser = array();
         $stmt = Connexion::prepare("SELECT * FROM ".self::$table." WHERE id_user = ".$idUser.";");
         $stmt->execute();
@@ -63,9 +63,10 @@ class ExemplaireDAO extends DAO{
         return $listeJeuxUser;
     }
     
-    public function findMesJeux($id_user) {
+    public function findMesJeux($idUser) {
         $listeJeuxUser = array();
-        $requete = "SELECT P.note, P.nom, JC.nom_categorie, TA.agemin, TA.agemax, P.image FROM ".self::$table." E INNER JOIN produit P ON E.id_jeu=P.id_produit INNER JOIN jeu J on P.id_produit=J.id_jeu INNER JOIN jeucategorie JC ON J.id_jeu=JC.id_jeu INNER JOIN trancheage TA ON J.id_age=TA.id_age WHERE E.id_user=".$id_user.";";
+        $tuple=array();
+        $requete = "SELECT P.note, P.nom, JC.nom_categorie, TA.agemin, TA.agemax, P.image FROM ".self::$table." E INNER JOIN produit P ON E.id_jeu=P.id_produit INNER JOIN jeu J on P.id_produit=J.id_jeu INNER JOIN jeucategorie JC ON J.id_jeu=JC.id_jeu INNER JOIN trancheage TA ON J.id_age=TA.id_age WHERE E.id_user=".$idUser.";";
         $stmt = Connexion::prepare($requete);
         $tuples = $stmt->fetchAll();
         foreach ($tuples as $jeu) {

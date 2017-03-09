@@ -8,6 +8,7 @@ class Type {
     
 
     function __construct($listTypeProduit, $getListTypeProduit) {
+        $this->listTypeProduit = $listTypeProduit;
         $this->listTypeProduit = $getListTypeProduit;        
     }
     

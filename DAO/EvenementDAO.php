@@ -26,9 +26,9 @@ class EvenementDAO extends DAO {
         $stmt = Connexion::getInstance()->prepare("SELECT * FROM ".$this->table." WHERE ".$this->clePrimaire." = ".$id.";");
         $stmt->execute();
         $d = $stmt->fetch();
-        $user=new user($d["id_evenement"], $d["evenement"], $d["lien_image"]);
+        $evenement=new Evenement($d["id_evenement"], $d["evenement"], $d["lien_image"]);
             
-        return $user;
+        return $evenement;
         
     }
     
@@ -36,17 +36,21 @@ class EvenementDAO extends DAO {
         $stmt = Connexion::getInstance()->prepare("SELECT * FROM ".$this->table." WHERE evenement =".$evenement." = ".";");
         $stmt->execute();
         $d = $stmt->fetch();
-        $user=new user($d["id_evenement"], $d["evenement"], $d["lien_image"]);
+        $ObjEvenement=new Evenement($d["id_evenement"], $d["evenement"], $d["lien_image"]);
             
-        return $user;
+        return $ObjEvenement;
         
     }
     protected function update($obj) {
+        $evenement = $obj->getEvenement();
+        $lienImage = $obj->getLienImage();
+        $idEvenement = $obj->getId_evenement();
+        
         $stmt = Connexion::getInstance()->prepare("UPDATE ".$this->table." SET evenement='?', lien_image='?'  WHERE id='?'; ");
         
-        $stmt->bindParam(1, $obj->getEvenement());
-        $stmt->bindParam(2, $obj->getLienImage());
-        $stmt->bindParam(3, $obj->getId_evenement());
+        $stmt->bindParam(1, $evenement);
+        $stmt->bindParam(2, $lienImage);
+        $stmt->bindParam(3, $idEvenement);
         
         $stmt->execute(); 
         

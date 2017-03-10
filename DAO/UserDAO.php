@@ -38,7 +38,7 @@ class UserDAO extends DAO {
         $stmt->execute();
         $d = $stmt->fetch();
         $user=new User($d["id_user"], $d["pseudo"], $d["ville"], $d["adr_mail"], $d["tel"], $d["is_admin"], $d["is_bureau"],
-                $d["mdp"], $d["note_user"], $d["nbBan"], $d["enBan"]);
+                $d["mdp"], $d["moyenne"], $d["nbBan"], $d["enBan"], $d["nb_notes"]);
             
         return $user;
    
@@ -50,7 +50,7 @@ class UserDAO extends DAO {
         $d = $stmt->fetch();
         if ($d!=0) {
             $user=new User($d["id_user"], $d["pseudo"], $d["ville"], $d["adr_mail"], $d["tel"], $d["is_admin"], $d["is_bureau"],
-                $d["mdp"], $d["note_user"], $d["nbBan"], $d["enBan"]);
+                $d["mdp"], $d["moyenne"], $d["nbBan"], $d["enBan"], $d["nb_notes"]);
         } else {
             $user = null;
         }
@@ -61,11 +61,11 @@ class UserDAO extends DAO {
         
         $pseudo=$obj->getPseudo(); $ville=$obj->getVille(); $mail=$obj->getMail();
     	$tel=$obj->getTel(); $isAdmin=$obj->IsAdmin(); $isBureau=$obj->isBureau();
-    	$mdp=$obj->getMdp(); $noteUser=$obj->getNoteUser(); $nbBan=$obj->getNbBan();
-        $enBan=$obj->getEnBan(); $idUser=$obj->getId_user();
+    	$mdp=$obj->getMdp(); $moyenne=$obj->getNoteUser(); $nbBan=$obj->getNbBan();
+        $enBan=$obj->getEnBan(); $idUser=$obj->getId_user(); $nb_notes= getNbNotes();
         
         $stmt = Connexion::prepare("UPDATE ".UserDAO::$table." SET pseudo='?', ville='?', adr_mail='?', tel='?',"
-                . "is_admin='?', is_bureau='?', mdp='?', note_user='?', nbBan='?', enBan='?'  WHERE id='?' ; ");
+                . "is_admin='?', is_bureau='?', mdp='?', moyenne='?', nbBan='?', enBan='?', nb_notes='?' WHERE id='?' ; ");
         
         $stmt->bindParam(1, $pseudo);
         $stmt->bindParam(2, $ville);
@@ -74,10 +74,11 @@ class UserDAO extends DAO {
         $stmt->bindParam(5, $isAdmin);
         $stmt->bindParam(6, $isBureau);
         $stmt->bindParam(7, $mdp);
-        $stmt->bindParam(8, $noteUser);
+        $stmt->bindParam(8, $moyenne);
         $stmt->bindParam(9, $nbBan);
         $stmt->bindParam(10, $enBan);
-        $stmt->bindParam(11, $idUser);
+        $stmt->bindParam(11, $nb_notes);
+        $stmt->bindParam(12, $idUser);
         
         $stmt->execute(); 
         
@@ -118,7 +119,7 @@ class UserDAO extends DAO {
         $d = $stmt->fetch();
         if($d!=0){
             $user=new User($d["id_user"], $d["pseudo"], $d["ville"], $d["adr_mail"], $d["tel"], $d["is_admin"], $d["is_bureau"],
-                $d["mdp"], $d["note_user"], $d["nbBan"], $d["enBan"]);
+                $d["mdp"], $d["moyenne"], $d["nbBan"], $d["enBan"], $d["nb_notes"]);
         }else{
             $user=null;
         }  

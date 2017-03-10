@@ -90,10 +90,10 @@ class JeuDAO extends DAO {
     
     // renvoi une liste des jeux -paramètres des jeux acccessibles via $listeJeux['nom']- dernièrement empruntés
     public function getDerniersEmprunt() {
-        $stmt = Connexion::prepare("SELECT id_jeu, nom, date_emprunts, note FROM emprunt "
+        $stmt = Connexion::prepare("SELECT ".self::$tableFille.".id_jeu, nom, date_emprunts, note FROM emprunt "
                 . "INNER JOIN exemplaire ON exemplaire.id_exemplaire=emprunt.id_exemplaire "
-                . "INNER JOIN ".JeuDAO::$tableFille." on ".JeuDAO::$tableFille.".".JeuDAO::$clePrimaireFille."= exemplaire.id_jeu "
-                . "INNER JOIN ".JeuDAO::$tableMere." on ".JeuDAO::$tableFille.".".JeuDAO::$clePrimaireFille."=".JeuDAO::$tableMere.".".JeuDAO::$clePrimaireMere." "
+                . "INNER JOIN ".self::$tableFille." on ".self::$tableFille.".".self::$clePrimaireFille."= exemplaire.id_jeu "
+                . "INNER JOIN ".self::$tableMere." on ".self::$tableFille.".".self::$clePrimaireFille."=".self::$tableMere.".".self::$clePrimaireMere." "
                 . "ORDER BY date_emprunts DESC LIMIT 10;");
         $stmt->execute();
         $result = $stmt->fetchAll();

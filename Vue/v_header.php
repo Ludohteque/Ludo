@@ -49,9 +49,9 @@
                         <span id="welc">Bienvenue <?php if (UserDAO::estConnecte()) {
             echo $_SESSION['pseudo'];
         } ?> !</span>
-                        <a class="btn btn-success" id="inscription" href="index.php?uc=inscription&action=demandeInscription">S'enregistrer</a>
                         <?php
                         if (!UserDAO::estConnecte()) {
+                            echo "<a class=\"btn btn-success\" id=\"inscription\" href=\"index.php?uc=inscription&action=demandeInscription\">S'enregistrer</a>";
                             echo "<a class=\"btn btn-success\" id=\"connexion\" href=\"index.php?uc=connexion&action=demandeConnexion\">Se logger</a>";
                         }
                         if (UserDAO::estConnecte()) {

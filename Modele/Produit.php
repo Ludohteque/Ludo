@@ -1,8 +1,7 @@
 <?php
 
 class Produit {
-    
-    
+
     protected $idProduit;
     protected $nom;
     protected $note;
@@ -12,8 +11,7 @@ class Produit {
     protected $dateAjout;
     protected $image;
 
-    function __construct($idProduit, $note, $descriptif, $etat, $nom, $dateAjout, $image) {
-        
+    function __construct($idProduit, $nom, $descriptif, $etat, $note, $dateAjout, $image) {
         $this->idProduit = $idProduit;
         $this->note = $note;
         $this->descriptif = $descriptif;
@@ -27,10 +25,26 @@ class Produit {
         return $this->idProduit;
     }
 
+    function getDateAjout() {
+        return $this->dateAjout;
+    }
+
+    function getImage() {
+        return $this->image;
+    }
+
+    function setDateAjout($dateAjout) {
+        $this->dateAjout = $dateAjout;
+    }
+
+    function setImage($image) {
+        $this->image = $image;
+    }
+
     function setIdProduit($idProduit) {
         $this->idProduit = $idProduit;
     }
-        
+
     function getNom() {
         return $this->nom;
     }
@@ -71,8 +85,6 @@ class Produit {
         $this->etat = $etat;
     }
 
-
-    
-    
 }
+
 ?>

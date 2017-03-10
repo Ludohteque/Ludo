@@ -60,6 +60,33 @@ class MessageDAO extends DAO {
         $stmt->execute();
         
     }
+    public function demandeAjout($obj) {
+    	$req = Connexion::getInstance()->prepare("SELECT m.* FROM".$this->table." m JOIN user u ON u.id_user = m.id_destinataire JOIN type t ON t.type_message = m.type WHERE t.type_message LIKE 'Demande ajout AND m.etat LIKE 'non_lu'';");
+        
+        $listeMessages = array();
+        $req->execute();
+        $d = $req->fetchAll();
+        foreach($d AS $unMessage){ 
+            $listeMessages[]=new Message($unMessage["id_message"], $unMessage["corps"], $unMessage["id_expediteur"], $unMessage["id_destinataire"], $unMessage["sujet"], $unMessage["type"]);
+        }
+            
+        return $listeMessages;
+        
+    }
+    
+    public function damandeEmprunt($obj) {
+        	$req = Connexion::getInstance()->prepare("SELECT m.* FROM".$this->table." m JOIN user u ON u.id_user = m.id_destinataire JOIN type t ON t.type_message = m.type WHERE t.type_message LIKE 'Demande de prêt' AND u.pseudo LIKE '';");
+        
+        $listeMessages = array();
+        $req->execute();
+        $d = $req->fetchAll();
+        foreach($d AS $unMessage){ 
+            $listeMessages[]=new Message($unMessage["id_message"], $unMessage["corps"], $unMessage["id_expediteur"], $unMessage["id_destinataire"], $unMessage["sujet"], $unMessage["type"]);
+        }
+            
+        return $listeMessages;
+        
+    }
     public function getMessagesSignalement() {
     //public function getMessagesSignalement($obj) {
         

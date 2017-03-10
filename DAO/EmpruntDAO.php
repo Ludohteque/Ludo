@@ -1,5 +1,5 @@
 <?php
-require_once 'Modele/Emprunt.php';
+require_once ('Modele/Emprunt.php');
 
 class EmpruntDAO extends DAO {
     
@@ -65,6 +65,19 @@ class EmpruntDAO extends DAO {
         }
         return $listeEmprunts;
     }
+    
+    public function getMesEmprunts($id) {
+        $stmt = Connexion::prepare("select * from emprunt WHERE id_emprunteur = ".$id.";");
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $listeEmprunts = array();
+        foreach ($result as $value) {
+            $newEmprunt = new Emprunt($value['id_emprunts'],$value['date_emprunts'], $value['date_remise'], $value['id_emprunteur'], $value['id_exemplaire']);
+            $listeEmprunts[] = $newEmprunt;
+        }
+        return $listeEmprunts;
+    }
+    
         
     }
 

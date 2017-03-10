@@ -1,4 +1,5 @@
 <?php
+define('LIEN_IMAGE','Vue/img/');
 session_start();
 require_once('DAO/Connexion.php');
 require_once ('DAO/DAO.php');
@@ -23,5 +24,12 @@ switch($uc){
         case 'dashboard' :{
                 include("Controleur/c_dashboard.php");break;
         }
+        case 'jeu' : {
+                include("Controleur/c_jeu.php");break;
+        }
+        case 'evenement' : {
+                include("Controleur/c_admin_evenements.php");break;
+        }
+            
 }
 ?>

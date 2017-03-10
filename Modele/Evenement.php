@@ -35,7 +35,7 @@
         }
 
         function getLienImage() {
-            return "/Vue/img/".$this->lienImage."";
+            return LIEN_IMAGE.$this->lienImage."";
         }
 
         function setIdEvenement($idEvenement) {

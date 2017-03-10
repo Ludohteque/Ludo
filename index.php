@@ -3,9 +3,6 @@ define('LIEN_IMAGE','Vue/img/');
 session_start();
 require_once('DAO/Connexion.php');
 require_once ('DAO/DAO.php');
-require_once ('DAO/UserDAO.php');
-$daouser = new UserDAO();
-$estConnecte = $daouser->estConnecte();
 if(!isset($_GET['uc'])){
      $_GET['uc'] = 'accueil';
 }	 

@@ -16,6 +16,7 @@ class UserDAO extends DAO {
     	$mail=$obj->getMail();
     	$tel=$obj->getTel();
     	$mdp=$obj->getMdp();
+        
     	$stmt = Connexion::prepare("INSERT INTO ".UserDAO::$table." (pseudo, ville, adr_mail, tel, mdp) "
                 . "VALUES (?, ?, ?, ?, ?)");
     	$stmt->bindParam(1, $pseudo);

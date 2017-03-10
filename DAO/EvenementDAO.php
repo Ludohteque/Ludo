@@ -7,11 +7,12 @@ class EvenementDAO extends DAO {
     private $clePrimaire = "id_evenement";
     
     public function create($obj) {
-    	$stmt = Connexion::getInstance()->prepare("INSERT INTO ". $this -> table." (evenement, lien_image) ". "VALUES (?, ?)");
+    	$stmt = Connexion::getInstance()->prepare("INSERT INTO ". $this -> table." (evenement, lien_image, titre, date_ajout) ". "VALUES (?, ?, ?, ?)");
     	
     	$stmt->bindParam(1, $obj->getEvenement());
     	$stmt->bindParam(2, $obj->getLienImage());
-    	
+    	$stmt->bindParam(3, $obj->getTitre());
+    	$stmt->bindParam(4, $obj->getDateAjout());
     	$stmt->execute();
     }
 

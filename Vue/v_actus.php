@@ -1,14 +1,8 @@
 <?php
 require_once('DAO/EvenementDAO.php');
-$unevendao = new EvenementDAO();
-$mneven1 = $unevendao->findDernierEvenement();
-$mneven1->getIdEvenement();
-$mneven2 = $unevendao->findDernierEvenement();
-$mneven1->getIdEvenement()-1;
-$mneven3 = $unevendao->findDernierEvenement();
-$mneven1->getIdEvenement()-2;
-$mneven4 = $unevendao->findDernierEvenement();
-$mneven1->getIdEvenement()-3;
+$evendao = new EvenementDAO();
+$lesEvenements = $evendao->findDernierEvenement();
+var_dump($lesEvenements);
 ?>
 
 
@@ -122,16 +116,18 @@ $mneven1->getIdEvenement()-3;
                 </div>
                 <a data-u="any" href="http://www.jssor.com" style="display:none">Full Width Slider</a>
                 <div>
-                    <a id="evenement" href="index.php?uc=evenement&action=affichageEven&id=<?php echo $mneven1->getIdEvenement(); ?>"><img data-u="image" src="<?php $mneven1->getLienImage(); ?>" /></a>
+                    <a id="evenement" href="index.php?uc=evenement&action=affichageEven&id=<?php echo $lesEvenements[0]->getIdEvenement(); ?>"><img data-u="image" src="<?php $lesEvenements[0]->getLienImage(); ?>" /></a>
                 </div>
                 <div>
-                    <a id="evenement" href="index.php?uc=evenement&action=affichageEven&id=<?php echo $mneven2->getIdEvenement(); ?>"><img data-u="image" src="<?php $mneven2->getLienImage(); ?>" /></a>
+                    <div style="position:absolute;top:30px;left:30px;width:480px;height:120px;z-index:0;line-height:60px;"><span class="slidertitle">BlaBlaBla</span></div>
+                    <div style="position:absolute;top:300px;left:30px;width:480px;height:120px;z-index:0;line-height:38px;"><span class="slidertext">Plus de blabla, et des boutons si on veut... Génial !!!</span></div>
+                    <a id="evenement" href="index.php?uc=evenement&action=affichageEven&id=<?php echo $lesEvenements[1]->getIdEvenement(); ?>"><img data-u="image" src="<?php $lesEvenements[1]->getLienImage(); ?>" /></a>
                 </div>
                 <div>
-                    <a id="evenement" href="index.php?uc=evenement&action=affichageEven&id=<?php echo $mneven3->getIdEvenement(); ?>"><img data-u="image" src="<?php $mneven3->getLienImage(); ?>" /></a>
+                    <a id="evenement" href="index.php?uc=evenement&action=affichageEven&id=<?php echo $lesEvenements[2]->getIdEvenement(); ?>"><img data-u="image" src="<?php $lesEvenements[2]->getLienImage(); ?>" /></a>
                 </div>
                 <div>
-                    <a id="evenement" href="index.php?uc=evenement&action=affichageEven&id=<?php echo $mneven4->getIdEvenement(); ?>"><img data-u="image" src="<?php $mneven4->getLienImage(); ?>" /></a>
+                    <a id="evenement" href="index.php?uc=evenement&action=affichageEven&id=<?php echo $lesEvenements[3]->getIdEvenement(); ?>"><img data-u="image" src="<?php $lesEvenements[3]->getLienImage(); ?>" /></a>
                 </div> 
             </div>
             <!-- Bullet Navigator -->

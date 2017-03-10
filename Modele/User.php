@@ -33,7 +33,7 @@ class User {
 		
 	}
 	function getIdUser() {
-            return $this->id_user;
+            return $this->idUser;
         }
 
         function getPseudo() {

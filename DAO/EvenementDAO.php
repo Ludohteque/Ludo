@@ -5,6 +5,7 @@ class EvenementDAO extends DAO {
     
     private $table = "evenement";
     private $clePrimaire = "id_evenement";
+    private $cleDate = "date_ajout";
     
     public function create($obj) {
     	$stmt = Connexion::getInstance()->prepare("INSERT INTO ". $this -> table." (evenement, lien_image, titre, date_ajout) ". "VALUES (?, ?, ?, ?)");
@@ -58,13 +59,18 @@ class EvenementDAO extends DAO {
         
     }
 
-    public function findDernierEvenement() {
-        $stmt = Connexion::getInstance()->prepare("SELECT MAX($this->clePrimaire) FROM ".$this->table.";");
+    public function findDernierEvenement() { //select * from evenement order by date_ajout desc limit 4 ".$this->clePrimare."
+        $listeEven = array();
+        $stmt = Connexion::getInstance()->prepare("SELECT * FROM ".$this->table." ORDER BY ".$this->cleDate." DESC LIMIT 4;");
         $stmt->execute();
-        $d = $stmt->fetch();
-        $evenement=new Evenement($d["id_evenement"], $d["evenement"], $d["lien_image"]);
-            
-        return $evenement;
+        $resultats = $stmt->fetchAll();
+        if ($resultats != 0) {
+            foreach ($resultats as $unResultat) {
+                $evenement=new Evenement($unResultat["id_evenement"], $unResultat["evenement"], $unResultat["lien_image"], $unResultat["titre"],$unResultat["date_ajout"]);
+                $listeEven[] = $evenement;
+            }
+        }
+        return $listeEven;
         
     }
     

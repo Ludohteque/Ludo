@@ -10,10 +10,8 @@ if(!isset($_GET['uc'])){
 $uc = $_GET['uc'];
 switch($uc){
 	case 'accueil':{
-                
-		include("Vue/v_main.php");
-             
-                break;
+            include("Vue/v_main.php");
+            break;
 	}
 	case 'connexion' :{
 		include("Controleur/c_connexion.php");break;

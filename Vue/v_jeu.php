@@ -21,7 +21,10 @@ include('Vue/v_header.php');
                 }
                 ?></p>
         </div>
-        <div class='col-md-6'><h3>Note</h3><p><?php echo $jeu->getNote(); ?></p></div>
+        <div class='col-md-6'>
+            <h3>Note</h3>
+            <p><?php echo $jeu->getNote()."/5"; ?></p>
+        </div>
     </div>
 </div>
 <div class="container contacts">
@@ -41,7 +44,7 @@ include('Vue/v_header.php');
                 <td><?php echo $unUser->getPseudo(); ?></td>
                 <td><?php echo $unUser->getVille(); ?></td>
                 <td><?php if($disponible) {echo "Oui";} else {echo "Non";} ?></td>
-                <td><?php echo $unUser->getNoteUser(); ?></td>
+                <td><?php echo $unUser->getMoyenne(); ?></td>
             </tr>   
             <?php
         }

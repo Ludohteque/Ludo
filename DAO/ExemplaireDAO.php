@@ -80,8 +80,10 @@ class ExemplaireDAO extends DAO{
         $stmt = Connexion::prepare($requete);
         $stmt -> execute();
         $tuples = $stmt->fetchAll();
-        foreach ($tuples as $jeu) {
-            $listeJeuxUser[] = $jeu;
+        if ($tuples != 0) {
+            foreach ($tuples as $jeu) {
+                $listeJeuxUser[] = $jeu;
+            }
         }
         return $listeJeuxUser;        
     }

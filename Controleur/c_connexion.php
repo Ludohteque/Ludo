@@ -23,7 +23,10 @@ switch($action){
                     $_SESSION['pseudo']=$joueur->getPseudo();
                     $_SESSION['admin']=$joueur->isAdmin();
                     $_SESSION['bureau']=$joueur->isBureau();
-                    
+                    if($joueur->isAdmin()){
+                        include 'Vue/v_admin.php';
+                    }else{ 
+                        include("Vue/v_main.php"); }
                     include("Vue/v_main.php");
                 } else{
                     include_once 'Vue/v_connexion.php';

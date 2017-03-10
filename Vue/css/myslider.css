@@ -392,6 +392,16 @@ p.ism-badge a.ism-link:hover {
     top: 50%; -webkit-transform: translateY(-50%); -moz-transform: translateY(-50%); -ms-transform: translateY(-50%); transform: translateY(-50%);
 }
 
+#my-slider .ism-slide-3 .ism-img-frame {
+    width: 100%;
+}
+
+#my-slider .ism-slide-3 .ism-img {
+    width: 100%;
+    top: 50%; -webkit-transform: translateY(-50%); -moz-transform: translateY(-50%); -ms-transform: translateY(-50%); transform: translateY(-50%);
+}
+
+
 
 /* CAPTIONS */
 

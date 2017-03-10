@@ -10,7 +10,7 @@ $lesEmpruntes = $jeuDAO->getDerniersEmprunt();
 include('Vue/v_header.php');
 include('Vue/v_actus.php');
 
-if (UserDAO::estConnecte()) {
+if ($estConnecte) {
     include('Vue/v_tablemesjeux.php');
 }
 ?>

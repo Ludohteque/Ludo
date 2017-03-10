@@ -3,7 +3,9 @@ define('LIEN_IMAGE','Vue/img/');
 session_start();
 require_once('DAO/Connexion.php');
 require_once ('DAO/DAO.php');
-/*$estConnecte = estConnecte();*/
+require_once ('DAO/UserDAO.php');
+$daouser = new UserDAO();
+$estConnecte = $daouser->estConnecte();
 if(!isset($_GET['uc'])){
      $_GET['uc'] = 'accueil';
 }	 
@@ -24,6 +26,9 @@ switch($uc){
         }
         case 'jeu' : {
                 include("Controleur/c_jeu.php");break;
+        }
+        case 'evenement' : {
+                include("Controleur/c_admin_evenements.php");break;
         }
             
 }

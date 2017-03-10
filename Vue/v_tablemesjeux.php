@@ -1,7 +1,7 @@
 <?php
 require_once('DAO/ExemplaireDAO.php');
 $unjeudao = new ExemplaireDAO();
-$mesjeux = $unjeudao->findMesJeux($_SESSION['id']);
+$mesjeux = $unjeudao->findMesJeux($_SESSION['id_user']);
 ?>
 <div id="tableContainer"> <!-- table contenant la liste de ses propres jeux -->
         <table class="table table-hover table-condensed" id="listPropreJeux">

@@ -16,6 +16,7 @@ class UserDAO extends DAO {
     	$mail=$obj->getMail();
     	$tel=$obj->getTel();
     	$mdp=$obj->getMdp();
+        
     	$stmt = Connexion::prepare("INSERT INTO ".UserDAO::$table." (pseudo, ville, adr_mail, tel, mdp) "
                 . "VALUES (?, ?, ?, ?, ?)");
     	$stmt->bindParam(1, $pseudo);
@@ -49,7 +50,7 @@ class UserDAO extends DAO {
         $d = $stmt->fetch();
         if ($d!=0) {
             $user=new User($d["id_user"], $d["pseudo"], $d["ville"], $d["adr_mail"], $d["tel"], $d["is_admin"], $d["is_bureau"],
-                $d["mdp"], $d["note_user"], $d["nbBan"], $d["enBan"]);
+                $d["mdp"], $d["moyenne"], $d["nbBan"], $d["enBan"], $d['nb_notes']);
         } else {
             $user = null;
         }
@@ -64,7 +65,7 @@ class UserDAO extends DAO {
         $enBan=$obj->getEnBan(); $idUser=$obj->getId_user();
         
         $stmt = Connexion::prepare("UPDATE ".UserDAO::$table." SET pseudo='?', ville='?', adr_mail='?', tel='?',"
-                . "is_admin='?', is_bureau='?', mdp='?', note_user='?', nbBan='?', enBan='?'  WHERE id='?' ; ");
+                . "is_admin='?', is_bureau='?', mdp='?', moyenne='?', nbBan='?', enBan='?', nb_notes='?'  WHERE id='?' ; ");
         
         $stmt->bindParam(1, $pseudo);
         $stmt->bindParam(2, $ville);

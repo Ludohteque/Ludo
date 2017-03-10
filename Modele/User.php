@@ -12,11 +12,12 @@ class User {
 	private $isAdmin;
 	private $mdp;
 	private $isBureau;
-        private $noteUser;
+        private $moyenne;
         private $nbBan;
         private $enBan;
+        private $nbNotes;
 	
-	function __construct($idUser, $pseudo, $ville, $mail, $tel, $isAdmin, $isBureau, $mdp, $noteUser, $nbBan, $enBan) {
+	function __construct($idUser, $pseudo, $ville, $mail, $tel, $isAdmin, $isBureau, $mdp, $moyenne, $nbBan, $enBan, $nb_notes) {
                 $this->idUser = $idUser;
 		$this->pseudo = $pseudo;
 		$this->ville = $ville;
@@ -25,13 +26,14 @@ class User {
                 $this->isAdmin = $isAdmin;
                 $this->isBureau = $isBureau;
 		$this->mdp = $mdp;
-                $this->noteUser = $noteUser;
+                $this->moyenne = $moyenne;
                 $this->nbBan = $nbBan;
                 $this->enBan = $enBan;
+                $this->nbNotes = $nb_notes;
 		
 	}
 	function getIdUser() {
-            return $this->idUser;
+            return $this->id_user;
         }
 
         function getPseudo() {
@@ -62,8 +64,8 @@ class User {
             return $this->isBureau;
         }
 
-        function getNoteUser() {
-            return $this->noteUser;
+        function getMoyenne() {
+            return $this->moyenne;
         }
 
         function getNbBan() {
@@ -73,7 +75,14 @@ class User {
         function getEnBan() {
             return $this->enBan;
         }
+        function getNbNotes() {
+            return $this->nb_notes;
+        }
+        function setNbNotes($nbNotes) {
+            $this->nbNotes = $nbNotes;
+        }
 
+        
         function setIdUser($idUser) {
             $this->idUser = $idUser;
         }
@@ -106,8 +115,8 @@ class User {
             $this->isBureau = $isBureau;
         }
 
-        function setNoteUser($noteUser) {
-            $this->noteUser = $noteUser;
+        function setMoyenne($moyenne) {
+            $this->moyenne = $moyenne;
         }
 
         function setNbBan($nbBan) {

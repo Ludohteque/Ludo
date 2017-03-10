@@ -17,10 +17,13 @@
         <link href="https://fonts.googleapis.com/css?family=Eczar" rel="stylesheet">
         <link rel="stylesheet" href="Vue/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="Vue/css/main.css">
-        <script src="Vue/js/main.js"</script>
+        
         <script src="Vue/js/vendor/jquery-1.11.2.min.js"></script>
+        
         <script src="Vue/js/jssor.slider-22.1.8.min.js"></script>
+        <script src="Vue/js/main.js"</script>
         <script src="Vue/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        
         <?php require_once('DAO/UserDAO.php'); ?>
     </head>
     <body>
@@ -42,7 +45,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <form class="navbar-form navbar-right" role="form">
-                <span id="welc">Bienvenue <?php if (UserDAO::estConnecte()) { echo $_SESSION['pseudo']; } ?> !</span>
+                <span id="welc">Bienvenue <?php if (UserDAO::estConnecte()) { echo $_SESSION['pseudo'];} ?> !</span>
                 <a class="btn btn-success" id="inscription" href="index.php?uc=inscription&action=demandeInscription">S'enregistrer</a>
                 <?php if (!UserDAO::estConnecte()){echo "<a class=\"btn btn-success\" id=\"connexion\" href=\"index.php?uc=connexion&action=demandeConnexion\">Se logger</a>";}
                 if (UserDAO::estConnecte()){echo "<a class=\"btn btn-success\" href=\"index.php?uc=dashboard&action=demandeDashboard\">Ma Dashboard</a> ";

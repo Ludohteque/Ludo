@@ -69,7 +69,11 @@ class JeuDAO extends DAO {
         $listeJeux = array();
         //var_dump($result);
         foreach ($result as $value) {
-            $newjeu = new Jeu($value['id_jeu'],$value['nom'], $value['descriptif'], $value['etat'], $value['note'], $value['date_ajout'], $value['image'], $value['id_nb_joueurs'], $value['id_age'], $value['id_duree']);
+            $daoage = new TrancheAgeDAO();
+            $age = $daoage->find($value['id_age']);
+            $daoduree = new DureeDAO();
+            $duree = $daoduree->find($value['id_duree']);
+            $newjeu = new Jeu($value['id_jeu'],$value['nom'], $value['descriptif'], $value['etat'], $value['note'], $value['date_ajout'], $value['image'], $value['id_nb_joueurs'], $age, $duree);
             $listeJeux[] = $newjeu;
         }
         return $listeJeux;
@@ -82,7 +86,11 @@ class JeuDAO extends DAO {
         $result = $stmt->fetchAll();
         $listeJeux = array();
         foreach ($result as $value) {
-            $newjeu = new Jeu($value['id_jeu'],$value['nom'], $value['descriptif'], $value['etat'], $value['note'], $value['date_ajout'], $value['image'], $value['id_nb_joueurs'], $value['id_age'], $value['id_duree']);
+            $daoage = new TrancheAgeDAO();
+            $age = $daoage->find($value['id_age']);
+            $daoduree = new DureeDAO();
+            $duree = $daoduree->find($value['id_duree']);
+            $newjeu = new Jeu($value['id_jeu'],$value['nom'], $value['descriptif'], $value['etat'], $value['note'], $value['date_ajout'], $value['image'], $value['id_nb_joueurs'], $age, $duree);
             $listeJeux[] = $newjeu;
         }
         return $listeJeux;

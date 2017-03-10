@@ -29,7 +29,7 @@ class EvenementDAO extends DAO {
         $stmt = Connexion::getInstance()->prepare("SELECT * FROM ".$this->table." WHERE ".$this->clePrimaire." = ".$id.";");
         $stmt->execute();
         $d = $stmt->fetch();
-        $evenement=new Evenement($d["id_evenement"], $d["evenement"], $d["lien_image"]);
+        $evenement=new Evenement($d["id_evenement"], $d["evenement"], $d["lien_image"], $d["titre"], $d["date_ajout"]);
             
         return $evenement;
         
@@ -71,6 +71,9 @@ class EvenementDAO extends DAO {
             }
         }
         return $listeEven;
+        
+    }
+    public function transfoDateEvenement($id) {
         
     }
     

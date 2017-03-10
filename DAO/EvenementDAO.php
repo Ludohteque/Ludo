@@ -1,6 +1,7 @@
 <?php
 
 require_once 'Modele/Evenement.php';
+
 class EvenementDAO extends DAO {
     
     private $table = "evenement";

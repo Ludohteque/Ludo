@@ -16,6 +16,7 @@ class User {
         private $nbBan;
         private $enBan;
         private $nbNotes;
+        private $lesExemplaires;
 	
 	function __construct($idUser, $pseudo, $ville, $mail, $tel, $isAdmin, $isBureau, $mdp, $moyenne, $nbBan, $enBan, $nb_notes) {
                 $this->idUser = $idUser;
@@ -127,6 +128,13 @@ class User {
             $this->enBan = $enBan;
         }
 
+        function getLesExemplaires() {
+            return $this->lesExemplaires;
+        }
+
+        function setLesExemplaires($lesExemplaires) {
+            $this->lesExemplaires = $lesExemplaires;
+        }
 
 	
 }

@@ -1,6 +1,4 @@
 <?php
-require_once('DAO/UserDAO.php');
-require_once('DAO/EmpruntDAO.php');
 include('Vue/v_dashboard.php');
 if(!isset($_GET['action'])){
 	$_GET['action'] = 'demandeDashboard';

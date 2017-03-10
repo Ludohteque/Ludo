@@ -1,5 +1,7 @@
 <?php
 
+require_once 'Modele/Message.php';
+
 class MessageDAO extends DAO {
     private $table = "message";
     private $clePrimaire = "id_message";

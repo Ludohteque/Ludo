@@ -23,32 +23,36 @@ include('Vue/v_header.php');
         </div>
         <div class='col-md-6'>
             <h3>Note</h3>
-            <p><?php echo $jeu->getNote()."/5"; ?></p>
+            <p><?php echo $jeu->getNote() . "/5"; ?></p>
         </div>
     </div>
 </div>
 <div class="container contacts">
     <h3>Ils ont ce jeu !</h3>
-    <table>
-        <tr>
+    <table class="tableau">
+        <tr class="tableauTete">
             <th>Pseudo</th>
             <th>Localisation</th>
             <th>Disponible</th>
             <th>Note</th>
         </tr>
         <?php
-        foreach ($listeUsers as $unUser) {
-            $disponible = $daoexemplaire->estDisponible($id, $unUser->getIdUser());
+        foreach ($listeExemplaires as $unExemplaire) {
+            $disponible = $unExemplaire->getDisponibilite();
             ?>
             <tr>
-                <td><?php echo $unUser->getPseudo(); ?></td>
-                <td><?php echo $unUser->getVille(); ?></td>
-                <td><?php if($disponible) {echo "Oui";} else {echo "Non";} ?></td>
-                <td><?php echo $unUser->getMoyenne(); ?></td>
+                <td><?php echo $unExemplaire->getIdUser()->getPseudo(); ?></td>
+                <td><?php echo $unExemplaire->getIdUser()->getVille(); ?></td>
+                <td><?php if ($disponible) {
+                echo "Oui";
+            } else {
+                echo "Non";
+            } ?></td>
+                <td><?php echo $unExemplaire->getIdUser()->getMoyenne(); ?></td>
             </tr>   
-            <?php
-        }
-        ?>
+    <?php
+}
+?>
     </table>
 </div>
 

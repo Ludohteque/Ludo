@@ -54,13 +54,17 @@ class EmpruntDAO extends DAO {
         
     }
     
-    public function getEmprunts() {
+    public function getDerniersEmprunts() {
         $stmt = Connexion::prepare("select * from emprunt ORDER BY date_emprunts DESC LIMIT 10;");
         $stmt->execute();
         $result = $stmt->fetchAll();
         $listeEmprunts = array();
         foreach ($result as $value) {
-            $newemprunt = new Emprunt($value['id_emprunts'],$value['date_emprunts'], $value['date_remise'], $value['id_emprunteur'], $value['id_exemplaire']);
+            $daouser = new UserDAO();
+            $user = $daouser->find($value['id_emprunteur']);
+            $daoexemplaire = new ExemplaireDAO();
+            $exemplaire = $daoexemplaire->find($value['id_exemplaire']);
+            $newemprunt = new Emprunt($value['id_emprunts'],$value['date_emprunts'], $value['date_remise'], $user, $exemplaire);
             $listeEmprunts[] = $newemprunt;
         }
         return $listeEmprunts;

@@ -1,7 +1,7 @@
 <?php
 
-
 require_once 'Modele/Jeu.php';
+
 class JeuDAO extends DAO {
     
     private static $tableMere = "produit";
@@ -84,22 +84,6 @@ class JeuDAO extends DAO {
         foreach ($result as $value) {
             $newjeu = new Jeu($value['id_jeu'],$value['nom'], $value['descriptif'], $value['etat'], $value['note'], $value['date_ajout'], $value['image'], $value['id_nb_joueurs'], $value['id_age'], $value['id_duree']);
             $listeJeux[] = $newjeu;
-        }
-        return $listeJeux;
-    }
-    
-    // renvoi une liste des jeux -paramètres des jeux acccessibles via $listeJeux['nom']- dernièrement empruntés
-    public function getDerniersEmprunt() {
-        $stmt = Connexion::prepare("SELECT ".self::$tableFille.".id_jeu, nom, date_emprunts, note FROM emprunt "
-                . "INNER JOIN exemplaire ON exemplaire.id_exemplaire=emprunt.id_exemplaire "
-                . "INNER JOIN ".self::$tableFille." on ".self::$tableFille.".".self::$clePrimaireFille."= exemplaire.id_jeu "
-                . "INNER JOIN ".self::$tableMere." on ".self::$tableFille.".".self::$clePrimaireFille."=".self::$tableMere.".".self::$clePrimaireMere." "
-                . "ORDER BY date_emprunts DESC LIMIT 10;");
-        $stmt->execute();
-        $result = $stmt->fetchAll();
-        $listeJeux = array();
-        foreach ($result as $value) {
-            $listeJeux[] = $value;
         }
         return $listeJeux;
     }

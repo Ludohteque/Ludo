@@ -1,6 +1,8 @@
 <?php
 
-class TrancheAge extends DAO {
+require_once 'Modele/TrancheAge.php';
+
+class TrancheAgeDAO extends DAO {
     
     private static $table="trancheage";
     private static $id="id_age";

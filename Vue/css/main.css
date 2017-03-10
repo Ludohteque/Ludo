@@ -544,21 +544,13 @@ background: #0033cc;
 --------------------------------------------------
 -------------------------------------------------*/
 
-td, th {
+.tableau td, tableau th {
     border: 1px solid #dddddd;
     text-align: center;
     padding: 8px;
 }
 
-
-/**-----------------------------------------------
---------------------------------------------------
--------------------MAIN TABLEAUX------------------
---------------------------------------------------
--------------------------------------------------*/
-
-
-.jeuxaccueil {
+.tableau {
     margin: auto;
     box-shadow: none;
     border: solid 1px gray;
@@ -567,15 +559,16 @@ td, th {
     margin-bottom: 10px;
 }
 
-.jeuxaccueil tr:nth-child(even) {
+.tableau tr:nth-child(even) {
     background-color: #dddddd;
 }
 
-.trjeuxmain th {
+.tableau th {
     text-align: center;
     color: white;
     background-color: #1565c0;
     text-transform: uppercase;
+    padding: 8px;
 }
 
 /**-----------------------------------------------
@@ -600,44 +593,4 @@ td, th {
     text-align: center;
 }
 
-.contacts th {
-    text-align: center;
-    color: white;
-    background-color: #1565c0;
-    text-transform: uppercase;
-}
-
-.contacts table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-/**-----------------------------------------------
---------------------------------------------------
-----------------------NOTATION--------------------
---------------------------------------------------
--------------------------------------------------*/
-
-.rating {
-    width: 226px;
-    margin: 0 auto 1em;
-    font-size: 45px;
-    overflow:hidden;
-}
-.rating a {
-    float:right;
-    color: #aaa;
-    text-decoration: none;
-    -webkit-transition: color .4s;
-    -moz-transition: color .4s;
-    -o-transition: color .4s;
-    transition: color .4s;
-}
-.rating a:hover,
-.rating a:hover ~ a,
-.rating a:focus,
-.rating a:focus ~ a{
-    color: orange;
-    cursor: pointer;
-}
 

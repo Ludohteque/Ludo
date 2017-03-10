@@ -1,7 +1,6 @@
 <?php
-namespace emprunt;
 
-    class emprunt {
+    class Emprunt {
         
         
         private $idEmprunts;

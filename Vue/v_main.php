@@ -1,11 +1,5 @@
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <?php
-require_once('DAO/JeuDAO.php');
-require_once('Modele/Jeu.php');
-$jeuDAO = new JeuDAO();
-$lesNouveautes = $jeuDAO->getNouveautes();
-$lesPopulaires = $jeuDAO->getPopulaires();
-$lesEmpruntes = $jeuDAO->getDerniersEmprunt();
 
 include('Vue/v_header.php');
 include('Vue/v_actus.php');
@@ -22,8 +16,8 @@ if (UserDAO::estConnecte()) {
         <div class="col-md-4">
             <h2>Jeux populaires :</h2>
             <p>ici vont les jeux populaires... Cékomssapicétou !!!<p>
-            <table class="jeuxaccueil">
-                <tr class="trjeuxmain">
+            <table class="tableau">
+                <tr class="tableauTete">
                     <th>Jeu</th>
                     <th>Note</th>
                 </tr>
@@ -43,8 +37,8 @@ if (UserDAO::estConnecte()) {
         <div class="col-md-4">
             <h2>Nouveautés</h2>
             <p>Ici vont les nouveautés ... Cékomssapicétou !!!</p>
-            <table class="jeuxaccueil">
-                <tr class="trjeuxmain">
+            <table class="tableau">
+                <tr class="tableauTete">
                     <th>Jeu</th>
                     <th>Note</th>
                 </tr>
@@ -64,19 +58,19 @@ if (UserDAO::estConnecte()) {
         <div class="col-md-4">
             <h2>Derniers jeux empruntés</h2>
             <p>Ici vont les derniers jeux empruntés .... Cékomssapicétou !!!<p>
-            <table class="jeuxaccueil">
-                <tr class="trjeuxmain">
+            <table class="tableau">
+                <tr class="tableauTete">
                     <th>Jeu</th>
                     <th>Date d'emprunt</th>
                     <th>Note</th>
                 </tr>
                 <?php
-                foreach ($lesEmpruntes as $leJeu) {
+                foreach ($lesEmpruntes as $unEmprunt) {
                     ?>
                     <tr>
-                        <td><?php echo $leJeu['nom']; ?></td>
-                        <td><?php echo $leJeu['date_emprunts']; ?></td>
-                        <td><?php echo $leJeu['note']; ?></td>
+                        <td><?php echo $unEmprunt->getIdExemplaire()->getIdJeu()->getNom(); ?></td>
+                        <td><?php echo $unEmprunt->getDateEmprunts(); ?></td>
+                        <td><?php echo $unEmprunt->getIdExemplaire()->getIdJeu()->getNote(); ?></td>
                     </tr>   
                     <?php
                 }

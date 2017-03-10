@@ -1,5 +1,7 @@
 <?php
 
+require_once 'Modele/Duree.php';
+
 class DureeDAO extends DAO {
   
     private $table = "duree";

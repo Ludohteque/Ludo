@@ -4,12 +4,12 @@ require_once 'Modele/Exemplaire.php';
 
 class ExemplaireDAO extends DAO {
 
-    private static $table="exemplaire";
-    private static $id="id_exemplaire";
-    
+    private static $table = "exemplaire";
+    private static $id = "id_exemplaire";
+
     public function create($obj) {
-        $stmt = Connexion::prepare("INSERT INTO ".self::$table." (id_jeu, id_user, etat, disponibilite) "
-                . "VALUES (?, ?, ?, ?)");
+        $stmt = Connexion::prepare("INSERT INTO " . self::$table . " (id_jeu, id_user, etat, disponibilite) "
+                        . "VALUES (?, ?, ?, ?)");
         $stmt->bindParam(1, $obj->getIdJeu());
         $stmt->bindParam(2, $obj->getIdUser());
         $stmt->bindParam(3, $obj->getEtat());
@@ -22,7 +22,6 @@ class ExemplaireDAO extends DAO {
         $stmt->execute();
         $d = $stmt->fetch();
         $exemplaire = new Exemplaire($d["id_exemplaire"], $d["id_jeu"], $d["id_user"], $d["etat"], $d["disponibilite"]);
-
         return $exemplaire;
     }
 
@@ -43,7 +42,15 @@ class ExemplaireDAO extends DAO {
     }
 
     public function find($id) {
-        
+        $stmt = Connexion::prepare("SELECT * FROM " . self::$table . " WHERE id_jeu = " . $id . ";");
+        $stmt->execute();
+        $d = $stmt->fetch();
+        $daojeu = new JeuDAO();
+        $jeu = $daojeu->find($d['id_jeu']);
+        $daouser = new UserDAO();
+        $user = $daouser->find($d['id_user']);
+        $exemplaire = new Exemplaire($d["id_exemplaire"], $jeu, $user, $d["etat"], $d["disponibilite"]);
+        return $exemplaire;
     }
 
     public function update($obj) {
@@ -64,9 +71,9 @@ class ExemplaireDAO extends DAO {
 
     public function findMesJeux($idUser) {
         $listeJeuxUser = array();
-        $requete = "SELECT P.nom, TA.age_min, JC.nom_categorie, TA.age_min, P.image, P.note, P.image FROM ".self::$table." E INNER JOIN produit P ON E.id_jeu=P.id_produit INNER JOIN jeu J on P.id_produit=J.id_jeu INNER JOIN jeucategorie JC ON J.id_jeu=JC.id_jeu INNER JOIN trancheage TA ON J.id_age=TA.id_age WHERE E.id_user=".$idUser.";";
+        $requete = "SELECT P.nom, TA.age_min, JC.nom_categorie, TA.age_min, P.image, P.note, P.image FROM " . self::$table . " E INNER JOIN produit P ON E.id_jeu=P.id_produit INNER JOIN jeu J on P.id_produit=J.id_jeu INNER JOIN jeucategorie JC ON J.id_jeu=JC.id_jeu INNER JOIN trancheage TA ON J.id_age=TA.id_age WHERE E.id_user=" . $idUser . ";";
         $stmt = Connexion::prepare($requete);
-        $stmt -> execute();
+        $stmt->execute();
         $tuples = $stmt->fetchAll();
         if ($tuples != 0) {
             foreach ($tuples as $jeu) {
@@ -83,18 +90,14 @@ class ExemplaireDAO extends DAO {
         $stmt->execute();
         $d = $stmt->fetchAll();
         foreach ($d as $unExemplaire) {
-            $ex = new Exemplaire($unExemplaire['id_exemplaire'], $unExemplaire['id_jeu'], $unExemplaire['id_user'], $unExemplaire['etat'], $unExemplaire['disponibilite']);
+            $daojeu = new JeuDAO();
+            $jeu = $daojeu->find($unExemplaire['id_jeu']);
+            $daouser = new UserDAO();
+            $user = $daouser->find($unExemplaire['id_user']);
+            $ex = new Exemplaire($unExemplaire['id_exemplaire'], $jeu, $user, $unExemplaire['etat'], $unExemplaire['disponibilite']);
             $listeExemplaire[] = $ex;
         }
         return $listeExemplaire;
-    }
-
-    public function estDisponible($idJeu, $idUser) {
-        $requete = "SELECT disponibilite FROM " . self::$table . " WHERE id_jeu=" . $idJeu . " AND id_user=".$idUser.";";
-        $stmt = Connexion::prepare($requete);
-        $stmt->execute();
-        $d = $stmt->fetch();
-        return $d['disponibilite'];
     }
 
 }

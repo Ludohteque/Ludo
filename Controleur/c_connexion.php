@@ -5,8 +5,6 @@ if(!isset($_GET['action'])){
 }
 $action = $_GET['action'];
 
-require_once("DAO/UserDAO.php");
-require_once("modele/User.php");
 switch($action){
 	case 'demandeConnexion':{
 		include("Vue/v_connexion.php");

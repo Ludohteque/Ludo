@@ -151,15 +151,15 @@ table {
     text-shadow: 8px 8px 7px rgba(0, 0, 0, .7);
 }
 
-.container {
+.containergeneral {
     text-align: center;
 }
 
-.container > h1 {
+.containergeneral > h1 {
     text-shadow: 8px 8px 4px rgba(0, 0, 0, .1);
 }
 
-.container > p {
+.containergeneral > p {
     text-shadow: 8px 8px 4px rgba(0, 0, 0, .1);
 }
 
@@ -585,8 +585,3 @@ background: #0033cc;
 .description {
     margin-top: 100px;
 }
-
-
-
-
-

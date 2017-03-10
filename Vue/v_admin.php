@@ -16,10 +16,25 @@ require_once('DAO/MessageDAO.php');?>
 			        <div class="content-1">
 						<h2></h2>
                         
-				    </div>
-                        <?php    $monMessage=new MessageDAO();
-                            $unmessage = $monMessage->getMessagesSignalement();
-                            echo $unmessage; ?>
+				</div>
+                            
+                            <table>
+                            <tr style="background-color: white;">
+                                <th style="text-align:center;">Sujet</th>
+                                <th style="text-align:center;">Expediteur</th> 
+                            </tr>
+                            
+                                <?php    $monMessage=new MessageDAO();
+                                     $listeMessages = $monMessage->getMessagesSignalement();
+                                     //var_dump($unmessage);
+                                foreach ($listeMessages as $unmessage) {?>
+                            <tr>
+                                    <td><?php echo $unmessage[0];?></td>
+                                    <td><?php echo $unmessage[1];?></td>
+                            </tr>
+                                <?php } ?>
+
+                            </table>
 			        <div class="content-2">
 						<h2>Demande d'ajouts de jeu à traiter</h2>
 						<h3>Excellence</h3>

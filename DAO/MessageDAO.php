@@ -1,5 +1,5 @@
 <?php
-
+require_once ('Modele/Message.php');
 class MessageDAO extends DAO {
     private $table = "message";
     private $clePrimaire = "id_message";
@@ -88,20 +88,18 @@ class MessageDAO extends DAO {
         
     }
     public function getMessagesSignalement() {
-    //public function getMessagesSignalement($obj) {
+        //public function getMessagesSignalement($obj) {
         
-        $req = Connexion::getInstance()->prepare("SELECT m.* FROM".$this->table." m JOIN user u ON u.id_user = m.id_destinataire JOIN type t ON t.type_message = m.type WHERE t.type_message LIKE 'Signalement';");
+        $req = Connexion::prepare("SELECT u.pseudo, m.sujet, m.corps FROM " . $this->table . " m JOIN user u ON u.id_user = m.id_expediteur JOIN type t ON t.type_message = m.type WHERE t.type_message LIKE 'Signalement';");
+        $listeMessages = array();
+        $req->execute();
+        $lesmessages = $req->fetchAll();
+        foreach ($lesmessages AS $unMessage) {
+            $listeMessages[] = $unMessage;
+        }
 
-
-    $listeMessages = array();
-    $req->execute();
-    $d = $req->fetchAll();
-    foreach($d AS $unMessage){ 
-        $listeMessages[]=new Message($unMessage["id_message"], $unMessage["corps"], $unMessage["id_expediteur"], $unMessage["id_destinataire"], $unMessage["sujet"], $unMessage["type"]);
+        return $listeMessages;
     }
 
-    return $listeMessages;
-
-    }
 }
 ?>

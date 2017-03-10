@@ -27,7 +27,7 @@ switch($action){
                     $_SESSION['bureau']=$joueur->isBureau();
                     $_SESSION['id']=$joueur->getIdUser();
                     if($joueur->isAdmin()){
-                        include 'Vue/v_admin_evenements.php';//à retirer pour y placer la vue du dashboard de l'admin.
+                        include 'Vue/v_admin.php';//à retirer pour y placer la vue du dashboard de l'admin.
                     }else{
                         include("Vue/v_main.php");
                     }

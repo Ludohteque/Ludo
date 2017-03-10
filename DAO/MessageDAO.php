@@ -60,7 +60,21 @@ class MessageDAO extends DAO {
         $stmt->execute();
         
     }
-    
+    public function getMessagesSignalement() {
+    //public function getMessagesSignalement($obj) {
+        
+        $req = Connexion::getInstance()->prepare("SELECT m.* FROM".$this->table." m JOIN user u ON u.id_user = m.id_destinataire JOIN type t ON t.type_message = m.type WHERE t.type_message LIKE 'Signalement';");
 
+
+    $listeMessages = array();
+    $req->execute();
+    $d = $req->fetchAll();
+    foreach($d AS $unMessage){ 
+        $listeMessages[]=new Message($unMessage["id_message"], $unMessage["corps"], $unMessage["id_expediteur"], $unMessage["id_destinataire"], $unMessage["sujet"], $unMessage["type"]);
+    }
+
+    return $listeMessages;
+
+    }
 }
 ?>

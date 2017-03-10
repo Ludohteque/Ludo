@@ -23,5 +23,8 @@ switch($uc){
         case 'dashboard' :{
                 include("Controleur/c_dashboard.php");break;
         }
+        case 'dashboardAdmin' : {
+                include("Controleur/c_dashBoardAdmin.php");break;
+        } 
 }
 ?>

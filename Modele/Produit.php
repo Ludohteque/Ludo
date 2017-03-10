@@ -11,8 +11,7 @@ class Produit {
     protected $dateAjout;
     protected $image;
 
-    function __construct($idProduit, $note, $descriptif, $etat, $nom, $dateAjout, $image) {
-        
+    function __construct($idProduit, $nom, $descriptif, $etat, $note, $dateAjout, $image) {
         $this->idProduit = $idProduit;
         $this->note = $note;
         $this->descriptif = $descriptif;

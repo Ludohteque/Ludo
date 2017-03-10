@@ -17,7 +17,7 @@ class User {
         private $enBan;
 	
 	function __construct($idUser, $pseudo, $ville, $mail, $tel, $isAdmin, $isBureau, $mdp, $noteUser, $nbBan, $enBan) {
-                $this->id_user = $idUser;
+                $this->idUser = $idUser;
 		$this->pseudo = $pseudo;
 		$this->ville = $ville;
 		$this->mail = $mail;

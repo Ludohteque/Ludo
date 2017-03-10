@@ -10,6 +10,7 @@ class Jeu extends Produit {
 	private $idAge;
         private $idDuree;
         private $lesCommentaires;
+        private $lesCategories;
         
         function __construct($idJeu, $nomJeu, $descriptif, $etat, $note, $dateAjout, $image, $nbJoueurs, $idAge, $idDuree) {
             parent::__construct($idJeu, $nomJeu, $descriptif, $etat, $note, $dateAjout, $image);
@@ -58,6 +59,15 @@ class Jeu extends Produit {
         function setLesCommentaires($lesCommentaires) {
             $this->lesCommentaires = $lesCommentaires;
         }
+        
+        function getLesCategories() {
+            return $this->lesCategories;
+        }
+
+        function setLesCategories($lesCategories) {
+            $this->lesCategories = $lesCategories;
+        }
+
 
 
 

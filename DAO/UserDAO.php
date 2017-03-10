@@ -126,6 +126,19 @@ class UserDAO extends DAO {
     
     public function estConnecte(){
         return isset($_SESSION['pseudo']);
-            
     }
+    
+    public function getListeUsers($listeExemplaire) {
+        $listeUsers = array();
+        foreach ($listeExemplaire as $unExemplaire) {
+            $stmt = Connexion::prepare("SELECT * FROM ".UserDAO::$table." WHERE id_user=".$unExemplaire->getIdUser().";");
+            $stmt->execute();
+            $d = $stmt->fetch();
+            $user=new User($d["id_user"], $d["pseudo"], $d["ville"], $d["adr_mail"], $d["tel"], $d["is_admin"], $d["is_bureau"],
+                $d["mdp"], $d["note_user"], $d["nbBan"], $d["enBan"]);
+            $listeUsers[] = $user;
+        }
+        return $listeUsers;
+    }
+    
 }

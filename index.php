@@ -3,17 +3,14 @@ define('LIEN_IMAGE','Vue/img/');
 session_start();
 require_once('DAO/Connexion.php');
 require_once ('DAO/DAO.php');
-/*$estConnecte = estConnecte();*/
 if(!isset($_GET['uc'])){
      $_GET['uc'] = 'accueil';
 }	 
 $uc = $_GET['uc'];
 switch($uc){
 	case 'accueil':{
-                
-		include("Vue/v_main.php");
-             
-                break;
+            include("Vue/v_main.php");
+            break;
 	}
 	case 'connexion' :{
 		include("Controleur/c_connexion.php");break;

@@ -1,9 +1,12 @@
 <?php
 
+require_once 'Modele/Categorie.php';
+
 class CategorieDAO extends DAO{
     
-    private $table = "categorie";
-    private $clePrimaire = "nom_categorie";
+    private static $table = "categorie";
+    private static $clePrimaire = "nom_categorie";
+    private static $tableLien = "jeucategorie";
 
     public function create($obj) {
         
@@ -14,12 +17,13 @@ class CategorieDAO extends DAO{
     }
 
         
-    protected function delete($obj) {
+    public function delete($obj) {
         $nom_categorie=$obj->getNomCat();
-        $stmt = Connexion::prepare("DELETE FROM ".CategorieDAO::$table." WHERE ".CategorieDAO::clePrimaire." = ".$nom_categorie.";");        $stmt->execute();
+        $stmt = Connexion::prepare("DELETE FROM ".CategorieDAO::$table." WHERE ".CategorieDAO::clePrimaire." = ".$nom_categorie.";");        
+        $stmt->execute();
     }
 
-    protected function find($id) {
+    public function find($id) {
         $stmt = Connexion::prepare("SELECT * FROM ".CategorieDAO::$table." WHERE ".CategorieDAO::clePrimaire." = ".$id.";");
         $stmt->execute();
         $d = $stmt->fetch();
@@ -37,7 +41,7 @@ class CategorieDAO extends DAO{
     }
 
 
-    protected function update($obj) {
+    public function update($obj) {
         $stmt = Connexion::prepare("UPDATE ".CategorieDAO::$table." SET nom_categorie='?', WHERE id='?' ; ");        
         $stmt->bindParam(1, $obj->getnomCat());
         
@@ -52,6 +56,17 @@ class CategorieDAO extends DAO{
             $succes=true;
         }
         return $succes;
+    }
+    
+    public function setCategoriesParJeu($jeu) {
+        $listeCategories = array();
+        $stmt = Connexion::prepare("SELECT nom_categorie FROM ".self::$tableLien." WHERE id_jeu=".$jeu->getIdProduit().";");
+        $stmt->execute();
+        $d = $stmt->fetchAll();
+        foreach ($d as $value) {
+            $listeCategories[] = $value['nom_categorie'];
+        }
+        $jeu->setLesCategories($listeCategories);
     }
 
 }

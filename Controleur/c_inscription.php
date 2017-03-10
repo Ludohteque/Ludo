@@ -27,7 +27,7 @@ switch($action){
                     include("Vue/v_erreurs.php");
                     include("Vue/v_connexion.php");
                 }else {
-                    $user = new User(-1, $login, $ville, $mail, $phone, false, false, $mdp, 0, 0, false);
+                    $user = new User(-1, $login, $ville, $mail, $phone, false, false, $mdp, 0, 0, false, 0);
                     $userdao->create($user);
                     include('Vue/v_main.php');
                 }

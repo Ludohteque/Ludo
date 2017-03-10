@@ -14,7 +14,6 @@ if (UserDAO::estConnecte()) {
     include('Vue/v_tablemesjeux.php');
 }
 ?>
-<div id="en blanc"></div>
 
 
 <div class="container">
@@ -28,16 +27,16 @@ if (UserDAO::estConnecte()) {
                     <th>Jeu</th>
                     <th>Note</th>
                 </tr>
-<?php
-foreach ($lesPopulaires as $leJeu) {
-    ?>
+                <?php
+                foreach ($lesPopulaires as $leJeu) {
+                    ?>
                     <tr>
-                        <td><a href='index.php?uc=jeu&action=affichage&id=<?php echo $leJeu->getIdJeu(); ?>'><?php echo $leJeu->getNom(); ?></a></td>
+                        <td><a href='index.php?uc=jeu&action=affichage&id=<?php echo $leJeu->getIdProduit(); ?>'><?php echo $leJeu->getNom(); ?></a></td>
                         <td><?php echo $leJeu->getNote(); ?></td>
                     </tr>   
-    <?php
-}
-?>
+                    <?php
+                }
+                ?>
             </table>
             <a class="btn btn-default" href="#" role="button">Voir plus &raquo;</a></p>
         </div>
@@ -49,16 +48,16 @@ foreach ($lesPopulaires as $leJeu) {
                     <th>Jeu</th>
                     <th>Note</th>
                 </tr>
-<?php
-foreach ($lesNouveautes as $leJeu) {
-    ?>
+                <?php
+                foreach ($lesNouveautes as $leJeu) {
+                    ?>
                     <tr>
                         <td><?php echo $leJeu->getNom(); ?></td>
                         <td><?php echo $leJeu->getNote(); ?></td>
                     </tr>   
-    <?php
-}
-?>
+                    <?php
+                }
+                ?>
             </table>
             <a class="btn btn-default" href="#" role="button">Voir plus &raquo;</a>
         </div>
@@ -71,17 +70,17 @@ foreach ($lesNouveautes as $leJeu) {
                     <th>Date d'emprunt</th>
                     <th>Note</th>
                 </tr>
-<?php
-foreach ($lesEmpruntes as $leJeu) {
-    ?>
+                <?php
+                foreach ($lesEmpruntes as $leJeu) {
+                    ?>
                     <tr>
                         <td><?php echo $leJeu['nom']; ?></td>
                         <td><?php echo $leJeu['date_emprunts']; ?></td>
                         <td><?php echo $leJeu['note']; ?></td>
                     </tr>   
-    <?php
-}
-?>
+                    <?php
+                }
+                ?>
             </table>
             <a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div>

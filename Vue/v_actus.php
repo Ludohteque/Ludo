@@ -13,20 +13,20 @@ $lesEvenements = $evendao->findDernierEvenement();
         <div class="ism-slider" data-play_type="loop" data-interval="3000" id="my-slider">
             <ol>
                 <li>
-                    <img src="Vue/img/slider_1.jpg">
-                    <div class="ism-caption ism-caption-0">Titre 1</div>
+                    <a id="evenement" href="index.php?uc=evenement&action=affichageEven&id=<?php echo $lesEvenements[0]->getIdEvenement(); ?>"><img src="<?php echo $lesEvenements[0]->getLienImage(); ?>"></a>
+                    <div class="ism-caption ism-caption-0"><?php echo $lesEvenements[0]->getTitre(); ?></div>
                 </li>
                 <li>
-                    <img src="Vue/img/slider_2.jpg">
-                    <div class="ism-caption ism-caption-0">Titre 2</div>
+                    <a id="evenement" href="index.php?uc=evenement&action=affichageEven&id=<?php echo $lesEvenements[1]->getIdEvenement(); ?>"><img src="<?php echo $lesEvenements[1]->getLienImage(); ?>"></a>
+                    <div class="ism-caption ism-caption-1"><?php echo $lesEvenements[1]->getTitre(); ?></div>
                 </li>
                 <li>
-                    <img src="Vue/img/slider_3.jpg">
-                    <div class="ism-caption ism-caption-0">Titre 3</div>
+                    <a id="evenement" href="index.php?uc=evenement&action=affichageEven&id=<?php echo $lesEvenements[2]->getIdEvenement(); ?>"><img src="<?php echo $lesEvenements[2]->getLienImage(); ?>"></a>
+                    <div class="ism-caption ism-caption-2"><?php echo $lesEvenements[2]->getTitre(); ?></div>
                 </li>
                 <li>
-                    <img src="Vue/img/slider_4.jpg">
-                    <div class="ism-caption ism-caption-0">Titre 3</div>
+                    <a id="evenement" href="index.php?uc=evenement&action=affichageEven&id=<?php echo $lesEvenements[3]->getIdEvenement(); ?>"><img src="<?php echo $lesEvenements[3]->getLienImage(); ?>"></a>
+                    <div class="ism-caption ism-caption-1"><?php echo $lesEvenements[3]->getTitre(); ?></div>
                 </li>
             </ol>
         </div>

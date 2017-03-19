@@ -1,5 +1,4 @@
 <?php
-require_once('DAO/EvenementDAO.php');
 $evendao = new EvenementDAO();
 $lesEvenements = $evendao->findDernierEvenement();
 ?>

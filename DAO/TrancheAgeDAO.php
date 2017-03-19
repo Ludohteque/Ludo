@@ -31,7 +31,7 @@ class TrancheAgeDAO extends DAO {
         $stmt = Connexion::prepare("SELECT * FROM ".TrancheAgeDAO::$table." WHERE ".TrancheAgeDAO::$id." = ".$id.";");
         $stmt->execute();
         $d = $stmt->fetch();
-        $trancheAge=new TrancheAge($d["age_min"], $d["age_max"]);
+        $trancheAge=new TrancheAge($d['id_age'],$d["age_min"], $d["age_max"]);
             
         return $trancheAge;
     }

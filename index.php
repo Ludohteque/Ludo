@@ -16,6 +16,7 @@ require_once('DAO/EvenementDAO.php');
 require_once('DAO/MessageDAO.php');
 require_once('DAO/ProduitDAO.php');
 require_once('DAO/TrancheAgeDAO.php');
+require_once('DAO/NombreJoueursDAO.php');
 
 if (!isset($_GET['uc'])) {
     $_GET['uc'] = 'accueil';

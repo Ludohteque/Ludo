@@ -108,7 +108,6 @@ class UserDAO extends DAO {
     }
 
     public function connect($idUser, $pseudo, $mdp) {
-        $_SESSION['id'] = $idUser;
         $_SESSION['user'] = $pseudo;
         $_SESSION['mdp'] = $mdp;
     }

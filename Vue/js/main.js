@@ -143,8 +143,6 @@ $("#connexion").click(function() {
     $("body").addClass("grey");
 });
 
-
-
-
-
-
+//$("#boutonSignalement").click(function() {
+//    
+//}

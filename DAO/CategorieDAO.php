@@ -5,7 +5,8 @@ require_once 'Modele/Categorie.php';
 class CategorieDAO extends DAO{
     
     private static $table = "categorie";
-    private static $clePrimaire = "nom_categorie";
+    private static $clePrimaire1 = "nom_categorie";
+    private static $clePrimaire2 = "id_jeu";
     private static $tableLien = "jeucategorie";
 
     public function create($obj) {
@@ -24,7 +25,7 @@ class CategorieDAO extends DAO{
     }
 
     public function find($id) {
-        $stmt = Connexion::prepare("SELECT * FROM ".CategorieDAO::$table." WHERE ".CategorieDAO::clePrimaire." = ".$id.";");
+        $stmt = Connexion::prepare("SELECT * FROM ".self::$tableLien." WHERE ".self::$clePrimaire2." = ".$id.";");
         $stmt->execute();
         $d = $stmt->fetch();
         $categorie = new Categorie($d["nom_categorie"]);

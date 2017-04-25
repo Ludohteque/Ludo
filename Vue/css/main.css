@@ -514,26 +514,31 @@ input[type=reset]:focus,
 	color: #398080;
 }
 .content div p {
-	font-size: 14px;
-	line-height: 22px;
-	font-style: italic;
-	text-align: left;
-	margin: 0;
-	color: #777;
-	padding-left: 15px;
-	font-family: Cambria, Georgia, serif;
-	border-left: 8px solid rgba(63,148,148, 0.1);
+    font-size: 14px;
+    line-height: 22px;
+    font-style: italic;
+    text-align: left;
+    margin: 0;
+    color: #777;
+    padding-left: 15px;
+    font-family: Cambria, Georgia, serif;
+    border-left: 8px solid rgba(63,148,148, 0.1);
 }
 
 
 /**-----------------------------------------------
 --------------------------------------------------
--------------------MAIN TABLEAUX------------------
+---------------TABLEAUX EN GENERAL----------------
 --------------------------------------------------
 -------------------------------------------------*/
 
+.tableau td, tableau th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+}
 
-.jeuxaccueil {
+.tableau {
     margin: auto;
     box-shadow: none;
     border: solid 1px gray;
@@ -548,15 +553,16 @@ input[type=reset]:focus,
     padding: 8px;
 }
 
-.jeuxaccueil tr:nth-child(even) {
+.tableau tr:nth-child(even) {
     background-color: #dddddd;
 }
 
-.trjeuxmain th {
+.tableau th {
     text-align: center;
     color: white;
     background-color: #1565c0;
     text-transform: uppercase;
+    padding: 8px;
 }
 
 /**-----------------------------------------------
@@ -573,3 +579,5 @@ input[type=reset]:focus,
 .description {
     margin-top: 100px;
 }
+
+

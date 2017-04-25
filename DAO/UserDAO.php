@@ -38,7 +38,6 @@ class UserDAO extends DAO {
         $stmt->execute();
         $d = $stmt->fetch();
         $user = new User($d["id_user"], $d["pseudo"], $d["ville"], $d["adr_mail"], $d["tel"], $d["is_admin"], $d["is_bureau"], $d["mdp"], $d["moyenne"], $d["nbBan"], $d["enBan"], $d["nb_notes"]);
-
         return $user;
     }
 
@@ -109,7 +108,6 @@ class UserDAO extends DAO {
     }
 
     public function connect($idUser, $pseudo, $mdp) {
-        $_SESSION['id'] = $idUser;
         $_SESSION['user'] = $pseudo;
         $_SESSION['mdp'] = $mdp;
     }
@@ -134,18 +132,6 @@ class UserDAO extends DAO {
 
     public function estConnecte() {
         return isset($_SESSION['pseudo']);
-    }
-
-    public function getListeUsers($listeExemplaire) {
-        $listeUsers = array();
-        foreach ($listeExemplaire as $unExemplaire) {
-            $stmt = Connexion::prepare("SELECT * FROM " . UserDAO::$table . " WHERE id_user=" . $unExemplaire->getIdUser() . ";");
-            $stmt->execute();
-            $d = $stmt->fetch();
-            $user = new User($d["id_user"], $d["pseudo"], $d["ville"], $d["adr_mail"], $d["tel"], $d["is_admin"], $d["is_bureau"], $d["mdp"], $d["moyenne"], $d["nbBan"], $d["enBan"], $d["nb_notes"]);
-            $listeUsers[] = $user;
-        }
-        return $listeUsers;
     }
 
 }

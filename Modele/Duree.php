@@ -1,8 +1,5 @@
 <?php
-
-namespace duree;
-
-    class duree {
+    class Duree {
         
         private $idDuree;
         private $dureeMin;

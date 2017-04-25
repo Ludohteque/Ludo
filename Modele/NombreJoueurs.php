@@ -1,35 +1,41 @@
 <?php
 
-    class NombreJoueurs {
-        
-        private $idNbj;
-        private $nbjMin;
-        private $nbjMax;
-        
-        function __construct($idNbj, $nbjMin, $nbjMax) {
-            $this->idNbj = $idNbj;
-            $this->nbjMin = $nbjMin;
-            $this->nbjMin = $nbjMax;
-        }
-        
-        
-        function getIdNbj() {
-            return $this->idNbj;
-            
-        }              
-        
-        function getNbjMin() {
-            return $this->nbjMin;
-        }
-        function getNbjMax() {
-            return $this->nbjMax;
-        }
-        
-        function setNbjMin($nbjMin) {
-            $this->nbjMin = $nbjMin;
-        }
-        function setNbjMax($nbjMax) {
-            $this->nbjMax = $nbjMax;
-        }
-
+class NombreJoueurs {
+    
+    private $idNbJoueurs;
+    private $nbJoueursMin;
+    private $nbJoueursMax;
+    
+    function __construct($idNbJoueurs, $nbJoueursMin, $nbJoueursMax) {
+        $this->idNbJoueurs = $idNbJoueurs;
+        $this->nbJoueursMin = $nbJoueursMin;
+        $this->nbJoueursMax = $nbJoueursMax;
     }
+
+    function getIdNbJoueurs() {
+        return $this->idNbJoueurs;
+    }
+
+    function getNbJoueursMin() {
+        return $this->nbJoueursMin;
+    }
+
+    function getNbJoueursMax() {
+        return $this->nbJoueursMax;
+    }
+
+    function setIdNbJoueurs($idNbJoueurs) {
+        $this->idNbJoueurs = $idNbJoueurs;
+    }
+
+    function setNbJoueursMin($nbJoueursMin) {
+        $this->nbJoueursMin = $nbJoueursMin;
+    }
+
+    function setNbJoueursMax($nbJoueursMax) {
+        $this->nbJoueursMax = $nbJoueursMax;
+    }
+
+
+    
+}

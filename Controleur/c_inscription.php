@@ -9,8 +9,6 @@ switch($action){
 		break;
 	}
 	case 'valideInscription':{
-                require_once('Modele/User.php');
-                require_once ('DAO/UserDAO.php');
 		$login = $_POST['pseudo'];
 		$mdp = $_POST['passe'];
                 $mdp = md5($mdp);

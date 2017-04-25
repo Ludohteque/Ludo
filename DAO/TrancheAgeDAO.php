@@ -1,6 +1,8 @@
 <?php
 
-class TrancheAge extends DAO {
+require_once 'Modele/TrancheAge.php';
+
+class TrancheAgeDAO extends DAO {
     
     private static $table="trancheage";
     private static $id="id_age";
@@ -29,7 +31,7 @@ class TrancheAge extends DAO {
         $stmt = Connexion::prepare("SELECT * FROM ".TrancheAgeDAO::$table." WHERE ".TrancheAgeDAO::$id." = ".$id.";");
         $stmt->execute();
         $d = $stmt->fetch();
-        $trancheAge=new TrancheAge($d["age_min"], $d["age_max"]);
+        $trancheAge=new TrancheAge($d['id_age'],$d["age_min"], $d["age_max"]);
             
         return $trancheAge;
     }

@@ -1,5 +1,7 @@
 <?php
 
+require_once 'Modele/Produit.php';
+
 class ProduitDAO extends DAO {
     
     public function create($obj) {

@@ -7,6 +7,7 @@ $action = $_GET['action'];
 
 switch ($action) {
     case 'demandeConnexion': {
+            $joueur = 1;
             include("Vue/v_connexion.php");
             break;
         }

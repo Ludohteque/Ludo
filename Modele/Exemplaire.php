@@ -13,7 +13,7 @@ class Exemplaire {
         $this->idExemplaire = $idExemplaire;
         $this->idJeu = $idJeu;
         $this->idUser = $idUser;
-        $this->commentaire = $etat;
+        $this->etat = $etat;
         $this->disponibilite = $disponibilite;
     }
 

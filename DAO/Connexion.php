@@ -13,7 +13,8 @@ class Connexion {
 
 	public function __construct(){
 		try{
-			$this->PDOInstance = new PDO('mysql:dbname='.self::DEFAULT_SQL_DTB.';host='.self::DEFAULT_SQL_HOST,self::DEFAULT_SQL_USER ,self::DEFAULT_SQL_PASS);       
+			$this->PDOInstance = new PDO('mysql:dbname='.self::DEFAULT_SQL_DTB.';host='.self::DEFAULT_SQL_HOST,self::DEFAULT_SQL_USER ,self::DEFAULT_SQL_PASS);    
+                        $this->PDOInstance->exec("SET NAMES 'UTF8'");
                 }
 		catch(PDOException $e){
 			echo 'La base de donnée n\'est pas disponible, merci de réessayer plus tard.';

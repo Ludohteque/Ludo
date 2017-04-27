@@ -11,14 +11,16 @@ class Message {
     private $emprunt = false;
     private $ajout = false;
     private $signalement = false;
+    private $date;
     
-    function __construct($idMessage, $corps, $idExpediteur, $idDestinataire, $sujet, $type) {
+    function __construct($idMessage, $corps, $idExpediteur, $idDestinataire, $sujet, $type, $date) {
         $this->idMessage = $idMessage;
         $this->corps = $corps;
         $this->idExpediteur = $idExpediteur;
         $this->idDestinataire = $idDestinataire;
         $this->sujet = $sujet;
         $this->type = $type;
+        $this->date = $date;
     }
 
     function getIdMessage() {
@@ -54,7 +56,12 @@ class Message {
     function getMessagesSignalement() {
 	return $this->signalement;
     }
+    
+    function getDate() {
+        return $this->date;
+    }
 
+    
     function setIdMessage($idMessage) {
         $this->idMessage = $idMessage;
     }
@@ -77,6 +84,10 @@ class Message {
 
     function setType($type) {
         $this->type = $type;
+    }
+
+    function setDate($date) {
+        $this->date = $date;
     }
 
 

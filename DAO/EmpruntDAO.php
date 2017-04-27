@@ -70,13 +70,33 @@ class EmpruntDAO extends DAO {
         return $listeEmprunts;
     }
     
+    public function getMesPrets($id) {
+        $stmt = Connexion::prepare("select * from exemplaire INNER JOIN emprunt USING (id_exemplaire) WHERE id_user = ".$id.";");
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $listePrets = array();
+        foreach ($result as $value) {
+            $daouser = new UserDAO();
+            $user = $daouser->find($value['id_emprunteur']);
+            $daoexemplaire = new ExemplaireDAO();
+            $exemplaire = $daoexemplaire->find($value['id_exemplaire']);
+            $newPret = new Emprunt($value['id_emprunts'],$value['date_emprunts'], $value['date_remise'], $user, $exemplaire);
+            $listePrets[] = $newPret;
+        }
+        return $listePrets;
+    }
+    
     public function getMesEmprunts($id) {
         $stmt = Connexion::prepare("select * from emprunt WHERE id_emprunteur = ".$id.";");
         $stmt->execute();
         $result = $stmt->fetchAll();
         $listeEmprunts = array();
         foreach ($result as $value) {
-            $newEmprunt = new Emprunt($value['id_emprunts'],$value['date_emprunts'], $value['date_remise'], $value['id_emprunteur'], $value['id_exemplaire']);
+            $daouser = new UserDAO();
+            $user = $daouser->find($value['id_emprunteur']);
+            $daoexemplaire = new ExemplaireDAO();
+            $exemplaire = $daoexemplaire->find($value['id_exemplaire']);
+            $newEmprunt = new Emprunt($value['id_emprunts'],$value['date_emprunts'], $value['date_remise'], $user, $exemplaire);
             $listeEmprunts[] = $newEmprunt;
         }
         return $listeEmprunts;

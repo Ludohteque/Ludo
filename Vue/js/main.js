@@ -67,7 +67,7 @@ function verifForm(f)
    var telOk = verifTel(f.phone);
    var mailOK = isEmail(f.mail);
    var passeOK = verifPasse(f.passe);
-   alert(pseudoOk+mdpIdent+mailIdent+telOk);
+//   alert(pseudoOk+mdpIdent+mailIdent+telOk);
    if(mailIdent && mdpIdent && pseudoOk && mailOK && telOk && passeOK)
    {
        return true;}

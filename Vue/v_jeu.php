@@ -31,6 +31,7 @@ include('Vue/v_header.php');
     <h3>Ils ont ce jeu !</h3>
     <table class="tableau">
         <tr class="tableauTete">
+            <th>Exemplaire</th>
             <th>Pseudo</th>
             <th>Localisation</th>
             <th>Disponible</th>
@@ -41,6 +42,7 @@ include('Vue/v_header.php');
             $disponible = $unExemplaire->getDisponibilite();
             ?>
             <tr>
+                <td><?php echo $unExemplaire->getIdExemplaire(); ?></td>
                 <td><?php echo $unExemplaire->getIdUser()->getPseudo(); ?></td>
                 <td><?php echo $unExemplaire->getIdUser()->getVille(); ?></td>
                 <td><?php if ($disponible) {

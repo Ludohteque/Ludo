@@ -492,6 +492,7 @@ input[type=reset]:focus,
     -o-transition: all linear 0.1s;
     -ms-transition: all linear 0.1s;
     transition: all linear 0.1s;
+    width: 100%;
 }
 
 .tabs input.tab-selector-1:checked ~ .content .content-1,

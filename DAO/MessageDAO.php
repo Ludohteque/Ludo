@@ -92,7 +92,7 @@ class MessageDAO extends DAO {
     public function getMessagesSignalement() {
         //public function getMessagesSignalement($obj) {
         
-        $req = Connexion::prepare("SELECT u.pseudo, m.sujet, m.corps FROM " . $this->table . " m JOIN user u ON u.id_user = m.id_expediteur JOIN type t ON t.type_message = m.type WHERE t.type_message LIKE 'Signalement';");
+        $req = Connexion::prepare("SELECT u.pseudo, m.sujet, m.corps FROM " .$this->table. " m JOIN user u ON u.id_user = m.id_expediteur JOIN type t ON t.type_message = m.type WHERE t.type_message LIKE 'Signalement';");
         $listeMessages = array();
         $req->execute();
         $lesmessages = $req->fetchAll();
@@ -101,6 +101,19 @@ class MessageDAO extends DAO {
         }
 
         return $listeMessages;
+    }
+    
+        public function getDemandeAjout() {
+    	$req = Connexion::prepare("SELECT u.pseudo, m.sujet, m.corps FROM " .$this->table. " m JOIN user u ON u.id_user = m.id_expediteur JOIN type t ON t.type_message = m.type WHERE t.type_message LIKE 'Demande d\'ajout';");
+        $listeMessages = array();
+        $req->execute();
+        $lesmessages = $req->fetchAll();
+        foreach ($lesmessages AS $unMessage) {
+            $listeMessages[] = $unMessage;
+        }
+            
+        return $listeMessages;
+        
     }
 
 }

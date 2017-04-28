@@ -26,5 +26,5 @@ class NombreJoueursDAO extends DAO {
     public function update($obj) {
         
     }
-
+    
 }

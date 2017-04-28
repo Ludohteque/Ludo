@@ -8,7 +8,7 @@
         
         function __construct($idDuree, $dureeMin, $dureeMax) {
             $this->idDuree = $idDuree;
-            $this->dureeMin = $dureeMax;
+            $this->dureeMax = $dureeMax;
             $this->dureeMin = $dureeMin;
         }
         

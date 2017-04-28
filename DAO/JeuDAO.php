@@ -105,5 +105,25 @@ class JeuDAO extends DAO {
         }
         return $listeJeux;
     }
+    
+        //permet de retrouver les demandes d'ajout de jeu
+        public function getJeuxInvalides() {
+        $stmt = Connexion::prepare("select * from " .JeuDAO::$tableMere. " inner join " .JeuDAO::$tableFille. " on " .JeuDAO::$tableFille. "." .JeuDAO::$clePrimaireFille. "=" .JeuDAO::$tableMere. "." . JeuDAO::$clePrimaireMere . " WHERE ".JeuDAO::$tableFille.".is_valide=0 ORDER BY ".JeuDAO::$tableMere.".date_ajout;");
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $listeJeux = array();
+        foreach ($result as $value) {
+            $nbjoueeursdao = new NombreJoueursDAO();
+            $nbJoueurs = $nbjoueeursdao->find($value['id_nb_joueurs']);
+            $daoage = new TrancheAgeDAO();
+            $age = $daoage->find($value['id_age']);
+            $daoduree = new DureeDAO();
+            $duree = $daoduree->find($value['id_duree']);
+            $newjeu = new Jeu($value['id_jeu'], $value['nom'], $value['descriptif'], $value['etat'], $value['note'], $value['date_ajout'], $value['image'], $nbJoueurs, $age, $duree);
+            $listeJeux[] = $newjeu;
+        }
+        return $listeJeux;
+    }
+
 
 }

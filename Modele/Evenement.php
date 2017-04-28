@@ -49,7 +49,11 @@
         function setLienImage($lienImage) {
             $this->lienImage = $lienImage;
         }
-
+        
+        public function transfoDateEvenement($id) {
+            
         }
+    
+    }
         
  ?>

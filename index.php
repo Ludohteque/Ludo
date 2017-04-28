@@ -36,6 +36,10 @@ switch ($uc) {
             include("Controleur/c_connexion.php");
             break;
         }
+    case 'admin' : {
+            include("Controleur/c_admin.php");
+            break;
+        }
     case 'inscription' : {
             include("Controleur/c_inscription.php");
             break;

@@ -42,7 +42,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="index.php"><img src="Vue/img/logo.png" width="30" height="30"/></a>
-                    <a class="navbar-brand" href="#">Ludothèque</a>
+                    <a class="navbar-brand" href="index.php">Ludothèque</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <form class="navbar-form navbar-right" role="form">

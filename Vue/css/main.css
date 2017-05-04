@@ -487,6 +487,13 @@ input[type=reset]:focus,
 
 .content div {
     position: absolute;
+	top: 0;
+	left: 0;
+        width:100%;
+	bottom: 100%;
+	padding: 10px 40px;
+	overflow: auto; /* Overflow du contenu des onglets */
+	z-index: 1;
     top: 0;
     left: 0;
     bottom: 100%;
@@ -572,6 +579,10 @@ input[type=reset]:focus,
     background-color: #1565c0;
     text-transform: uppercase;
     padding: 8px;
+}
+
+.width60 {
+    width: 60%;
 }
 
 /**-----------------------------------------------

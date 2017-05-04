@@ -74,9 +74,7 @@ class EvenementDAO extends DAO {
         return $listeEven;
         
     }
-    public function transfoDateEvenement($id) {
-        
-    }
+
     
 }
 

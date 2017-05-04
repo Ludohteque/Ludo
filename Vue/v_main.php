@@ -15,7 +15,7 @@ if (UserDAO::estConnecte()) {
     <div class="row">
         <div class="col-md-4">
             <h2>Jeux populaires :</h2>
-            <p>ici vont les jeux populaires... Cékomssapicétou !!!<p>
+            <p>ici vont les jeux populaires... <p>
             <table class="tableau">
                 <tr class="tableauTete">
                     <th>Jeu</th>
@@ -36,7 +36,7 @@ if (UserDAO::estConnecte()) {
         </div>
         <div class="col-md-4">
             <h2>Nouveautés</h2>
-            <p>Ici vont les nouveautés ... Cékomssapicétou !!!</p>
+            <p>Ici vont les nouveautés ...</p>
             <table class="tableau">
                 <tr class="tableauTete">
                     <th>Jeu</th>
@@ -57,7 +57,7 @@ if (UserDAO::estConnecte()) {
         </div>
         <div class="col-md-4">
             <h2>Derniers jeux empruntés</h2>
-            <p>Ici vont les derniers jeux empruntés .... Cékomssapicétou !!!<p>
+            <p>Ici vont les derniers jeux empruntés ....<p>
             <table class="tableau">
                 <tr class="tableauTete">
                     <th>Jeu</th>
@@ -76,10 +76,10 @@ if (UserDAO::estConnecte()) {
                 }
                 ?>
             </table>
-            <a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            <a class="btn btn-default" href="#" role="button">Voir plus &raquo;</a></p>
         </div>
     </div>
 
-    <hr id="barreH"> <!-- Balise de barre horizontale -->
+    <hr id="barreH" /> <!-- Balise de barre horizontale -->
 </div><!-- /container -->        
-<? php include('Vue/v_footer.php'); ?>
+<?php include('Vue/v_footer.php'); ?>

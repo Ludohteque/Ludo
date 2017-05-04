@@ -26,7 +26,11 @@ switch ($action) {
                 $_SESSION['bureau'] = $joueur->isBureau();
                 $_SESSION['id'] = $joueur->getIdUser();
                 if ($joueur->isAdmin()) {
-                    include 'Vue/v_admin_evenements.php'; //à retirer pour y placer la vue du dashboard de l'admin.
+                    $messagedao = new MessageDAO();
+                    $jeudao = new JeuDAO();
+                    $signalements = $messagedao->getMessagesSignalement();
+                    $demandesajout = $jeudao->getJeuxInvalides();
+                    include("Vue/v_admin.php"); //à retirer pour y placer la vue du dashboard de l'admin.
                 } else {
                     $jeuDAO = new JeuDAO();
                     $empruntDAO = new EmpruntDAO();

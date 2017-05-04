@@ -133,5 +133,9 @@ class UserDAO extends DAO {
     public function estConnecte() {
         return isset($_SESSION['pseudo']);
     }
+    
+    public function isAdmin() {
+        return isset($_SESSION['admin']) && $_SESSION['admin']==1;
+    }
 
 }

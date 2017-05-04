@@ -1,5 +1,10 @@
 <?php include('v_header.php'); ?>
 <h5>Ma Dashboard :</h5>
+<?php
+if ($messageEnvoye) {
+    echo "<div class='message'>".$resultat."</div>";
+}
+?>
 <section class="tabs">
     <input id="tab-1" type="radio" name="radio-set" class="tab-selector-1" checked="checked" />
     <label for="tab-1" class="tab-label-1">Mes jeux :</label>
@@ -104,6 +109,7 @@
 
         <div class="content-4">
             <h2>Tous vos messages</h2>
+            <a class="btn btn-success" href="index.php?uc=dashboard&action=repondreMessage">Nouveau message</a>
             <h3>Demande de prêt - Message envoyés</h3>
             <?php
             $messagedao = new MessageDAO();
@@ -126,7 +132,6 @@
                             <td><?php echo $unMessage->getDate() ?></td>
                             <td>
                                 <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#corps<?php echo $unMessage->getIdMessage(); ?>">Voir</button>
-                                <a class="btn btn-success" href="index.php?uc=dashboard&action=repondre&id=<?php echo $unMessage->getIdDestinataire()->getIdUser();?>">Répondre</a>
                             </td>
                         </tr>
                         <tr id="corps<?php echo $unMessage->getIdMessage(); ?>" class="collapse">
@@ -153,7 +158,10 @@
                             <td><?php echo $unMessage->getSujet(); ?></td>
                             <td><?php echo $unMessage->getIdExpediteur()->getPseudo(); ?></td>
                             <td><?php echo $unMessage->getDate() ?></td>
-                            <td><button type="button" class="btn btn-info" data-toggle="collapse" data-target="#corps<?php echo $unMessage->getIdMessage(); ?>">Voir</button></td>
+                            <td>
+                                <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#corps<?php echo $unMessage->getIdMessage(); ?>">Voir</button>
+                                <a class="btn btn-success" href="index.php?uc=dashboard&action=repondreMessage&id=<?php echo $unMessage->getIdExpediteur()->getIdUser(); ?>">Répondre</a>
+                            </td>
                         </tr>
                         <tr id="corps<?php echo $unMessage->getIdMessage(); ?>" class="collapse">
                             <td colspan="100%"><?php echo $unMessage->getCorps() ?></td>
@@ -182,7 +190,9 @@
                             <td><?php echo $unMessage->getSujet(); ?></td>
                             <td><?php echo $unMessage->getIdDestinataire()->getPseudo(); ?></td>
                             <td><?php echo $unMessage->getDate() ?></td>
-                            <td><button type="button" class="btn btn-info" data-toggle="collapse" data-target="#corps<?php echo $unMessage->getIdMessage(); ?>">Voir</button></td>
+                            <td>
+                                <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#corps<?php echo $unMessage->getIdMessage(); ?>">Voir</button>
+                            </td>
                         </tr>
                         <tr id="corps<?php echo $unMessage->getIdMessage(); ?>" class="collapse">
                             <td colspan="100%"><?php echo $unMessage->getCorps() ?></td>
@@ -211,7 +221,10 @@
                             <td><?php echo $unMessage->getSujet(); ?></td>
                             <td><?php echo $unMessage->getIdExpediteur()->getPseudo(); ?></td>
                             <td><?php echo $unMessage->getDate() ?></td>
-                            <td><button type="button" class="btn btn-info" data-toggle="collapse" data-target="#corps<?php echo $unMessage->getIdMessage(); ?>">Voir</button></td>
+                            <td>
+                                <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#corps<?php echo $unMessage->getIdMessage(); ?>">Voir</button>
+                                <a class="btn btn-success" href="index.php?uc=dashboard&action=repondreMessage&id=<?php echo $unMessage->getIdExpediteur()->getIdUser(); ?>">Répondre</a>
+                            </td>
                         </tr>
                         <tr id="corps<?php echo $unMessage->getIdMessage(); ?>" class="collapse">
                             <td colspan="100%"><?php echo $unMessage->getCorps() ?></td>

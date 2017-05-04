@@ -10,17 +10,19 @@ class MessageDAO extends DAO {
     public function create($obj) {
 
         $corps = $obj->getCorps();
-        $idExpediteur = $obj->getIdExpediteur();
-        $idDestinataire = $obj->getIdDestinataire();
+        $idExpediteur = $obj->getIdExpediteur()->getIdUser();
+        $idDestinataire = $obj->getIdDestinataire()->getIdUser();
         $sujet = $obj->getSujet();
         $type = $obj->getType();
+        $date = $obj->getDate();
 
-        $req = Connexion::getInstance()->prepare("INSERT INTO " . $this->table . " (corps, idExpediteur, idDestinataire, sujet, type) VALUES (?, ?, ?, ?, ?)");
+        $req = Connexion::prepare("INSERT INTO " . self::$table . " (corps, id_expediteur, id_destinataire, sujet, type, date) VALUES (?, ?, ?, ?, ?, ?)");
         $req->bindParam(1, $corps);
         $req->bindParam(2, $idExpediteur);
         $req->bindParam(3, $idDestinataire);
         $req->bindParam(4, $sujet);
         $req->bindParam(5, $type);
+        $req->bindParam(6, $date);
 
         $req->execute();
     }

@@ -3,8 +3,8 @@ require_once ('Modele/Emprunt.php');
 
 class EmpruntDAO extends DAO {
     
-    private $table = "emprunt";
-    private $clePrimaire = "id_emprunts";
+    private static $table = "emprunt";
+    private static $clePrimaire = "id_emprunts";
     
     public function create($obj) {
     	$date_emprunts=$obj->getDateEmprunt();

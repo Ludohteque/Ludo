@@ -61,7 +61,7 @@
                         <td><?php echo $unjeu->getDescriptif(); ?></td>
                         <td><?php echo $unjeu->getIdDuree()->getDureeMin()." / ".$unjeu->getIdDuree()->getDureeMax().""; ?></td>
                         <td><?php echo $unjeu->getIdage()->getAgeMin()." / ".$unjeu->getIdage()->getAgeMax(); ?></td>
-                        <td><?php echo "à faire" //$unjeu->getNbJoueurs()->getNbJoueursMin()." / ".$unjeu->getNbJoueurs()->getNbJoueursMax(); ?></td>
+                        <td><?php echo $unjeu->getNbJoueurs()->getNbJoueursMin()." / ".$unjeu->getNbJoueurs()->getNbJoueursMax(); ?></td>
                         <td><?php var_dump($unjeu->getLesCategories());echo "???";
                         
                         //foreach ($unjeu->getLesCategories() as $unecategorie){

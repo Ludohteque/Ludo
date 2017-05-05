@@ -4,9 +4,9 @@ require_once 'Modele/Evenement.php';
 
 class EvenementDAO extends DAO {
     
-    private $table = "evenement";
-    private $clePrimaire = "id_evenement";
-    private $cleDate = "date_ajout";
+    private static $table = "evenement";
+    private static $clePrimaire = "id_evenement";
+    private static $cleDate = "date_ajout";
     
     public function create($obj) {
     	$stmt =  Connexion::prepare("INSERT INTO ".self::$table." (evenement, lien_image, titre, date_ajout) ". "VALUES (?, ?, ?, ?)");
@@ -62,7 +62,7 @@ class EvenementDAO extends DAO {
 
     public function findDernierEvenement() { //select * from evenement order by date_ajout desc limit 4 ".$this->clePrimare."
         $listeEven = array();
-        $stmt = Connexion::prepare("SELECT * FROM ".self::$table." ORDER BY ".self::cleDate." DESC LIMIT 4;");
+        $stmt = Connexion::prepare("SELECT * FROM ".self::$table." ORDER BY ".self::$cleDate." DESC LIMIT 4;");
         $stmt->execute();
         $resultats = $stmt->fetchAll();
         if ($resultats != 0) {

@@ -4,8 +4,8 @@ require_once 'Modele/Commentaire.php';
 
 class CommentaireDAO extends DAO{
     
-    private $table = "commentaire";
-    private $clePrimaire = "id_comm";
+    private static $table = "commentaire";
+    private static $clePrimaire = "id_comm";
     
     public function create($obj) {
         

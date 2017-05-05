@@ -54,13 +54,13 @@ class JeuDAO extends DAO {
 
     public function update($obj) {
         $id = $obj->getIdJeu();
-        $stmt = Connexion::getInstance()->prepare("update " .self::$tableFille. " set id_age=?, nb_joueurs=?, id_categorie=?, id_duree=?, descriptif=? where " . $this->clePrimaireFille . "=" . $id . ";");
+        $stmt = Connexion::getInstance()->prepare("update " .self::$tableFille. " set id_age=?, nb_joueurs=?, id_categorie=?, id_duree=?, descriptif=? where " . self::$clePrimaireFille . "=" . $id . ";");
         $stmt->bindParam(1, $obj->getIdAge());
         $stmt->bindParam(2, $obj->getNbJoueurs());
         $stmt->bindParam(3, $obj->getIdCat());
         $stmt->bindParam(4, $obj->getIdDuree());
         $stmt->bindParam(5, $obj->getDescriptif());
-        $stmt2 = Connexion::getInstance()->prepare("update " .self::$tableMere. " set nom=?, etat=?, note=?, descriptif=?, date_ajout=? where " . $this->clePrimaireMere . "=" . $id . ";");
+        $stmt2 = Connexion::getInstance()->prepare("update " .self::$tableMere. " set nom=?, etat=?, note=?, descriptif=?, date_ajout=? where " . self::$clePrimaireMere . "=" . $id . ";");
         $stmt2->bindParam(1, $obj->getNom());
         $stmt2->bindParam(2, $obj->getEtat());
         $stmt2->bindParam(3, $obj->getNote());
@@ -89,7 +89,7 @@ class JeuDAO extends DAO {
 
     // renvoie une liste d'objet Jeu
     public function getPopulaires() {
-        $stmt = Connexion::prepare("select * from " .self::$tableMere . " inner join " .self::$tableFille . " on " .self::$tableFille . "." . JeuDAO::$clePrimaireFille . "=" . JeuDAO::$tableMere . "." . JeuDAO::$clePrimaireMere . " ORDER BY note DESC LIMIT 10;");
+        $stmt = Connexion::prepare("select * from " .self::$tableMere . " inner join " .self::$tableFille . " on " .self::$tableFille . "." . self::$clePrimaireFille . "=" . self::$tableMere . "." . self::$clePrimaireMere . " ORDER BY note DESC LIMIT 10;");
         $stmt->execute();
         $result = $stmt->fetchAll();
         $listeJeux = array();

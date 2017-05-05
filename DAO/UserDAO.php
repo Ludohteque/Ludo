@@ -17,7 +17,7 @@ class UserDAO extends DAO {
         $tel = $obj->getTel();
         $mdp = $obj->getMdp();
 
-        $stmt = Connexion::prepare("INSERT INTO " . UserDAO::$table . " (pseudo, ville, adr_mail, tel, mdp) "
+        $stmt = Connexion::prepare("INSERT INTO " . self::$table . " (pseudo, ville, adr_mail, tel, mdp) "
                         . "VALUES (?, ?, ?, ?, ?)");
         $stmt->bindParam(1, $pseudo);
         $stmt->bindParam(2, $ville);
@@ -29,12 +29,12 @@ class UserDAO extends DAO {
 
     public function delete($obj) {
         $idCourant = $obj->getId();
-        $stmt = Connexion::prepare("DELETE FROM " . UserDAO::$table . " WHERE " . UserDAO::$id . " = " . $idCourant . ";");
+        $stmt = Connexion::prepare("DELETE FROM " . self::$table . " WHERE " . self::$id . " = " . $idCourant . ";");
         $stmt->execute();
     }
 
     public function find($id) {
-        $stmt = Connexion::prepare("SELECT * FROM " . UserDAO::$table . " WHERE " . UserDAO::$id . " = " . $id . ";");
+        $stmt = Connexion::prepare("SELECT * FROM " . self::$table . " WHERE " . self::$id . " = " . $id . ";");
         $stmt->execute();
         $d = $stmt->fetch();
         $user = new User($d["id_user"], $d["pseudo"], $d["ville"], $d["adr_mail"], $d["tel"], $d["is_admin"], $d["is_bureau"], $d["mdp"], $d["moyenne"], $d["nbBan"], $d["enBan"], $d["nb_notes"]);
@@ -42,7 +42,7 @@ class UserDAO extends DAO {
     }
 
     public function findParPseudo($pseudo) {
-        $stmt = Connexion::prepare("SELECT * FROM " . UserDAO::$table . " WHERE pseudo = '" . $pseudo . "';");
+        $stmt = Connexion::prepare("SELECT * FROM " . self::$table . " WHERE pseudo = '" . $pseudo . "';");
         $stmt->execute();
         $d = $stmt->fetch();
         if ($d != 0) {
@@ -68,7 +68,7 @@ class UserDAO extends DAO {
         $idUser = $obj->getId_user();
         $nb_notes = getNbNotes();
 
-        $stmt = Connexion::prepare("UPDATE " . UserDAO::$table . " SET pseudo='?', ville='?', adr_mail='?', tel='?',"
+        $stmt = Connexion::prepare("UPDATE " . self::$table . " SET pseudo='?', ville='?', adr_mail='?', tel='?',"
                         . "is_admin='?', is_bureau='?', mdp='?', moyenne='?', nbBan='?', enBan='?', nb_notes='?' WHERE id='?' ; ");
 
         $stmt->bindParam(1, $pseudo);
@@ -98,7 +98,7 @@ class UserDAO extends DAO {
 
     public function mailExist($mail) {
         $succes = false;
-        $stmt = Connexion::prepare("SELECT * FROM " . UserDAO::$table . " WHERE $mail = '" . $mail . "';");
+        $stmt = Connexion::prepare("SELECT * FROM " . self::$table . " WHERE $mail = '" . $mail . "';");
         $stmt->execute();
         $d = $stmt->fetch();
         if ($d != 0) {
@@ -119,7 +119,7 @@ class UserDAO extends DAO {
 
     public function getInfosJoueur($login, $mdp) {
 
-        $stmt = Connexion::prepare("SELECT * FROM " . UserDAO::$table . " WHERE pseudo = '" . $login . "' AND mdp = '" . $mdp . "';");
+        $stmt = Connexion::prepare("SELECT * FROM " . self::$table . " WHERE pseudo = '" . $login . "' AND mdp = '" . $mdp . "';");
         $stmt->execute();
         $d = $stmt->fetch();
         if ($d != 0) {

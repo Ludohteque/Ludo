@@ -67,7 +67,7 @@ class MessageDAO extends DAO {
     }
 
     public function demandeAjout($obj) {
-        $req = Connexion::getInstance()->prepare("SELECT * FROM " . $this->table . " m JOIN user u ON u.id_user = m.id_destinataire JOIN type t ON t.type_message = m.type WHERE t.type_message LIKE 'Demande ajout AND m.etat LIKE 'non_lu'';");
+        $req = Connexion::getInstance()->prepare("SELECT * FROM " . self::$table . " m JOIN user u ON u.id_user = m.id_destinataire JOIN type t ON t.type_message = m.type WHERE t.type_message LIKE 'Demande ajout AND m.etat LIKE 'non_lu'';");
 
         $listeMessages = array();
         $req->execute();

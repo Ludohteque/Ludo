@@ -19,7 +19,7 @@ class NombreJoueursDAO extends DAO {
         $stmt = Connexion::prepare("SELECT * FROM " .self::$table. " WHERE " .self::$clePrimaire. " = " . $id . ";");
         $stmt->execute();
         $d = $stmt->fetch();
-        $nbJoueurs = new NombreJoueursDAO($d['id_nb_joueur'],$d['nb_joueur_min'],$d['nb_joueur_max']);
+        $nbJoueurs = new NombreJoueurs($d['id_nb_joueur'],$d['nb_joueur_min'],$d['nb_joueur_max']);
         return $nbJoueurs;
     }
 

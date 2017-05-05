@@ -2,7 +2,7 @@
 <h5>Ma Dashboard :</h5>
 <?php
 if ($messageEnvoye) {
-    echo "<div class='message'>".$resultat."</div>";
+    echo "<div class='message'>" . $resultat . "</div>";
 }
 ?>
 <section class="tabs">
@@ -23,6 +23,7 @@ if ($messageEnvoye) {
     <div class="content">
         <div class="content-1">
             <h2>Liste de mes jeux</h2>
+            <a class="btn btn-success" href="index.php?uc=dashboard&action=ajouterExemplaire">Ajouter un jeu</a>
             <?php
             $exemplairedao = new ExemplaireDAO();
             $mesExemplaires = $exemplairedao->findParIdUser($_SESSION['id']);
@@ -161,6 +162,7 @@ if ($messageEnvoye) {
                             <td>
                                 <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#corps<?php echo $unMessage->getIdMessage(); ?>">Voir</button>
                                 <a class="btn btn-success" href="index.php?uc=dashboard&action=repondreMessage&id=<?php echo $unMessage->getIdExpediteur()->getIdUser(); ?>">Répondre</a>
+                                <a class="btn btn-success" href="index.php?uc=dashboard&action=demarrerEmprunt&id=<?php echo $unMessage->getIdExpediteur()->getIdUser(); ?>">Démarrer l'emprunt</a>
                             </td>
                         </tr>
                         <tr id="corps<?php echo $unMessage->getIdMessage(); ?>" class="collapse">

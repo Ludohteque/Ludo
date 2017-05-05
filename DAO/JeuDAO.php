@@ -53,6 +53,24 @@ class JeuDAO extends DAO {
         $jeu = new Jeu($result['id_jeu'], $result['nom'], $result['descriptif'], $result['etat'], $result['note'], $result['date_ajout'], $result['image'], $nbJoueurs, $age, $duree, $lesCat);
         return $jeu;
     }
+    
+    public function findParNom($nom) {
+        $stmt = Connexion::prepare("select * from " . self::$tableFille . " "
+                        . "inner join " . self::$tableMere . " on " . self::$tableFille . "." . self::$clePrimaireFille . "=" . self::$tableMere . "." . self::$clePrimaireMere . " "
+                        . "where " . self::$tableMere . ".nom = '" . $nom . "';");
+        $stmt->execute();
+        $result = $stmt->fetch();
+        $nbjoueeursdao = new NombreJoueursDAO();
+        $nbJoueurs = $nbjoueeursdao->find($result['id_nb_joueurs']);
+        $daoage = new TrancheAgeDAO();
+        $age = $daoage->find($result['id_age']);
+        $daoduree = new DureeDAO();
+        $duree = $daoduree->find($result['id_duree']);
+        $daocat = new CategorieDAO();
+        $lesCat = $daocat->findAll($result['id_jeu']);
+        $jeu = new Jeu($result['id_jeu'], $result['nom'], $result['descriptif'], $result['etat'], $result['note'], $result['date_ajout'], $result['image'], $nbJoueurs, $age, $duree, $lesCat);
+        return $jeu;
+    }
 
     public function update($obj) {
         $id = $obj->getIdJeu();
@@ -68,6 +86,26 @@ class JeuDAO extends DAO {
         $stmt2->bindParam(3, $obj->getNote());
         $stmt2->bindParam(4, $obj->getDescriptif());
         $stmt2->bindParam(5, $obj->getDateAjout());
+    }
+    
+    public function getAll() {
+        $stmt = Connexion::prepare("select * from " . self::$tableMere . " inner join " . self::$tableFille . " on " . self::$tableFille . "." . self::$clePrimaireFille . "=" . self::$tableMere . "." . self::$clePrimaireMere . " ORDER BY " . self::$dateAjout . ";");
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $listeJeux = array();
+        foreach ($result as $value) {
+            $nbjoueeursdao = new NombreJoueursDAO();
+            $nbJoueurs = $nbjoueeursdao->find($value['id_nb_joueurs']);
+            $daoage = new TrancheAgeDAO();
+            $age = $daoage->find($value['id_age']);
+            $daoduree = new DureeDAO();
+            $duree = $daoduree->find($value['id_duree']);
+            $daocat = new CategorieDAO();
+            $lesCat = $daocat->findAll($value['id_jeu']);
+            $newjeu = new Jeu($value['id_jeu'], $value['nom'], $value['descriptif'], $value['etat'], $value['note'], $value['date_ajout'], $value['image'], $nbJoueurs, $age, $duree, $lesCat);
+            $listeJeux[] = $newjeu;
+        }
+        return $listeJeux;
     }
 
     public function getNouveautes() {

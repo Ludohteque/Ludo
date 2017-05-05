@@ -62,11 +62,11 @@
                         <td><?php echo $unjeu->getIdDuree()->getDureeMin()." / ".$unjeu->getIdDuree()->getDureeMax().""; ?></td>
                         <td><?php echo $unjeu->getIdage()->getAgeMin()." / ".$unjeu->getIdage()->getAgeMax(); ?></td>
                         <td><?php echo $unjeu->getNbJoueurs()->getNbJoueursMin()." à ".$unjeu->getNbJoueurs()->getNbJoueursMax(); ?></td>
-                        <td><?php var_dump($unjeu->getLesCategories());echo "???";
-                        
-                        //foreach ($unjeu->getLesCategories() as $unecategorie){
-                            //echo $unecategorie->getNomCat();
-                        //}; 
+                        <td><?php 
+                        $lesCat = $unjeu->getLesCategories();
+                        foreach ($lesCat as $unecategorie){
+                            echo $unecategorie."<br>";
+                        };
                         ?></td>
                         <td><?php echo $unjeu->getEtat(); ?></td>
                         <td><img src="<?php echo $unjeu->getImage(); ?>" /></td>

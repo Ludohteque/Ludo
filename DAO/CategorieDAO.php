@@ -29,9 +29,20 @@ class CategorieDAO extends DAO{
         $stmt->execute();
         $d = $stmt->fetch();
         $categorie = new Categorie($d["nom_categorie"]);
-            
         return $categorie;        
     }
+    
+    public function findAll($id) {
+        $categories = array();
+        $stmt = Connexion::prepare("SELECT * FROM ".self::$tableLien." WHERE ".self::$clePrimaire2." = ".$id.";");
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        foreach ($result as $uneCat) {
+            $categories[] = $uneCat["nom_categorie"];
+        }
+        return $categories;        
+    }
+    
     public function findParCategorie($categorie) {
         $stmt = Connexion::prepare("SELECT * FROM ".self::$table." WHERE categorie = ".$categorie.";");
         $stmt->execute();
@@ -59,16 +70,6 @@ class CategorieDAO extends DAO{
         return $succes;
     }
     
-    public function setCategoriesParJeu($jeu) {
-        $listeCategories = array();
-        $stmt = Connexion::prepare("SELECT nom_categorie FROM ".self::$tableLien." WHERE id_jeu=".$jeu->getIdProduit().";");
-        $stmt->execute();
-        $d = $stmt->fetchAll();
-        foreach ($d as $value) {
-            $listeCategories[] = $value['nom_categorie'];
-        }
-        $jeu->setLesCategories($listeCategories);
-    }
 
 }
 

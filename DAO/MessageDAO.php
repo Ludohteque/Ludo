@@ -15,7 +15,7 @@ class MessageDAO extends DAO {
         $sujet = $obj->getSujet();
         $type = $obj->getType();
 
-        $req = Connexion::getInstance()->prepare("INSERT INTO " . $this->table . " (corps, idExpediteur, idDestinataire, sujet, type) VALUES (?, ?, ?, ?, ?)");
+        $req = Connexion::getInstance()->prepare("INSERT INTO " .self::$table. " (corps, idExpediteur, idDestinataire, sujet, type) VALUES (?, ?, ?, ?, ?)");
         $req->bindParam(1, $corps);
         $req->bindParam(2, $idExpediteur);
         $req->bindParam(3, $idDestinataire);
@@ -28,13 +28,13 @@ class MessageDAO extends DAO {
     public function delete($obj) {
         $idMessage = $obj->getIdMessage();
 
-        $req = Connexion::getInstance()->prepare("DELETE FROM " . $this->table . " WHERE " . $this->clePrimaire . " = " . $idMessage . ";");
+        $req = Connexion::getInstance()->prepare("DELETE FROM " .self::$table. " WHERE " . self::$clePrimaire . " = " . $idMessage . ";");
         $req->execute();
     }
 
     public function find($id) {
 
-        $req = Connexion::getInstance()->prepare("SELECT * FROM " . $this->table . " WHERE " . $this->clePrimaire . " = " . $id . ";");
+        $req = Connexion::getInstance()->prepare("SELECT * FROM " .self::$table. " WHERE " . self::$clePrimaire . " = " . $id . ";");
         $req->execute();
         $d = $req->fetch();
         $message = new Message($d["id_message"], $d["corps"], $d["id_expediteur"], $d["id_destinataire"], $d["sujet"], $d["type"]);
@@ -51,7 +51,7 @@ class MessageDAO extends DAO {
         $type = $obj->getType();
         $idMessage = $obj->getIdMessage();
 
-        $stmt = Connexion::getInstance()->prepare("UPDATE " . $this->table . " SET corps='?', idExpediteur='?', idDestinataire='?', sujet='?',"
+        $stmt = Connexion::getInstance()->prepare("UPDATE " .self::$table. " SET corps='?', idExpediteur='?', idDestinataire='?', sujet='?',"
                 . "type='? WHERE id='?' ; ");
 
         $stmt->bindParam(1, $corps);
@@ -65,7 +65,7 @@ class MessageDAO extends DAO {
     }
 
     public function demandeAjout($obj) {
-        $req = Connexion::getInstance()->prepare("SELECT * FROM " . $this->table . " m JOIN user u ON u.id_user = m.id_destinataire JOIN type t ON t.type_message = m.type WHERE t.type_message LIKE 'Demande ajout AND m.etat LIKE 'non_lu'';");
+        $req = Connexion::getInstance()->prepare("SELECT * FROM " .self::$table. " m JOIN user u ON u.id_user = m.id_destinataire JOIN type t ON t.type_message = m.type WHERE t.type_message LIKE 'Demande ajout AND m.etat LIKE 'non_lu'';");
 
         $listeMessages = array();
         $req->execute();
@@ -94,7 +94,7 @@ class MessageDAO extends DAO {
     public function getMessagesSignalement() {
         //public function getMessagesSignalement($obj) {
         
-        $req = Connexion::prepare("SELECT u.pseudo, m.sujet, m.corps FROM " .$this->table. " m JOIN user u ON u.id_user = m.id_expediteur JOIN type t ON t.type_message = m.type WHERE t.type_message LIKE 'Signalement';");
+        $req = Connexion::prepare("SELECT u.pseudo, m.sujet, m.corps FROM " .self::$table. " m JOIN user u ON u.id_user = m.id_expediteur JOIN type t ON t.type_message = m.type WHERE t.type_message LIKE 'Signalement';");
         $listeMessages = array();
         $req->execute();
         $lesmessages = $req->fetchAll();
@@ -106,7 +106,7 @@ class MessageDAO extends DAO {
     }
     
         public function getDemandeAjout() {
-    	$req = Connexion::prepare("SELECT u.pseudo, m.sujet, m.corps FROM " .$this->table. " m JOIN user u ON u.id_user = m.id_expediteur JOIN type t ON t.type_message = m.type WHERE t.type_message LIKE 'Demande d\'ajout';");
+    	$req = Connexion::prepare("SELECT u.pseudo, m.sujet, m.corps FROM " .self::$table. " m JOIN user u ON u.id_user = m.id_expediteur JOIN type t ON t.type_message = m.type WHERE t.type_message LIKE 'Demande d\'ajout';");
         $listeMessages = array();
         $req->execute();
         $lesmessages = $req->fetchAll();

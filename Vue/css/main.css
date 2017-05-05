@@ -7,7 +7,7 @@
 
 body {
     background-color: whitesmoke;
-    font-family: 'Kavoon', serif;
+    font-family: 'Raleway', serif;
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -21,7 +21,7 @@ body {
 
 h5 {
     font-family: inherit;
-    font-weight: 500;
+    font-weight: bolder;
     line-height: 1.1;
     color: inherit;
     margin-top: 20px;

@@ -15,7 +15,7 @@
     </p>
     <?php
     if ($joueur == null) {
-        echo "Erreur de login et/ou mot de passe. Veuillez réessayer.";
+        echo "<div class='message'>Erreur de login et/ou mot de passe. Veuillez réessayer.</div>";
     }
     ?>
 </form>

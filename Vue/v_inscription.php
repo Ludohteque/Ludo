@@ -45,9 +45,9 @@
         <?php
         if ($demande == 1) {
             if ($userdao->pseudoExist($login)) {
-                echo "Le pseudo est déjà existant. Veuillez en choisir un autre.";
+                echo "<div class='message'>Le pseudo est déjà existant. Veuillez en choisir un autre.</div>";
             } else if ($userdao->mailExist($mail)) {
-                echo "Le mail est déjà existant. Vérifiez bien que vous n'avez pas déjà de compte sur notre site web.";
+                echo "<div class='message'>Le mail est déjà existant. Vérifiez bien que vous n'avez pas déjà de compte sur notre site web.</div>";
             }
         }
         ?>

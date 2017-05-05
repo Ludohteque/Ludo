@@ -14,10 +14,10 @@ include('Vue/v_header.php');
     </div>
     <div class="row">
         <div class='col-md-6'>
-            <h3>Catégorie</h3>
+            <h3>Catégorie(s)</h3>
             <p><?php
                 foreach ($jeu->getLesCategories() as $uneCategorie) {
-                    echo $uneCategorie;
+                    echo $uneCategorie."<br>";
                 }
                 ?></p>
         </div>

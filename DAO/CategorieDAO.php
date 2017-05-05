@@ -12,7 +12,7 @@ class CategorieDAO extends DAO{
     public function create($obj) {
         
         $nomCat=$obj->getNomCat();
-    	$stmt = Connexion::prepare("INSERT INTO ".CategorieDAO::$table." (nom_cat)". "VALUES (?)");
+    	$stmt = Connexion::prepare("INSERT INTO ".self::$table." (nom_cat)". "VALUES (?)");
        	$req->bindParam(1, $nomCat);    	
     	$req->execute();        
     }
@@ -20,7 +20,7 @@ class CategorieDAO extends DAO{
         
     public function delete($obj) {
         $nom_categorie=$obj->getNomCat();
-        $stmt = Connexion::prepare("DELETE FROM ".CategorieDAO::$table." WHERE ".CategorieDAO::clePrimaire." = ".$nom_categorie.";");        
+        $stmt = Connexion::prepare("DELETE FROM ".self::$table." WHERE ".self::clePrimaire." = ".$nom_categorie.";");        
         $stmt->execute();
     }
 
@@ -33,7 +33,7 @@ class CategorieDAO extends DAO{
         return $categorie;        
     }
     public function findParCategorie($categorie) {
-        $stmt = Connexion::prepare("SELECT * FROM ".CategorieDAO::$table." WHERE categorie = ".$categorie.";");
+        $stmt = Connexion::prepare("SELECT * FROM ".self::$table." WHERE categorie = ".$categorie.";");
         $stmt->execute();
         $d = $stmt->fetch();
         $user=new Categorie($d["nom_categorie"]);
@@ -43,7 +43,7 @@ class CategorieDAO extends DAO{
 
 
     public function update($obj) {
-        $stmt = Connexion::prepare("UPDATE ".CategorieDAO::$table." SET nom_categorie='?', WHERE id='?' ; ");        
+        $stmt = Connexion::prepare("UPDATE ".self::$table." SET nom_categorie='?', WHERE id='?' ; ");        
         $stmt->bindParam(1, $obj->getnomCat());
         
         $stmt->execute(); 

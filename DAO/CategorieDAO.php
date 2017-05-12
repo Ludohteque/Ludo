@@ -12,7 +12,7 @@ class CategorieDAO extends DAO{
     public function create($obj) {
         
         $nomCat=$obj->getNomCat();
-    	$stmt = Connexion::prepare("INSERT INTO ".CategorieDAO::$table." (nom_cat)". "VALUES (?)");
+    	$stmt = Connexion::prepare("INSERT INTO ".self::$table." (nom_cat)". "VALUES (?)");
        	$req->bindParam(1, $nomCat);    	
     	$req->execute();        
     }
@@ -20,7 +20,7 @@ class CategorieDAO extends DAO{
         
     public function delete($obj) {
         $nom_categorie=$obj->getNomCat();
-        $stmt = Connexion::prepare("DELETE FROM ".CategorieDAO::$table." WHERE ".CategorieDAO::clePrimaire." = ".$nom_categorie.";");        
+        $stmt = Connexion::prepare("DELETE FROM ".self::$table." WHERE ".self::clePrimaire." = ".$nom_categorie.";");        
         $stmt->execute();
     }
 
@@ -29,11 +29,22 @@ class CategorieDAO extends DAO{
         $stmt->execute();
         $d = $stmt->fetch();
         $categorie = new Categorie($d["nom_categorie"]);
-            
         return $categorie;        
     }
+    
+    public function findAll($id) {
+        $categories = array();
+        $stmt = Connexion::prepare("SELECT * FROM ".self::$tableLien." WHERE ".self::$clePrimaire2." = ".$id.";");
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        foreach ($result as $uneCat) {
+            $categories[] = $uneCat["nom_categorie"];
+        }
+        return $categories;        
+    }
+    
     public function findParCategorie($categorie) {
-        $stmt = Connexion::prepare("SELECT * FROM ".CategorieDAO::$table." WHERE categorie = ".$categorie.";");
+        $stmt = Connexion::prepare("SELECT * FROM ".self::$table." WHERE categorie = ".$categorie.";");
         $stmt->execute();
         $d = $stmt->fetch();
         $user=new Categorie($d["nom_categorie"]);
@@ -43,7 +54,7 @@ class CategorieDAO extends DAO{
 
 
     public function update($obj) {
-        $stmt = Connexion::prepare("UPDATE ".CategorieDAO::$table." SET nom_categorie='?', WHERE id='?' ; ");        
+        $stmt = Connexion::prepare("UPDATE ".self::$table." SET nom_categorie='?', WHERE id='?' ; ");        
         $stmt->bindParam(1, $obj->getnomCat());
         
         $stmt->execute(); 
@@ -59,16 +70,6 @@ class CategorieDAO extends DAO{
         return $succes;
     }
     
-    public function setCategoriesParJeu($jeu) {
-        $listeCategories = array();
-        $stmt = Connexion::prepare("SELECT nom_categorie FROM ".self::$tableLien." WHERE id_jeu=".$jeu->getIdProduit().";");
-        $stmt->execute();
-        $d = $stmt->fetchAll();
-        foreach ($d as $value) {
-            $listeCategories[] = $value['nom_categorie'];
-        }
-        $jeu->setLesCategories($listeCategories);
-    }
 
 }
 

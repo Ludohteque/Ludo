@@ -7,7 +7,8 @@
     <input id="tab-2" type="radio" name="radio-set" class="tab-selector-2" />
     <label for="tab-2" class="tab-label-2">Demande ajout :</label>
 
-
+    <input id="tab-3" type="radio" name="radio-set" class="tab-selector-3" />
+    <label for="tab-3" class="tab-label-3">Actions :</label>
 
     <div class="clear-shadow"></div>
 
@@ -30,13 +31,13 @@
                         <td><?php echo $unmessage[1]; ?></td>
                         <td class="width60"><?php echo $unmessage[2]; ?></td>
                     </tr>
-            <?php } ?>
+                <?php } ?>
             </table>
 
         </div>
 
 
-        
+
         <div class="content-2">
             </br>
             <table class="tableau">
@@ -52,44 +53,68 @@
                     <th style="text-align:center;">Photo</th>
                 </tr>
 
-                <?php //class="width60"
+                <?php
+                //class="width60"
                 foreach ($demandesajout as $unjeu) {
                     ?>
                     <tr> 
                         <td><?php echo $unjeu->getNom(); ?></td>
                         <td><?php echo $unjeu->getDateAjout(); ?></td>
                         <td><?php echo $unjeu->getDescriptif(); ?></td>
-                        <td><?php echo $unjeu->getIdDuree()->getDureeMin()." / ".$unjeu->getIdDuree()->getDureeMax().""; ?></td>
-                        <td><?php echo $unjeu->getIdage()->getAgeMin()." / ".$unjeu->getIdage()->getAgeMax(); ?></td>
-                        <td><?php echo "à faire" //$unjeu->getNbJoueurs()->getNbJoueursMin()." / ".$unjeu->getNbJoueurs()->getNbJoueursMax(); ?></td>
-                        <td><?php var_dump($unjeu->getLesCategories());echo "???";
-                        
-                        //foreach ($unjeu->getLesCategories() as $unecategorie){
-                            //echo $unecategorie->getNomCat();
-                        //}; 
-                        ?></td>
+                        <td><?php echo $unjeu->getIdDuree()->getDureeMin() . " / " . $unjeu->getIdDuree()->getDureeMax() . ""; ?></td>
+                        <td><?php echo $unjeu->getIdage()->getAgeMin() . " / " . $unjeu->getIdage()->getAgeMax(); ?></td>
+                        <td><?php echo $unjeu->getNbJoueurs()->getNbJoueursMin() . " à " . $unjeu->getNbJoueurs()->getNbJoueursMax(); ?></td>
+                        <td><?php
+                            $lesCat = $unjeu->getLesCategories();
+                            foreach ($lesCat as $unecategorie) {
+                                echo $unecategorie . "<br>";
+                            };
+                            ?></td>
                         <td><?php echo $unjeu->getEtat(); ?></td>
                         <td><img src="<?php echo $unjeu->getImage(); ?>" /></td>
                     </tr>
-<?php } ?>
+                <?php } ?>
             </table>
 
         </div>
+        <div class="content-3">
+            <table class="tableau">
+                <tr class="">
+                    <td style="text-align:center;">Administration des Utilisateurs</td>
+                    <td style="text-align: center;"><?php
+                        if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
+                            echo "<a class=\"btn btn-danger\" href=\"index.php?uc=admin&action=userAdmin\">Utilisateurs</a>";
+                        }
+                        ?></td>
 
-    
-</div>
+                </tr>
+                <tr class="">
+                    <td style="text-align:center;">Administration des Jeux</td>
+                    <td style="text-align: center;"><?php
+                        if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
+                            echo "<a class=\"btn btn-danger\" href=\"index.php?uc=admin&action=jeuxAdmin\">Jeux</a>";
+                        }
+                        ?></td>
+
+                </tr>
+                <tr class="">
+                    <td style="text-align:center;">Administration d'évènements</td>
+                    <td style="text-align: center;"><?php
+                        if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
+                            echo "<a class=\"btn btn-danger\" href=\"index.php?uc=admin&action=evenementsAdmin\">Evenements</a>";
+                        }
+                        ?></td>
+
+                </tr>
+            </table>
+        </div>
+    </div>
+
 </section>
+<?php include('v_footer.php'); ?>
 
 
 
 
-<?php
-include('v_footer.php');
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 

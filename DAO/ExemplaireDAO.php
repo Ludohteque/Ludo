@@ -8,12 +8,16 @@ class ExemplaireDAO extends DAO {
     private static $id = "id_exemplaire";
 
     public function create($obj) {
+        $idJeu = $obj->getIdJeu()->getIdJeu();
+        $idUser = $obj->getIdUser()->getIdUser();
+        $etat = $obj->getEtat();
+        $dispo = $obj->getDisponibilite();
         $stmt = Connexion::prepare("INSERT INTO " . self::$table . " (id_jeu, id_user, etat, disponibilite) "
                         . "VALUES (?, ?, ?, ?)");
-        $stmt->bindParam(1, $obj->getIdJeu());
-        $stmt->bindParam(2, $obj->getIdUser());
-        $stmt->bindParam(3, $obj->getEtat());
-        $stmt->bindParam(4, $obj->getDisponibilite());
+        $stmt->bindParam(1, $idJeu);
+        $stmt->bindParam(2, $idUser);
+        $stmt->bindParam(3, $etat);
+        $stmt->bindParam(4, $dispo);
         $stmt->execute();
     }
 
@@ -46,7 +50,7 @@ class ExemplaireDAO extends DAO {
     }
 
     public function find($id) {
-        $stmt = Connexion::prepare("SELECT * FROM " . self::$table . " WHERE id_jeu = " . $id . ";");
+        $stmt = Connexion::prepare("SELECT * FROM " . self::$table . " WHERE id_exemplaire = " . $id . ";");
         $stmt->execute();
         $d = $stmt->fetch();
         $daojeu = new JeuDAO();

@@ -8,7 +8,6 @@ switch($action) {
         $daoexemplaire = new ExemplaireDAO();
         $daouser = new UserDAO();
         $jeu = $daojeu->find($id);
-        $daocat->setCategoriesParJeu($jeu);
         $listeExemplaires = $daoexemplaire->findListeExemplaire($jeu->getIdProduit());
         include_once 'Vue/v_jeu.php';
         break;

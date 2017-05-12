@@ -4,8 +4,10 @@ require_once 'Modele/Produit.php';
 
 class ProduitDAO extends DAO {
     
+    private static $table = "produit";
+    
     public function create($obj) {
-        $stmt = Connexion::getInstance()->prepare("insert into ".$this->table." (idProduit, nom, note, descriptif, isValide, etat, dateAjout) values (?,?,?,?,?,?,?);");
+        $stmt = Connexion::getInstance()->prepare("insert into ".self::$table." (idProduit, nom, note, descriptif, isValide, etat, dateAjout) values (?,?,?,?,?,?,?);");
         $stmt->bindParam(1, $obj->getIdProduit());
         $stmt->bindParam(2, $obj->getNom());
         $stmt->bindParam(3, $obj->getNote());

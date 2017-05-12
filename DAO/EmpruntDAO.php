@@ -3,8 +3,8 @@ require_once ('Modele/Emprunt.php');
 
 class EmpruntDAO extends DAO {
     
-    private $table = "emprunt";
-    private $clePrimaire = "id_emprunts";
+    private static $table = "emprunt";
+    private static $clePrimaire = "id_emprunts";
     
     public function create($obj) {
     	$date_emprunts=$obj->getDateEmprunt();
@@ -12,7 +12,7 @@ class EmpruntDAO extends DAO {
     	$id_emprunteur=$obj->getIdEmprunteur();
     	$id_exemplaire=$obj->getIdExemplaire();
 
-    	$stmt = Connexion::prepare("INSERT INTO ".EmpruntDAO::$table." (date_emprunts, date_remise, id_emprunteur, id_exemplaire) "
+    	$stmt = Connexion::prepare("INSERT INTO ".self::$table." (date_emprunts, date_remise, id_emprunteur, id_exemplaire) "
                 . "VALUES (?, ?, ?, ?)");
     	$stmt->bindParam(1, $date_emprunts);
     	$stmt->bindParam(2, $date_remise);
@@ -23,12 +23,12 @@ class EmpruntDAO extends DAO {
 
     public function delete($obj) {
         $id_emprunts=$obj->getId();
-    	$stmt = Connexion::prepare("DELETE FROM ".EmpruntDAO::$table." WHERE ".EmpruntDAO::$id." = ".$id_emprunts.";");
+    	$stmt = Connexion::prepare("DELETE FROM ".self::$table." WHERE ".self::$id." = ".$id_emprunts.";");
         $stmt->execute();
     }
 
     public function find($id) {
-        $stmt = Connexion::prepare("SELECT * FROM ".EmpruntDAO::$table." WHERE ".EmpruntDAO::$id." = ".$id.";");
+        $stmt = Connexion::prepare("SELECT * FROM ".self::$table." WHERE ".self::$clePrimaire." = ".$id.";");
         $stmt->execute();
         $d = $stmt->fetch();
         $emprunt=new Emprunt($d["id_emprunts"],$d["date_emprunts"], $d["date_remise"], $d["id_emprunteur"], $d["id_exemplaire"]);
@@ -42,7 +42,7 @@ class EmpruntDAO extends DAO {
         $idExemplaire = $obj->getIdExemplaire();
         $idEmprunt = $obj->getId_emprunts();
         
-        $stmt = Connexion::prepare("UPDATE ".UserDAO::$table." SET date_emprunts='?', date_remise='?', id_emprunteur='?', id_exemplaire='?' WHERE id='?' ; ");
+        $stmt = Connexion::prepare("UPDATE ".self::$table." SET date_emprunts='?', date_remise='?', id_emprunteur='?', id_exemplaire='?' WHERE id='?' ; ");
         
         $stmt->bindParam(1, $dateEmprunt);
         $stmt->bindParam(2, $dateRemise);
@@ -55,7 +55,7 @@ class EmpruntDAO extends DAO {
     }
     
     public function getDerniersEmprunts() {
-        $stmt = Connexion::prepare("select * from emprunt ORDER BY date_emprunts DESC LIMIT 10;");
+        $stmt = Connexion::prepare("select * from ".self::$table." ORDER BY date_emprunts DESC LIMIT 10;");
         $stmt->execute();
         $result = $stmt->fetchAll();
         $listeEmprunts = array();
@@ -87,7 +87,7 @@ class EmpruntDAO extends DAO {
     }
     
     public function getMesEmprunts($id) {
-        $stmt = Connexion::prepare("select * from emprunt WHERE id_emprunteur = ".$id.";");
+        $stmt = Connexion::prepare("select * from ".self::$table." WHERE id_emprunteur = ".$id.";");
         $stmt->execute();
         $result = $stmt->fetchAll();
         $listeEmprunts = array();

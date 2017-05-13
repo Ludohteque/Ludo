@@ -92,6 +92,7 @@
                     <td style="text-align:center;">Administration des Jeux</td>
                     <td style="text-align: center;"><?php
                         if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
+                            echo "<a class=\"btn btn-primary\" href=\"index.php?uc=admin&action=demandeNouveaujeu\">Nouveau jeu</a>";
                             echo "<a class=\"btn btn-danger\" href=\"index.php?uc=admin&action=jeuxAdmin\">Jeux</a>";
                         }
                         ?></td>

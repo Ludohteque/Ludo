@@ -35,6 +35,18 @@ class TrancheAgeDAO extends DAO {
             
         return $trancheAge;
     }
+    
+    public function findAll() {
+        $stmt = Connexion::prepare("SELECT * FROM ".self::$table." ORDER BY age_min ASC;");
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $listeTranches = array();
+        foreach ($result as $value) {
+            $trancheAge = new TrancheAge($value['id_age'],$value["age_min"], $value["age_max"]);
+            $listeTranches[] = $trancheAge;
+        }    
+        return $listeTranches;
+    }
 
     public function update($obj) {
         $idAge=$obj->getIdAge();
@@ -50,6 +62,12 @@ class TrancheAgeDAO extends DAO {
         
         $stmt->execute(); 
         
+    }
+    
+    public function __toString() {
+        $ageMin=$this->getAgeMin();
+    	$ageMax=$this->getAgeMax();
+        echo $ageMin." ans / ".$ageMax." ans";
     }
 
 }

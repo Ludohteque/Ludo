@@ -29,13 +29,6 @@
                 <select class="form-control" id="type" name="type">
                     <option>Demande de prêt</option>
                     <option>Questions diverses</option>
-                    <?php
-                    if ($_SESSION['admin'] == 1) {
-                        ?>
-                        <option>Demande de prêt</option>
-                        <option>Signalement</option>
-                        <?php
-                    }
                     ?>
 
                 </select>

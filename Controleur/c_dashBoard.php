@@ -38,6 +38,38 @@ switch ($action) {
         }
         include('Vue/v_dashboard.php');
         break;
+    case 'ajouterExemplaire':
+        $daojeu = new JeuDAO();
+        $jeux = $daojeu->getAll();
+        include('Vue/v_dashboard_ajout_exemplaire.php');
+        break;
+    case 'enregistrerExemplaire':
+        $nom = $_POST['jeu'];
+        $etat = $_POST['etat'];
+        $dispo = $_POST['dispo'];
+        if ($dispo == "on") {
+            $dispo = 1;
+        } else {
+            $dispo = 0;
+        }
+        $daojeu = new JeuDAO();
+        $jeu = $daojeu->findParNom($nom);
+        $daouser = new UserDAO();
+        $user = $daouser->find($_SESSION['id']);
+        $exemplaire = new Exemplaire(-1, $jeu, $user, $etat, $dispo);
+        $daoexemplaire = new ExemplaireDAO();
+        $daoexemplaire->create($exemplaire);
+        include('Vue/v_dashboard.php');
+        break;
+    case 'demarrerEmprunt':
+        $destinataire = null;
+        if (isset($_GET['id'])) {
+            $destinataire = $_GET['id'];
+        }
+        $userdao = new UserDAO();
+        $user = $userdao->find($destinataire);
+        include('Vue/v_dashboard_emprunt.php');
+        break;
 }
 // a décommenter pour que cela demande la connexion, et avoir un truc fonctionnel... 
 // Commenté a des fins de tests.

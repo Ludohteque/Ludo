@@ -36,7 +36,7 @@ $dureedao = new DureeDAO;
                     <option disabled selected>Choisissez une tranche d'âge</option>
                     <?php $tranches = $trancheagedao->findAll();
                     foreach ($tranches as $unetranche) { ?>                      
-                    <option><?php echo $unetranche->getAgeMin()." ans / ".$unetranche->getAgeMax()." ans"; ?></option>
+                    <option value="<?php echo $unetranche->getIdAge(); ?>"><?php echo $unetranche->getAgeMin()." ans / ".$unetranche->getAgeMax()." ans"; ?></option>
                     <?php } ?>
                 </select>
             </div>
@@ -48,7 +48,7 @@ $dureedao = new DureeDAO;
                     <option disabled selected>Choisissez une durée de jeu</option>
                     <?php $durees = $dureedao->findAll();
                     foreach ($durees as $uneduree) { ?>                      
-                    <option><?php echo $uneduree->getDureeMin()." minutes / ".$uneduree->getDureeMax()." minutes"; ?></option>
+                    <option value="<?php echo $uneduree->getIdDuree(); ?>"><?php echo $uneduree->getDureeMin()." minutes / ".$uneduree->getDureeMax()." minutes"; ?></option>
                     <?php } ?>
                 </select>
             </div>
@@ -70,7 +70,7 @@ $dureedao = new DureeDAO;
                     <option disabled selected>Choisissez un nombre de joueurs</option>
                     <?php $nbjoueurs = $nombrejoueursdao->findAll();
                     foreach ($nbjoueurs as $unnbjoueur) { ?>                      
-                    <option><?php echo $unnbjoueur['nb_joueur_min']." à ".$unnbjoueur['nb_joueur_max']." joueurs"; ?></option>
+                    <option value="<?php echo $unnbjoueur[0]; ?>"><?php echo $unnbjoueur['nb_joueur_min']." à ".$unnbjoueur['nb_joueur_max']." joueurs"; ?></option>
                     <?php } ?>
                 </select>
             </div>

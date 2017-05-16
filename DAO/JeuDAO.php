@@ -22,8 +22,6 @@ class JeuDAO extends DAO {
         $stmt->bindParam(2, $etat);
         $stmt->bindParam(3, $nomjeu);
         $stmt->execute();
-        
-        //nombrejouersdao, agedao, dureedao, find(nom) et getId à faire TODO !!!
         $connexion = Connexion::getInstance();
         $id = $connexion::dernierIdInsere(self::$clePrimaireMere, self::$tableMere);
         $stmt2 = Connexion::prepare("insert into " . self::$tableFille . " (id_jeu, nb_joueurs, id_age, is_valide, id_duree) values (?,?,?,0,?);");

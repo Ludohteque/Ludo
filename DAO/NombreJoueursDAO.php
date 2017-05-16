@@ -7,6 +7,7 @@ class NombreJoueursDAO extends DAO {
     private static $table = "nbjoueur";
     private static $clePrimaire = "id_nb_joueur";
     
+    
     public function create($obj) {
         
     }

@@ -43,6 +43,10 @@ class Connexion {
 		return $result[0];
 	}
         
+        public static function lastInsertId(){
+            return Connexion::getInstance()->PDOInstance->lastInsertId();
+    }
+        
         
         
 }

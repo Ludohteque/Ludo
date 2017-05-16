@@ -59,7 +59,7 @@ $dureedao = new DureeDAO;
                 <?php $categories = $categoriedao->findCategories(); ?>
                     <?php
                     foreach ($categories as $unecategorie) { ?>                      
-                <input type="checkbox" name="categories"><?php echo $unecategorie; ?></input></br>
+                <input type="checkbox" name="categories[]" value="<?php echo $unecategorie ?>"><?php echo $unecategorie; ?></input></br>
                     <?php } ?>
             </div>
         </div>
@@ -84,7 +84,7 @@ $dureedao = new DureeDAO;
         <div class="form-group">        
             <div class="col-sm-offset-2 col-sm-10">
                 <button type="submit" class="btn btn-default">Envoyer</button>
-                <INPUT class="btn btn-default" TYPE="BUTTON" VALUE="Annuler" onClick="history.back()">
+                <INPUT class="btn btn-default" TYPE="BUTTON" VALUE="Annuler">
             </div>
         </div>
     </form>

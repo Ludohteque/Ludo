@@ -130,11 +130,11 @@ class UserDAO extends DAO {
         return $user;
     }
 
-    public function estConnecte() {
+    public static function estConnecte() {
         return isset($_SESSION['pseudo']);
     }
     
-    public function isAdmin() {
+    public static function isAdmin() {
         return isset($_SESSION['admin']) && $_SESSION['admin']==1;
     }
 

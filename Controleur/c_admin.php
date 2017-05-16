@@ -35,7 +35,7 @@ switch ($action) {
                 $jeudao->fileupload();
                 $image = preg_replace("` `i", "", $fichier);
             }
-            $isvalide = false;
+            $isvalide = 0;
             $nouveaujeu = new jeu(-1, $nom, $descriptif, $etat, 3, new \DateTime(), $image, $nbjoueurs, $tranchedage, $duree, $categories);
             $jeudao->create($nouveaujeu);
             $resultat = "Votre jeu a bien été ajouté !"; //TODO

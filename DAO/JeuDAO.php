@@ -17,14 +17,17 @@ class JeuDAO extends DAO {
         $age = $obj->getIdAge();
         $duree = $obj->getIdDuree();
         $nbjoueurs = $obj->getNbJoueurs();
+        $categories = $obj->getLesCategories();
+        $isvalide = 0;
         $stmt = Connexion::prepare("insert into " . self::$tableMere . " (note, descriptif, etat, nom) values (3,?,?,?);");
         $stmt->bindParam(1, $descriptif);
         $stmt->bindParam(2, $etat);
         $stmt->bindParam(3, $nomjeu);
         $stmt->execute();
-        $connexion = Connexion::getInstance();
-        $id = $connexion::dernierIdInsere(self::$clePrimaireMere, self::$tableMere);
-        $stmt2 = Connexion::prepare("insert into " . self::$tableFille . " (id_jeu, nb_joueurs, id_age, is_valide, id_duree) values (?,?,?,0,?);");
+        $id = Connexion::getInstance()->dernierIdInsere(self::$clePrimaireMere, self::$tableMere);
+        //$id = $idtemp +1;
+        
+        $stmt2 = Connexion::prepare("insert into " . self::$tableFille . " (id_jeu, nb_joueurs, id_age, is_valide, id_duree) values (?+1,?,?,0,?);");
 //        $stmt2 = Connexion::prepare("insert into " . self::$tableFille . " (nb_joueurs, id_age, is_valide, id_duree) values (?,?,0,?);");
         $stmt2->bindParam(1, $id);
         $stmt2->bindParam(2, $nbjoueurs);
@@ -32,6 +35,12 @@ class JeuDAO extends DAO {
         //$stmt2->bindParam(4, 0);
         $stmt2->bindParam(4, $duree);
         $stmt2->execute();
+        foreach ($categories as $unecategorie) {
+            $stmt3 = Connexion::prepare("insert into jeucategorie (id_jeu, nom_categorie) values (?, ?)");
+            $stmt3->bindParam(1, $id);
+            $stmt3->bindParam(2, $unecategorie);
+            $stmt3->execute();
+        }
         $obj->setIdJeu($id);
     }
 

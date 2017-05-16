@@ -11,31 +11,30 @@ class JeuDAO extends DAO {
     private static $dateAjout = "date_ajout";
 
     public function create($obj) {
-        $nomjeu = $obj->getNomJeu();
         $descriptif = $obj->getDescriptif();
         $etat = $obj->getEtat();
-        $age = $obj->getIdAge();
-        $duree = $obj->getIdDuree();
-        $nbjoueurs = $obj->getNbJoueurs();
-        $categories = $obj->getLesCategories();
-        $isvalide = 0;
-        $stmt = Connexion::prepare("insert into " . self::$tableMere . " (note, descriptif, etat, nom) values (3,?,?,?);");
+        $nomjeu = $obj->getNomJeu();
+        $dateajouter = $obj->getDateAjout()->format('Y-m-d H:i:s');
+        $image = $obj->getImage();
+        $stmt = Connexion::prepare("insert into ".self::$tableMere." (note, descriptif, etat, nom, dateajout, image) values (3,?,?,?,?,?);"); ///note par défaut : 3
         $stmt->bindParam(1, $descriptif);
         $stmt->bindParam(2, $etat);
         $stmt->bindParam(3, $nomjeu);
+        $stmt->bindParam(4, $dateajouter);
+        $stmt->bindParam(5, $image);
         $stmt->execute();
-        $id = Connexion::getInstance()->dernierIdInsere(self::$clePrimaireMere, self::$tableMere);
-        //$id = $idtemp +1;
-        
-        $stmt2 = Connexion::prepare("insert into " . self::$tableFille . " (id_jeu, nb_joueurs, id_age, is_valide, id_duree) values (?+1,?,?,0,?);");
-//        $stmt2 = Connexion::prepare("insert into " . self::$tableFille . " (nb_joueurs, id_age, is_valide, id_duree) values (?,?,0,?);");
+        $idtemp = Connexion::getInstance()->dernierIdInsere(self::$clePrimaireMere, self::$tableMere);
+        $id = $idtemp + 1;
+        $nbjoueurs = $obj->getNbJoueurs();
+        $age = $obj->getIdAge();
+        $duree = $obj->getIdDuree();
+        $stmt2 = Connexion::prepare("insert into " . self::$tableFille . " (id_jeu, nb_joueurs, id_age, is_valide, id_duree) values (?,?,?,0,?);"); //id  = last+1 ; is_valide = 0
         $stmt2->bindParam(1, $id);
         $stmt2->bindParam(2, $nbjoueurs);
         $stmt2->bindParam(3, $age);
-        //$stmt2->bindParam(4, 0);
         $stmt2->bindParam(4, $duree);
         $stmt2->execute();
-        foreach ($categories as $unecategorie) {
+        foreach ($obj->getLesCategories() as $unecategorie) {
             $stmt3 = Connexion::prepare("insert into jeucategorie (id_jeu, nom_categorie) values (?, ?)");
             $stmt3->bindParam(1, $id);
             $stmt3->bindParam(2, $unecategorie);

@@ -17,22 +17,24 @@ class JeuDAO extends DAO {
         $age = $obj->getIdAge();
         $duree = $obj->getIdDuree();
         $nbjoueurs = $obj->getNbJoueurs();
-        $stmt = Connexion::prepare("insert into " . self::$tableMere . " (descriptif, etat, nom) values (?,?,?);");
+        $stmt = Connexion::prepare("insert into " . self::$tableMere . " (note, descriptif, etat, nom) values (3,?,?,?);");
         $stmt->bindParam(1, $descriptif);
         $stmt->bindParam(2, $etat);
         $stmt->bindParam(3, $nomjeu);
         $stmt->execute();
-        //$id = Connexion::getInstance()->lastInsertId();
-//        $stmt2 = Connexion::prepare("insert into " . self::$tableFille . " (id_jeu, nb_joueurs, id_age, is_valide, id_duree) values (?,?,?,?,?);");
-//        $stmt2->bindParam(1, $id);
-        $stmt2 = Connexion::prepare("insert into " . self::$tableFille . " (nb_joueurs, id_age, is_valide, id_duree) values (?,?,0,?);");
-        //$stmt2->bindParam(1, $id);
-        $stmt2->bindParam(1, $nbjoueurs);
-        $stmt2->bindParam(2, $age);
-        //$stmt2->bindParam(3, 0);
-        $stmt2->bindParam(3, $duree);
+        
+        //nombrejouersdao, agedao, dureedao, find(nom) et getId à faire TODO !!!
+        $connexion = Connexion::getInstance();
+        $id = $connexion::dernierIdInsere(self::$clePrimaireMere, self::$tableMere);
+        $stmt2 = Connexion::prepare("insert into " . self::$tableFille . " (id_jeu, nb_joueurs, id_age, is_valide, id_duree) values (?,?,?,0,?);");
+//        $stmt2 = Connexion::prepare("insert into " . self::$tableFille . " (nb_joueurs, id_age, is_valide, id_duree) values (?,?,0,?);");
+        $stmt2->bindParam(1, $id);
+        $stmt2->bindParam(2, $nbjoueurs);
+        $stmt2->bindParam(3, $age);
+        //$stmt2->bindParam(4, 0);
+        $stmt2->bindParam(4, $duree);
         $stmt2->execute();
-        //$obj->setIdJeu($id);
+        $obj->setIdJeu($id);
     }
 
     public function delete($obj) {

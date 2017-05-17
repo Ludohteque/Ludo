@@ -29,9 +29,9 @@ switch ($action) {
             $categories = $_POST['categories'];
             $nbjoueurs = $_POST['nbjoueurs'];
             $duree = $_POST['duree'];
+            $jeudao = new JeuDAO();
             if(is_uploaded_file($_FILES['image']['tmp_name'])){
                 $fichier = $_FILES['image']['name'];
-                $jeudao = new JeuDAO();
                 $jeudao->fileupload();
                 $image = preg_replace("` `i", "", $fichier);
             }

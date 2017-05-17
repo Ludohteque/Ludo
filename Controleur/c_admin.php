@@ -54,6 +54,33 @@ switch ($action) {
             }
             break;
         }
+        
+        case 'userAdmin': {
+            $userdao = new UserDAO();
+            $items = $userdao->findAll();
+            $titre = "utilisateurs";
+                include_once 'Vue/v_adminliste.php';
+            break;
+        }
+        
+        case 'jeuxAdmin': {
+            $jeudao = new JeuDAO();
+            $items = $jeudao->getAll();
+            $titre = "jeux";
+                include_once 'Vue/v_adminliste.php';
+            break;
+        }
+        
+        case 'evenementsAdmin': {
+            $evendao = new EvenementDAO();
+            $items = $evendao->findAll();
+            $titre = "évènements";
+                include_once 'Vue/v_adminliste.php';
+            break;
+        }
+        
+        
+        
 }
 
 // getMesssages( ... , type='signalement');

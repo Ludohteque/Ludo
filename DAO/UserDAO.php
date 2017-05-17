@@ -133,9 +133,23 @@ class UserDAO extends DAO {
     public static function estConnecte() {
         return isset($_SESSION['pseudo']);
     }
-    
+
     public static function isAdmin() {
-        return isset($_SESSION['admin']) && $_SESSION['admin']==1;
+        return isset($_SESSION['admin']) && $_SESSION['admin'] == 1;
+    }
+
+    public function findAll() {
+        $stmt = Connexion::prepare("SELECT * FROM " . self::$table . ";");
+        $stmt->execute();
+        $resultats = $stmt->fetchAll();
+        $reponse = array();
+        if ($resultats != 0) {
+            foreach ($resultats as $resultat) {
+                $user = new User($resultat["id_user"], $resultat["pseudo"], $resultat["ville"], $resultat["adr_mail"], $resultat["tel"], $resultat["is_admin"], $resultat["is_bureau"], $resultat["mdp"], $resultat["moyenne"], $resultat["nbBan"], $resultat["enBan"], $resultat["nb_notes"]);
+                $reponse[] = $user;
+            }
+        }
+        return $reponse;
     }
 
 }

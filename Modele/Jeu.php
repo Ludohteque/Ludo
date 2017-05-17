@@ -27,6 +27,10 @@ class Jeu extends Produit {
             return parent::getNom();
         }
         
+        function getNote() {
+            return parent::getNote();
+        }
+        
         function getIdJeu() {
             return $this->idJeu;
         }

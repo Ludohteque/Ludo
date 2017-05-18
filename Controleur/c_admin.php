@@ -39,10 +39,9 @@ switch ($action) {
             $nouveaujeu = new jeu(-1, $nom, $descriptif, $etat, 3, new \DateTime(), $image, $nbjoueurs, $tranchedage, $duree, $categories);
             $jeudao->create($nouveaujeu);
             $resultat = "Votre jeu a bien été ajouté !"; //TODO
-            $messagedao = new MessageDAO();
-            $signalements = $messagedao->getMessagesSignalement();
-            $demandesajout = $jeudao->getJeuxInvalides();
-                include_once 'Vue/v_admin.php';
+            $items = $jeudao->getAll();
+            $titre = "jeux";
+                include_once 'Vue/v_adminliste.php';
             
             } else { 
                 $messagedao = new MessageDAO();

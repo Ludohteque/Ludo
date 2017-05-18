@@ -64,7 +64,7 @@
                 <td><?php echo "boutons" ?></td>
     <?php } else if ($titre == "jeux") { ?>
                 <td><?php echo $unitem->getIdJeu(); ?></td>
-                *<td><?php echo $unitem->getNom(); ?></td>
+                <td><?php echo $unitem->getNom(); ?></td>
                 <td><?php echo $unitem->getDescriptif(); ?></td>
                 <td><?php echo $unitem->getEtat(); ?></td>
                 <td><?php
@@ -78,7 +78,7 @@
                 <td><?php echo $unitem->getIdage()->getAgeMin() . " / " . $unitem->getIdage()->getAgeMax(); ?></td>
                 <td><?php echo $unitem->getNote(); ?></td>
                 <td><?php echo $unitem->getDateAjout(); ?></td>
-                <td><img src="<?php echo $unitem->getImage(); ?>" /></td>
+                <td><?php if ($unitem->getImage()) { ?><img width="150" height="100" src="Vue/img/jeu/<?php echo $unitem->getImage(); ?>" /><?php } ?></td>
                 <td><?php echo "boutons"; ?></td>
     <?php } else if ($titre == "évènements") { ?>
                 <td><?php echo $unitem->getIdEvenement(); ?></td>

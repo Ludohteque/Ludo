@@ -78,7 +78,7 @@ $dureedao = new DureeDAO;
         <div class="form-group">
                             <label for="image" class="col-lg-2 control-label">Illustration :</label>
                             <div class="col-lg-10">
-                                <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                                <input type="file" class="form-control" id="image" name="image" accept="image/*"></input>
                             </div>
                         </div>
         <div class="form-group">        

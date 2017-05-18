@@ -218,7 +218,6 @@ class JeuDAO extends DAO {
                         //on déplace l'image dans le répertoire final
                         move_uploaded_file($tmp, 'Vue/img/jeu/' . $fichier);
                         //Message indiquant que tout s'est bien passé
-                        echo "L'image a été envoyée avec succès<br/>";
                     } else {
                         //Le type mime, ou la taille ou le poids est incorrect
                         echo 'Votre image a été rejetée (poids, taille ou type incorrect)';

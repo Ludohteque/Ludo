@@ -1,5 +1,10 @@
 <?php include('v_header.php'); ?>
 <h5>Ma Dashboard :</h5>
+<?php
+if ($messageEnvoye) {
+    echo "<div class='message'>" . $resultat . "</div>";
+}
+?>
 <section class="tabs">
     <input id="tab-1" type="radio" name="radio-set" class="tab-selector-1" checked="checked" />
     <label for="tab-1" class="tab-label-1">Signalements :</label>

@@ -78,7 +78,6 @@
 
         </div>
         <div class="content-3">
-            <?php var_dump($nouveaujeu); ?>
             <table class="tableau">
                 <tr class="">
                     <td style="text-align:center;">Administration des Utilisateurs</td>

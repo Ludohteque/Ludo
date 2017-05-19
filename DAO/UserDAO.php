@@ -32,7 +32,7 @@ class UserDAO extends DAO {
         $stmt = Connexion::prepare("DELETE FROM " . self::$table . " WHERE " . self::$id . " = " . $idCourant . ";");
         $stmt->execute();
     }
-    
+
     public function find($id) {
         $stmt = Connexion::prepare("SELECT * FROM " . self::$table . " WHERE " . self::$id . " = " . $id . ";");
         $stmt->execute();
@@ -151,7 +151,7 @@ class UserDAO extends DAO {
         }
         return $reponse;
     }
-    
+
     public function findBannis() {
         $stmt = Connexion::prepare("SELECT * FROM " . self::$table . " WHERE enBan IS TRUE;");
         $stmt->execute();
@@ -164,6 +164,19 @@ class UserDAO extends DAO {
             }
         }
         return $reponse;
+    }
+
+    public function deban($obj) {
+        $idCourant = $obj->getIdUser();
+        $stmt = Connexion::prepare("UPDATE " . self::$table . " SET enBan = 0 WHERE " . self::$id . " = " . $idCourant . ";");
+        $stmt->execute();
+    }
+    
+        public function banUser($obj) {
+        $idCourant = $obj->getIdUser();
+        $nbbansfinal = $obj->getNbBan() + 1;
+        $stmt = Connexion::prepare("UPDATE " . self::$table . " SET enBan = 1, nbBan = ".$nbbansfinal." WHERE " . self::$id . " = " . $idCourant . ";");
+        $stmt->execute();
     }
 
 }

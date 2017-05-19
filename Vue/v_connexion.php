@@ -15,7 +15,10 @@
     </p>
     <?php
     if ($joueur == null) {
-        echo "<div class='message'>Erreur de login et/ou mot de passe. Veuillez réessayer.</div>";
+        echo "<div class='message'><span class='red'>Erreur de login et/ou mot de passe. Veuillez réessayer.</span></div>";
+    }
+    if (isset($message)) {
+        echo "<div class='message'><span class='red'>".$message."</span></div>";
     }
     ?>
 </form>

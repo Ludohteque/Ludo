@@ -89,6 +89,28 @@ switch ($action) {
             include_once 'Vue/v_adminliste.php';
             break;
         }
+        
+        case 'debanUser': {
+            $userdao = new UserDAO();
+            $id = $_GET['id'];
+            $user = $userdao->find($id);
+            $userdao->deban($user);
+            $items = $userdao->findAll();
+            $titre = "utilisateurs";
+            include_once 'Vue/v_adminliste.php';
+            break;
+        }
+        
+        case 'banUser': {
+            $userdao = new UserDAO();
+            $id = $_GET['id'];
+            $user = $userdao->find($id);
+            $userdao->banUser($user);
+            $items = $userdao->findAll();
+            $titre = "utilisateurs";
+            include_once 'Vue/v_adminliste.php';
+            break;
+        }
 
     case 'jeuxAdmin': {
             $jeudao = new JeuDAO();

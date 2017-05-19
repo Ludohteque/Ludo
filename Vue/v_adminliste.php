@@ -75,7 +75,13 @@
 
                        
                   <?php   ?></td>
-                <td><?php echo "<a class=\"btn btn-danger\" href=\"index.php?uc=admin&action=deleteUser&id=".$unitem->getIdUser()."\">supprimer utilisateur</a>" ?></td>
+                <td><?php if (!$unitem->getEnBan()) 
+                {echo "<a class=\"btn btn-warning\" href=\"index.php?uc=admin&action=banUser&id=".$unitem->getIdUser()."\">Ban l'utilisateur</a>"; }
+                else { 
+                    echo "<a class=\"btn btn-success\" href=\"index.php?uc=admin&action=debanUser&id=".$unitem->getIdUser()."\">Deban l'utilisateur</a>";
+                            
+                }?>
+                    <?php echo "<a class=\"btn btn-danger\" href=\"index.php?uc=admin&action=deleteUser&id=".$unitem->getIdUser()."\">supprimer utilisateur</a>" ?></td>
 
     <?php } else if ($titre == "jeux") { ?>
                 <td><?php echo $unitem->getIdJeu(); ?></td>
@@ -125,7 +131,9 @@
                         echo "[ " . $unitem->getNbBan() . " Ban(s) ]";
                     }
                     ?></td>
-                <td><?php echo "boutons" ?></td>
+                <td><?php echo "<a class=\"btn btn-success\" href=\"index.php?uc=admin&action=debanUser&id=".$unitem->getIdUser()."\">Deban l'utilisateur</a>" ?>
+                    <?php echo "<a class=\"btn btn-danger\" href=\"index.php?uc=admin&action=deleteUser&id=".$unitem->getIdUser()."\">supprimer utilisateur</a>" ?>
+                </td>
     <?php
     }
 }

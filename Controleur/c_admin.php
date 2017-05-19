@@ -63,6 +63,16 @@ switch ($action) {
             include_once 'Vue/v_adminliste.php';
             break;
         }
+        case 'deleteUser': {
+            $userdao = new UserDAO();
+            $id = $_GET['id'];
+            $user = $userdao->find($id);
+            $userdao->delete($user);
+            $items = $userdao->findAll();
+            $titre = "utilisateurs";
+            include_once 'Vue/v_adminliste.php';
+            break;
+        }
 
     case 'jeuxAdmin': {
             $jeudao = new JeuDAO();

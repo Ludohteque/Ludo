@@ -61,7 +61,7 @@
                         echo "";
                     } ?></td>
                 <td><?php echo $unitem->getNbBan(); ?></td>
-                <td><?php echo "boutons" ?></td>
+                <td><?php echo "<a class=\"btn btn-danger\" href=\"index.php?uc=admin&action=deleteUser&id=".$unitem->getIdUser()."\">supprimer utilisateur</a>" ?></td>
     <?php } else if ($titre == "jeux") { ?>
                 <td><?php echo $unitem->getIdJeu(); ?></td>
                 <td><?php echo $unitem->getNom(); ?></td>

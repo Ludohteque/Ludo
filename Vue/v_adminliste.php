@@ -11,7 +11,6 @@
             <th style="text-align:center;">Est admin</th>
             <th style="text-align:center;">Note moyenne</th>
             <th style="text-align:center;">Banni ?</th>
-            <th style="text-align:center;">Nombre de bans</th>
             <th style="text-align:center;">Actions</th>
         <?php } else if ($titre == "jeux") { ?>
             <th style="text-align:center;">Id</th>
@@ -34,7 +33,17 @@
             <th style="text-align:center;">Date d'ajout</th>
             <th style="text-align:center;">Image</th>
             <th style="text-align:center;">Actions</th>
-            <?php } ?>
+        <?php } ?>
+            <?php if ($titre == "utilisateurs bannis") { ?>
+            <th style="text-align:center;">Id</th>
+            <th style="text-align:center;">Pseudo</th>
+            <th style="text-align:center;">Ville</th>
+            <th style="text-align:center;">Téléphone</th>
+            <th style="text-align:center;">Est admin</th>
+            <th style="text-align:center;">Note moyenne</th>
+            <th style="text-align:center;">Banni ?</th>
+            <th style="text-align:center;">Actions</th>
+        <?php } ?>
     </tr>
 
     <?php
@@ -46,7 +55,7 @@
                 <td><?php echo $unitem->getIdUser(); ?></td>
                 <td><?php echo $unitem->getPseudo(); ?></td>
                 <td><?php echo $unitem->getVille(); ?></td>
-                <td><?php echo "0".$unitem->getTel(); ?></td>
+                <td><?php echo "0" . $unitem->getTel(); ?></td>
                 <td><?php
                     if ($unitem->isAdmin()) {
                         echo "ADMIN";
@@ -55,12 +64,13 @@
                     }
                     ?></td>
                 <td><?php echo $unitem->getMoyenne(); ?></td>
-                <td><?php if ($unitem->getEnBan()) {
-                        echo "Banni !!";
+                <td><?php
+                    if ($unitem->getEnBan()) {
+                        echo "<span class=\"red\">Banni !!<span> [ " . $unitem->getNbBan() . " Ban(s) ]";
                     } else {
-                        echo "";
-                    } ?></td>
-                <td><?php echo $unitem->getNbBan(); ?></td>
+                        echo "[ " . $unitem->getNbBan() . " Ban(s) ]";
+                    }
+                    ?></td>
                 <td><?php echo "boutons" ?></td>
     <?php } else if ($titre == "jeux") { ?>
                 <td><?php echo $unitem->getIdJeu(); ?></td>
@@ -85,12 +95,36 @@
                 <td><?php echo $unitem->getTitre(); ?></td>
                 <td><?php echo $unitem->getEvenement(); ?></td>
                 <td><?php echo $unitem->getDateAjout(); ?></td>
-                <td><?php echo $unitem->getLienImage(); ?></td>
+                <td><?php if ($unitem->getLienImage()) { ?><img width="150" height="100" src="<?php echo $unitem->getLienImage(); ?>" /><?php } ?></td>
                 <td><?php echo "boutons" ?></td>
-            <?php
+                <?php
             }
-        }
-        ?>
+            if ($titre == "utilisateurs bannis") {
+                ?>
+                <td><?php echo $unitem->getIdUser(); ?></td>
+                <td><?php echo $unitem->getPseudo(); ?></td>
+                <td><?php echo $unitem->getVille(); ?></td>
+                <td><?php echo "0" . $unitem->getTel(); ?></td>
+                <td><?php
+                    if ($unitem->isAdmin()) {
+                        echo "ADMIN";
+                    } else {
+                        echo "non";
+                    }
+                    ?></td>
+                <td><?php echo $unitem->getMoyenne(); ?></td>
+                <td><?php
+                    if ($unitem->getEnBan()) {
+                        echo "<span class=\"red\">Banni !!<span> [ " . $unitem->getNbBan() . " Ban(s) ]";
+                    } else {
+                        echo "[ " . $unitem->getNbBan() . " Ban(s) ]";
+                    }
+                    ?></td>
+                <td><?php echo "boutons" ?></td>
+    <?php
+    }
+}
+?>
     </tr>
 </table>
 

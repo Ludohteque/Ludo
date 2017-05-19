@@ -63,6 +63,22 @@ switch ($action) {
             include_once 'Vue/v_adminliste.php';
             break;
         }
+        
+    case 'banAdmin': {
+            $userdao = new UserDAO();
+            $items = $userdao->findBannis();
+            $titre = "utilisateurs bannis";
+            include_once 'Vue/v_adminliste.php';
+            break;
+        }
+        
+        case 'demandeBan': {
+            $userdao = new UserDAO();
+            $items = $userdao->find(Bannis($id);
+            $titre = "utilisateurs bannis";
+            include_once 'Vue/v_adminliste.php';
+            break;
+        }
 
     case 'jeuxAdmin': {
             $jeudao = new JeuDAO();

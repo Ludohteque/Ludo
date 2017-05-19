@@ -88,9 +88,10 @@ if (isset($messageEnvoye)) {
                     <td style="text-align:center;">Administration des Utilisateurs</td>
                     <td style="text-align: center;"><?php
                         if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
-                            echo "<a class=\"btn btn-danger\" href=\"index.php?uc=admin&action=userAdmin\">Tous les Utilisateurs</a>";
-                            ?><span> </span><?php
-                            echo "<a class=\"btn btn-warning\" href=\"index.php?uc=admin&action=banAdmin\">Bannissements</a>";
+                            echo "<a class=\"btn btn-block btn-warning\" href=\"index.php?uc=admin&action=banAdmin\">Bannissements</a>";
+                            ?></td>
+                        <td><?php
+                            echo "<a class=\"btn btn-block btn-danger\" href=\"index.php?uc=admin&action=userAdmin\">Tous les Utilisateurs</a>";
                         }
                         ?></td>
 
@@ -99,9 +100,10 @@ if (isset($messageEnvoye)) {
                     <td style="text-align:center;">Administration des Jeux</td>
                     <td style="text-align: center;"><?php
                         if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
-                            echo "<a class=\"btn btn-success\" href=\"index.php?uc=admin&action=demandeNouveaujeu\">Nouveau jeu</a>";
-                            ?><span> </span><?php
-                            echo "<a class=\"btn btn-danger\" href=\"index.php?uc=admin&action=jeuxAdmin\">Tous les Jeux</a>";
+                            echo "<a class=\"btn btn-block btn-success\" href=\"index.php?uc=admin&action=demandeNouveaujeu\">Nouveau jeu</a>";
+                            ?></td>
+                        <td><?php
+                            echo "<a class=\"btn btn-block btn-danger\" href=\"index.php?uc=admin&action=jeuxAdmin\">Tous les Jeux</a>";
                         }
                         ?></td>
 
@@ -110,9 +112,10 @@ if (isset($messageEnvoye)) {
                     <td style="text-align:center;">Administration d'évènements</td>
                     <td style="text-align: center;"><?php
                         if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
-                            echo "<a class=\"btn btn-success\" href=\"index.php?uc=admin&action=demandeNouveleven\">Nouvel Evenement</a>";
-                            ?><span> </span><?php
-                            echo "<a class=\"btn btn-danger\" href=\"index.php?uc=admin&action=evenementsAdmin\">Tous les Evenements</a>";
+                            echo "<a class=\"btn btn-block btn-success\" href=\"index.php?uc=admin&action=demandeNouveleven\">Nouvel Evenement</a>";
+                            ?></td>
+                        <td><?php
+                            echo "<a class=\"btn btn-block btn-danger\" href=\"index.php?uc=admin&action=evenementsAdmin\">Tous les Evenements</a>";
                         }
                         ?></td>
 

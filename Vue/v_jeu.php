@@ -9,7 +9,7 @@ include('Vue/v_header.php');
             <p><?php echo $jeu->getDescriptif(); ?></p>
         </div>
         <div class='col-md-4'>
-            <img class='imgJeu' src='<?php echo LIEN_IMAGE . $jeu->getImage(); ?>'/>
+            <img class='imgJeu' src='<?php echo LIEN_IMAGE ."jeu/". $jeu->getImage(); ?>'/>
         </div>
     </div>
     <div class="row">

@@ -1,5 +1,10 @@
 <?php include('v_header.php'); ?>
-<h5>Ma Dashboard :</h5>
+<h5>Dashboard d'administration :</h5>
+<?php
+if (isset($messageEnvoye)) {
+    echo "<div class='message'>" . $resultat . "</div>";
+}
+?>
 <section class="tabs">
     <input id="tab-1" type="radio" name="radio-set" class="tab-selector-1" checked="checked" />
     <label for="tab-1" class="tab-label-1">Signalements :</label>
@@ -71,7 +76,7 @@
                             };
                             ?></td>
                         <td><?php echo $unjeu->getEtat(); ?></td>
-                        <td><img src="<?php echo $unjeu->getImage(); ?>" /></td>
+                        <td><?php if ($unjeu->getImage()) { ?><img width="150" height="100" src="Vue/img/jeu/<?php echo $unjeu->getImage(); ?>" /><?php } ?></td>
                     </tr>
                 <?php } ?>
             </table>
@@ -83,7 +88,9 @@
                     <td style="text-align:center;">Administration des Utilisateurs</td>
                     <td style="text-align: center;"><?php
                         if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
-                            echo "<a class=\"btn btn-danger\" href=\"index.php?uc=admin&action=userAdmin\">Utilisateurs</a>";
+                            echo "<a class=\"btn btn-danger\" href=\"index.php?uc=admin&action=userAdmin\">Tous les Utilisateurs</a>";
+                            ?><span> </span><?php
+                            echo "<a class=\"btn btn-warning\" href=\"index.php?uc=admin&action=banAdmin\">Bannissements</a>";
                         }
                         ?></td>
 
@@ -92,7 +99,9 @@
                     <td style="text-align:center;">Administration des Jeux</td>
                     <td style="text-align: center;"><?php
                         if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
-                            echo "<a class=\"btn btn-danger\" href=\"index.php?uc=admin&action=jeuxAdmin\">Jeux</a>";
+                            echo "<a class=\"btn btn-success\" href=\"index.php?uc=admin&action=demandeNouveaujeu\">Nouveau jeu</a>";
+                            ?><span> </span><?php
+                            echo "<a class=\"btn btn-danger\" href=\"index.php?uc=admin&action=jeuxAdmin\">Tous les Jeux</a>";
                         }
                         ?></td>
 
@@ -101,7 +110,9 @@
                     <td style="text-align:center;">Administration d'évènements</td>
                     <td style="text-align: center;"><?php
                         if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
-                            echo "<a class=\"btn btn-danger\" href=\"index.php?uc=admin&action=evenementsAdmin\">Evenements</a>";
+                            echo "<a class=\"btn btn-success\" href=\"index.php?uc=admin&action=demandeNouveleven\">Nouvel Evenement</a>";
+                            ?><span> </span><?php
+                            echo "<a class=\"btn btn-danger\" href=\"index.php?uc=admin&action=evenementsAdmin\">Tous les Evenements</a>";
                         }
                         ?></td>
 

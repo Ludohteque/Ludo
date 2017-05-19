@@ -43,6 +43,17 @@ class CategorieDAO extends DAO{
         return $categories;        
     }
     
+    public function findCategories() {
+        $categories = array();
+        $stmt = Connexion::prepare("SELECT * FROM ".self::$table." ORDER BY nom_categorie;");
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        foreach ($result as $uneCat) {
+            $categories[] = $uneCat["nom_categorie"];
+        }
+        return $categories;        
+    }
+    
     public function findParCategorie($categorie) {
         $stmt = Connexion::prepare("SELECT * FROM ".self::$table." WHERE categorie = ".$categorie.";");
         $stmt->execute();

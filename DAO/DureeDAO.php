@@ -31,6 +31,21 @@ class DureeDAO extends DAO {
         return $duree;
         
     }
+    
+        public function findAll() {        
+    	$stmt = Connexion::getInstance()->prepare("SELECT * FROM ".self::$table." ORDER BY duree_min ASC;");
+        $stmt->execute();
+        $resultats = $stmt->fetchAll();
+        $durees = array();
+        foreach ($resultats as $unresultat) {
+            $duree=new Duree($unresultat["id_duree"], $unresultat["duree_min"], $unresultat["duree_max"]);
+            $durees[] = $duree;
+        }
+        
+            
+        return $durees;
+        
+    }
 
     public function update($obj) {
         $dureeMin = $obj->getDureeMin();

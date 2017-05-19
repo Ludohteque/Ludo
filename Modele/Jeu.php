@@ -5,6 +5,7 @@ class Jeu extends Produit {
 
     
         //attributs
+        
 	private $idJeu;
 	private $nbJoueurs;
 	private $idAge;
@@ -20,6 +21,14 @@ class Jeu extends Produit {
             $this->idDuree = $idDuree;
             $this->lesCategories = $lesCategories;
             
+        }
+        
+        function getnomJeu() {
+            return parent::getNom();
+        }
+        
+        function getNote() {
+            return parent::getNote();
         }
         
         function getIdJeu() {

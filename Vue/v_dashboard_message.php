@@ -16,9 +16,9 @@
             <div class="col-sm-10">
                 <?php
                 if ($user != null) {
-                    ?><input type="text" class="form-control" id="destinataire" name="destinataire" value='<?php echo $user->getPseudo(); ?>' ><?php
+                    ?><input type="text" class="form-control" id="destinataire" name="destinataire" value='<?php echo $user->getPseudo(); ?>' required><?php
                 } else {
-                    ?><input type="text" class="form-control" id="destinataire" name="destinataire" placeholder="Entrez le destinataire"><?php
+                    ?><input type="text" class="form-control" id="destinataire" name="destinataire" placeholder="Entrez le destinataire" required><?php
                 }
                 ?>
             </div>
@@ -26,7 +26,8 @@
         <div class="form-group">
             <label class="control-label col-sm-2" for="type">Type:</label>
             <div class="col-sm-10">
-                <select class="form-control" id="type" name="type">
+                <select class="form-control" id="type" name="type" required>
+                    <option disabled="" selected>Sélectionnez un type...</option>
                     <option>Demande de prêt</option>
                     <option>Questions diverses</option>
                     ?>
@@ -43,7 +44,7 @@
         <div class="form-group">
             <label class="control-label col-sm-2" for="corps">Corps:</label>
             <div class="col-sm-10">
-                <textarea class="form-control" rows="5" id="corps" name="corps" placeholder="Entrez le corps de votre message"></textarea>
+                <textarea class="form-control" rows="5" id="corps" name="corps" placeholder="Entrez le corps de votre message" required></textarea>
             </div>
         </div>
         <div class="form-group">        

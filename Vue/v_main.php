@@ -46,7 +46,7 @@ if (UserDAO::estConnecte()) {
                 foreach ($lesNouveautes as $leJeu) {
                     ?>
                     <tr>
-                        <td><?php echo $leJeu->getNom(); ?></td>
+                        <td><a href='index.php?uc=jeu&action=affichage&id=<?php echo $leJeu->getIdProduit(); ?>'><?php echo $leJeu->getNom(); ?></a></td>
                         <td><?php echo $leJeu->getNote(); ?></td>
                     </tr>   
                     <?php
@@ -68,7 +68,7 @@ if (UserDAO::estConnecte()) {
                 foreach ($lesEmpruntes as $unEmprunt) {
                     ?>
                     <tr>
-                        <td><?php echo $unEmprunt->getIdExemplaire()->getIdJeu()->getNom(); ?></td>
+                        <td><a href='index.php?uc=jeu&action=affichage&id=<?php echo $unEmprunt->getIdExemplaire()->getIdJeu()->getIdJeu(); ?>'><?php echo $unEmprunt->getIdExemplaire()->getIdJeu()->getNom(); ?></a></td>
                         <td><?php echo $unEmprunt->getDateEmprunts(); ?></td>
                         <td><?php echo $unEmprunt->getIdExemplaire()->getIdJeu()->getNote(); ?></td>
                     </tr>   

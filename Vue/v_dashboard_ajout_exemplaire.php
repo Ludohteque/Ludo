@@ -7,7 +7,8 @@
         <div class="form-group">
             <label class="control-label col-sm-2" for="jeu">Choisissez un jeu:</label>
             <div class="col-sm-10">
-                <select class="form-control" id="type" name="jeu">
+                <select class="form-control" id="type" name="jeu" required>
+                    <option disabled="" selected>Sélectionnez un jeu...</option>
                     <?php
                     foreach ($jeux as $unJeu) {
                         echo "<option>" . $unJeu->getNom() . "</option>";
@@ -19,7 +20,7 @@
         <div class="form-group">
             <label class="control-label col-sm-2" for="etat">Etat:</label>
             <div class="col-sm-10">
-                <textarea class="form-control" rows="5" id="etat" name="etat" placeholder="Entrez l'état global de votre jeu"></textarea>
+                <textarea class="form-control" rows="5" id="etat" name="etat" placeholder="Entrez l'état global de votre jeu" required></textarea>
             </div>
         </div>
 

@@ -10,6 +10,5 @@ abstract class DAO {
     
     abstract public function update($obj);
     
-    
 }
 

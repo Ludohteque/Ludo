@@ -9,12 +9,15 @@ class EvenementDAO extends DAO {
     private static $cleDate = "date_ajout";
 
     public function create($obj) {
+        $even = $obj->getEvenement();
+        $image = $obj->getLien();
+        $titre = $obj->getTitre();
+        $dateajout = $obj->getDateAjout()->format('Y-m-d H:i:s');
         $stmt = Connexion::prepare("INSERT INTO " . self::$table . " (evenement, lien_image, titre, date_ajout) " . "VALUES (?, ?, ?, ?)");
-
-        $stmt->bindParam(1, $obj->getEvenement());
-        $stmt->bindParam(2, $obj->getLienImage());
-        $stmt->bindParam(3, $obj->getTitre());
-        $stmt->bindParam(4, $obj->getDateAjout());
+        $stmt->bindParam(1, $even);
+        $stmt->bindParam(2, $image);
+        $stmt->bindParam(3, $titre);
+        $stmt->bindParam(4, $dateajout);
         $stmt->execute();
     }
 

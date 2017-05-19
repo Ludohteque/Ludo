@@ -47,7 +47,7 @@ class Connexion {
             return Connexion::getInstance()->PDOInstance->lastInsertId();
     }
         
-        
+   
         
 }
 //On fait l'appel a getInstance comme ça:

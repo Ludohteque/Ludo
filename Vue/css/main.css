@@ -320,7 +320,7 @@ input[type=reset]:focus,
 .tabs input {
     position: absolute;
     z-index: 1000;
-    width: 10%;
+    width: 5%;
     height: 40px;
     left: 0px;
     top: 0px;
@@ -512,7 +512,8 @@ input[type=reset]:focus,
 .tabs input.tab-selector-1:checked ~ .content .content-1,
 .tabs input.tab-selector-2:checked ~ .content .content-2,
 .tabs input.tab-selector-3:checked ~ .content .content-3,
-.tabs input.tab-selector-4:checked ~ .content .content-4 {
+.tabs input.tab-selector-4:checked ~ .content .content-4,
+.tabs input.tab-selector-5:checked ~ .content .content-5{
     bottom: 0px;
     z-index: 100;
     -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";

@@ -89,6 +89,13 @@ switch ($action) {
             include_once 'Vue/v_adminliste.php';
             break;
         }
+        case 'deleteJeu': {
+            $jeudao = new JeuDAO();
+            $id = $_GET['id'];
+            $jeu = $jeudao->find($id);
+            $jeudao->delete($jeu);
+            $items = $jeudao->getAll();
+            $titre = "jeux";
         
         case 'debanUser': {
             $userdao = new UserDAO();
@@ -127,7 +134,16 @@ switch ($action) {
             include_once 'Vue/v_adminliste.php';
             break;
         }
-
+        case 'deleteEvenements': {
+            $evendao = new EvenementDAO();
+            $id = $_GET['id'];
+            $even = $evendao->find($id);
+            $evendao->delete($even);
+            $items = $evendao->findAll();
+            $titre = "evenements";
+            include_once 'Vue/v_adminliste.php';
+            break;
+        }
     case 'demandeNouveleven': {
            $demande = 0;
            include("Vue/v_admin_newevenement.php");

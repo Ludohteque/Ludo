@@ -4,7 +4,6 @@ if (!isset($_GET['action'])) {
     $_GET['action'] = 'demandeDashboard';
 }
 $action = $_GET['action'];
-$messageEnvoye = false;
 switch ($action) {
     case 'demandeDashboard':
         include('Vue/v_dashboard.php');
@@ -19,7 +18,6 @@ switch ($action) {
         include('Vue/v_dashboard_message.php');
         break;
     case 'envoyerMessage':
-        $messageEnvoye = true;
         $expediteur = $_POST['expediteur'];
         $sujet = $_POST['sujet'];
         $destinataire = $_POST['destinataire'];
@@ -87,6 +85,15 @@ switch ($action) {
         $userdao = new UserDAO();
         $user = $userdao->find($destinataire);
         include('Vue/v_dashboard_emprunt.php');
+        break;
+    case 'remiseJeu':
+        $id = $_POST['idEmprunt'];
+        $daoemprunt = new EmpruntDAO();
+        $emprunt = $daoemprunt->find($id);
+        $emprunt->setDateRemise(date('Y-m-d H:i:s'));
+        $daoemprunt->update($emprunt);
+        $resultat = "Le jeu a bien été enregistré comme rendu.";
+        include('Vue/v_dashboard.php');
         break;
 }
 // a décommenter pour que cela demande la connexion, et avoir un truc fonctionnel... 

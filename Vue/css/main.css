@@ -317,10 +317,10 @@ input[type=reset]:focus,
     width: 80%;
 }
 
-.tabs input {
+.tabs > input {
     position: absolute;
     z-index: 1000;
-    width: 10%;
+    width: 5%;
     height: 40px;
     left: 0px;
     top: 0px;
@@ -343,7 +343,7 @@ input[type=reset]:focus,
 
 
 
-.tabs label {
+.tabs > label {
     background: #0033cc;
     background: -moz-linear-gradient(top, #ccccff 0%, #b3b3ff 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ccccff), color-stop(100%,#b3b3ff));
@@ -372,7 +372,7 @@ input[type=reset]:focus,
     box-shadow: 2px 0 2px rgba(0,0,0,0.1), -2px 0 2px rgba(0,0,0,0.1);
 }
 
-.tabs label:after {
+.tabs > label:after {
     content: '';
     background: lightgray;
     position: absolute;
@@ -485,15 +485,15 @@ input[type=reset]:focus,
     border-radius: 0 3px 3px 3px;
 }
 
-.content div {
+.content > div {
     position: absolute;
-	top: 0;
-	left: 0;
-        width:100%;
-	bottom: 100%;
-	padding: 10px 40px;
-	overflow: auto; /* Overflow du contenu des onglets */
-	z-index: 1;
+    top: 0;
+    left: 0;
+    width:100%;
+    bottom: 100%;
+    padding: 10px 40px;
+    overflow: auto; /* Overflow du contenu des onglets */
+    z-index: 1;
     top: 0;
     left: 0;
     bottom: 100%;
@@ -512,7 +512,8 @@ input[type=reset]:focus,
 .tabs input.tab-selector-1:checked ~ .content .content-1,
 .tabs input.tab-selector-2:checked ~ .content .content-2,
 .tabs input.tab-selector-3:checked ~ .content .content-3,
-.tabs input.tab-selector-4:checked ~ .content .content-4 {
+.tabs input.tab-selector-4:checked ~ .content .content-4,
+.tabs input.tab-selector-5:checked ~ .content .content-5{
     bottom: 0px;
     z-index: 100;
     -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";

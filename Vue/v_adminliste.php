@@ -100,15 +100,15 @@
                 <td><?php echo $unitem->getNote(); ?></td>
                 <td><?php echo $unitem->getDateAjout(); ?></td>
                 <td><?php if ($unitem->getImage()) { ?><img width="150" height="100" src="Vue/img/jeu/<?php echo $unitem->getImage(); ?>" /><?php } ?></td>
-                <td><?php echo "boutons"; ?></td>
+                <td><?php echo "<a class=\"btn btn-danger\" href=\"index.php?uc=admin&action=deleteJeu&id=".$unitem->getIdJeu()."\">supprimer jeu</a>" ?></td>
     <?php } else if ($titre == "évènements") { ?>
                 <td><?php echo $unitem->getIdEvenement(); ?></td>
                 <td><?php echo $unitem->getTitre(); ?></td>
                 <td><?php echo $unitem->getEvenement(); ?></td>
                 <td><?php echo $unitem->getDateAjout(); ?></td>
-                <td><?php if ($unitem->getLienImage()) { ?><img width="150" height="100" src="<?php echo $unitem->getLienImage(); ?>" /><?php } ?></td>
-                <td><?php echo "boutons" ?></td>
-                <?php
+                <td><?php echo $unitem->getLienImage(); ?></td>
+                <td><?php echo "<a class=\"btn btn-danger\" href=\"index.php?uc=admin&action=deleteEvenement&id=".$unitem->getIdEvenement()."\">supprimer evenement</a>" ?></td>
+            <?php
             }
             if ($titre == "utilisateurs bannis") {
                 ?>

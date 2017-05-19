@@ -1,7 +1,7 @@
 <?php include('v_header.php'); ?>
 <h5>Ma Dashboard :</h5>
 <?php
-if ($messageEnvoye) {
+if (isset($resultat)) {
     echo "<div class='message'>" . $resultat . "</div>";
 }
 ?>
@@ -17,6 +17,9 @@ if ($messageEnvoye) {
 
     <input id="tab-4" type="radio" name="radio-set" class="tab-selector-4" />
     <label for="tab-4" class="tab-label-4">Mes messages :</label>
+    
+    <input id="tab-5" type="radio" name="radio-set" class="tab-selector-5" />
+    <label for="tab-5" class="tab-label-5">Mon profil :</label>
 
     <div class="clear-shadow"></div>
 
@@ -40,7 +43,7 @@ if ($messageEnvoye) {
                     ?>
                     <tr>
                         <td><?php echo $unExemplaire->getIdExemplaire(); ?></td>
-                        <td><?php echo $unExemplaire->getIdJeu()->getNom(); ?></td>
+                        <td><a href='index.php?uc=jeu&action=affichage&id=<?php echo $unExemplaire->getIdJeu()->getIdJeu(); ?>'><?php echo $unExemplaire->getIdJeu()->getNom(); ?></a></td>
                         <td><?php echo $unExemplaire->getEtat(); ?></td>
                         <td><?php echo $unExemplaire->getDisponibilite(); ?></td>
                     </tr>
@@ -69,10 +72,23 @@ if ($messageEnvoye) {
                     ?>
                     <tr>
                         <td><?php echo $unPret->getIdExemplaire()->getIdExemplaire(); ?></td>
-                        <td><?php echo $unPret->getIdExemplaire()->getIdJeu()->getNom(); ?></td>
+                        <td><a href='index.php?uc=jeu&action=affichage&id=<?php echo $unPret->getIdExemplaire()->getIdJeu()->getIdJeu(); ?>'><?php echo $unPret->getIdExemplaire()->getIdJeu()->getNom(); ?></a></td>
                         <td><?php echo $unPret->getIdExemplaire()->getEtat(); ?></td>
                         <td><?php echo $unPret->getDateEmprunts(); ?></td>
-                        <td><?php echo $unPret->getDateRemise(); ?></td>
+                        <td>
+                            <?php 
+                            if ($unPret->getDateRemise()==null) {
+                                ?>
+                            <form action="index.php?uc=dashboard&action=remiseJeu" method ="POST">
+                                <input value="<?php echo $unPret->getIdEmprunts();?>" name="idEmprunt" type="hidden"/>
+                                <button type="submit" class="btn btn-warning">Rendu</button>
+                            </form>
+                                <?php
+                            } else {
+                                echo $unPret->getDateRemise();
+                            }  
+                            ?>
+                        </td>
                     </tr>
                     <?php
                 }
@@ -97,7 +113,7 @@ if ($messageEnvoye) {
                     ?>
                     <tr>
                         <td><?php echo $unEmprunt->getIdExemplaire()->getIdExemplaire(); ?></td>
-                        <td><?php echo $unEmprunt->getIdExemplaire()->getIdJeu()->getNom(); ?></td>
+                        <td><a href='index.php?uc=jeu&action=affichage&id=<?php echo $unEmprunt->getIdExemplaire()->getIdJeu()->getIdJeu(); ?>'><?php echo $unEmprunt->getIdExemplaire()->getIdJeu()->getNom(); ?></a></td>
                         <td><?php echo $unEmprunt->getIdExemplaire()->getEtat(); ?></td>
                         <td><?php echo $unEmprunt->getDateEmprunts(); ?></td>
                         <td><?php echo $unEmprunt->getDateEmprunts(); ?></td>
@@ -236,6 +252,52 @@ if ($messageEnvoye) {
                 }
                 ?>
             </table>
+        </div>
+        <div class="content-5">
+            <?php
+            $daouser = new UserDAO();
+            $user = $daouser->find($_SESSION['id']);
+            ?>
+            <h2>Vos informations</h2>
+            <form>
+                <div class="form-group">
+                    <label>Pseudo:</label>
+                    <p><?php echo $user->getPseudo();?></p>
+                </div>
+                <div class="form-group">
+                    <label>Ville:</label>
+                    <p><?php echo $user->getVille();?></p>
+                </div>
+                <div class="form-group">
+                    <label>Nouvelle ville:</label>
+                    <input type="text" class="form-control" name="ville"/>
+                </div>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <p><?php echo $user->getMail();?></p>
+                </div>
+                <div class="form-group">
+                    <label>Nouvelle email:</label>
+                    <input type="text" class="form-control" name="mail"/>
+                </div>
+                <div class="form-group">
+                    <label>Téléphone:</label>
+                    <p><?php echo $user->getTel();?></p>
+                </div>
+                <div class="form-group">
+                    <label>Nouveau téléphone:</label>
+                    <input type="text" class="form-control" name="tel"/>
+                </div>
+                <div class="form-group">
+                    <label>Nouveau mot de passe:</label>
+                    <input type="password" class="form-control" name="pass"/>
+                </div>
+                <div class="form-group">
+                    <label>Confirmer mot de passe:</label>
+                    <input type="password" class="form-control" name="pass1"/>
+                </div>
+                
+            </form>
         </div>
     </div>
 </section>

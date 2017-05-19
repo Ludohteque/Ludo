@@ -254,8 +254,50 @@ if (isset($resultat)) {
             </table>
         </div>
         <div class="content-5">
+            <?php
+            $daouser = new UserDAO();
+            $user = $daouser->find($_SESSION['id']);
+            ?>
             <h2>Vos informations</h2>
-            
+            <form>
+                <div class="form-group">
+                    <label>Pseudo:</label>
+                    <p><?php echo $user->getPseudo();?></p>
+                </div>
+                <div class="form-group">
+                    <label>Ville:</label>
+                    <p><?php echo $user->getVille();?></p>
+                </div>
+                <div class="form-group">
+                    <label>Nouvelle ville:</label>
+                    <input type="text" class="form-control" name="ville"/>
+                </div>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <p><?php echo $user->getMail();?></p>
+                </div>
+                <div class="form-group">
+                    <label>Nouvelle email:</label>
+                    <input type="text" class="form-control" name="mail"/>
+                </div>
+                <div class="form-group">
+                    <label>Téléphone:</label>
+                    <p><?php echo $user->getTel();?></p>
+                </div>
+                <div class="form-group">
+                    <label>Nouveau téléphone:</label>
+                    <input type="text" class="form-control" name="tel"/>
+                </div>
+                <div class="form-group">
+                    <label>Nouveau mot de passe:</label>
+                    <input type="password" class="form-control" name="pass"/>
+                </div>
+                <div class="form-group">
+                    <label>Confirmer mot de passe:</label>
+                    <input type="password" class="form-control" name="pass1"/>
+                </div>
+                
+            </form>
         </div>
     </div>
 </section>

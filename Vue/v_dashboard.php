@@ -72,7 +72,7 @@ if ($messageEnvoye) {
                         <td><?php echo $unPret->getIdExemplaire()->getIdJeu()->getNom(); ?></td>
                         <td><?php echo $unPret->getIdExemplaire()->getEtat(); ?></td>
                         <td><?php echo $unPret->getDateEmprunts(); ?></td>
-                        <td><?php echo $unPret->getDateEmprunts(); ?></td>
+                        <td><?php echo $unPret->getDateRemise(); ?></td>
                     </tr>
                     <?php
                 }

@@ -7,11 +7,10 @@ class EmpruntDAO extends DAO {
     private static $clePrimaire = "id_emprunts";
     
     public function create($obj) {
-    	$date_emprunts=$obj->getDateEmprunt();
+    	$date_emprunts=$obj->getDateEmprunts();
     	$date_remise=$obj->getDateRemise();
-    	$id_emprunteur=$obj->getIdEmprunteur();
-    	$id_exemplaire=$obj->getIdExemplaire();
-
+    	$id_emprunteur=$obj->getIdEmprunteur()->getIdUser();
+    	$id_exemplaire=$obj->getIdExemplaire()->getIdExemplaire();
     	$stmt = Connexion::prepare("INSERT INTO ".self::$table." (date_emprunts, date_remise, id_emprunteur, id_exemplaire) "
                 . "VALUES (?, ?, ?, ?)");
     	$stmt->bindParam(1, $date_emprunts);

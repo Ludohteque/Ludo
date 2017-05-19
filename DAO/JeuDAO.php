@@ -49,7 +49,7 @@ class JeuDAO extends DAO {
         $daoduree = new DureeDAO();
         $duree = $daoduree->find($result['id_duree']);
         $daocat = new CategorieDAO();
-        $lesCat = $daocat->findAll($result['id_jeu']);
+        $lesCat = $daocat->findAllByJeu($result['id_jeu']);
         $jeu = new Jeu($result['id_jeu'], $result['nom'], $result['descriptif'], $result['etat'], $result['note'], $result['date_ajout'], $result['image'], $nbJoueurs, $age, $duree, $lesCat);
         return $jeu;
     }
@@ -67,7 +67,7 @@ class JeuDAO extends DAO {
         $daoduree = new DureeDAO();
         $duree = $daoduree->find($result['id_duree']);
         $daocat = new CategorieDAO();
-        $lesCat = $daocat->findAll($result['id_jeu']);
+        $lesCat = $daocat->findAllByJeu($result['id_jeu']);
         $jeu = new Jeu($result['id_jeu'], $result['nom'], $result['descriptif'], $result['etat'], $result['note'], $result['date_ajout'], $result['image'], $nbJoueurs, $age, $duree, $lesCat);
         return $jeu;
     }
@@ -101,7 +101,7 @@ class JeuDAO extends DAO {
             $daoduree = new DureeDAO();
             $duree = $daoduree->find($value['id_duree']);
             $daocat = new CategorieDAO();
-            $lesCat = $daocat->findAll($value['id_jeu']);
+            $lesCat = $daocat->findAllByJeu($value['id_jeu']);
             $newjeu = new Jeu($value['id_jeu'], $value['nom'], $value['descriptif'], $value['etat'], $value['note'], $value['date_ajout'], $value['image'], $nbJoueurs, $age, $duree, $lesCat);
             $listeJeux[] = $newjeu;
         }
@@ -122,7 +122,7 @@ class JeuDAO extends DAO {
             $daoduree = new DureeDAO();
             $duree = $daoduree->find($value['id_duree']);
             $daocat = new CategorieDAO();
-            $lesCat = $daocat->findAll($value['id_jeu']);
+            $lesCat = $daocat->findAllByJeu($value['id_jeu']);
             $newjeu = new Jeu($value['id_jeu'], $value['nom'], $value['descriptif'], $value['etat'], $value['note'], $value['date_ajout'], $value['image'], $nbJoueurs, $age, $duree, $lesCat);
             $listeJeux[] = $newjeu;
         }
@@ -143,7 +143,7 @@ class JeuDAO extends DAO {
             $daoduree = new DureeDAO();
             $duree = $daoduree->find($value['id_duree']);
             $daocat = new CategorieDAO();
-            $lesCat = $daocat->findAll($value['id_jeu']);
+            $lesCat = $daocat->findAllByJeu($value['id_jeu']);
             $newjeu = new Jeu($value['id_jeu'], $value['nom'], $value['descriptif'], $value['etat'], $value['note'], $value['date_ajout'], $value['image'], $nbJoueurs, $age, $duree, $lesCat);
             $listeJeux[] = $newjeu;
         }
@@ -164,7 +164,7 @@ class JeuDAO extends DAO {
             $daoduree = new DureeDAO();
             $duree = $daoduree->find($value['id_duree']);
             $daocat = new CategorieDAO();
-            $lesCategories = $daocat->findAll($value['id_jeu']);
+            $lesCategories = $daocat->findAllByJeu($value['id_jeu']);
             $newjeu = new Jeu($value['id_jeu'], $value['nom'], $value['descriptif'], $value['etat'], $value['note'], $value['date_ajout'], $value['image'], $nbJoueurs, $age, $duree, $lesCategories);
             $listeJeux[] = $newjeu;
         }

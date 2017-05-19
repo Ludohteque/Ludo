@@ -32,7 +32,7 @@ class CategorieDAO extends DAO{
         return $categorie;        
     }
     
-    public function findAll($id) {
+    public function findAllByJeu($id) {
         $categories = array();
         $stmt = Connexion::prepare("SELECT * FROM ".self::$tableLien." WHERE ".self::$clePrimaire2." = ".$id.";");
         $stmt->execute();

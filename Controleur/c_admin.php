@@ -96,6 +96,7 @@ switch ($action) {
             $jeudao->delete($jeu);
             $items = $jeudao->getAll();
             $titre = "jeux";
+        }
         
         case 'debanUser': {
             $userdao = new UserDAO();

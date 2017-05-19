@@ -24,7 +24,8 @@ if (isset($messageEnvoye)) {
                 <tr class="tableauTete">
                     <th style="text-align:center;">Utilisateur</th>
                     <th style="text-align:center;">Sujet</th>
-                    <th style="text-align:center;">Corps</th> 
+                    <th style="text-align:center;">Corps</th>
+                    <th colspan="2" style="text-align:center;">Actions</th> 
                 </tr>
 
                 <?php
@@ -32,9 +33,16 @@ if (isset($messageEnvoye)) {
                 foreach ($signalements as $unmessage) {
                     ?>
                     <tr>
-                        <td><?php echo $unmessage[0]; ?></td>
-                        <td><?php echo $unmessage[1]; ?></td>
-                        <td class="width60"><?php echo $unmessage[2]; ?></td>
+                        <td><?php echo $unmessage->getIdExpediteur()->getPseudo(); ?></td>
+                        <td><?php echo $unmessage->getSujet(); ?></td>
+                        <td class="width60"><?php echo $unmessage->getCorps(); ?></td>
+                        <td><?php if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
+                            echo "<a class=\"btn btn-sm btn-block btn-info\" href=\"index.php?uc=dashboard&action=repondreMessage&id=".$unmessage->getIdExpediteur()->getIdUser()."\">Répondre</a>";
+                            ?></td>
+                        <td class="mini"><?php
+                            echo "<a class=\"btn btn-sm btn-block btn-danger\" href=\"index.php?uc=admin&action=effacerSignalement&id=".$unmessage->getIdMessage()."\">Annuler</a>";
+                        }
+                        ?></td>
                     </tr>
                 <?php } ?>
             </table>
@@ -56,6 +64,7 @@ if (isset($messageEnvoye)) {
                     <th style="text-align:center;">Categories</th>
                     <th style="text-align:center;">Etat</th>
                     <th style="text-align:center;">Photo</th>
+                    <th colspan="2" style="text-align:center;">Actions</th>
                 </tr>
 
                 <?php
@@ -77,6 +86,14 @@ if (isset($messageEnvoye)) {
                             ?></td>
                         <td><?php echo $unjeu->getEtat(); ?></td>
                         <td><?php if ($unjeu->getImage()) { ?><img width="150" height="100" src="Vue/img/jeu/<?php echo $unjeu->getImage(); ?>" /><?php } ?></td>
+                        <td style="text-align: center;" class="mini"><?php
+                        if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
+                            echo "<a class=\"btn btn-sm btn-block btn-info\" href=\"index.php?uc=admin&action=valideAjout&id=".$unjeu->getIdJeu()."\">Valider</a>";
+                            ?></td>
+                        <td class="mini"><?php
+                            echo "<a class=\"btn btn-sm btn-block btn-danger\" href=\"index.php?uc=admin&action=deleteJeu&id=".$unjeu->getIdJeu()."\">Annuler</a>";
+                        }
+                        ?></td>
                     </tr>
                 <?php } ?>
             </table>
@@ -86,36 +103,36 @@ if (isset($messageEnvoye)) {
             <table class="tableau">
                 <tr class="">
                     <td style="text-align:center;">Administration des Utilisateurs</td>
-                    <td style="text-align: center;"><?php
+                    <td style="text-align: center;" class="mini"><?php
                         if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
-                            echo "<a class=\"btn btn-block btn-warning\" href=\"index.php?uc=admin&action=banAdmin\">Bannissements</a>";
+                            echo "<a class=\"btn btn-block btn-info\" href=\"index.php?uc=admin&action=banAdmin\">Bannissements</a>";
                             ?></td>
-                        <td><?php
-                            echo "<a class=\"btn btn-block btn-danger\" href=\"index.php?uc=admin&action=userAdmin\">Tous les Utilisateurs</a>";
+                        <td class="mini"><?php
+                            echo "<a class=\"btn btn-block btn-info\" href=\"index.php?uc=admin&action=userAdmin\">Tous les Utilisateurs</a>";
                         }
                         ?></td>
 
                 </tr>
                 <tr class="">
                     <td style="text-align:center;">Administration des Jeux</td>
-                    <td style="text-align: center;"><?php
+                    <td style="text-align: center;" class="mini"><?php
                         if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
                             echo "<a class=\"btn btn-block btn-success\" href=\"index.php?uc=admin&action=demandeNouveaujeu\">Nouveau jeu</a>";
                             ?></td>
-                        <td><?php
-                            echo "<a class=\"btn btn-block btn-danger\" href=\"index.php?uc=admin&action=jeuxAdmin\">Tous les Jeux</a>";
+                        <td class="mini"><?php
+                            echo "<a class=\"btn btn-block btn-info\" href=\"index.php?uc=admin&action=jeuxAdmin\">Tous les Jeux</a>";
                         }
                         ?></td>
 
                 </tr>
                 <tr class="">
                     <td style="text-align:center;">Administration d'évènements</td>
-                    <td style="text-align: center;"><?php
+                    <td style="text-align: center;" class="mini"><?php
                         if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
                             echo "<a class=\"btn btn-block btn-success\" href=\"index.php?uc=admin&action=demandeNouveleven\">Nouvel Evenement</a>";
                             ?></td>
-                        <td><?php
-                            echo "<a class=\"btn btn-block btn-danger\" href=\"index.php?uc=admin&action=evenementsAdmin\">Tous les Evenements</a>";
+                        <td class="mini"><?php
+                            echo "<a class=\"btn btn-block btn-info\" href=\"index.php?uc=admin&action=evenementsAdmin\">Tous les Evenements</a>";
                         }
                         ?></td>
 

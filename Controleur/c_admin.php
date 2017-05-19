@@ -76,27 +76,62 @@ switch ($action) {
             $userdao = new UserDAO();
             $items = $userdao->find(Bannis($id));
             $titre = "utilisateurs bannis";
+            include_once 'Vue/v_adminliste.php';
         break;
         }
 
         case 'deleteUser': {
             $userdao = new UserDAO();
+            if (isset($_GET['id'])) {
             $id = $_GET['id'];
             $user = $userdao->find($id);
             $userdao->delete($user);
+            }
             $items = $userdao->findAll();
             $titre = "utilisateurs";
             include_once 'Vue/v_adminliste.php';
             break;
         }
         case 'deleteJeu': {
+            if (isset($_GET['id'])) {
             $jeudao = new JeuDAO();
             $id = $_GET['id'];
             $jeu = $jeudao->find($id);
             $jeudao->delete($jeu);
+            }
             $items = $jeudao->getAll();
             $titre = "jeux";
+            include_once 'Vue/v_adminliste.php';
+            break;
         }
+        
+        case 'deleteAjout': {
+            if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $jeu = $jeudao->find($id);
+            $jeudao->delete($jeu);
+            $messagedao = new MessageDAO();
+            }
+            $signalements = $messagedao->getMessagesSignalement();
+            $demandesajout = $jeudao->getJeuxInvalides();
+            include_once 'Vue/v_admin.php';
+            break;
+        }
+        
+                
+    case 'effacerSignalement':
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+        
+        $messagedao = new MessageDAO;
+        $jeudao = new JeuDAO;
+        $message = $messagedao->find($id);
+        $messagedao->delete($message);
+        }
+        $signalements = $messagedao->getMessagesSignalement();
+        $demandesajout = $jeudao->getJeuxInvalides();
+        include('Vue/v_admin.php');
+        break;
         
         case 'debanUser': {
             $userdao = new UserDAO();
@@ -177,7 +212,20 @@ switch ($action) {
                 $resultat = "Ajout impossible ! il manque des informations !";
                 include_once 'Vue/v_admin.php';
             }
-    }
+            break;
+    } 
+    
+    case 'valideAjout': {
+            $jeudao = new JeuDAO();
+            $id = $_GET['id'];
+            $jeu = $jeudao->find($id);
+            $jeudao->valideAjout($jeu);
+            $messagedao = new MessageDAO();
+            $signalements = $messagedao->getMessagesSignalement();
+            $demandesajout = $jeudao->getJeuxInvalides();
+            include_once 'Vue/v_admin.php';
+            break;
+        }
 }
     
     function fileupload() {

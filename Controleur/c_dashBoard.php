@@ -17,6 +17,7 @@ switch ($action) {
         $user = $userdao->find($destinataire);
         include('Vue/v_dashboard_message.php');
         break;
+        
     case 'envoyerMessage':
         $expediteur = $_POST['expediteur'];
         $sujet = $_POST['sujet'];

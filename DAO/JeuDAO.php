@@ -186,6 +186,11 @@ class JeuDAO extends DAO {
         return $listeJeux;
     }
 
+    public function valideAjout($obj) {
+        $id = $obj->getIdJeu();
+        $stmt = Connexion::prepare("UPDATE " . self::$tableFille . " SET is_valide = 1 WHERE ".self::$clePrimaireFille." = ".$id.";");
+        $stmt->execute();
+    }
    // public function fileupload() {
 //        if (isset($_FILES['image'])) {
 //            //$_FILES existe on récupère les infos qui nous intéressent

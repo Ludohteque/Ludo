@@ -38,7 +38,7 @@ class MessageDAO extends DAO {
         $req = Connexion::getInstance()->prepare("SELECT * FROM " .self::$table. " WHERE " . self::$clePrimaire . " = " . $id . ";");
         $req->execute();
         $d = $req->fetch();
-        $message = new Message($d["id_message"], $d["corps"], $d["id_expediteur"], $d["id_destinataire"], $d["sujet"], $d["type"]);
+        $message = new Message($d["id_message"], $d["corps"], $d["id_expediteur"], $d["id_destinataire"], $d["sujet"], $d["type"], $d["date"]);
 
         return $message;
     }
@@ -95,14 +95,16 @@ class MessageDAO extends DAO {
     public function getMessagesSignalement() {
         //public function getMessagesSignalement($obj) {
         
-        $req = Connexion::prepare("SELECT u.pseudo, m.sujet, m.corps FROM " .self::$table. " m JOIN user u ON u.id_user = m.id_expediteur JOIN type t ON t.type_message = m.type WHERE t.type_message LIKE 'Signalement';");
-        $listeMessages = array();
+        $req = Connexion::prepare("SELECT * FROM " .self::$table. " WHERE type LIKE 'Signalement';");
         $req->execute();
         $lesmessages = $req->fetchAll();
+        $listeMessages = array();
         foreach ($lesmessages AS $unMessage) {
-            $listeMessages[] = $unMessage;
+            $userdao = new UserDAO;
+            $expediteur = $userdao->find($unMessage['id_expediteur']);
+            $destinataire = $userdao->find($unMessage['id_destinataire']);
+            $listeMessages[] = new Message($unMessage["id_message"], $unMessage["corps"], $expediteur, $destinataire, $unMessage["sujet"], $unMessage["type"], $unMessage["date"]);
         }
-
         return $listeMessages;
     }
     
@@ -112,9 +114,11 @@ class MessageDAO extends DAO {
         $req->execute();
         $lesmessages = $req->fetchAll();
         foreach ($lesmessages AS $unMessage) {
-            $listeMessages[] = $unMessage;
+            $userdao = new UserDAO;
+            $expediteur = $userdao->find($unMessage['id_expediteur']);
+            $destinataire = $userdao->find($unMessage['id_destinataire']);
+            $listeMessages[] = new Message($unMessage["id_message"], $unMessage["corps"], $expediteur, $destinataire, $unMessage["sujet"], $unMessage["type"], $unMessage["date"]);
         }
-            
         return $listeMessages;
         
     }

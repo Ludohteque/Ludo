@@ -12,6 +12,16 @@ body {
     padding-bottom: 20px;
 }
 
+footer {
+    position: fixed;
+    bottom: 0px;
+    right: 10px;
+}
+
+.mini {
+   max-width: 80px;
+}
+
 .grey {
     background-color : lightgray;
     height: 100%;

@@ -11,7 +11,7 @@
             <th style="text-align:center;">Est admin</th>
             <th style="text-align:center;">Note moyenne</th>
             <th style="text-align:center;">Banni ?</th>
-            <th style="text-align:center;">Actions</th>
+            <th colspan="2" style="text-align:center;">Actions</th>
         <?php } else if ($titre == "jeux") { ?>
             <th style="text-align:center;">Id</th>
             <th style="text-align:center;">Nom</th>
@@ -42,7 +42,7 @@
             <th style="text-align:center;">Est admin</th>
             <th style="text-align:center;">Note moyenne</th>
             <th style="text-align:center;">Banni ?</th>
-            <th style="text-align:center;">Actions</th>
+            <th colspan="2" style="text-align:center;">Actions</th>
         <?php } ?>
     </tr>
 
@@ -75,13 +75,13 @@
 
                        
                   <?php   ?></td>
-                <td><?php if (!$unitem->getEnBan()) 
-                {echo "<a class=\"btn btn-warning\" href=\"index.php?uc=admin&action=banUser&id=".$unitem->getIdUser()."\">Ban l'utilisateur</a>"; }
+                <td class="mini"><?php if (!$unitem->getEnBan()) 
+                {echo "<a class=\"btn btn-xs btn-warning\" href=\"index.php?uc=admin&action=banUser&id=".$unitem->getIdUser()."\">Ban l'utilisateur</a>"; }
                 else { 
-                    echo "<a class=\"btn btn-success\" href=\"index.php?uc=admin&action=debanUser&id=".$unitem->getIdUser()."\">Deban l'utilisateur</a>";
+                    echo "<a class=\"btn btn-xs btn-success\" href=\"index.php?uc=admin&action=debanUser&id=".$unitem->getIdUser()."\">De-ban l'utilisateur</a>";
                             
-                }?>
-                    <?php echo "<a class=\"btn btn-danger\" href=\"index.php?uc=admin&action=deleteUser&id=".$unitem->getIdUser()."\">supprimer utilisateur</a>" ?></td>
+                    }?></td>
+                    <td class="mini"><?php echo "<a class=\"btn btn-danger\" href=\"index.php?uc=admin&action=deleteUser&id=".$unitem->getIdUser()."\">supprimer utilisateur</a>" ?></td>
 
     <?php } else if ($titre == "jeux") { ?>
                 <td><?php echo $unitem->getIdJeu(); ?></td>
@@ -105,8 +105,8 @@
                 <td><?php echo $unitem->getIdEvenement(); ?></td>
                 <td><?php echo $unitem->getTitre(); ?></td>
                 <td><?php echo $unitem->getEvenement(); ?></td>
+                <td><?php if ($unitem->getLienImage()) { ?><img width="200" height="100" src="<?php echo $unitem->getLienImage(); ?>" /><?php } ?></td>
                 <td><?php echo $unitem->getDateAjout(); ?></td>
-                <td><?php echo $unitem->getLienImage(); ?></td>
                 <td><?php echo "<a class=\"btn btn-danger\" href=\"index.php?uc=admin&action=deleteEvenement&id=".$unitem->getIdEvenement()."\">supprimer evenement</a>" ?></td>
             <?php
             }
@@ -131,8 +131,9 @@
                         echo "[ " . $unitem->getNbBan() . " Ban(s) ]";
                     }
                     ?></td>
-                <td><?php echo "<a class=\"btn btn-success\" href=\"index.php?uc=admin&action=debanUser&id=".$unitem->getIdUser()."\">Deban l'utilisateur</a>" ?>
-                    <?php echo "<a class=\"btn btn-danger\" href=\"index.php?uc=admin&action=deleteUser&id=".$unitem->getIdUser()."\">supprimer utilisateur</a>" ?>
+                <td class="mini"><?php echo "<a class=\"btn btn-xs btn-success\" href=\"index.php?uc=admin&action=debanUser&id=".$unitem->getIdUser()."\">De-ban l'utilisateur</a>" ?>
+                <td class="mini">    <?php echo "<a class=\"btn btn-danger\" href=\"index.php?uc=admin&action=deleteUser&id=".$unitem->getIdUser()."\">supprimer utilisateur</a>" ?>
+                </td>
                 </td>
     <?php
     }

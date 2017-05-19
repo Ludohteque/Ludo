@@ -1,7 +1,7 @@
 <?php include('v_header.php'); ?>
 <h5>Ma Dashboard :</h5>
 <?php
-if ($messageEnvoye) {
+if (isset($messageEnvoye)) {
     echo "<div class='message'>" . $resultat . "</div>";
 }
 ?>

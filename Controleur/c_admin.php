@@ -74,8 +74,18 @@ switch ($action) {
         
         case 'demandeBan': {
             $userdao = new UserDAO();
-            $items = $userdao->find(Bannis($id);
+            $items = $userdao->find(Bannis($id));
             $titre = "utilisateurs bannis";
+        break;
+        }
+
+        case 'deleteUser': {
+            $userdao = new UserDAO();
+            $id = $_GET['id'];
+            $user = $userdao->find($id);
+            $userdao->delete($user);
+            $items = $userdao->findAll();
+            $titre = "utilisateurs";
             include_once 'Vue/v_adminliste.php';
             break;
         }

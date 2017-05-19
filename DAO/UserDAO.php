@@ -28,7 +28,7 @@ class UserDAO extends DAO {
     }
 
     public function delete($obj) {
-        $idCourant = $obj->getId();
+        $idCourant = $obj->getIdUser();
         $stmt = Connexion::prepare("DELETE FROM " . self::$table . " WHERE " . self::$id . " = " . $idCourant . ";");
         $stmt->execute();
     }

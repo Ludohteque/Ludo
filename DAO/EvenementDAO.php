@@ -30,7 +30,7 @@ class EvenementDAO extends DAO {
     }
 
     public function find($id) {
-        $stmt = Connexion::prepare("SELECT * FROM " . self::$table . " WHERE " . self::$cleprimaire . " = " . $id . ";");
+        $stmt = Connexion::prepare("SELECT * FROM " . self::$table . " WHERE " . self::$clePrimaire . " = " . $id . ";");
         $stmt->execute();
         $d = $stmt->fetch();
         $evenement = new Evenement($d["id_evenement"], $d["evenement"], $d["lien_image"], $d["titre"], $d["date_ajout"]);

@@ -47,6 +47,7 @@ switch ($action) {
                 $titre = "jeux";
                 include_once 'Vue/v_adminliste.php';
             } else {
+                $jeudao = new JeuDAO;
                 $messagedao = new MessageDAO();
                 $signalements = $messagedao->getMessagesSignalement();
                 $demandesajout = $jeudao->getJeuxInvalides();

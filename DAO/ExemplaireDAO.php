@@ -77,19 +77,19 @@ class ExemplaireDAO extends DAO {
         return $listeJeuxUser;
     }
 
-    public function findMesJeux($idUser) {
-        $listeJeuxUser = array();
-        $requete = "SELECT P.nom, TA.age_min, JC.nom_categorie, TA.age_min, P.image, P.note, P.image FROM " . self::$table . " E INNER JOIN produit P ON E.id_jeu=P.id_produit INNER JOIN jeu J on P.id_produit=J.id_jeu INNER JOIN jeucategorie JC ON J.id_jeu=JC.id_jeu INNER JOIN trancheage TA ON J.id_age=TA.id_age WHERE E.id_user=" . $idUser . ";";
-        $stmt = Connexion::prepare($requete);
-        $stmt->execute();
-        $tuples = $stmt->fetchAll();
-        if ($tuples != 0) {
-            foreach ($tuples as $jeu) {
-                $listeJeuxUser[] = $jeu;
-            }
-        }
-        return $listeJeuxUser;
-    }
+//    public function findMesJeux($idUser) {
+//        $listeJeuxUser = array();
+//        $requete = "SELECT P.nom, TA.age_min, JC.nom_categorie, TA.age_min, P.image, P.note, P.image FROM " . self::$table . " E INNER JOIN produit P ON E.id_jeu=P.id_produit INNER JOIN jeu J on P.id_produit=J.id_jeu INNER JOIN jeucategorie JC ON J.id_jeu=JC.id_jeu INNER JOIN trancheage TA ON J.id_age=TA.id_age WHERE E.id_user=" . $idUser . ";";
+//        $stmt = Connexion::prepare($requete);
+//        $stmt->execute();
+//        $tuples = $stmt->fetchAll();
+//        if ($tuples != 0) {
+//            foreach ($tuples as $jeu) {
+//                $listeJeuxUser[] = $jeu;
+//            }
+//        }
+//        return $listeJeuxUser;
+//    }
 
     public function findListeExemplaire($idJeu) {
         $listeExemplaire = array();

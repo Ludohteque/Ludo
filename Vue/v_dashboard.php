@@ -25,8 +25,7 @@ if (isset($resultat)) {
 
     <div class="content">
         <div class="content-1">
-            <h2>Liste de mes jeux</h2>
-            <a class="btn btn-success" href="index.php?uc=dashboard&action=ajouterExemplaire">Ajouter un jeu</a>
+            <h2>Liste de mes jeux<div class="right"><a class="btn btn-success" href="index.php?uc=dashboard&action=ajouterExemplaire">Ajouter un jeu</a></div></h2>
             <?php
             $exemplairedao = new ExemplaireDAO();
             $mesExemplaires = $exemplairedao->findParIdUser($_SESSION['id']);

@@ -124,6 +124,11 @@ table {
     margin: auto;
     /*left: 2%;*/
     text-align: center;
+    vertical-align: middle;
+}
+
+.table > tbody > tr > td{
+   vertical-align: middle; 
 }
 
 /*#tableContainer {
@@ -318,6 +323,10 @@ input[type=reset]:focus,
 }
 #right {
     text-align: right;
+}
+
+.right {
+    text-align:right;
 }
 /* Onglets */
 
@@ -616,6 +625,21 @@ input[type=reset]:focus,
 }
 
 .description {
+    margin-top: 100px;
+}
+
+/**-----------------------------------------------
+--------------------------------------------------
+----------------------VUE EVENEMENT---------------
+--------------------------------------------------
+-------------------------------------------------*/
+
+.description .imgeven {
+    max-width: 80%;
+    height: auto;
+}
+
+.evenement {
     margin-top: 100px;
 }
 

@@ -44,7 +44,7 @@ if (isset($resultat)) {
                         <td><?php echo $unExemplaire->getIdExemplaire(); ?></td>
                         <td><a href='index.php?uc=jeu&action=affichage&id=<?php echo $unExemplaire->getIdJeu()->getIdJeu(); ?>'><?php echo $unExemplaire->getIdJeu()->getNom(); ?></a></td>
                         <td><?php echo $unExemplaire->getEtat(); ?></td>
-                        <td><?php echo $unExemplaire->getDisponibilite(); ?></td>
+                        <td><?php echo $unExemplaire->getDisponibilite() ? "Oui" : "Non" ; ?></td>
                     </tr>
 
                     <?php

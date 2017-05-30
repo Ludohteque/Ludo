@@ -89,18 +89,31 @@ class JeuDAO extends DAO {
 
     public function update($obj) {
         $id = $obj->getIdJeu();
-        $stmt = Connexion::getInstance()->prepare("update " . self::$tableFille . " set id_age=?, nb_joueurs=?, id_categorie=?, id_duree=?, descriptif=? where " . self::$clePrimaireFille . "=" . $id . ";");
-        $stmt->bindParam(1, $obj->getIdAge());
-        $stmt->bindParam(2, $obj->getNbJoueurs());
-        $stmt->bindParam(3, $obj->getIdCat());
-        $stmt->bindParam(4, $obj->getIdDuree());
-        $stmt->bindParam(5, $obj->getDescriptif());
-        $stmt2 = Connexion::getInstance()->prepare("update " . self::$tableMere . " set nom=?, etat=?, note=?, descriptif=?, date_ajout=? where " . self::$clePrimaireMere . "=" . $id . ";");
-        $stmt2->bindParam(1, $obj->getNom());
-        $stmt2->bindParam(2, $obj->getEtat());
-        $stmt2->bindParam(3, $obj->getNote());
-        $stmt2->bindParam(4, $obj->getDescriptif());
-        $stmt2->bindParam(5, $obj->getDateAjout());
+        $descriptif = $obj->getDescriptif();
+        $etat = $obj->getEtat();
+        $nomjeu = $obj->getNomJeu();
+        $dateajouter = $obj->getDateAjout()->format('Y-m-d H:i:s');
+        $image = $obj->getImage();
+        $note = $obj->getNote();
+        $nbjoueurs = $obj->getNbJoueurs();
+        $age = $obj->getIdAge();
+        $duree = $obj->getIdDuree();
+        $stmt = Connexion::getInstance()->prepare("update " . self::$tableFille . " set id_age=?, nb_joueurs=?, id_duree=?, descriptif=? where " . self::$clePrimaireFille . "=" . $id . ";");
+        $stmt->bindParam(1, $age);
+        $stmt->bindParam(2, $nbjoueurs);
+        $stmt->bindParam(3, $duree);
+        $stmt->bindParam(4, $descriptif);
+        $stmt2 = Connexion::getInstance()->prepare("update " . self::$tableMere . " set nom=?, etat=?, note=?, date_ajout=? where " . self::$clePrimaireMere . "=" . $id . ";");
+        $stmt2->bindParam(1, $nomjeu);
+        $stmt2->bindParam(2, $etat);
+        $stmt2->bindParam(3, $note);
+        $stmt2->bindParam(4, $dateajouter);
+        foreach ($obj->getLesCategories() as $unecategorie) {
+            $stmt3 = Connexion::prepare("insert into jeucategorie (id_jeu, nom_categorie) values (?, ?)");
+            $stmt3->bindParam(1, $id);
+            $stmt3->bindParam(2, $unecategorie);
+            $stmt3->execute();
+        }
     }
 
     public function getAll() {

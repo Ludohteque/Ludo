@@ -9,7 +9,7 @@ include('Vue/v_header.php');
             <p><?php echo $jeu->getDescriptif(); ?></p>
         </div>
         <div class='col-md-4'>
-            <img class='imgJeu' src='<?php echo LIEN_IMAGE ."jeu/". $jeu->getImage(); ?>'/>
+            <img class='imgJeu' src='<?php echo LIEN_IMAGE . "jeu/" . $jeu->getImage(); ?>'/>
         </div>
     </div>
     <div class="row">
@@ -56,7 +56,9 @@ include('Vue/v_header.php');
                 <td><?php echo $unExemplaire->getIdUser()->getMoyenne(); ?></td>
                 <td>
                     <?php
-                    if ($unExemplaire->getIdUser()->getIdUser() != $_SESSION['id']) {
+                    if (!isset($_SESSION['id'])) {
+                        echo "Connectez-vous pour contacter le détenteur du jeu !";                        
+                    } else if ($unExemplaire->getIdUser()->getIdUser() != $_SESSION['id']) {
                         ?>
                         <a class="btn btn-success" href="index.php?uc=dashboard&action=repondreMessage&id=<?php echo $unExemplaire->getIdUser()->getIdUser(); ?>">Contacter</a>
                         <?php

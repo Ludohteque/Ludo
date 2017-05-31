@@ -8,7 +8,6 @@ class MessageDAO extends DAO {
     private static $clePrimaire = "id_message";
 
     public function create($obj) {
-
         $corps = $obj->getCorps();
         $idExpediteur = $obj->getIdExpediteur()->getIdUser();
         $idDestinataire = $obj->getIdDestinataire()->getIdUser();

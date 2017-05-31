@@ -12,18 +12,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/css?family=Raleway|Open+Sans" rel="stylesheet">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <link href="https://fonts.googleapis.com/css?family=Eczar" rel="stylesheet">
+
 
         <link rel="stylesheet" href="Vue/css/bootstrap.min.css">
-        <link href="https://fonts.googleapis.com/css?family=Eczar" rel="stylesheet">
         <link rel="stylesheet" href="Vue/css/bootstrap-theme.min.css">
-                <link rel="stylesheet" href="Vue/css/myslider.css">
+        <link rel="stylesheet" href="Vue/css/myslider.css">
         <link rel="stylesheet" href="Vue/css/main.css">
 
         <script src="Vue/js/vendor/jquery-1.11.2.min.js"></script>
+        <script src="Vue/js/vendor/bootstrap.min.js" type="text/javascript"></script>
+
         <script src="Vue/js/ism-2.2.min.js"></script>
+        <script src="Vue/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 
         <script src="Vue/js/main.js"></script>
-        <script src="Vue/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 
         <?php require_once('DAO/UserDAO.php'); ?>
     </head>
@@ -46,22 +49,26 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <form class="navbar-form navbar-right" role="form">
-                        <span id="welc">Bienvenue <?php if (UserDAO::estConnecte()) {
-            echo $_SESSION['pseudo'];
-        } ?> !</span>
+                        <span id="welc">Bienvenue <?php
+                            if (UserDAO::estConnecte()) {
+                                echo $_SESSION['pseudo'];
+                            }
+                            ?> !</span>
                         <?php
                         if (!UserDAO::estConnecte()) {
                             echo "<a class=\"btn btn-success\" id=\"inscription\" href=\"index.php?uc=inscription&action=demandeInscription\">S'enregistrer</a>";
-                            ?><span> </span><?php echo "<a class=\"btn btn-success\" id=\"connexion\" href=\"index.php?uc=connexion&action=demandeConnexion\">Se logger</a>";
-                        }
-                        if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
-                            echo "<a class=\"btn btn-warning\" href=\"index.php?uc=admin&action=demandeAdmin\">Administration</a>";
-                            ?><span> </span><?php echo "<a class=\"btn btn-success\" href=\"index.php?uc=dashboard&action=demandeDashboard\">Ma Dashboard</a>";
-                            ?><span> </span><?php echo "<a class=\"btn btn-danger\" href=\"index.php?uc=connexion&action=deconnexion\">Déconnexion</a>";
-                        }
-                        else if (UserDAO::estConnecte()) {
+                            ?><span> </span><?php
+                                echo "<a class=\"btn btn-success\" id=\"connexion\" href=\"index.php?uc=connexion&action=demandeConnexion\">Se logger</a>";
+                            }
+                            if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
+                                echo "<a class=\"btn btn-warning\" href=\"index.php?uc=admin&action=demandeAdmin\">Administration</a>";
+                                ?><span> </span><?php echo "<a class=\"btn btn-success\" href=\"index.php?uc=dashboard&action=demandeDashboard\">Ma Dashboard</a>";
+                                ?><span> </span><?php
+                            echo "<a class=\"btn btn-danger\" href=\"index.php?uc=connexion&action=deconnexion\">Déconnexion</a>";
+                        } else if (UserDAO::estConnecte()) {
                             echo "<a class=\"btn btn-success\" href=\"index.php?uc=dashboard&action=demandeDashboard\">Ma Dashboard</a>";
-                            ?><span> </span><?php echo "<a class=\"btn btn-danger\" href=\"index.php?uc=connexion&action=deconnexion\">Déconnexion</a>";
+                            ?><span> </span><?php
+                            echo "<a class=\"btn btn-danger\" href=\"index.php?uc=connexion&action=deconnexion\">Déconnexion</a>";
                         }
                         ?>
                     </form>

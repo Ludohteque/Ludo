@@ -57,15 +57,14 @@
                         <?php
                         if (!UserDAO::estConnecte()) {
                             echo "<a class=\"btn btn-success\" id=\"inscription\" href=\"index.php?uc=inscription&action=demandeInscription\">S'enregistrer</a>";
-                            ?><span> </span><?php
-                                echo "<a class=\"btn btn-success\" id=\"connexion\" href=\"index.php?uc=connexion&action=demandeConnexion\">Se logger</a>";
-                            }
-                            if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
-                                echo "<a class=\"btn btn-warning\" href=\"index.php?uc=admin&action=demandeAdmin\">Administration</a>";
-                                ?><span> </span><?php echo "<a class=\"btn btn-success\" href=\"index.php?uc=dashboard&action=demandeDashboard\">Ma Dashboard</a>";
-                                ?><span> </span><?php
-                            echo "<a class=\"btn btn-danger\" href=\"index.php?uc=connexion&action=deconnexion\">Déconnexion</a>";
-                        } else if (UserDAO::estConnecte()) {
+                            ?><span> </span><?php echo "<a class=\"btn btn-success\" id=\"connexion\" href=\"index.php?uc=connexion&action=demandeConnexion\">S'identifier</a>";
+                        }
+                        if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
+                            echo "<a class=\"btn btn-warning\" href=\"index.php?uc=admin&action=demandeAdmin\">Administration</a>";
+                            ?><span> </span><?php echo "<a class=\"btn btn-success\" href=\"index.php?uc=dashboard&action=demandeDashboard\">Ma Dashboard</a>";
+                            ?><span> </span><?php echo "<a class=\"btn btn-danger\" href=\"index.php?uc=connexion&action=deconnexion\">Déconnexion</a>";
+                        }
+                        else if (UserDAO::estConnecte()) {
                             echo "<a class=\"btn btn-success\" href=\"index.php?uc=dashboard&action=demandeDashboard\">Ma Dashboard</a>";
                             ?><span> </span><?php
                             echo "<a class=\"btn btn-danger\" href=\"index.php?uc=connexion&action=deconnexion\">Déconnexion</a>";

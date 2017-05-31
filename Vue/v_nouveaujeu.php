@@ -20,7 +20,7 @@ $dureedao = new DureeDAO;
                 <div class="form-group">
             <label class="control-label col-sm-2" for="descriptif">Description :</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="descriptif" name="descriptif" placeholder="Entrez une description" required="true">
+                <textarea rows="5" required="true" type="text" class="form-control" id="descriptif" name="descriptif" placeholder="Entrez une description" required="true"></textarea>
             </div>
         </div>
                         <div class="form-group">
@@ -59,7 +59,7 @@ $dureedao = new DureeDAO;
                 <?php $categories = $categoriedao->findCategories(); ?>
                     <?php
                     foreach ($categories as $unecategorie) { ?>                      
-                <input type="checkbox" class="categories[]" name="categories[]" value="<?php echo $unecategorie ?>"><?php echo $unecategorie; ?></input></br>
+                <input type="checkbox" class="categories[]" name="categories[]" value="<?php echo $unecategorie ?>"><?php echo " - ".$unecategorie; ?></input></br>
                     <?php } ?>
             </div>
         </div>
@@ -78,7 +78,7 @@ $dureedao = new DureeDAO;
         <div class="form-group">
                             <label for="image" class="col-lg-2 control-label">Illustration :</label>
                             <div class="col-lg-10">
-                                <input type="file" class="form-control" id="image" name="image" accept="image/*" required="true"></input>
+                                <input type="file" class="form-control heightfix" id="image" name="image" accept="image/*" required="true"></input> 
                             </div>
                         </div>
         <div class="form-group">        

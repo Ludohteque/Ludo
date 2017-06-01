@@ -64,7 +64,7 @@ if (isset($messageEnvoye)) {
                     <th style="text-align:center;">Categories</th>
                     <th style="text-align:center;">Etat</th>
                     <th style="text-align:center;">Photo</th>
-                    <th colspan="2" style="text-align:center;">Actions</th>
+                    <th colspan="3" style="text-align:center;">Actions</th>
                 </tr>
 
                 <?php

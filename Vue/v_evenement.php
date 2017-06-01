@@ -22,7 +22,7 @@ include('Vue/v_header.php');
     </div>
     <div class="row">
     <div class="evenement"></br></br>
-        <p><?php echo $even->getEvenement(); ?></p>
+        <p ><?php echo nl2br($even->getEvenement()); ?></p>
     </div>
 </div>
 

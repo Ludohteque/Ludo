@@ -117,7 +117,7 @@ switch ($action) {
         }
         
         case 'okmodifDemandeJeu': {
-            if (isset($_POST['nom']) && isset($_POST['descriptif']) && isset($_POST['etat']) && isset($_POST['age']) && isset($_POST['categories']) && isset($_POST['nbjoueurs']) && isset($_POST['duree']) && is_uploaded_file($_FILES['image']['tmp_name'])) {
+            if (isset($_POST['nom']) && isset($_POST['descriptif']) && isset($_POST['etat']) && isset($_POST['age']) && isset($_POST['categories']) && isset($_POST['nbjoueurs']) && isset($_POST['duree'])) { //&& is_uploaded_file($_FILES['image']['tmp_name'])
                 $id = $_GET['id'];
                 $nom = $_POST['nom'];
                 $descriptif = $_POST['descriptif'];
@@ -134,16 +134,16 @@ switch ($action) {
                     define('TARGET', 'Vue/img/jeu/');
                     fileupload();
                 } else {
-                    $image = $jeu->getImage(); /// ??????????????????????????????????????????
+                    $image = $jeu->getImage();
                 }
-                $message = MESSAGE;
-                $nomImage = NOM_IMAGE;
+                $message = 'MESSAGE';
+                $nomImage = 'NOM_IMAGE';
                 $isvalide = 0;
-                if ($message == 'Upload réussi !') {
+                //if ($message == 'Upload réussi !') { //valable sur create, pas sur update
                     $nouveaujeu = new jeu($id, $nom, $descriptif, $etat, $note, $date, $nomImage, $nbjoueurs, $tranchedage, $duree, $categories);
                     $jeudao->update($nouveaujeu);
                     //$resultat = "Votre jeu a bien été ajouté !";
-                }//TODO
+                //}//TODO
                 $items = $jeudao->getAll();
                 $titre = "jeux";
                 include_once 'Vue/v_adminliste.php';

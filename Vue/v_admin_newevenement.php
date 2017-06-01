@@ -14,14 +14,14 @@
         <div class="form-group">
             <label class="control-label col-sm-2" for="texte">Texte de l'événement :<span class="red"></span></label>
                 <div class="col-sm-10">
-		<textarea class="form-control" id="evenement" name="evenement" type="text" rows="10" required="true"></textarea><span class="red">Attention, pour sauter une ligne et faire des paragraphes, mettre deux &lt;/br&gt; dans votre texte !</br></br></span>
+		<textarea class="form-control" id="evenement" name="evenement" type="text" rows="10" required="true"></textarea><span class="red">*</span></br>
                 </div>
 	</div>
         </br>
 	<div class="form-group">
                             <label for="image" class="col-lg-2 control-label">Illustration :</label>
                             <div class="col-lg-10">
-                                <input type="file" class="form-control" id="image" name="image" accept="image/*"></input>
+                                <input type="file" class="form-control" id="image" name="image" accept="image/*"></input><span class="red">*</span>
                             </div>
                         </div>
         <div class="form-group">

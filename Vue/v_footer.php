@@ -28,15 +28,15 @@
     ga('send', 'pageview');
 
     $(document).ready(function () {
-        $('#newjeuvld').click(function () {
-            checked = $("input[type=checkbox]:checked").length;
-
-            if (!checked) {
-                alert("Vous devez choisir au moins une catégorie !");
-                return false;
-            }
-
-        });
+//        $('#newjeuvld').click(function () {
+//            checked = $("input[type=checkbox]:checked").length;
+//
+//            if (!checked) {
+//                alert("Vous devez choisir au moins une catégorie !");
+//                return false;
+//            }
+//
+//        });
     });
 
 

@@ -8,7 +8,6 @@ class EmpruntDAO extends DAO {
     private static $clePrimaire = "id_emprunts";
 
     public function create($obj) {
-        var_dump($obj);
         $date_emprunts = $obj->getDateEmprunts();
         $date_remise = $obj->getDateRemise();
         $id_emprunteur = $obj->getIdEmprunteur()->getIdUser();
@@ -24,7 +23,6 @@ class EmpruntDAO extends DAO {
         $stmt->bindParam(5, $statut);
         $stmt->bindParam(6, $limite);
         $stmt->execute();
-        var_dump($stmt);
     }
 
     public function delete($obj) {

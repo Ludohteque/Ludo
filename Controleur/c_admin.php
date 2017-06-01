@@ -136,8 +136,8 @@ switch ($action) {
                 } else {
                     $image = $jeu->getImage();
                 }
-                $message = 'MESSAGE';
-                $nomImage = 'NOM_IMAGE';
+                $message = MESSAGE;
+                $nomImage = NOM_IMAGE;
                 $isvalide = 0;
                 //if ($message == 'Upload réussi !') { //valable sur create, pas sur update
                     $nouveaujeu = new jeu($id, $nom, $descriptif, $etat, $note, $date, $nomImage, $nbjoueurs, $tranchedage, $duree, $categories);
@@ -171,6 +171,44 @@ switch ($action) {
             break;
         }
         
+    case 'demModifEvenement' : {
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $evenementdao = new EvenementDAO();
+            $evenement = $evenementdao->find($id);
+            include_once 'Vue/v_modifEvenement.php';
+        }
+        break;
+    }
+    
+    case 'valideModifEven' : {
+        if (isset($_GET['id']) && isset($_POST['evenement']) && isset($_POST['titre'])) {
+            $id = $_GET['id'];
+            $evenementdao = new EvenementDAO();
+            $evenementOriginal = $evenementdao->find($id);
+            $date = $evenementOriginal->getDateAjout();
+            $evenementOriginal->setTitre($_POST['titre']);
+            $evenementOriginal->setEvenement($_POST['evenement']);
+            if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+                    define('TARGET', 'Vue/img/evenement/');
+                    fileupload();
+                    $nomImage = NOM_IMAGE;
+                    $evenementOriginal->setLienImage($nomImage);
+                }
+    
+                $message = MESSAGE;
+                //if ($message == 'Upload réussi !') {
+                    //$evenementOriginal->setLienImage($nomImage);
+                    $evenementdao->update($evenementOriginal);
+                    $resultat = "Votre evenement a bien été ajouté !";
+                    $items = $evenementdao->findAll();
+                    $titre = "évènements";
+                    include_once 'Vue/v_adminliste.php';
+            //include_once 'Vue/v_modifEvenement.php';
+                //}
+        }
+        break;
+    }
                 
     case 'effacerSignalement':
         if (isset($_GET['id'])) {

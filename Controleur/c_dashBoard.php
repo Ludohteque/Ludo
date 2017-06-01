@@ -142,6 +142,26 @@ switch ($action) {
         $resultat = "La date a été modifié.";
         include('Vue/v_dashboard.php');
         break;
+    case 'contactAdmin':
+        $userdao = new UserDAO();
+        $user = $userdao->find($_GET['id']);
+        include('Vue/v_dashboard_messageadmin.php');
+        break;
+    case 'confirmContactAdmin':
+        $corps = $_POST['corps'];
+        $sujet = $_POST['sujet'];
+        $type = $_POST['type'];
+        $userdao = new UserDAO();
+        $expediteur = $userdao->find($_GET['id']);
+        $destinataires = $userdao->getAdmins();
+        $messagedao = new MessageDAO();
+        foreach ($destinataires as $admin) {
+            $message = new Message(-1, $corps, $expediteur, $admin, $sujet, $type, date('Y-m-d H:i:s'));
+                
+                $messagedao->create($message);
+        }
+        include('Vue/v_dashboard.php');
+        break;
 }
 // a décommenter pour que cela demande la connexion, et avoir un truc fonctionnel... 
 // Commenté a des fins de tests.

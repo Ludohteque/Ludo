@@ -1,5 +1,5 @@
 <footer>
-    <p>&copy; Nous 2017</p>
+    <p>&copy; Nous 2017 <a href="index.php?uc=dashboard&action=contactAdmin&id=<?php echo $_SESSION['id']; ?>">Contacter l'administrateur</a></p>
 </footer>
 
 

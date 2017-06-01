@@ -49,14 +49,16 @@ class EvenementDAO extends DAO {
 
     public function update($obj) {
         $evenement = $obj->getEvenement();
-        $lienImage = $obj->getLienImage();
-        $idEvenement = $obj->getId_evenement();
+        $lienImage = $obj->getLien();
+        $idEvenement = $obj->getIdEvenement();
+        $titre = $obj->getTitre();
 
-        $stmt = Connexion::prepare("UPDATE " . self::$table . " SET evenement='?', lien_image='?'  WHERE id='?'; ");
+        $stmt = Connexion::prepare('UPDATE ' . self::$table . ' SET evenement="'.$evenement.'", lien_image="'.$lienImage.'", titre="'.$titre.'"  WHERE id_evenement="'.$idEvenement.'";' );
 
-        $stmt->bindParam(1, $evenement);
-        $stmt->bindParam(2, $lienImage);
-        $stmt->bindParam(3, $idEvenement);
+//        $stmt->bindParam(1, $evenement);
+//        $stmt->bindParam(2, $lienImage);
+//        $stmt->bindParam(3, $idEvenement);
+        $stmt->bindParam(4, $titre);
 
         $stmt->execute();
     }

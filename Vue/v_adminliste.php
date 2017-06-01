@@ -34,9 +34,9 @@ if (isset($resultat)) {
             <th style="text-align:center;">Id</th>
             <th style="text-align:center;">Titre</th>
             <th style="text-align:center;">Texte</th>
-            <th style="text-align:center;">Date d'ajout</th>
             <th style="text-align:center;">Image</th>
-            <th style="text-align:center;">Actions</th>
+            <th style="text-align:center;">Date d'ajout</th>
+            <th colspan="2" style="text-align:center;">Actions</th>
         <?php } ?>
             <?php if ($titre == "utilisateurs bannis") { ?>
             <th style="text-align:center;">Id</th>
@@ -111,8 +111,9 @@ if (isset($resultat)) {
                 <td><?php echo htmlentities($unitem->getEvenement()); ?></td>
                 <td><?php if ($unitem->getLienImage()) { ?><img width="200" height="100" src="<?php echo $unitem->getLienImage(); ?>" /><?php } ?></td>
                 <td><?php echo $unitem->getDateAjout(); ?></td>
-                <td><?php echo "<a class=\"btn btn-xs btn-danger\" href=\"index.php?uc=admin&action=deleteEvenement&id=".$unitem->getIdEvenement()."\">supprimer evenement</a>" ?></td>
-            <?php
+                <td><?php echo "<a class=\"btn btn-xs btn-danger\" href=\"index.php?uc=admin&action=deleteEvenement&id=".$unitem->getIdEvenement()."\">Supprimer evenement</a>" ?></td>
+                <td><?php echo "<a class=\"btn btn-xs btn-danger\" href=\"index.php?uc=admin&action=demModifEvenement&id=".$unitem->getIdEvenement()."\">Modifier evenement</a>" ?></td>
+                    <?php
             }
             if ($titre == "utilisateurs bannis") {
                 ?>

@@ -178,5 +178,19 @@ class UserDAO extends DAO {
         $stmt = Connexion::prepare("UPDATE " . self::$table . " SET enBan = 1, nbBan = ".$nbbansfinal." WHERE " . self::$id . " = " . $idCourant . ";");
         $stmt->execute();
     }
+    
+    public function getAdmins() {
+        $stmt = Connexion::prepare("SELECT * FROM " . self::$table . " WHERE is_admin IS TRUE;");
+        $stmt->execute();
+        $resultats = $stmt->fetchAll();
+        $reponse = array();
+        if ($resultats != 0) {
+            foreach ($resultats as $resultat) {
+                $user = new User($resultat["id_user"], $resultat["pseudo"], $resultat["ville"], $resultat["adr_mail"], $resultat["tel"], $resultat["is_admin"], $resultat["is_bureau"], $resultat["mdp"], $resultat["moyenne"], $resultat["nbBan"], $resultat["enBan"], $resultat["nb_notes"]);
+                $reponse[] = $user;
+            }
+        }
+        return $reponse;
+    }
 
 }

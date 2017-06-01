@@ -1,5 +1,6 @@
 <footer>
-    <p>&copy; Nous 2017</p>
+    <p>&copy; Nous 2017 <a href="index.php?uc=dashboard&action=contactAdmin&id=<?php echo $_SESSION['id']; ?>"><span class="red">Contacter l'administrateur</span></a>
+     <a href="index.php?uc=admin&action=demandeNouveaujeu">Demander l'ajout d'un jeu en base de données</a> </p>
 </footer>
 
 

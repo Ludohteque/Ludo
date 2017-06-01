@@ -34,10 +34,11 @@ class JeuDAO extends DAO {
         $stmt2->bindParam(4, $duree);
         $stmt2->execute();
         foreach ($obj->getLesCategories() as $unecategorie) {
-            $stmt3 = Connexion::prepare("insert into jeucategorie (id_jeu, nom_categorie) values (?, ?)");
-            $stmt3->bindParam(1, $id);
-            $stmt3->bindParam(2, $unecategorie);
-            $stmt3->execute();
+
+            $stmt4 = Connexion::prepare("insert into jeucategorie (id_jeu, nom_categorie) values (?, ?)");
+            $stmt4->bindParam(1, $id);
+            $stmt4->bindParam(2, $unecategorie);
+            $stmt4->execute();
         }
         $obj->setIdJeu($id);
         //$obj->setIdProduit($id);
@@ -92,27 +93,38 @@ class JeuDAO extends DAO {
         $descriptif = $obj->getDescriptif();
         $etat = $obj->getEtat();
         $nomjeu = $obj->getNomJeu();
-        $dateajouter = $obj->getDateAjout()->format('Y-m-d H:i:s');
+        $dateajouter = $obj->getDateAjout(); //->format('Y-m-d H:i:s');
         $image = $obj->getImage();
         $note = $obj->getNote();
         $nbjoueurs = $obj->getNbJoueurs();
         $age = $obj->getIdAge();
         $duree = $obj->getIdDuree();
-        $stmt = Connexion::getInstance()->prepare("update " . self::$tableFille . " set id_age=?, nb_joueurs=?, id_duree=?, descriptif=? where " . self::$clePrimaireFille . "=" . $id . ";");
+        $stmt = Connexion::prepare("update " . self::$tableFille . " set id_age=?, nb_joueurs=?, id_duree=?, descriptif=? where " . self::$clePrimaireFille . "=" . $id . ";");
         $stmt->bindParam(1, $age);
         $stmt->bindParam(2, $nbjoueurs);
         $stmt->bindParam(3, $duree);
         $stmt->bindParam(4, $descriptif);
-        $stmt2 = Connexion::getInstance()->prepare("update " . self::$tableMere . " set nom=?, etat=?, note=?, date_ajout=? where " . self::$clePrimaireMere . "=" . $id . ";");
+        $stmt->execute();
+        $stmt2 = Connexion::prepare("update " . self::$tableMere . " set nom=?, etat=?, note=?, date_ajout=? where " . self::$clePrimaireMere . "=" . $id . ";");
         $stmt2->bindParam(1, $nomjeu);
         $stmt2->bindParam(2, $etat);
         $stmt2->bindParam(3, $note);
         $stmt2->bindParam(4, $dateajouter);
-        foreach ($obj->getLesCategories() as $unecategorie) {
-            $stmt3 = Connexion::prepare("insert into jeucategorie (id_jeu, nom_categorie) values (?, ?)");
-            $stmt3->bindParam(1, $id);
-            $stmt3->bindParam(2, $unecategorie);
+        $stmt2->execute();
+        $lescategories = $obj->getLesCategories();
+        
+        foreach ($lescategories as $unecategorie) {
+            $stmt3 = Connexion::Prepare("select * from jeucategorie where id_jeu = " . $id . " and nom_categorie like '" . $unecategorie . "';");
             $stmt3->execute();
+            $result = $stmt3->fetch();
+            if ($result == false) {
+                
+                $stmt4 = Connexion::prepare("insert into jeucategorie (id_jeu, nom_categorie) values (?, ?);");
+                
+                $stmt4->bindParam(1, $id);
+                $stmt4->bindParam(2, $unecategorie);
+                $stmt4->execute();
+            }
         }
     }
 
@@ -201,10 +213,11 @@ class JeuDAO extends DAO {
 
     public function valideAjout($obj) {
         $id = $obj->getIdJeu();
-        $stmt = Connexion::prepare("UPDATE " . self::$tableFille . " SET is_valide = 1 WHERE ".self::$clePrimaireFille." = ".$id.";");
+        $stmt = Connexion::prepare("UPDATE " . self::$tableFille . " SET is_valide = 1 WHERE " . self::$clePrimaireFille . " = " . $id . ";");
         $stmt->execute();
     }
-   // public function fileupload() {
+
+    // public function fileupload() {
 //        if (isset($_FILES['image'])) {
 //            //$_FILES existe on récupère les infos qui nous intéressent
 //            $fichier = $_FILES['image']['name']; //nom réel de l'image

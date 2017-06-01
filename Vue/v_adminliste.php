@@ -104,7 +104,7 @@
     <?php } else if ($titre == "évènements") { ?>
                 <td><?php echo $unitem->getIdEvenement(); ?></td>
                 <td><?php echo $unitem->getTitre(); ?></td>
-                <td><?php echo $unitem->getEvenement(); ?></td>
+                <td><?php echo htmlentities($unitem->getEvenement()); ?></td>
                 <td><?php if ($unitem->getLienImage()) { ?><img width="200" height="100" src="<?php echo $unitem->getLienImage(); ?>" /><?php } ?></td>
                 <td><?php echo $unitem->getDateAjout(); ?></td>
                 <td><?php echo "<a class=\"btn btn-danger\" href=\"index.php?uc=admin&action=deleteEvenement&id=".$unitem->getIdEvenement()."\">supprimer evenement</a>" ?></td>

@@ -107,6 +107,10 @@ switch ($action) {
         $emprunt->setStatut("En cours");
         $emprunt->setDateEmprunts(date('Y-m-d'));
         $daoemprunt->update($emprunt);
+        $daoexemplaire = new ExemplaireDAO();
+        $exemplaire = $emprunt->getIdExemplaire();
+        $exemplaire->setDisponibilite(0);
+        $daoexemplaire->update($exemplaire);
         $resultat = "L'emprunt a été enregistré en tant qu'emprunt en cours.";
         include('Vue/v_dashboard.php');
         break;

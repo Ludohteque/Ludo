@@ -54,6 +54,11 @@ class Exemplaire {
     function setEtat($etat) {
         $this->etat = $etat;
     }
+    function setDisponibilite($disponibilite) {
+        $this->disponibilite = $disponibilite;
+    }
+
+
 
 }
 ?>

@@ -17,12 +17,11 @@ switch ($action) {
         $user = $userdao->find($destinataire);
         include('Vue/v_dashboard_message.php');
         break;
-        
+
     case 'envoyerMessage':
         $expediteur = $_POST['expediteur'];
         $sujet = $_POST['sujet'];
         $destinataire = $_POST['destinataire'];
-
         $userdao = new UserDAO();
         $userExpediteur = $userdao->findParPseudo($expediteur);
         $userDestinataire = $userdao->findParPseudo($destinataire);
@@ -64,11 +63,6 @@ switch ($action) {
         $nom = $_POST['jeu'];
         $etat = $_POST['etat'];
         $dispo = $_POST['dispo'];
-        if ($dispo == "on") {
-            $dispo = 1;
-        } else {
-            $dispo = 0;
-        }
         $daojeu = new JeuDAO();
         $jeu = $daojeu->findParNom($nom);
         $daouser = new UserDAO();
@@ -78,22 +72,74 @@ switch ($action) {
         $daoexemplaire->create($exemplaire);
         include('Vue/v_dashboard.php');
         break;
-    case 'demarrerEmprunt':
+    case 'choixPreteur':
         $destinataire = null;
         if (isset($_GET['id'])) {
             $destinataire = $_GET['id'];
         }
         $userdao = new UserDAO();
-        $user = $userdao->find($destinataire);
+        $utils = $userdao->findAll();
+        include('Vue/v_listeutilisateurs.php');
+        break;
+    case 'demarrerEmprunt':
+        $preteur = null;
+        if (isset($_POST['preteur'])) {
+            $preteur = $_POST['preteur'];
+        }
+        $userdao = new UserDAO();
+        $user = $userdao->find($preteur);
         include('Vue/v_dashboard_emprunt.php');
         break;
+    case 'ajoutPret':
+        $daouser = new UserDAO();
+        $emprunteur = $daouser->find($_SESSION['id']);
+        $daoexemplaire = new ExemplaireDAO();
+        $exemplaire = $daoexemplaire->find($_POST['exemplaire']);
+        $emprunt = new Emprunt(-1, null, null, $emprunteur, $exemplaire, "En attente de validation", $_POST['date']);
+        $daoemprunt = new EmpruntDAO();
+        $daoemprunt->create($emprunt);
+        $resultat = "La demande d'emprunt a bien été envoyé au prêteur.";
+        include('Vue/v_dashboard.php');
+        break;
+    case 'validerEmprunt':
+        $daoemprunt = new EmpruntDAO();
+        $emprunt = $daoemprunt->find($_GET['id']);
+        $emprunt->setStatut("En cours");
+        $emprunt->setDateEmprunts(date('Y-m-d'));
+        $daoemprunt->update($emprunt);
+        $resultat = "L'emprunt a été enregistré en tant qu'emprunt en cours.";
+        include('Vue/v_dashboard.php');
+        break;
     case 'remiseJeu':
-        $id = $_POST['idEmprunt'];
+        $id = $_GET['id'];
         $daoemprunt = new EmpruntDAO();
         $emprunt = $daoemprunt->find($id);
         $emprunt->setDateRemise(date('Y-m-d H:i:s'));
+        $emprunt->setStatut("Fini");
         $daoemprunt->update($emprunt);
         $resultat = "Le jeu a bien été enregistré comme rendu.";
+        include('Vue/v_dashboard.php');
+        break;
+    case 'annulerEmprunt':
+        $id = $_GET['id'];
+        $daoemprunt = new EmpruntDAO();
+        $emprunt = $daoemprunt->find($id);
+        $emprunt->setStatut("Annulé");
+        $daoemprunt->update($emprunt);
+        $resultat = "L'emprunt proposé a été refusé.";
+        include('Vue/v_dashboard.php');
+        break;
+    case 'changementDate':
+        $id = $_GET['id'];
+        include('Vue/v_changementdate.php');
+        break;
+    case 'validerDate':
+        $id = $_POST['id'];
+        $daoemprunt = new EmpruntDAO();
+        $emprunt = $daoemprunt->find($id);
+        $emprunt->setDateLimite($_POST['date']);
+        $daoemprunt->update($emprunt);
+        $resultat = "La date a été modifié.";
         include('Vue/v_dashboard.php');
         break;
 }

@@ -8,7 +8,7 @@
         <div class="form-group">
             <label class="control-label col-sm-2" for="expediteur">Expéditeur:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="expediteur" name="expediteur"  value="<?php echo $_SESSION['pseudo']; ?>">
+                <input type="text" class="form-control" id="expediteur" name="expediteur"  value="<?php echo $_SESSION['pseudo']; ?>" readonly="">
             </div>
         </div>
         <div class="form-group">
@@ -16,7 +16,7 @@
             <div class="col-sm-10">
                 <?php
                 if ($user != null) {
-                    ?><input type="text" class="form-control" id="destinataire" name="destinataire" value='<?php echo $user->getPseudo(); ?>' required><?php
+                    ?><input type="text" class="form-control" id="destinataire" name="destinataire" value='<?php echo $user->getPseudo(); ?>' readonly=""><?php
                 } else {
                     ?><input type="text" class="form-control" id="destinataire" name="destinataire" placeholder="Entrez le destinataire" required><?php
                 }

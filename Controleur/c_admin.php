@@ -106,6 +106,58 @@ switch ($action) {
             break;
         }
         
+        case 'modifDemandeJeu': {
+            if (isset($_GET['id'])) {
+            $jeudao = new JeuDAO();
+            $id = $_GET['id'];
+            $jeu = $jeudao->find($id);
+            include_once 'Vue/v_admin_modifDemandeAjout.php';
+            }
+            break;
+        }
+        
+        case 'okmodifDemandeJeu': {
+            if (isset($_POST['nom']) && isset($_POST['descriptif']) && isset($_POST['etat']) && isset($_POST['age']) && isset($_POST['categories']) && isset($_POST['nbjoueurs']) && isset($_POST['duree']) && is_uploaded_file($_FILES['image']['tmp_name'])) {
+                $id = $_GET['id'];
+                $nom = $_POST['nom'];
+                $descriptif = $_POST['descriptif'];
+                $etat = $_POST['etat'];
+                $tranchedage = $_POST['age'];
+                $categories = $_POST['categories'];
+                $nbjoueurs = $_POST['nbjoueurs'];
+                $duree = $_POST['duree'];
+                $jeudao = new JeuDAO();
+                $jeu = $jeudao->find($id);
+                $note = $jeu->getNote();
+                $date = $jeu->getDateAjout();
+                if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+                    define('TARGET', 'Vue/img/jeu/');
+                    fileupload();
+                } else {
+                    $image = $jeu->getImage(); /// ??????????????????????????????????????????
+                }
+                $message = MESSAGE;
+                $nomImage = NOM_IMAGE;
+                $isvalide = 0;
+                if ($message == 'Upload réussi !') {
+                    $nouveaujeu = new jeu($id, $nom, $descriptif, $etat, $note, $date, $nomImage, $nbjoueurs, $tranchedage, $duree, $categories);
+                    $jeudao->update($nouveaujeu);
+                    //$resultat = "Votre jeu a bien été ajouté !";
+                }//TODO
+                $items = $jeudao->getAll();
+                $titre = "jeux";
+                include_once 'Vue/v_adminliste.php';
+            } else {
+                $jeudao = new JeuDAO;
+                $messagedao = new MessageDAO();
+                $signalements = $messagedao->getMessagesSignalement();
+                $demandesajout = $jeudao->getJeuxInvalides();
+                $resultat = "Ajout impossible ! il manque des informations !";
+                include_once 'Vue/v_admin.php';
+            }
+            break;
+        }
+        
         case 'deleteAjout': {
             if (isset($_GET['id'])) {
             $id = $_GET['id'];

@@ -27,8 +27,8 @@
         <div class="form-group">
             <label class="control-label col-sm-2">Disponibilité:</label>
             <div class="col-sm-10">
-                <label class="radio-inline"><input type="radio" name="dispo" checked="">Oui</label>
-                <label class="radio-inline"><input type="radio" name="dispo">Non</label>
+                <label class="radio-inline"><input type="radio" name="dispo" checked="" value="1">Oui</label>
+                <label class="radio-inline"><input type="radio" name="dispo" value="0">Non</label>
             </div>
         </div>
         <div class="form-group">        

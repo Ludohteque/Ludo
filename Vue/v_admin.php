@@ -92,6 +92,10 @@ if (isset($messageEnvoye)) {
                             ?></td>
                         <td class="mini"><?php
                             echo "<a class=\"btn btn-sm btn-block btn-danger\" href=\"index.php?uc=admin&action=deleteJeu&id=".$unjeu->getIdJeu()."\">Annuler</a>";
+                        
+                        ?></td>
+                        <td class="mini"><?php
+                            echo "<a class=\"btn btn-sm btn-block btn-danger\" href=\"index.php?uc=admin&action=modifDemandeJeu&id=".$unjeu->getIdJeu()."\">modifier</a>";
                         }
                         ?></td>
                     </tr>

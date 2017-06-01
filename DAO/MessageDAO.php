@@ -107,6 +107,22 @@ class MessageDAO extends DAO {
         return $listeMessages;
     }
     
+    public function getRenseignements($id) {
+        //public function getMessagesSignalement($obj) {
+        
+        $req = Connexion::prepare("SELECT * FROM " .self::$table. " WHERE type LIKE 'Renseignement' and id_destinataire=".$id.";");
+        $req->execute();
+        $lesmessages = $req->fetchAll();
+        $listeMessages = array();
+        foreach ($lesmessages AS $unMessage) {
+            $userdao = new UserDAO;
+            $expediteur = $userdao->find($unMessage['id_expediteur']);
+            $destinataire = $userdao->find($unMessage['id_destinataire']);
+            $listeMessages[] = new Message($unMessage["id_message"], $unMessage["corps"], $expediteur, $destinataire, $unMessage["sujet"], $unMessage["type"], $unMessage["date"]);
+        }
+        return $listeMessages;
+    }
+    
         public function getDemandeAjout() {
     	$req = Connexion::prepare("SELECT u.pseudo, m.sujet, m.corps FROM " .self::$table. " m JOIN user u ON u.id_user = m.id_expediteur JOIN type t ON t.type_message = m.type WHERE t.type_message LIKE 'Demande d\'ajout';");
         $listeMessages = array();

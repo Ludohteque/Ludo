@@ -10,10 +10,13 @@ if (isset($messageEnvoye)) {
     <label for="tab-1" class="tab-label-1">Signalements :</label>
 
     <input id="tab-2" type="radio" name="radio-set" class="tab-selector-2" />
-    <label for="tab-2" class="tab-label-2">Demande ajout :</label>
-
+    <label for="tab-2" class="tab-label-2">Renseignements :</label>
+    
     <input id="tab-3" type="radio" name="radio-set" class="tab-selector-3" />
-    <label for="tab-3" class="tab-label-3">Actions :</label>
+    <label for="tab-3" class="tab-label-3">Demande ajout :</label>
+
+    <input id="tab-4" type="radio" name="radio-set" class="tab-selector-4" />
+    <label for="tab-4" class="tab-label-4">Actions :</label>
 
     <div class="clear-shadow"></div>
 
@@ -48,10 +51,39 @@ if (isset($messageEnvoye)) {
             </table>
 
         </div>
-
-
-
+        
         <div class="content-2">
+            </br>
+            <table class="tableau">
+                <tr class="tableauTete">
+                    <th style="text-align:center;">Utilisateur</th>
+                    <th style="text-align:center;">Sujet</th>
+                    <th style="text-align:center;">Corps</th>
+                    <th colspan="2" style="text-align:center;">Actions</th> 
+                </tr>
+
+                <?php
+                //var_dump($unmessage);
+                foreach ($renseignements as $unmessage) {
+                    ?>
+                    <tr>
+                        <td><?php echo $unmessage->getIdExpediteur()->getPseudo(); ?></td>
+                        <td><?php echo $unmessage->getSujet(); ?></td>
+                        <td class="width60"><?php echo $unmessage->getCorps(); ?></td>
+                        <td><?php if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
+                            echo "<a class=\"btn btn-sm btn-block btn-info\" href=\"index.php?uc=dashboard&action=repondreMessage&id=".$unmessage->getIdExpediteur()->getIdUser()."\">Répondre</a>";
+                            ?></td>
+                        <td class="mini"><?php
+                            echo "<a class=\"btn btn-sm btn-block btn-danger\" href=\"index.php?uc=admin&action=effacerRenseignement&id=".$unmessage->getIdMessage()."\">Annuler</a>";
+                        }
+                        ?></td>
+                    </tr>
+                <?php } ?>
+            </table>
+
+        </div>
+
+        <div class="content-3">
             </br>
             <table class="tableau">
                 <tr class="tableauTete">
@@ -103,7 +135,7 @@ if (isset($messageEnvoye)) {
             </table>
 
         </div>
-        <div class="content-3">
+        <div class="content-4">
             <table class="tableau">
                 <tr class="">
                     <td style="text-align:center;">Administration des Utilisateurs</td>

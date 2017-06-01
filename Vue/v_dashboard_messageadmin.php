@@ -27,7 +27,7 @@
             <label class="control-label col-sm-2" for="type">Type:</label>
             <div class="col-sm-10">
                 <select class="form-control" id="type" name="type" required>
-                    <option disabled="" selected>Renseignement</option>
+                    <option>Renseignement</option>
                     <option>Signalement</option>
                     ?>
 

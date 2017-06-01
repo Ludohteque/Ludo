@@ -13,6 +13,7 @@ switch ($action) {
         $messagedao = new MessageDAO();
         $jeudao = new JeuDAO();
         $signalements = $messagedao->getMessagesSignalement();
+        $renseignements = $messagedao->getRenseignements($_SESSION['id']);
         $demandesajout = $jeudao->getJeuxInvalides();
         include_once 'Vue/v_admin.php';
         break;
@@ -50,6 +51,7 @@ switch ($action) {
                 $jeudao = new JeuDAO;
                 $messagedao = new MessageDAO();
                 $signalements = $messagedao->getMessagesSignalement();
+                $renseignements = $messagedao->getRenseignements($_SESSION['id']);
                 $demandesajout = $jeudao->getJeuxInvalides();
                 $resultat = "Ajout impossible ! il manque des informations !";
                 include_once 'Vue/v_admin.php';
@@ -151,6 +153,7 @@ switch ($action) {
                 $jeudao = new JeuDAO;
                 $messagedao = new MessageDAO();
                 $signalements = $messagedao->getMessagesSignalement();
+                $renseignements = $messagedao->getRenseignements($_SESSION['id']);
                 $demandesajout = $jeudao->getJeuxInvalides();
                 $resultat = "Ajout impossible ! il manque des informations !";
                 include_once 'Vue/v_admin.php';
@@ -166,6 +169,7 @@ switch ($action) {
             $messagedao = new MessageDAO();
             }
             $signalements = $messagedao->getMessagesSignalement();
+            $renseignements = $messagedao->getRenseignements($_SESSION['id']);
             $demandesajout = $jeudao->getJeuxInvalides();
             include_once 'Vue/v_admin.php';
             break;
@@ -220,6 +224,22 @@ switch ($action) {
         $messagedao->delete($message);
         }
         $signalements = $messagedao->getMessagesSignalement();
+        $renseignements = $messagedao->getRenseignements($_SESSION['id']);
+        $demandesajout = $jeudao->getJeuxInvalides();
+        include('Vue/v_admin.php');
+        break;
+        
+        case 'effacerRenseignement':
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+        
+        $messagedao = new MessageDAO;
+        $jeudao = new JeuDAO;
+        $message = $messagedao->find($id);
+        $messagedao->delete($message);
+        }
+        $signalements = $messagedao->getMessagesSignalement();
+        $renseignements = $messagedao->getRenseignements($_SESSION['id']);
         $demandesajout = $jeudao->getJeuxInvalides();
         include('Vue/v_admin.php');
         break;
@@ -285,20 +305,22 @@ switch ($action) {
                 if (is_uploaded_file($_FILES['image']['tmp_name'])) {
                     define('TARGET', 'Vue/img/evenement/');
                     fileupload();
+                    $message = MESSAGE;
+                    $nomImage = NOM_IMAGE;
                 }
-                $message = MESSAGE;
-                $nomImage = NOM_IMAGE;
-                if ($message == 'Upload réussi !') {
+                $message="";
+                //if ($message == 'Upload réussi !') {
                     $newevent = new evenement(-1, $even, $nomImage, $titreeven, new \DateTime());
                     $eventdao->create($newevent);
                     $resultat = "Votre evenement a bien été ajouté !";
                     $items = $eventdao->findAll();
                     $titre = "évènements";
                     include_once 'Vue/v_adminliste.php';
-                }
+                //}
         }else {
                 $messagedao = new MessageDAO();
                 $signalements = $messagedao->getMessagesSignalement();
+                $renseignements = $messagedao->getRenseignements($_SESSION['id']);
                 $demandesajout = $jeudao->getJeuxInvalides();
                 $resultat = "Ajout impossible ! il manque des informations !";
                 include_once 'Vue/v_admin.php';
@@ -313,6 +335,7 @@ switch ($action) {
             $jeudao->valideAjout($jeu);
             $messagedao = new MessageDAO();
             $signalements = $messagedao->getMessagesSignalement();
+            $renseignements = $messagedao->getRenseignements($_SESSION['id']);
             $demandesajout = $jeudao->getJeuxInvalides();
             include_once 'Vue/v_admin.php';
             break;

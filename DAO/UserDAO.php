@@ -17,7 +17,7 @@ class UserDAO extends DAO {
         $tel = $obj->getTel();
         $mdp = $obj->getMdp();
 
-        $stmt = Connexion::prepare("INSERT INTO " . UserDAO::$table . " (pseudo, ville, adr_mail, tel, mdp) "
+        $stmt = Connexion::prepare("INSERT INTO " . self::$table . " (pseudo, ville, adr_mail, tel, mdp) "
                         . "VALUES (?, ?, ?, ?, ?)");
         $stmt->bindParam(1, $pseudo);
         $stmt->bindParam(2, $ville);
@@ -28,13 +28,13 @@ class UserDAO extends DAO {
     }
 
     public function delete($obj) {
-        $idCourant = $obj->getId();
-        $stmt = Connexion::prepare("DELETE FROM " . UserDAO::$table . " WHERE " . UserDAO::$id . " = " . $idCourant . ";");
+        $idCourant = $obj->getIdUser();
+        $stmt = Connexion::prepare("DELETE FROM " . self::$table . " WHERE " . self::$id . " = " . $idCourant . ";");
         $stmt->execute();
     }
 
     public function find($id) {
-        $stmt = Connexion::prepare("SELECT * FROM " . UserDAO::$table . " WHERE " . UserDAO::$id . " = " . $id . ";");
+        $stmt = Connexion::prepare("SELECT * FROM " . self::$table . " WHERE " . self::$id . " = " . $id . ";");
         $stmt->execute();
         $d = $stmt->fetch();
         $user = new User($d["id_user"], $d["pseudo"], $d["ville"], $d["adr_mail"], $d["tel"], $d["is_admin"], $d["is_bureau"], $d["mdp"], $d["moyenne"], $d["nbBan"], $d["enBan"], $d["nb_notes"]);
@@ -42,7 +42,7 @@ class UserDAO extends DAO {
     }
 
     public function findParPseudo($pseudo) {
-        $stmt = Connexion::prepare("SELECT * FROM " . UserDAO::$table . " WHERE pseudo = '" . $pseudo . "';");
+        $stmt = Connexion::prepare("SELECT * FROM " . self::$table . " WHERE pseudo = '" . $pseudo . "';");
         $stmt->execute();
         $d = $stmt->fetch();
         if ($d != 0) {
@@ -55,6 +55,7 @@ class UserDAO extends DAO {
 
     public function update($obj) {
 
+       
         $pseudo = $obj->getPseudo();
         $ville = $obj->getVille();
         $mail = $obj->getMail();
@@ -62,14 +63,14 @@ class UserDAO extends DAO {
         $isAdmin = $obj->IsAdmin();
         $isBureau = $obj->isBureau();
         $mdp = $obj->getMdp();
-        $moyenne = $obj->getNoteUser();
+        $moyenne = $obj->getMoyenne();
         $nbBan = $obj->getNbBan();
         $enBan = $obj->getEnBan();
-        $idUser = $obj->getId_user();
-        $nb_notes = getNbNotes();
+        $idUser = $obj->getIdUser();
+        $nb_notes = $obj->getNbNotes();
 
-        $stmt = Connexion::prepare("UPDATE " . UserDAO::$table . " SET pseudo='?', ville='?', adr_mail='?', tel='?',"
-                        . "is_admin='?', is_bureau='?', mdp='?', moyenne='?', nbBan='?', enBan='?', nb_notes='?' WHERE id='?' ; ");
+        $stmt = Connexion::prepare("UPDATE " . self::$table . " SET pseudo=?, ville=?, adr_mail=?, tel=?,"
+                        . "is_admin=?, is_bureau=?, mdp=?, moyenne=?, nbBan=?, enBan=?, nb_notes=? WHERE id_user=? ; ");
 
         $stmt->bindParam(1, $pseudo);
         $stmt->bindParam(2, $ville);
@@ -98,7 +99,7 @@ class UserDAO extends DAO {
 
     public function mailExist($mail) {
         $succes = false;
-        $stmt = Connexion::prepare("SELECT * FROM " . UserDAO::$table . " WHERE $mail = '" . $mail . "';");
+        $stmt = Connexion::prepare("SELECT * FROM " . self::$table . " WHERE $mail = '" . $mail . "';");
         $stmt->execute();
         $d = $stmt->fetch();
         if ($d != 0) {
@@ -119,7 +120,7 @@ class UserDAO extends DAO {
 
     public function getInfosJoueur($login, $mdp) {
 
-        $stmt = Connexion::prepare("SELECT * FROM " . UserDAO::$table . " WHERE pseudo = '" . $login . "' AND mdp = '" . $mdp . "';");
+        $stmt = Connexion::prepare("SELECT * FROM " . self::$table . " WHERE pseudo = '" . $login . "' AND mdp = '" . $mdp . "';");
         $stmt->execute();
         $d = $stmt->fetch();
         if ($d != 0) {
@@ -130,12 +131,67 @@ class UserDAO extends DAO {
         return $user;
     }
 
-    public function estConnecte() {
+    public static function estConnecte() {
         return isset($_SESSION['pseudo']);
     }
+
+    public static function isAdmin() {
+        return isset($_SESSION['admin']) && $_SESSION['admin'] == 1;
+    }
+
+    public function findAll() {
+        $stmt = Connexion::prepare("SELECT * FROM " . self::$table . ";");
+        $stmt->execute();
+        $resultats = $stmt->fetchAll();
+        $reponse = array();
+        if ($resultats != 0) {
+            foreach ($resultats as $resultat) {
+                $user = new User($resultat["id_user"], $resultat["pseudo"], $resultat["ville"], $resultat["adr_mail"], $resultat["tel"], $resultat["is_admin"], $resultat["is_bureau"], $resultat["mdp"], $resultat["moyenne"], $resultat["nbBan"], $resultat["enBan"], $resultat["nb_notes"]);
+                $reponse[] = $user;
+            }
+        }
+        return $reponse;
+    }
+
+    public function findBannis() {
+        $stmt = Connexion::prepare("SELECT * FROM " . self::$table . " WHERE enBan IS TRUE;");
+        $stmt->execute();
+        $resultats = $stmt->fetchAll();
+        $reponse = array();
+        if ($resultats != 0) {
+            foreach ($resultats as $resultat) {
+                $user = new User($resultat["id_user"], $resultat["pseudo"], $resultat["ville"], $resultat["adr_mail"], $resultat["tel"], $resultat["is_admin"], $resultat["is_bureau"], $resultat["mdp"], $resultat["moyenne"], $resultat["nbBan"], $resultat["enBan"], $resultat["nb_notes"]);
+                $reponse[] = $user;
+            }
+        }
+        return $reponse;
+    }
+
+    public function deban($obj) {
+        $idCourant = $obj->getIdUser();
+        $stmt = Connexion::prepare("UPDATE " . self::$table . " SET enBan = 0 WHERE " . self::$id . " = " . $idCourant . ";");
+        $stmt->execute();
+    }
     
-    public function isAdmin() {
-        return isset($_SESSION['admin']) && $_SESSION['admin']==1;
+        public function banUser($obj) {
+        $idCourant = $obj->getIdUser();
+        $nbbansfinal = $obj->getNbBan() + 1;
+        $stmt = Connexion::prepare("UPDATE " . self::$table . " SET enBan = 1, nbBan = ".$nbbansfinal." WHERE " . self::$id . " = " . $idCourant . ";");
+        $stmt->execute();
+    }
+    
+    public function getAdmins() {
+        $stmt = Connexion::prepare("SELECT * FROM " . self::$table . " WHERE is_admin IS TRUE;");
+        $stmt->execute();
+        $resultats = $stmt->fetchAll();
+        $reponse = array();
+        if ($resultats != 0) {
+            foreach ($resultats as $resultat) {
+                $user = new User($resultat["id_user"], $resultat["pseudo"], $resultat["ville"], $resultat["adr_mail"], $resultat["tel"], $resultat["is_admin"], $resultat["is_bureau"], $resultat["mdp"], $resultat["moyenne"], $resultat["nbBan"], $resultat["enBan"], $resultat["nb_notes"]);
+                $reponse[] = $user;
+            }
+        }
+        return $reponse;
     }
 
 }

@@ -18,7 +18,11 @@ switch ($action) {
             $mdp = md5($mdp);
             $userDAO = new UserDAO();
             $joueur = $userDAO->getInfosJoueur($login, $mdp);
-
+            if ($joueur != null && $joueur->getEnBan()) {
+                    $message = "Connexion impossible : Vous êtes banni !!";
+                    include_once 'Vue/v_connexion.php';
+                    break;
+                }
 
             if ($joueur != null) {
                 $_SESSION['pseudo'] = $joueur->getPseudo();
@@ -30,7 +34,7 @@ switch ($action) {
                     $jeudao = new JeuDAO();
                     $signalements = $messagedao->getMessagesSignalement();
                     $demandesajout = $jeudao->getJeuxInvalides();
-                    include("Vue/v_admin.php"); //à retirer pour y placer la vue du dashboard de l'admin.
+                    include("Vue/v_admin.php");
                 } else {
                     $jeuDAO = new JeuDAO();
                     $empruntDAO = new EmpruntDAO();

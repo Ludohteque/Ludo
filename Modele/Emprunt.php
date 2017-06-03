@@ -8,14 +8,18 @@
         private $dateRemise;
         private $idEmprunteur;
         private $idExemplaire;
+        private $statut;
+        private $dateLimite;
         
-        function __construct($idEmprunts, $dateEmprunts, $dateRemise, $idEmprunteur, $idExemplaire) {
+        function __construct($idEmprunts, $dateEmprunts, $dateRemise, $idEmprunteur, $idExemplaire, $statut, $dateLimite) {
             
             $this->idEmprunts = $idEmprunts;
             $this->dateEmprunts = $dateEmprunts;
             $this->dateRemise = $dateRemise;
             $this->idEmprunteur = $idEmprunteur;
             $this->idExemplaire = $idExemplaire;    
+            $this->statut = $statut;
+            $this->dateLimite = $dateLimite;
         }
         
         
@@ -58,6 +62,23 @@
         function setIdExemplaire($idExemplaire) {
             $this->idExemplaire = $idExemplaire;
         }
+        function getStatut() {
+            return $this->statut;
+        }
+
+        function setStatut($statut) {
+            $this->statut = $statut;
+        }
+        
+        function getDateLimite() {
+            return $this->dateLimite;
+        }
+
+        function setDateLimite($dateLimite) {
+            $this->dateLimite = $dateLimite;
+        }
+
+
 
 
     }

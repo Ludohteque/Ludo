@@ -77,7 +77,7 @@ class User {
             return $this->enBan;
         }
         function getNbNotes() {
-            return $this->nb_notes;
+            return $this->nbNotes;
         }
         function setNbNotes($nbNotes) {
             $this->nbNotes = $nbNotes;

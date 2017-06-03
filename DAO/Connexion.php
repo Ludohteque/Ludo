@@ -35,7 +35,19 @@ class Connexion {
 		return Connexion::getInstance()->PDOInstance->prepare($query);
 	}
         
+        public static function dernierIdInsere($colonneid, $table)
+	{
+            $stmt = Connexion::prepare("SELECT MAX(".$colonneid.") FROM ".$table);
+             $stmt->execute();
+                $result = $stmt->fetch();
+		return $result[0];
+	}
         
+        public static function lastInsertId(){
+            return Connexion::getInstance()->PDOInstance->lastInsertId();
+    }
+        
+   
         
 }
 //On fait l'appel a getInstance comme ça:

@@ -1,6 +1,5 @@
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <?php
-
 include('Vue/v_header.php');
 include('Vue/v_actus.php');
 
@@ -46,7 +45,7 @@ if (UserDAO::estConnecte()) {
                 foreach ($lesNouveautes as $leJeu) {
                     ?>
                     <tr>
-                        <td><?php echo $leJeu->getNom(); ?></td>
+                        <td><a href='index.php?uc=jeu&action=affichage&id=<?php echo $leJeu->getIdProduit(); ?>'><?php echo $leJeu->getNom(); ?></a></td>
                         <td><?php echo $leJeu->getNote(); ?></td>
                     </tr>   
                     <?php
@@ -66,13 +65,15 @@ if (UserDAO::estConnecte()) {
                 </tr>
                 <?php
                 foreach ($lesEmpruntes as $unEmprunt) {
-                    ?>
-                    <tr>
-                        <td><?php echo $unEmprunt->getIdExemplaire()->getIdJeu()->getNom(); ?></td>
-                        <td><?php echo $unEmprunt->getDateEmprunts(); ?></td>
-                        <td><?php echo $unEmprunt->getIdExemplaire()->getIdJeu()->getNote(); ?></td>
-                    </tr>   
-                    <?php
+                    if ($unEmprunt->getStatut() != "Annulé") {
+                        ?>
+                        <tr>
+                            <td><a href='index.php?uc=jeu&action=affichage&id=<?php echo $unEmprunt->getIdExemplaire()->getIdJeu()->getIdJeu(); ?>'><?php echo $unEmprunt->getIdExemplaire()->getIdJeu()->getNom(); ?></a></td>
+                            <td><?php echo $unEmprunt->getDateEmprunts(); ?></td>
+                            <td><?php echo $unEmprunt->getIdExemplaire()->getIdJeu()->getNote(); ?></td>
+                        </tr>   
+                        <?php
+                    }
                 }
                 ?>
             </table>

@@ -9,15 +9,15 @@ include('Vue/v_header.php');
             <p><?php echo $jeu->getDescriptif(); ?></p>
         </div>
         <div class='col-md-4'>
-            <img class='imgJeu' src='<?php echo LIEN_IMAGE . $jeu->getImage(); ?>'/>
+            <img class='imgJeu' src='<?php echo LIEN_IMAGE . "jeu/" . $jeu->getImage(); ?>'/>
         </div>
     </div>
     <div class="row">
         <div class='col-md-6'>
-            <h3>Catégorie</h3>
+            <h3>Catégorie(s)</h3>
             <p><?php
                 foreach ($jeu->getLesCategories() as $uneCategorie) {
-                    echo $uneCategorie;
+                    echo $uneCategorie . "<br>";
                 }
                 ?></p>
         </div>
@@ -31,11 +31,12 @@ include('Vue/v_header.php');
     <h3>Ils ont ce jeu !</h3>
     <table class="tableau">
         <tr class="tableauTete">
-            <th>Exemplaire</th>
+            <th>N° Exemplaire</th>
             <th>Pseudo</th>
             <th>Localisation</th>
             <th>Disponible</th>
             <th>Note</th>
+            <th>Contacter</th>
         </tr>
         <?php
         foreach ($listeExemplaires as $unExemplaire) {
@@ -45,16 +46,29 @@ include('Vue/v_header.php');
                 <td><?php echo $unExemplaire->getIdExemplaire(); ?></td>
                 <td><?php echo $unExemplaire->getIdUser()->getPseudo(); ?></td>
                 <td><?php echo $unExemplaire->getIdUser()->getVille(); ?></td>
-                <td><?php if ($disponible) {
-                echo "Oui";
-            } else {
-                echo "Non";
-            } ?></td>
+                <td><?php
+                    if ($disponible) {
+                        echo "Oui";
+                    } else {
+                        echo "Non";
+                    }
+                    ?></td>
                 <td><?php echo $unExemplaire->getIdUser()->getMoyenne(); ?></td>
+                <td>
+                    <?php
+                    if (!isset($_SESSION['id'])) {
+                        echo "Connectez-vous pour contacter le détenteur du jeu !";                        
+                    } else if ($unExemplaire->getIdUser()->getIdUser() != $_SESSION['id']) {
+                        ?>
+                        <a class="btn btn-success" href="index.php?uc=dashboard&action=repondreMessage&id=<?php echo $unExemplaire->getIdUser()->getIdUser(); ?>">Contacter</a>
+                        <?php
+                    }
+                    ?>
+                </td>
             </tr>   
-    <?php
-}
-?>
+            <?php
+        }
+        ?>
     </table>
 </div>
 

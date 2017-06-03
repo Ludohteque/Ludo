@@ -6,8 +6,8 @@ $lesEvenements = $evendao->findDernierEvenement();
 
 <div class="jumbotron">
     <div class="containergeneral">
-        <h1>Here comes the actus scroller</h1>
-        <p>This space is reserved for the scroller. Put only the scroller here !!!</p>
+        <?php if (UserDAO::estConnecte()) { ?><h1>Ma ludothèque</h1> <?php } else { ?>
+            <p>inscrivez-vous pour avoir accès à votre ludothèque !!!</p><?php } ?></br>
 
         <div class="ism-slider" data-play_type="loop" data-interval="3000" id="my-slider">
             <ol>
@@ -29,5 +29,6 @@ $lesEvenements = $evendao->findDernierEvenement();
                 </li>
             </ol>
         </div>
+
     </div>
 </div>

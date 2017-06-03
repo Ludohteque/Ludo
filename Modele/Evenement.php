@@ -20,7 +20,11 @@
         
         public function getTitre(){
             return $this->titre;
-        }    
+        }
+        
+        public function setTitre($titre){
+            $this->titre = $titre;
+        } 
         
         public function getDateAjout(){
             return $this->dateajout;
@@ -35,7 +39,13 @@
         }
 
         function getLienImage() {
-            return LIEN_IMAGE.$this->lienImage."";
+            return LIEN_IMAGE."evenement/".$this->lienImage; //
+
+        }
+        
+        function getLien() {
+            return $this->lienImage; //
+
         }
 
         function setIdEvenement($idEvenement) {

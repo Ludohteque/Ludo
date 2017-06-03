@@ -1,13 +1,22 @@
 <?php include('v_header.php'); ?>
-<h5>Ma Dashboard :</h5>
+<h5>Dashboard d'administration :</h5>
+<?php
+if (isset($messageEnvoye)) {
+    echo "<div class='message'>" . $resultat . "</div>";
+}
+?>
 <section class="tabs">
     <input id="tab-1" type="radio" name="radio-set" class="tab-selector-1" checked="checked" />
     <label for="tab-1" class="tab-label-1">Signalements :</label>
 
     <input id="tab-2" type="radio" name="radio-set" class="tab-selector-2" />
-    <label for="tab-2" class="tab-label-2">Demande ajout :</label>
+    <label for="tab-2" class="tab-label-2">Renseignements :</label>
+    
+    <input id="tab-3" type="radio" name="radio-set" class="tab-selector-3" />
+    <label for="tab-3" class="tab-label-3">Demande ajout :</label>
 
-
+    <input id="tab-4" type="radio" name="radio-set" class="tab-selector-4" />
+    <label for="tab-4" class="tab-label-4">Actions :</label>
 
     <div class="clear-shadow"></div>
 
@@ -18,7 +27,8 @@
                 <tr class="tableauTete">
                     <th style="text-align:center;">Utilisateur</th>
                     <th style="text-align:center;">Sujet</th>
-                    <th style="text-align:center;">Corps</th> 
+                    <th style="text-align:center;">Corps</th>
+                    <th colspan="2" style="text-align:center;">Actions</th> 
                 </tr>
 
                 <?php
@@ -26,18 +36,54 @@
                 foreach ($signalements as $unmessage) {
                     ?>
                     <tr>
-                        <td><?php echo $unmessage[0]; ?></td>
-                        <td><?php echo $unmessage[1]; ?></td>
-                        <td class="width60"><?php echo $unmessage[2]; ?></td>
+                        <td><?php echo $unmessage->getIdExpediteur()->getPseudo(); ?></td>
+                        <td><?php echo $unmessage->getSujet(); ?></td>
+                        <td class="width60"><?php echo $unmessage->getCorps(); ?></td>
+                        <td><?php if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
+                            echo "<a class=\"btn btn-sm btn-block btn-info\" href=\"index.php?uc=dashboard&action=repondreMessage&id=".$unmessage->getIdExpediteur()->getIdUser()."\">Répondre</a>";
+                            ?></td>
+                        <td class="mini"><?php
+                            echo "<a class=\"btn btn-sm btn-block btn-danger\" href=\"index.php?uc=admin&action=effacerSignalement&id=".$unmessage->getIdMessage()."\">Annuler</a>";
+                        }
+                        ?></td>
                     </tr>
-            <?php } ?>
+                <?php } ?>
+            </table>
+
+        </div>
+        
+        <div class="content-2">
+            </br>
+            <table class="tableau">
+                <tr class="tableauTete">
+                    <th style="text-align:center;">Utilisateur</th>
+                    <th style="text-align:center;">Sujet</th>
+                    <th style="text-align:center;">Corps</th>
+                    <th colspan="2" style="text-align:center;">Actions</th> 
+                </tr>
+
+                <?php
+                //var_dump($unmessage);
+                foreach ($renseignements as $unmessage) {
+                    ?>
+                    <tr>
+                        <td><?php echo $unmessage->getIdExpediteur()->getPseudo(); ?></td>
+                        <td><?php echo $unmessage->getSujet(); ?></td>
+                        <td class="width60"><?php echo $unmessage->getCorps(); ?></td>
+                        <td><?php if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
+                            echo "<a class=\"btn btn-sm btn-block btn-info\" href=\"index.php?uc=dashboard&action=repondreMessage&id=".$unmessage->getIdExpediteur()->getIdUser()."\">Répondre</a>";
+                            ?></td>
+                        <td class="mini"><?php
+                            echo "<a class=\"btn btn-sm btn-block btn-danger\" href=\"index.php?uc=admin&action=effacerRenseignement&id=".$unmessage->getIdMessage()."\">Annuler</a>";
+                        }
+                        ?></td>
+                    </tr>
+                <?php } ?>
             </table>
 
         </div>
 
-
-        
-        <div class="content-2">
+        <div class="content-3">
             </br>
             <table class="tableau">
                 <tr class="tableauTete">
@@ -50,46 +96,92 @@
                     <th style="text-align:center;">Categories</th>
                     <th style="text-align:center;">Etat</th>
                     <th style="text-align:center;">Photo</th>
+                    <th colspan="3" style="text-align:center;">Actions</th>
                 </tr>
 
-                <?php //class="width60"
+                <?php
+                //class="width60"
                 foreach ($demandesajout as $unjeu) {
                     ?>
                     <tr> 
                         <td><?php echo $unjeu->getNom(); ?></td>
                         <td><?php echo $unjeu->getDateAjout(); ?></td>
                         <td><?php echo $unjeu->getDescriptif(); ?></td>
-                        <td><?php echo $unjeu->getIdDuree()->getDureeMin()." / ".$unjeu->getIdDuree()->getDureeMax().""; ?></td>
-                        <td><?php echo $unjeu->getIdage()->getAgeMin()." / ".$unjeu->getIdage()->getAgeMax(); ?></td>
-                        <td><?php echo "à faire" //$unjeu->getNbJoueurs()->getNbJoueursMin()." / ".$unjeu->getNbJoueurs()->getNbJoueursMax(); ?></td>
-                        <td><?php var_dump($unjeu->getLesCategories());echo "???";
-                        
-                        //foreach ($unjeu->getLesCategories() as $unecategorie){
-                            //echo $unecategorie->getNomCat();
-                        //}; 
-                        ?></td>
+                        <td><?php echo $unjeu->getIdDuree()->getDureeMin() . " / " . $unjeu->getIdDuree()->getDureeMax() . ""; ?></td>
+                        <td><?php echo $unjeu->getIdage()->getAgeMin() . " / " . $unjeu->getIdage()->getAgeMax(); ?></td>
+                        <td><?php echo $unjeu->getNbJoueurs()->getNbJoueursMin() . " à " . $unjeu->getNbJoueurs()->getNbJoueursMax(); ?></td>
+                        <td><?php
+                            $lesCat = $unjeu->getLesCategories();
+                            foreach ($lesCat as $unecategorie) {
+                                echo $unecategorie . "<br>";
+                            };
+                            ?></td>
                         <td><?php echo $unjeu->getEtat(); ?></td>
-                        <td><img src="<?php echo $unjeu->getImage(); ?>" /></td>
+                        <td><?php if ($unjeu->getImage()) { ?><img width="150" height="100" src="Vue/img/jeu/<?php echo $unjeu->getImage(); ?>" /><?php } ?></td>
+                        <td style="text-align: center;" class="mini"><?php
+                        if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
+                            echo "<a class=\"btn btn-sm btn-block btn-info\" href=\"index.php?uc=admin&action=valideAjout&id=".$unjeu->getIdJeu()."\">Valider</a>";
+                            ?></td>
+                        <td class="mini"><?php
+                            echo "<a class=\"btn btn-sm btn-block btn-danger\" href=\"index.php?uc=admin&action=deleteJeu&id=".$unjeu->getIdJeu()."\">Annuler</a>";
+                        
+                        ?></td>
+                        <td class="mini"><?php
+                            echo "<a class=\"btn btn-sm btn-block btn-danger\" href=\"index.php?uc=admin&action=modifDemandeJeu&id=".$unjeu->getIdJeu()."\">modifier</a>";
+                        }
+                        ?></td>
                     </tr>
-<?php } ?>
+                <?php } ?>
             </table>
 
         </div>
+        <div class="content-4">
+            <table class="tableau">
+                <tr class="">
+                    <td style="text-align:center;">Administration des Utilisateurs</td>
+                    <td style="text-align: center;" class="mini"><?php
+                        if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
+                            echo "<a class=\"btn btn-block btn-info\" href=\"index.php?uc=admin&action=banAdmin\">Bannissements</a>";
+                            ?></td>
+                        <td class="mini"><?php
+                            echo "<a class=\"btn btn-block btn-info\" href=\"index.php?uc=admin&action=userAdmin\">Tous les Utilisateurs</a>";
+                        }
+                        ?></td>
 
-    
-</div>
+                </tr>
+                <tr class="">
+                    <td style="text-align:center;">Administration des Jeux</td>
+                    <td style="text-align: center;" class="mini"><?php
+                        if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
+                            echo "<a class=\"btn btn-block btn-success\" href=\"index.php?uc=admin&action=demandeNouveaujeu\">Nouveau jeu</a>";
+                            ?></td>
+                        <td class="mini"><?php
+                            echo "<a class=\"btn btn-block btn-info\" href=\"index.php?uc=admin&action=jeuxAdmin\">Tous les Jeux</a>";
+                        }
+                        ?></td>
+
+                </tr>
+                <tr class="">
+                    <td style="text-align:center;">Administration d'évènements</td>
+                    <td style="text-align: center;" class="mini"><?php
+                        if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
+                            echo "<a class=\"btn btn-block btn-success\" href=\"index.php?uc=admin&action=demandeNouveleven\">Nouvel Evenement</a>";
+                            ?></td>
+                        <td class="mini"><?php
+                            echo "<a class=\"btn btn-block btn-info\" href=\"index.php?uc=admin&action=evenementsAdmin\">Tous les Evenements</a>";
+                        }
+                        ?></td>
+
+                </tr>
+            </table>
+        </div>
+    </div>
+
 </section>
+<?php include('v_footer.php'); ?>
 
 
 
 
-<?php
-include('v_footer.php');
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 

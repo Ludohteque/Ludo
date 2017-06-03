@@ -99,13 +99,13 @@ class JeuDAO extends DAO {
         $nbjoueurs = $obj->getNbJoueurs();
         $age = $obj->getIdAge();
         $duree = $obj->getIdDuree();
-        $stmt = Connexion::prepare("update " . self::$tableFille . " set id_age=?, nb_joueurs=?, id_duree=?, descriptif=? where " . self::$clePrimaireFille . "=" . $id . ";");
+        $stmt = Connexion::prepare("update " . self::$tableFille . " set id_age=".$age.", id_nb_joueurs=".$nbjoueurs.", id_duree=".$duree." where " . self::$clePrimaireFille . "=" . $id . ";");
         $stmt->bindParam(1, $age);
         $stmt->bindParam(2, $nbjoueurs);
         $stmt->bindParam(3, $duree);
         $stmt->bindParam(4, $descriptif);
         $stmt->execute();
-        $stmt2 = Connexion::prepare("update " . self::$tableMere . " set nom=?, etat=?, note=?, date_ajout=? where " . self::$clePrimaireMere . "=" . $id . ";");
+        $stmt2 = Connexion::prepare("update " . self::$tableMere . " set nom=\"".$nomjeu."\", etat=\"".$etat."\", note=".$note.", descriptif=\"".$descriptif."\", date_ajout=".$dateajouter." where " . self::$clePrimaireMere . "=" . $id . ";");
         $stmt2->bindParam(1, $nomjeu);
         $stmt2->bindParam(2, $etat);
         $stmt2->bindParam(3, $note);

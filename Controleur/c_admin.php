@@ -130,17 +130,16 @@ switch ($action) {
         case 'okmodifDemandeJeu': {
             if (isset($_POST['nom']) && isset($_POST['descriptif']) && isset($_POST['etat']) && isset($_POST['age']) && isset($_POST['categories']) && isset($_POST['nbjoueurs']) && isset($_POST['duree'])) { //&& is_uploaded_file($_FILES['image']['tmp_name'])
                 $id = $_GET['id'];
-                $nom = $_POST['nom'];
-                $descriptif = $_POST['descriptif'];
-                $etat = $_POST['etat'];
-                $tranchedage = $_POST['age'];
-                $categories = $_POST['categories'];
-                $nbjoueurs = $_POST['nbjoueurs'];
-                $duree = $_POST['duree'];
                 $jeudao = new JeuDAO();
-                $jeu = $jeudao->find($id);
-                $note = $jeu->getNote();
-                $date = $jeu->getDateAjout();
+                $jeuoriginal = $jeudao->find($id);
+                
+                $jeuoriginal->setNom($_POST['nom']);
+                $jeuoriginal->setDescriptif($_POST['descriptif']);
+                $jeuoriginal->setEtat($_POST['etat']);
+                $jeuoriginal->setIdAge($_POST['age']);
+                $jeuoriginal->setLesCategories($_POST['categories']);
+                $jeuoriginal->setNbJoueurs($_POST['nbjoueurs']);
+                $jeuoriginal->setIdDuree($_POST['duree']);
                 $message="";
                 if (is_uploaded_file($_FILES['image']['tmp_name'])) {
                     define('TARGET', 'Vue/img/jeu/');
@@ -148,13 +147,14 @@ switch ($action) {
                     $message = MESSAGE;
                 $nomImage = NOM_IMAGE;
                 } else {
-                    $nomImage = $jeu->getImage();
+                    $nomImage = $jeuoriginal->getImage();
                 }
                 
                 $isvalide = 0;
                 //if ($message == 'Upload réussi !') { //valable sur create, pas sur update
-                    $nouveaujeu = new jeu($id, $nom, $descriptif, $etat, $note, $date, $nomImage, $nbjoueurs, $tranchedage, $duree, $categories);
-                    $jeudao->update($nouveaujeu);
+                    //$nouveaujeu = new jeu($id, $nom, $descriptif, $etat, $note, $date, $nomImage, $nbjoueurs, $tranchedage, $duree, $categories);
+                    $jeuoriginal->setImage($nomImage);
+                    $jeudao->update($jeuoriginal);
                     //$resultat = "Votre jeu a bien été ajouté !";
                 //}//TODO
                 $items = $jeudao->getAll();

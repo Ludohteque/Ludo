@@ -157,12 +157,12 @@ switch ($action) {
         $messagedao = new MessageDAO();
         foreach ($destinataires as $admin) {
             $message = new Message(-1, $corps, $expediteur, $admin, $sujet, $type, date('Y-m-d H:i:s'));
-                
-                $messagedao->create($message);
+
+            $messagedao->create($message);
         }
         include('Vue/v_dashboard.php');
         break;
-        
+
     case 'modifierInfos':
         $id = $_SESSION['id'];
         $userdao = new UserDAO();
@@ -179,15 +179,25 @@ switch ($action) {
         $id = $_SESSION['id'];
         $userdao = new UserDAO();
         $user = $userdao->find($id);
-        $user->setPseudo($pseudo);
-        $user->setVille($ville);
-        $user->setMail($mail);
-        $user->setTel($telephone);
-        $user->setMdp(md5($mdp1));
+        If ($pseudo != "") {
+            $user->setPseudo($pseudo);
+        }
+        if ($ville != "") {
+            $user->setVille($ville);
+        }
+        if ($mail != "") {
+            $user->setMail($mail);
+        }
+        if ($telephone != "") {
+            $user->setTel($telephone);
+        }
+        if ($mdp1 != "") {
+            $user->setMdp(md5($mdp1));
+        }
         $userdao->update($user);
+
         include('Vue/v_dashboard.php');
         break;
-    
 }
 // a décommenter pour que cela demande la connexion, et avoir un truc fonctionnel... 
 // Commenté a des fins de tests.

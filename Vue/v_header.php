@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="Vue/css/bootstrap.min.css">
         <link href="https://fonts.googleapis.com/css?family=Eczar" rel="stylesheet">
         <link rel="stylesheet" href="Vue/css/bootstrap-theme.min.css">
-                <link rel="stylesheet" href="Vue/css/myslider.css">
+        <link rel="stylesheet" href="Vue/css/myslider.css">
         <link rel="stylesheet" href="Vue/css/main.css">
 
         <script src="Vue/js/vendor/jquery-1.11.2.min.js"></script>

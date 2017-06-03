@@ -46,7 +46,9 @@ class ExemplaireDAO extends DAO {
     }
 
     public function delete($obj) {
-        
+        $id = $obj->getIdExemplaire();
+        $stmt = Connexion::prepare("DELETE FROM " . self::$table . " WHERE id_exemplaire = " . $id . ";");
+        $stmt->execute();
     }
 
     public function find($id) {
@@ -62,7 +64,13 @@ class ExemplaireDAO extends DAO {
     }
 
     public function update($obj) {
-        
+//        $idJeu = $obj->getIdJeu()->getIdJeu();
+//        $idUser = $obj->getIdUser()->getIdUser();
+        $idexemplaire = $obj->getIdExemplaire();
+        $etat = $obj->getEtat();
+        $dispo = $obj->getDisponibilite();
+        $stmt = Connexion::prepare("UPDATE ". self::$table ." set etat=\"".$etat."\", disponibilite=".$dispo." WHERE id_exemplaire=".$idexemplaire."");
+        $stmt->execute();
     }
 
     public function findUserExemplaires($idUser) {

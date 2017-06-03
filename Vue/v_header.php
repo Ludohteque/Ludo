@@ -20,13 +20,13 @@
         <link rel="stylesheet" href="Vue/css/myslider.css">
         <link rel="stylesheet" href="Vue/css/main.css">
 
-        <script src="Vue/js/vendor/jquery-1.11.2.min.js"></script>
+<!--        <script src="Vue/js/vendor/jquery-1.11.2.min.js"></script>
         <script src="Vue/js/vendor/bootstrap.min.js" type="text/javascript"></script>
 
         <script src="Vue/js/ism-2.2.min.js"></script>
         <script src="Vue/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 
-        <script src="Vue/js/main.js"></script>
+        <script src="Vue/js/main.js"></script>-->
 
         <?php require_once('DAO/UserDAO.php'); ?>
     </head>

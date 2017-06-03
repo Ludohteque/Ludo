@@ -104,6 +104,11 @@ switch ($action) {
             break;
             
     case 'modifExemplaire':
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $exemplairedao= new ExemplaireDAO();
+            $exemplaire = $exemplairedao->find($id);
+        }
         include_once('Vue/v_dashboard_modif_exemplaire.php');
         break;
     

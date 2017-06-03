@@ -216,6 +216,42 @@ switch ($action) {
         }
         include('Vue/v_dashboard.php');
         break;
+
+    case 'modifierInfos':
+        $id = $_SESSION['id'];
+        $userdao = new UserDAO();
+        $user = $userdao->find($id);
+        include ('Vue/v_dashboard_profil.php');
+        break;
+    case 'modifProfil':
+        $pseudo = $_POST['Pseudo'];
+        $ville = $_POST['Ville'];
+        $mail = $_POST['Email'];
+        $telephone = $_POST['Telephone'];
+        $mdp1 = $_POST['mdp1'];
+        $mdp2 = $_POST['mdp2'];
+        $id = $_SESSION['id'];
+        $userdao = new UserDAO();
+        $user = $userdao->find($id);
+        If ($pseudo != "") {
+            $user->setPseudo($pseudo);
+        }
+        if ($ville != "") {
+            $user->setVille($ville);
+        }
+        if ($mail != "") {
+            $user->setMail($mail);
+        }
+        if ($telephone != "") {
+            $user->setTel($telephone);
+        }
+        if ($mdp1 != "") {
+            $user->setMdp(md5($mdp1));
+        }
+        $userdao->update($user);
+
+        include('Vue/v_dashboard.php');
+        break;
 }
 // a décommenter pour que cela demande la connexion, et avoir un truc fonctionnel... 
 // Commenté a des fins de tests.

@@ -8,7 +8,7 @@
             <label class="control-label col-sm-2" for="jeu">Choisissez un jeu:</label>
             <div class="col-sm-10">
                 <select class="form-control" id="type" name="jeu" disabled>
-                    <option disabled><?php echo $exemplaire->getNom(); ?> </option>                    
+                    <option><?php echo $exemplaire->getIdJeu()->getnomJeu(); ?></option>                    
                 </select>
             </div>
         </div>

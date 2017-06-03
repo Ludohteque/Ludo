@@ -32,7 +32,8 @@ switch ($action) {
                 if ($joueur->isAdmin()) {
                     $messagedao = new MessageDAO();
                     $jeudao = new JeuDAO();
-                    $signalements = $messagedao->getMessagesSignalement();
+                    $signalements = $messagedao->getMessagesSignalement($_SESSION['id']);
+                    $renseignements = $messagedao->getRenseignements($_SESSION['id']);
                     $demandesajout = $jeudao->getJeuxInvalides();
                     include("Vue/v_admin.php");
                 } else {

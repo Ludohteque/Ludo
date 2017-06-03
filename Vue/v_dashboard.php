@@ -297,7 +297,7 @@ if (isset($resultat)) {
                             <td><?php echo $unMessage->getIdExpediteur()->getPseudo(); ?></td>
                             <td><?php echo $unMessage->getDate() ?></td>
                             <td>
-                                <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#corps<?php echo $unMessage->getIdMessage(); ?>">Voir</button>
+                                <button type="button" class="btn btn-info " data-toggle="collapse" data-target="#corps<?php echo $unMessage->getIdMessage(); ?>">Voir</button>
                                 <a class="btn btn-success" href="index.php?uc=dashboard&action=repondreMessage&id=<?php echo $unMessage->getIdExpediteur()->getIdUser(); ?>">Répondre</a>
                             </td>
                         </tr>

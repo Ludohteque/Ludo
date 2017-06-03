@@ -5,7 +5,6 @@
     <form id="form-horizontal" action="index.php?uc=admin&action=valideModifEven&id=<?php echo $evenement->getIdEvenement(); ?>" method="POST" enctype="multipart/form-data">
         <h2>Formulaire de modification d'événement :</h2>
         </br>
-        <?php var_dump($evenement); ?>
 	<div class="form-group">
 		<label class="control-label col-sm-2" for="evenement">Titre de l'événement :</label>
                 <div class="col-sm-10">
@@ -28,7 +27,7 @@
         <div class="form-group">
         
 		<button class="submit" id="go">Envoyer</button>
-                <button class="reset" type="reset" id="gfy">Retour</button>
+                <button class="reset" type="reset" id="gfy" onClick="history.back()">Retour</button>
         </div>
     </form>
 </section>

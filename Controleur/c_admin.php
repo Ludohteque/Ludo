@@ -209,9 +209,10 @@ switch ($action) {
                     fileupload();
                     $nomImage = NOM_IMAGE;
                     $evenementOriginal->setLienImage($nomImage);
+                    $message = MESSAGE;
                 }
     
-                $message = MESSAGE;
+                
                 //if ($message == 'Upload réussi !') {
                     //$evenementOriginal->setLienImage($nomImage);
                     $evenementdao->update($evenementOriginal);

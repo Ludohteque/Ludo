@@ -177,8 +177,8 @@ switch ($action) {
             $id = $_GET['id'];
             $jeu = $jeudao->find($id);
             $jeudao->delete($jeu);
-            $messagedao = new MessageDAO();
             }
+            $messagedao = new MessageDAO();
             $signalements = $messagedao->getMessagesSignalement($_SESSION['id']);
             $renseignements = $messagedao->getRenseignements($_SESSION['id']);
             $demandesajout = $jeudao->getJeuxInvalides();

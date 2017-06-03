@@ -91,7 +91,7 @@
                 <td><?php
                     $lesCat = $unitem->getLesCategories();
                     foreach ($lesCat as $unecategorie) {
-                        echo substr($unecategorie, (4)) . "<br>";
+                        echo substr($unecategorie, (7)) . "<br>";
                     }
                     ?></td>
                 <td><?php echo $unitem->getNbJoueurs()->getNbJoueursMin() . " à " . $unitem->getNbJoueurs()->getNbJoueursMax(); ?></td>

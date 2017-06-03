@@ -87,6 +87,22 @@ switch ($action) {
         $daoexemplaire->create($exemplaire);
         include('Vue/v_dashboard.php');
         break;
+    
+    case 'supprExemplaire':
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $exemplairedao= new ExemplaireDAO();
+            $exemplaire = $exemplairedao->find($id);
+            $exemplairedao->delete($exemplaire);
+        }    
+        $jeudao= new JeuDAO();
+        $messagedao = new MessageDAO();
+        $signalements = $messagedao->getMessagesSignalement($_SESSION['id']);
+            $renseignements = $messagedao->getRenseignements($_SESSION['id']);
+            $demandesajout = $jeudao->getJeuxInvalides();
+            include_once 'Vue/v_dashboard.php';
+            break;
+            
     case 'choixPreteur':
         $destinataire = null;
         if (isset($_GET['id'])) {

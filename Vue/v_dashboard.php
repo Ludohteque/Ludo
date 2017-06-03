@@ -45,7 +45,9 @@ if (isset($resultat)) {
                         <td><?php echo $unExemplaire->getIdExemplaire(); ?></td>
                         <td><a href='index.php?uc=jeu&action=affichage&id=<?php echo $unExemplaire->getIdJeu()->getIdJeu(); ?>'><?php echo $unExemplaire->getIdJeu()->getNom(); ?></a></td>
                         <td><?php echo $unExemplaire->getEtat(); ?></td>
-                        <td><?php echo $unExemplaire->getDisponibilite(); ?></td>
+                        <td><?php if ($unExemplaire->getDisponibilite() == 1){
+                            echo "disponible";
+                        }else { echo "indisponible";}?></td>
                         <td>
                             <a class="btn btn-success" href="index.php?uc=dashboard&action=supprExemplaire&id=<?php echo $unExemplaire->getIdExemplaire(); ?>">Supprimer</a>
                             <a class="btn btn-success" href="index.php?uc=dashboard&action=modifExemplaire&id=<?php echo $unExemplaire->getIdExemplaire(); ?>">Modifier</a>

@@ -12,7 +12,7 @@ switch ($action) {
     case "demandeAdmin":
         $messagedao = new MessageDAO();
         $jeudao = new JeuDAO();
-        $signalements = $messagedao->getMessagesSignalement();
+        $signalements = $messagedao->getMessagesSignalement($_SESSION['id']);
         $renseignements = $messagedao->getRenseignements($_SESSION['id']);
         $demandesajout = $jeudao->getJeuxInvalides();
         include_once 'Vue/v_admin.php';
@@ -46,11 +46,20 @@ switch ($action) {
                 }//TODO
                 $items = $jeudao->getAll();
                 $titre = "jeux";
-                include_once 'Vue/v_adminliste.php';
+                if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
+                    include_once 'Vue/v_adminliste.php';
+                } else {
+                    $jeuDAO = new JeuDAO();
+                    $empruntDAO = new EmpruntDAO();
+                    $lesNouveautes = $jeuDAO->getNouveautes();
+                    $lesPopulaires = $jeuDAO->getPopulaires();
+                    $lesEmpruntes = $empruntDAO->getDerniersEmprunts();
+                    include("Vue/v_main.php");                    
+                }
             } else {
                 $jeudao = new JeuDAO;
                 $messagedao = new MessageDAO();
-                $signalements = $messagedao->getMessagesSignalement();
+                $signalements = $messagedao->getMessagesSignalement($_SESSION['id']);
                 $renseignements = $messagedao->getRenseignements($_SESSION['id']);
                 $demandesajout = $jeudao->getJeuxInvalides();
                 $resultat = "Ajout impossible ! il manque des informations !";
@@ -132,14 +141,16 @@ switch ($action) {
                 $jeu = $jeudao->find($id);
                 $note = $jeu->getNote();
                 $date = $jeu->getDateAjout();
+                $message="";
                 if (is_uploaded_file($_FILES['image']['tmp_name'])) {
                     define('TARGET', 'Vue/img/jeu/');
                     fileupload();
-                } else {
-                    $image = $jeu->getImage();
-                }
-                $message = MESSAGE;
+                    $message = MESSAGE;
                 $nomImage = NOM_IMAGE;
+                } else {
+                    $nomImage = $jeu->getImage();
+                }
+                
                 $isvalide = 0;
                 //if ($message == 'Upload réussi !') { //valable sur create, pas sur update
                     $nouveaujeu = new jeu($id, $nom, $descriptif, $etat, $note, $date, $nomImage, $nbjoueurs, $tranchedage, $duree, $categories);
@@ -152,7 +163,7 @@ switch ($action) {
             } else {
                 $jeudao = new JeuDAO;
                 $messagedao = new MessageDAO();
-                $signalements = $messagedao->getMessagesSignalement();
+                $signalements = $messagedao->getMessagesSignalement($_SESSION['id']);
                 $renseignements = $messagedao->getRenseignements($_SESSION['id']);
                 $demandesajout = $jeudao->getJeuxInvalides();
                 $resultat = "Ajout impossible ! il manque des informations !";
@@ -168,7 +179,7 @@ switch ($action) {
             $jeudao->delete($jeu);
             $messagedao = new MessageDAO();
             }
-            $signalements = $messagedao->getMessagesSignalement();
+            $signalements = $messagedao->getMessagesSignalement($_SESSION['id']);
             $renseignements = $messagedao->getRenseignements($_SESSION['id']);
             $demandesajout = $jeudao->getJeuxInvalides();
             include_once 'Vue/v_admin.php';
@@ -198,9 +209,10 @@ switch ($action) {
                     fileupload();
                     $nomImage = NOM_IMAGE;
                     $evenementOriginal->setLienImage($nomImage);
+                    $message = MESSAGE;
                 }
     
-                $message = MESSAGE;
+                
                 //if ($message == 'Upload réussi !') {
                     //$evenementOriginal->setLienImage($nomImage);
                     $evenementdao->update($evenementOriginal);
@@ -223,7 +235,7 @@ switch ($action) {
         $message = $messagedao->find($id);
         $messagedao->delete($message);
         }
-        $signalements = $messagedao->getMessagesSignalement();
+        $signalements = $messagedao->getMessagesSignalement($_SESSION['id']);
         $renseignements = $messagedao->getRenseignements($_SESSION['id']);
         $demandesajout = $jeudao->getJeuxInvalides();
         include('Vue/v_admin.php');
@@ -238,7 +250,7 @@ switch ($action) {
         $message = $messagedao->find($id);
         $messagedao->delete($message);
         }
-        $signalements = $messagedao->getMessagesSignalement();
+        $signalements = $messagedao->getMessagesSignalement($_SESSION['id']);
         $renseignements = $messagedao->getRenseignements($_SESSION['id']);
         $demandesajout = $jeudao->getJeuxInvalides();
         include('Vue/v_admin.php');
@@ -319,7 +331,7 @@ switch ($action) {
                 //}
         }else {
                 $messagedao = new MessageDAO();
-                $signalements = $messagedao->getMessagesSignalement();
+                $signalements = $messagedao->getMessagesSignalement($_SESSION['id']);
                 $renseignements = $messagedao->getRenseignements($_SESSION['id']);
                 $demandesajout = $jeudao->getJeuxInvalides();
                 $resultat = "Ajout impossible ! il manque des informations !";
@@ -334,7 +346,7 @@ switch ($action) {
             $jeu = $jeudao->find($id);
             $jeudao->valideAjout($jeu);
             $messagedao = new MessageDAO();
-            $signalements = $messagedao->getMessagesSignalement();
+            $signalements = $messagedao->getMessagesSignalement($_SESSION['id']);
             $renseignements = $messagedao->getRenseignements($_SESSION['id']);
             $demandesajout = $jeudao->getJeuxInvalides();
             include_once 'Vue/v_admin.php';

@@ -9,12 +9,27 @@ switch ($action) {
         include('Vue/v_dashboard.php');
         break;
     case 'repondreMessage':
-        $destinataire = null;
+        $user = null;
         if (isset($_GET['id'])) {
             $destinataire = $_GET['id'];
+            $userdao = new UserDAO();
+            $user = $userdao->find($destinataire);
         }
+
+        include('Vue/v_dashboard_message.php');
+        break;
+
+    case 'reponseAdmin':
+        $destinataire = null;
+        if (isset($_GET['id'])) {
+            $message = $_GET['id'];
+        }
+        $messagedao = new MessageDAO();
+        $message = $messagedao->find($message);
+        $destinataire = $message->getIdExpediteur();
         $userdao = new UserDAO();
         $user = $userdao->find($destinataire);
+        $type = $message->getType();
         include('Vue/v_dashboard_message.php');
         break;
 

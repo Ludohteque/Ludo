@@ -40,7 +40,7 @@ if (isset($messageEnvoye)) {
                         <td><?php echo $unmessage->getSujet(); ?></td>
                         <td class="width60"><?php echo $unmessage->getCorps(); ?></td>
                         <td><?php if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
-                            echo "<a class=\"btn btn-sm btn-block btn-info\" href=\"index.php?uc=dashboard&action=repondreMessage&id=".$unmessage->getIdExpediteur()->getIdUser()."\">Répondre</a>";
+                            echo "<a class=\"btn btn-sm btn-block btn-info\" href=\"index.php?uc=dashboard&action=reponseAdmin&id=".$unmessage->getIdMessage()."\">Répondre</a>";
                             ?></td>
                         <td class="mini"><?php
                             echo "<a class=\"btn btn-sm btn-block btn-danger\" href=\"index.php?uc=admin&action=effacerSignalement&id=".$unmessage->getIdMessage()."\">Annuler</a>";
@@ -71,7 +71,7 @@ if (isset($messageEnvoye)) {
                         <td><?php echo $unmessage->getSujet(); ?></td>
                         <td class="width60"><?php echo $unmessage->getCorps(); ?></td>
                         <td><?php if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
-                            echo "<a class=\"btn btn-sm btn-block btn-info\" href=\"index.php?uc=dashboard&action=repondreMessage&id=".$unmessage->getIdExpediteur()->getIdUser()."\">Répondre</a>";
+                            echo "<a class=\"btn btn-sm btn-block btn-info\" href=\"index.php?uc=dashboard&action=reponseAdmin&id=".$unmessage->getIdMessage()."\">Répondre</a>";
                             ?></td>
                         <td class="mini"><?php
                             echo "<a class=\"btn btn-sm btn-block btn-danger\" href=\"index.php?uc=admin&action=effacerRenseignement&id=".$unmessage->getIdMessage()."\">Annuler</a>";

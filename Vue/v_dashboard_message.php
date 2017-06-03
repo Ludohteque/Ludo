@@ -15,22 +15,29 @@
             <label class="control-label col-sm-2" for="destinataire">Destinataire:</label>
             <div class="col-sm-10">
                 <?php
-                if ($user != null) {
-                    ?><input type="text" class="form-control" id="destinataire" name="destinataire" value='<?php echo $user->getPseudo(); ?>' readonly=""><?php
+                if (isset($user)) {
+                    if ($user != null) {
+                        ?><input type="text" class="form-control" id="destinataire" name="destinataire" value='<?php echo $user->getPseudo(); ?>' readonly=""><?php
+                    }
                 } else {
-                    ?><input type="text" class="form-control" id="destinataire" name="destinataire" placeholder="Entrez le destinataire" required><?php
+                    ?>
+                    <input type="text" class="form-control" id="destinataire" name="destinataire" placeholder="Entrez le destinataire" required><?php
                 }
                 ?>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2" for="type">Type:</label>
+
             <div class="col-sm-10">
                 <select class="form-control" id="type" name="type" required>
-                    <option disabled="" selected>Sélectionnez un type...</option>
-                    <option>Demande de prêt</option>
-                    <option>Questions diverses</option>
-                    ?>
+                    <?php if (isset($type)) { ?>
+                        <option disabled="" selected><?php echo $type; ?></option>
+                    <?php } else { ?>
+                        <option disabled="" selected>Sélectionnez un type...</option>
+                        <option>Demande de prêt</option>
+                        <option>Questions diverses</option>
+                    <?php } ?>
 
                 </select>
             </div>

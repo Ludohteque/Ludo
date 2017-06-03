@@ -91,10 +91,10 @@ class MessageDAO extends DAO {
         return $listeMessages;
     }
 
-    public function getMessagesSignalement() {
+    public function getMessagesSignalement($id) {
         //public function getMessagesSignalement($obj) {
         
-        $req = Connexion::prepare("SELECT * FROM " .self::$table. " WHERE type LIKE 'Signalement';");
+        $req = Connexion::prepare("SELECT * FROM " .self::$table. " WHERE type LIKE 'Signalement' and id_destinataire=".$id.";");
         $req->execute();
         $lesmessages = $req->fetchAll();
         $listeMessages = array();

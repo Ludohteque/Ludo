@@ -55,6 +55,7 @@ class UserDAO extends DAO {
 
     public function update($obj) {
 
+       
         $pseudo = $obj->getPseudo();
         $ville = $obj->getVille();
         $mail = $obj->getMail();
@@ -62,14 +63,14 @@ class UserDAO extends DAO {
         $isAdmin = $obj->IsAdmin();
         $isBureau = $obj->isBureau();
         $mdp = $obj->getMdp();
-        $moyenne = $obj->getNoteUser();
+        $moyenne = $obj->getMoyenne();
         $nbBan = $obj->getNbBan();
         $enBan = $obj->getEnBan();
-        $idUser = $obj->getId_user();
-        $nb_notes = getNbNotes();
+        $idUser = $obj->getIdUser();
+        $nb_notes = $obj->getNbNotes();
 
-        $stmt = Connexion::prepare("UPDATE " . self::$table . " SET pseudo='?', ville='?', adr_mail='?', tel='?',"
-                        . "is_admin='?', is_bureau='?', mdp='?', moyenne='?', nbBan='?', enBan='?', nb_notes='?' WHERE id='?' ; ");
+        $stmt = Connexion::prepare("UPDATE " . self::$table . " SET pseudo=?, ville=?, adr_mail=?, tel=?,"
+                        . "is_admin=?, is_bureau=?, mdp=?, moyenne=?, nbBan=?, enBan=?, nb_notes=? WHERE id_user=? ; ");
 
         $stmt->bindParam(1, $pseudo);
         $stmt->bindParam(2, $ville);

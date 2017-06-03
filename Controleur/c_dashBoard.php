@@ -103,6 +103,29 @@ switch ($action) {
             include_once 'Vue/v_dashboard.php';
             break;
             
+    case 'modifExemplaire':
+        include_once('Vue/v_dashboard_modif_exemplaire.php');
+        break;
+    
+    case 'valideModifExemplaire':
+          if (isset($_GET['id'])) {
+            $exemplairedao = new ExemplaireDAO();
+            $id = $_GET['id'];
+            $etat = $_POST['etat'];
+            $dispo = $_POST['dispo'];
+            $exemplaire = $exemplairedao->find($id);
+            $exemplaire->setEtat($etat);
+            $exemplaire->setDisponibilite($dispo);
+            $exemplairedao->update($exemplaire);
+          }
+        $jeudao= new JeuDAO();
+        $messagedao= new MessageDAO();
+        $signalements = $messagedao->getMessagesSignalement($_SESSION['id']);
+        $renseignements = $messagedao->getRenseignements($_SESSION['id']);
+        $demandesajout = $jeudao->getJeuxInvalides();
+        include_once 'Vue/v_dashboard.php';
+        break;
+        
     case 'choixPreteur':
         $destinataire = null;
         if (isset($_GET['id'])) {
@@ -191,6 +214,42 @@ switch ($action) {
 
             $messagedao->create($message);
         }
+        include('Vue/v_dashboard.php');
+        break;
+
+    case 'modifierInfos':
+        $id = $_SESSION['id'];
+        $userdao = new UserDAO();
+        $user = $userdao->find($id);
+        include ('Vue/v_dashboard_profil.php');
+        break;
+    case 'modifProfil':
+        $pseudo = $_POST['Pseudo'];
+        $ville = $_POST['Ville'];
+        $mail = $_POST['Email'];
+        $telephone = $_POST['Telephone'];
+        $mdp1 = $_POST['mdp1'];
+        $mdp2 = $_POST['mdp2'];
+        $id = $_SESSION['id'];
+        $userdao = new UserDAO();
+        $user = $userdao->find($id);
+        If ($pseudo != "") {
+            $user->setPseudo($pseudo);
+        }
+        if ($ville != "") {
+            $user->setVille($ville);
+        }
+        if ($mail != "") {
+            $user->setMail($mail);
+        }
+        if ($telephone != "") {
+            $user->setTel($telephone);
+        }
+        if ($mdp1 != "") {
+            $user->setMdp(md5($mdp1));
+        }
+        $userdao->update($user);
+
         include('Vue/v_dashboard.php');
         break;
 }

@@ -140,8 +140,14 @@ class JeuDAO extends DAO {
         return $listeJeux;
     }
 
-    public function getNouveautes() {
-        $stmt = Connexion::prepare("select * from " . self::$tableMere . " inner join " . self::$tableFille . " on " . self::$tableFille . "." . self::$clePrimaireFille . "=" . self::$tableMere . "." . self::$clePrimaireMere . " ORDER BY " . self::$dateAjout . " DESC LIMIT 10;");
+    public function getNouveautes($limite) {
+                if ($limite){
+            $lim = 'LIMIT 10';
+        }else{
+            $lim = '';
+        }
+           
+        $stmt = Connexion::prepare("select * from " . self::$tableMere . " inner join " . self::$tableFille . " on " . self::$tableFille . "." . self::$clePrimaireFille . "=" . self::$tableMere . "." . self::$clePrimaireMere . " ORDER BY " . self::$dateAjout . " DESC ".$lim.";");
         $stmt->execute();
         $result = $stmt->fetchAll();
         $listeJeux = array();
@@ -162,8 +168,13 @@ class JeuDAO extends DAO {
     }
 
     // renvoie une liste d'objet Jeu
-    public function getPopulaires() {
-        $stmt = Connexion::prepare("select * from " . self::$tableMere . " inner join " . self::$tableFille . " on " . self::$tableFille . "." . self::$clePrimaireFille . "=" . self::$tableMere . "." . self::$clePrimaireMere . " ORDER BY note DESC LIMIT 10;");
+    public function getPopulaires($limite) {
+        if ($limite){
+            $lim = 'LIMIT 10';
+        }else{
+            $lim = '';
+        }
+        $stmt = Connexion::prepare("select * from " . self::$tableMere . " inner join " . self::$tableFille . " on " . self::$tableFille . "." . self::$clePrimaireFille . "=" . self::$tableMere . "." . self::$clePrimaireMere . " ORDER BY note DESC ".$lim.";");
         $stmt->execute();
         $result = $stmt->fetchAll();
         $listeJeux = array();

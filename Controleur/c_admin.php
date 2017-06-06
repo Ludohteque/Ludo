@@ -280,7 +280,7 @@ switch ($action) {
 
     case 'jeuxAdmin': {
             $jeudao = new JeuDAO();
-            $items = $jeudao->getAll();
+            $items = $jeudao->getListeJeuxValides();
             $titre = "jeux";
             include_once 'Vue/v_adminliste.php';
             break;

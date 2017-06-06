@@ -222,7 +222,7 @@ class JeuDAO extends DAO {
     }
     
     public function getListeJeuxValides() {
-        $stmt = Connexion::prepare("select * from " . self::$tableMere . " inner join " . self::$tableFille . " on " . self::$tableFille . "." . self::$clePrimaireFille . "=" . self::$tableMere . "." . self::$clePrimaireMere . " WHERE " . self::$tableFille . ".is_valide=1 ;");
+        $stmt = Connexion::prepare("select * from " . self::$tableMere . " inner join " . self::$tableFille . " on " . self::$tableFille . "." . self::$clePrimaireFille . "=" . self::$tableMere . "." . self::$clePrimaireMere . " WHERE " . self::$tableFille . ".is_valide = '1' ;");
         $stmt->execute();
         $result = $stmt->fetchAll();
         $listeJeux = array();

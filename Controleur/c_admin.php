@@ -44,7 +44,7 @@ switch ($action) {
                     $jeudao->create($nouveaujeu);
                     //$resultat = "Votre jeu a bien été ajouté !";
                 }//TODO
-                $items = $jeudao->getAll();
+                $items = $jeudao->getListeJeuxValides();
                 $titre = "jeux";
                 if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
                     include_once 'Vue/v_adminliste.php';
@@ -109,9 +109,10 @@ switch ($action) {
             $jeudao = new JeuDAO();
             $id = $_GET['id'];
             $jeu = $jeudao->find($id);
+            unlink("Vue/img/jeu/".$jeu->getImage());
             $jeudao->delete($jeu);
             }
-            $items = $jeudao->getAll();
+            $items = $jeudao->getListeJeuxValides();
             $titre = "jeux";
             include_once 'Vue/v_adminliste.php';
             break;
@@ -140,11 +141,15 @@ switch ($action) {
                 $jeuoriginal->setLesCategories($_POST['categories']);
                 $jeuoriginal->setNbJoueurs($_POST['nbjoueurs']);
                 $jeuoriginal->setIdDuree($_POST['duree']);
+                $ancienneImage = "Vue/img/jeu/".$jeuoriginal->getImage();
                 $message="";
                 if (is_uploaded_file($_FILES['image']['tmp_name'])) {
                     define('TARGET', 'Vue/img/jeu/');
                     fileupload();
                     $message = MESSAGE;
+                    if ($message == 'Upload réussi !') {
+                        unlink($ancienneImage);
+                    }
                 $nomImage = NOM_IMAGE;
                 } else {
                     $nomImage = $jeuoriginal->getImage();
@@ -157,7 +162,7 @@ switch ($action) {
                     $jeudao->update($jeuoriginal);
                     //$resultat = "Votre jeu a bien été ajouté !";
                 //}//TODO
-                $items = $jeudao->getAll();
+                $items = $jeudao->getListeJeuxValides();
                 $titre = "jeux";
                 include_once 'Vue/v_adminliste.php';
             } else {
@@ -176,6 +181,8 @@ switch ($action) {
             if (isset($_GET['id'])) {
             $id = $_GET['id'];
             $jeu = $jeudao->find($id);
+            $ancienneImage = "Vue/img/jeu/".$jeu->getImage();
+            unlink($ancienneImage);
             $jeudao->delete($jeu);
             }
             $messagedao = new MessageDAO();
@@ -204,12 +211,16 @@ switch ($action) {
             $date = $evenementOriginal->getDateAjout();
             $evenementOriginal->setTitre($_POST['titre']);
             $evenementOriginal->setEvenement($_POST['evenement']);
+            $ancienneImage = $evenementOriginal->getLienImage();
             if (is_uploaded_file($_FILES['image']['tmp_name'])) {
                     define('TARGET', 'Vue/img/evenement/');
                     fileupload();
                     $nomImage = NOM_IMAGE;
-                    $evenementOriginal->setLienImage($nomImage);
                     $message = MESSAGE;
+                    if ($message == 'Upload réussi !') {
+                        $evenementOriginal->setLienImage($nomImage);
+                        unlink($ancienneImage);
+                    }
                 }
     
                 
@@ -297,6 +308,7 @@ switch ($action) {
             $evendao = new EvenementDAO();
             $id = $_GET['id'];
             $even = $evendao->find($id);
+            unlink($even->getLienImage());
             $evendao->delete($even);
             $items = $evendao->findAll();
             $titre = "évènements";

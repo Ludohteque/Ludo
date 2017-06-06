@@ -49,7 +49,7 @@ if (isset($resultat)) {
                             echo "disponible";
                         }else { echo "indisponible";}?></td>
                         <td>
-                            <a class="btn btn-success" href="index.php?uc=dashboard&action=supprExemplaire&id=<?php echo $unExemplaire->getIdExemplaire(); ?>">Supprimer</a>
+                            <a class="btn btn-success confirm" href="index.php?uc=dashboard&action=supprExemplaire&id=<?php echo $unExemplaire->getIdExemplaire(); ?>">Supprimer</a>
                             <a class="btn btn-success" href="index.php?uc=dashboard&action=modifExemplaire&id=<?php echo $unExemplaire->getIdExemplaire(); ?>">Modifier</a>
                         </td>
                     </tr>
@@ -120,7 +120,7 @@ if (isset($resultat)) {
                         <td><?php echo $unPret->getIdExemplaire()->getEtat(); ?></td>
                         <td>
                             <a class="btn btn-success" href="index.php?uc=dashboard&action=validerEmprunt&id=<?php echo $unPret->getIdEmprunts(); ?>">Valider l'emprunt</a>
-                            <a class="btn btn-success" href="index.php?uc=dashboard&action=annulerEmprunt&id=<?php echo $unPret->getIdEmprunts(); ?>">Refuser l'emprunt</a>
+                            <a class="btn btn-success confirm" href="index.php?uc=dashboard&action=annulerEmprunt&id=<?php echo $unPret->getIdEmprunts(); ?>">Refuser l'emprunt</a>
                         </td>
                     </tr>
                     <?php

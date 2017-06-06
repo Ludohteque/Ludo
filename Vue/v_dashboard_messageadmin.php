@@ -16,9 +16,9 @@
             <div class="col-sm-10">
                 <?php
                 if ($user != null) {
-                    ?><input type="text" class="form-control" id="destinataire" name="destinataire" value='<?php echo $user->getPseudo(); ?>' readonly=""><?php
+                    ?><input type="text" class="form-control" id="destinataire" name="destinataire" value='<?php echo "Administrateurs"; ?>' readonly=""><?php
                 } else {
-                    ?><input type="text" class="form-control" id="destinataire" name="destinataire" placeholder="Entrez le destinataire" disabled="True"><?php
+                    ?><input type="text" class="form-control" id="destinataire" name="destinataire" placeholder="Administrateurs" disabled="True"><?php
                 }
                 ?>
             </div>

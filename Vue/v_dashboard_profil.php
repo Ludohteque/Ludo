@@ -25,7 +25,7 @@ include('Vue/v_header.php');
         <div class="form-group">
             <label class="control-label col-sm-2">Téléphone:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="Telephone" value="<?php echo $user->getTel(); ?>">
+                <input type="text" class="form-control" name="Telephone" value="<?php echo "0".$user->getTel(); ?>">
             </div>
         </div>
         <div class="form-group">

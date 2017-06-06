@@ -248,6 +248,8 @@ switch ($action) {
 
         include('Vue/v_dashboard.php');
         break;
+        
+        
 }
 // a décommenter pour que cela demande la connexion, et avoir un truc fonctionnel... 
 // Commenté a des fins de tests.

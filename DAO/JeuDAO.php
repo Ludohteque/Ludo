@@ -93,7 +93,6 @@ class JeuDAO extends DAO {
         $descriptif = $obj->getDescriptif();
         $etat = $obj->getEtat();
         $nomjeu = $obj->getNomJeu();
-        $dateajouter = $obj->getDateAjout(); //->format('Y-m-d H:i:s');
         $image = $obj->getImage();
         $note = $obj->getNote();
         $nbjoueurs = $obj->getNbJoueurs();
@@ -101,7 +100,7 @@ class JeuDAO extends DAO {
         $duree = $obj->getIdDuree();
         $stmt = Connexion::prepare("update " . self::$tableFille . " set id_age=".$age.", id_nb_joueurs=".$nbjoueurs.", id_duree=".$duree." where " . self::$clePrimaireFille . "=" . $id . ";");
         $stmt->execute();
-        $stmt2 = Connexion::prepare("update " . self::$tableMere . " set nom=\"".$nomjeu."\", etat=\"".$etat."\", note=".$note.", descriptif=\"".$descriptif."\", date_ajout=".$dateajouter.", image=\"".$image."\" where " . self::$clePrimaireMere . "=" . $id . ";");
+        $stmt2 = Connexion::prepare("update " . self::$tableMere . " set nom=\"".$nomjeu."\", etat=\"".$etat."\", note=".$note.", descriptif=\"".$descriptif."\", image=\"".$image."\" where " . self::$clePrimaireMere . "=" . $id . ";");
         $stmt2->execute();
         $lescategories = $obj->getLesCategories();
         

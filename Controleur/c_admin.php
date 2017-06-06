@@ -293,13 +293,13 @@ switch ($action) {
             include_once 'Vue/v_adminliste.php';
             break;
         }
-        case 'deleteEvenements': {
+        case 'deleteEvenement': {
             $evendao = new EvenementDAO();
             $id = $_GET['id'];
             $even = $evendao->find($id);
             $evendao->delete($even);
             $items = $evendao->findAll();
-            $titre = "evenements";
+            $titre = "évènements";
             include_once 'Vue/v_adminliste.php';
             break;
         }

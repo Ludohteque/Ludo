@@ -1,6 +1,5 @@
 <?php include('v_header.php'); ?>
 <h5>Administration des <?php echo $titre; ?> :</h5></br></br>
-
 <table class="tableau width90">
     <tr class="tableauTete">
         <?php if ($titre == "utilisateurs") { ?>

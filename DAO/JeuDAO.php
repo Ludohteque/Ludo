@@ -219,6 +219,26 @@ class JeuDAO extends DAO {
         $stmt = Connexion::prepare("UPDATE " . self::$tableFille . " SET is_valide = 1 WHERE " . self::$clePrimaireFille . " = " . $id . ";");
         $stmt->execute();
     }
+    
+    public function getListeJeuxValides() {
+        $stmt = Connexion::prepare("select * from " . self::$tableMere . " inner join " . self::$tableFille . " on " . self::$tableFille . "." . self::$clePrimaireFille . "=" . self::$tableMere . "." . self::$clePrimaireMere . " WHERE " . self::$tableFille . ".is_valide=1 ;");
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $listeJeux = array();
+        foreach ($result as $value) {
+            $nbjoueeursdao = new NombreJoueursDAO();
+            $nbJoueurs = $nbjoueeursdao->find($value['id_nb_joueurs']);
+            $daoage = new TrancheAgeDAO();
+            $age = $daoage->find($value['id_age']);
+            $daoduree = new DureeDAO();
+            $duree = $daoduree->find($value['id_duree']);
+            $daocat = new CategorieDAO();
+            $lesCategories = $daocat->findAllByJeu($value['id_jeu']);
+            $newjeu = new Jeu($value['id_jeu'], $value['nom'], $value['descriptif'], $value['etat'], $value['note'], $value['date_ajout'], $value['image'], $nbJoueurs, $age, $duree, $lesCategories);
+            $listeJeux[] = $newjeu;
+        }
+        return $listeJeux;
+    }
 
     // public function fileupload() {
 //        if (isset($_FILES['image'])) {

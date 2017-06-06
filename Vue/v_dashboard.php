@@ -396,7 +396,7 @@ if (isset($resultat)) {
                 </div>
                 <div class="form-group">
                     <label>Téléphone:</label>
-                    <p><?php echo $user->getTel(); ?></p>
+                    <p><?php echo "0".$user->getTel(); ?></p>
                 </div>
                 <a class="btn btn-success" href="index.php?uc=dashboard&action=modifierInfos">Modifier</a>
 

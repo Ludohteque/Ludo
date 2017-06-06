@@ -51,9 +51,9 @@ switch ($action) {
                 } else {
                     $jeuDAO = new JeuDAO();
                     $empruntDAO = new EmpruntDAO();
-                    $lesNouveautes = $jeuDAO->getNouveautes();
-                    $lesPopulaires = $jeuDAO->getPopulaires();
-                    $lesEmpruntes = $empruntDAO->getDerniersEmprunts();
+                    $lesNouveautes = $jeuDAO->getNouveautes(True);
+                    $lesPopulaires = $jeuDAO->getPopulaires(True);
+                    $lesEmpruntes = $empruntDAO->getDerniersEmprunts(True);
                     include("Vue/v_main.php");                    
                 }
             } else {

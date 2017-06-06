@@ -45,10 +45,12 @@ class JeuDAO extends DAO {
     }
 
     public function delete($obj) {
+        $image = $obj->getImage();
         $stmt = Connexion::prepare("delete from " . self::$tableFille . " where " . self::$clePrimaireFille . " = " . $obj->getIdJeu() . ";");
         $stmt->execute();
 
         $stmt2 = Connexion::prepare("delete from " . self::$tableMere . " where " . self::$clePrimaireMere . " = " . $obj->getIdJeu() . ";");
+        
         $stmt2->execute();
     }
 

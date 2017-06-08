@@ -10,8 +10,9 @@ class Produit {
     protected $etat;
     protected $dateAjout;
     protected $image;
+    protected $valide;
 
-    function __construct($idProduit, $nom, $descriptif, $etat, $note, $dateAjout, $image) {
+    function __construct($idProduit, $nom, $descriptif, $etat, $note, $dateAjout, $image, $valide) {
         $this->idProduit = $idProduit;
         $this->note = $note;
         $this->descriptif = $descriptif;
@@ -19,6 +20,7 @@ class Produit {
         $this->nom = $nom;
         $this->dateAjout = $dateAjout;
         $this->image = $image;
+        $this->valide = $valide;
     }
 
     function getIdProduit() {

@@ -13,8 +13,8 @@ class Jeu extends Produit {
     private $lesCommentaires;
     private $lesCategories;
 
-    function __construct($idJeu, $nomJeu, $descriptif, $etat, $note, $dateAjout, $image, $nbJoueurs, $idAge, $idDuree, $lesCategories) {
-        parent::__construct($idJeu, $nomJeu, $descriptif, $etat, $note, $dateAjout, $image);
+    function __construct($idJeu, $nomJeu, $descriptif, $etat, $note, $dateAjout, $image, $nbJoueurs, $idAge, $idDuree, $lesCategories, $valide) {
+        parent::__construct($idJeu, $nomJeu, $descriptif, $etat, $note, $dateAjout, $image, $valide);
         $this->idJeu = $idJeu;
         $this->nbJoueurs = $nbJoueurs;
         $this->idAge = $idAge;
@@ -77,6 +77,15 @@ class Jeu extends Produit {
     function setLesCategories($lesCategories) {
         $this->lesCategories = $lesCategories;
     }
+    function getValide() {
+        return $this->valide;
+    }
+
+    function setValide($valide) {
+        $this->valide = $valide;
+    }
+
+
 
 }
 

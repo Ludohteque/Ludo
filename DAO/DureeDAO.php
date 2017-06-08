@@ -23,10 +23,10 @@ class DureeDAO extends DAO {
         $req->execute();
     }
     public function find($id) {        
-    	$req = Connexion::getInstance()->prepare("SELECT * FROM ".self::$table." WHERE ".self::$clePrimaire." = ".$id.";");
+    	$req = Connexion::prepare("SELECT * FROM ".self::$table." WHERE ".self::$clePrimaire." = ".$id.";");
         $req->execute();
         $d = $req->fetch();
-        $duree=new Duree($d["id_duree"], $d["duree_min"], $d["duree_max"]);
+        $duree= new Duree($d["id_duree"], $d["duree_min"], $d["duree_max"]);
             
         return $duree;
         

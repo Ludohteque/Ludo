@@ -138,20 +138,27 @@ function verifTel(champ) {
     }
 }
 function validation(f) {
-  if (f.mdp1.value !== f.mdp2.value) {
-    alert('Ce ne sont pas les mêmes mots de passe!');
-    f.mdp1.focus();
-    return false;
+    if (f.mdp1.value !== f.mdp2.value) {
+        alert('Ce ne sont pas les mêmes mots de passe!');
+        f.mdp1.focus();
+        return false;
+    } else if (f.mdp1.value === f.mdp2.value) {
+        return true;
+    } else {
+        f.mdp1.focus();
+        return false;
     }
-  else if (f.mdp1.value === f.mdp2.value) {
-    return true;
-    }
-  else {
-    f.mdp1.focus();
-    return false;
-    }
-  }
+}
 
+function verifCat(f) {
+    if ($('div.checkbox-group.required :checkbox:checked').length > 0) {
+        return true;
+    } else {
+        alert("Vous devez cocher au moins une catégorie.");
+        return false;
+    }
+
+}
 
 $("#inscription").click(function () {
     $("body").addClass("grey");
@@ -162,18 +169,19 @@ $("#connexion").click(function () {
 });
 
 $(".confirm").click(function (e) {
-            e.preventDefault();
-            theHREF = $(this).attr("href");
-            $("#cModal").modal("show");
-        });
+    e.preventDefault();
+    theHREF = $(this).attr("href");
+    $("#cModal").modal("show");
+});
 
-        $("#Non").click(function (e) {
-            $("#cModal").modal("hide");
-        });
+$("#Non").click(function (e) {
+    $("#cModal").modal("hide");
+});
 
-        $("#Yes").click(function (e) {
-            window.location.href = theHREF;
-        });
+$("#Yes").click(function (e) {
+    window.location.href = theHREF;
+});
+
 
 //$(document).ready(function () { 
         $('#newjeuvld').click(function (e) {

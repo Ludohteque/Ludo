@@ -43,29 +43,12 @@ switch ($action) {
         if ($userDestinataire == null) {
             $resultat = "Le destinataire n'existe pas.";
         } else {
-
-            if (isset($_POST['retour'])) {
-                $retour = $_POST['retour'];
-                $corps = "L'emprunt a été confirmé et vous devrez rendre le jeu dans $retour.";
-                $type = "Demande de prêt";
-                $message = new Message(-1, $corps, $userExpediteur, $userDestinataire, $sujet, $type, date('Y-m-d H:i:s'));
-                $messagedao = new MessageDAO();
-                $messagedao->create($message);
-                $idExemplaire = $_POST['jeu'];
-                $exemplairedao = new ExemplaireDAO();
-                $exemplaire = $exemplairedao->find($idExemplaire);
-                $emprunt = new Emprunt(-1, date('Y-m-d'), null, $userDestinataire, $exemplaire);
-                $daoemprunt = new EmpruntDAO();
-                $daoemprunt->create($emprunt);
-                $resultat = "L'emprunt a bien été enregistré et un message de confirmation a été envoyé à l'emprunteur.";
-            } else {
-                $corps = $_POST['corps'];
-                $type = $_POST['type'];
-                $message = new Message(-1, $corps, $userExpediteur, $userDestinataire, $sujet, $type, date('Y-m-d H:i:s'));
-                $messagedao = new MessageDAO();
-                $messagedao->create($message);
-                $resultat = "Votre message a bien été envoyé.";
-            }
+            $corps = $_POST['corps'];
+            $type = $_POST['type'];
+            $message = new Message(-1, $corps, $userExpediteur, $userDestinataire, $sujet, $type, date('Y-m-d H:i:s'));
+            $messagedao = new MessageDAO();
+            $messagedao->create($message);
+            $resultat = "Votre message a bien été envoyé.";
         }
         include('Vue/v_dashboard.php');
         break;
@@ -156,6 +139,10 @@ switch ($action) {
         $emprunt->setStatut("En cours");
         $emprunt->setDateEmprunts(date('Y-m-d'));
         $daoemprunt->update($emprunt);
+        $daoexemplaire = new ExemplaireDAO();
+        $exemplaire = $emprunt->getIdExemplaire();
+        $exemplaire->setDisponibilite(0);
+        $daoexemplaire->update($exemplaire);
         $resultat = "L'emprunt a été enregistré en tant qu'emprunt en cours.";
         include('Vue/v_dashboard.php');
         break;

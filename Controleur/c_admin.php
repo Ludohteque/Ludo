@@ -150,7 +150,7 @@ switch ($action) {
                     $nomImage = NOM_IMAGE;
                     $jeu->setImage($nomImage);
                 }
-                if ($message != 'Upload réussi !' || $message != "") {
+                if ($message != 'Upload réussi !' && $message != "") {
                     $resultat = $message;
                 } else {
                     $jeudao->update($jeu);
@@ -209,16 +209,11 @@ switch ($action) {
                     $message = MESSAGE;
                 }
 
-                
-                //if ($message == 'Upload réussi !') {
-                //$evenementOriginal->setLienImage($nomImage);
                 $evenementdao->update($evenementOriginal);
                 $resultat = "Votre evenement a bien été ajouté !";
                 $items = $evenementdao->findAll();
                 $titre = "évènements";
                 include_once 'Vue/v_adminliste.php';
-                //include_once 'Vue/v_modifEvenement.php';
-                //}
             }
             break;
         }

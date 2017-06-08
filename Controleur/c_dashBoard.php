@@ -9,12 +9,13 @@ switch ($action) {
         include('Vue/v_dashboard.php');
         break;
     case 'repondreMessage':
-        $destinataire = null;
+        $user = null;
+        
         if (isset($_GET['id'])) {
             $destinataire = $_GET['id'];
+            $userdao = new UserDAO();
+            $user = $userdao->find($destinataire);
         }
-        $userdao = new UserDAO();
-        $user = $userdao->find($destinataire);
         include('Vue/v_dashboard_message.php');
         break;
 
@@ -161,12 +162,11 @@ switch ($action) {
         $messagedao = new MessageDAO();
         foreach ($destinataires as $admin) {
             $message = new Message(-1, $corps, $expediteur, $admin, $sujet, $type, date('Y-m-d H:i:s'));
-                
-                $messagedao->create($message);
+
+            $messagedao->create($message);
         }
         include('Vue/v_dashboard.php');
         break;
-    
 }
 // a décommenter pour que cela demande la connexion, et avoir un truc fonctionnel... 
 // Commenté a des fins de tests.

@@ -329,7 +329,7 @@ if (isset($resultat)) {
                             <td><?php echo $unMessage->getIdDestinataire()->getPseudo(); ?></td>
                             <td><?php echo $unMessage->getDate() ?></td>
                             <td>
-                                <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#corps<?php echo $unMessage->getIdMessage(); ?>">Voir</button>
+                                <button type="button" class="btn btn-info" data-toggle="collapse" aria-expanded="false"  data-target="#corps<?php echo $unMessage->getIdMessage(); ?>">Voir</button>
                             </td>
                         </tr>
                         <tr id="corps<?php echo $unMessage->getIdMessage(); ?>" class="collapse">

@@ -68,7 +68,7 @@ class JeuDAO extends DAO {
         $duree = $daoduree->find($result['id_duree']);
         $daocat = new CategorieDAO();
         $lesCat = $daocat->findAllByJeu($result['id_jeu']);
-        $jeu = new Jeu($result['id_jeu'], $result['nom'], $result['descriptif'], $result['etat'], $result['note'], $result['date_ajout'], $result['image'], $nbJoueurs, $age, $duree, $lesCat);
+        $jeu = new Jeu($result['id_jeu'], $result['nom'], $result['descriptif'], $result['etat'], $result['note'], $result['date_ajout'], $result['image'], $nbJoueurs, $age, $duree, $lesCat, $result['is_valide']);
         return $jeu;
     }
 
@@ -86,7 +86,7 @@ class JeuDAO extends DAO {
         $duree = $daoduree->find($result['id_duree']);
         $daocat = new CategorieDAO();
         $lesCat = $daocat->findAllByJeu($result['id_jeu']);
-        $jeu = new Jeu($result['id_jeu'], $result['nom'], $result['descriptif'], $result['etat'], $result['note'], $result['date_ajout'], $result['image'], $nbJoueurs, $age, $duree, $lesCat);
+        $jeu = new Jeu($result['id_jeu'], $result['nom'], $result['descriptif'], $result['etat'], $result['note'], $result['date_ajout'], $result['image'], $nbJoueurs, $age, $duree, $lesCat, $result['is_valide']);
         return $jeu;
     }
 
@@ -105,19 +105,13 @@ class JeuDAO extends DAO {
         $stmt2 = Connexion::prepare("update " . self::$tableMere . " set nom=\"".$nomjeu."\", etat=\"".$etat."\", note=".$note.", descriptif=\"".$descriptif."\", image=\"".$image."\" where " . self::$clePrimaireMere . "=" . $id . ";");
         $stmt2->execute();
         $lescategories = $obj->getLesCategories();
-        
+        $stmt3 = Connexion::Prepare("delete from jeucategorie where id_jeu='$id';");
+        $stmt3->execute();
         foreach ($lescategories as $unecategorie) {
-            $stmt3 = Connexion::Prepare("select * from jeucategorie where id_jeu = " . $id . " and nom_categorie like '" . $unecategorie . "';");
-            $stmt3->execute();
-            $result = $stmt3->fetch();
-            if ($result == false) {
-                
-                $stmt4 = Connexion::prepare("insert into jeucategorie (id_jeu, nom_categorie) values (?, ?);");
-                
-                $stmt4->bindParam(1, $id);
-                $stmt4->bindParam(2, $unecategorie);
-                $stmt4->execute();
-            }
+            $stmt4 = Connexion::prepare("insert into jeucategorie (id_jeu, nom_categorie) values (?, ?);");
+            $stmt4->bindParam(1, $id);
+            $stmt4->bindParam(2, $unecategorie);
+            $stmt4->execute();
         }
     }
 
@@ -135,7 +129,7 @@ class JeuDAO extends DAO {
             $duree = $daoduree->find($value['id_duree']);
             $daocat = new CategorieDAO();
             $lesCat = $daocat->findAllByJeu($value['id_jeu']);
-            $newjeu = new Jeu($value['id_jeu'], $value['nom'], $value['descriptif'], $value['etat'], $value['note'], $value['date_ajout'], $value['image'], $nbJoueurs, $age, $duree, $lesCat);
+            $newjeu = new Jeu($value['id_jeu'], $value['nom'], $value['descriptif'], $value['etat'], $value['note'], $value['date_ajout'], $value['image'], $nbJoueurs, $age, $duree, $lesCat, $value['is_valide']);
             $listeJeux[] = $newjeu;
         }
         return $listeJeux;
@@ -162,7 +156,7 @@ class JeuDAO extends DAO {
             $duree = $daoduree->find($value['id_duree']);
             $daocat = new CategorieDAO();
             $lesCat = $daocat->findAllByJeu($value['id_jeu']);
-            $newjeu = new Jeu($value['id_jeu'], $value['nom'], $value['descriptif'], $value['etat'], $value['note'], $value['date_ajout'], $value['image'], $nbJoueurs, $age, $duree, $lesCat);
+            $newjeu = new Jeu($value['id_jeu'], $value['nom'], $value['descriptif'], $value['etat'], $value['note'], $value['date_ajout'], $value['image'], $nbJoueurs, $age, $duree, $lesCat, $value['is_valide']);
             $listeJeux[] = $newjeu;
         }
         return $listeJeux;
@@ -188,7 +182,7 @@ class JeuDAO extends DAO {
             $duree = $daoduree->find($value['id_duree']);
             $daocat = new CategorieDAO();
             $lesCat = $daocat->findAllByJeu($value['id_jeu']);
-            $newjeu = new Jeu($value['id_jeu'], $value['nom'], $value['descriptif'], $value['etat'], $value['note'], $value['date_ajout'], $value['image'], $nbJoueurs, $age, $duree, $lesCat);
+            $newjeu = new Jeu($value['id_jeu'], $value['nom'], $value['descriptif'], $value['etat'], $value['note'], $value['date_ajout'], $value['image'], $nbJoueurs, $age, $duree, $lesCat, $value['is_valide']);
             $listeJeux[] = $newjeu;
         }
         return $listeJeux;
@@ -209,7 +203,7 @@ class JeuDAO extends DAO {
             $duree = $daoduree->find($value['id_duree']);
             $daocat = new CategorieDAO();
             $lesCategories = $daocat->findAllByJeu($value['id_jeu']);
-            $newjeu = new Jeu($value['id_jeu'], $value['nom'], $value['descriptif'], $value['etat'], $value['note'], $value['date_ajout'], $value['image'], $nbJoueurs, $age, $duree, $lesCategories);
+            $newjeu = new Jeu($value['id_jeu'], $value['nom'], $value['descriptif'], $value['etat'], $value['note'], $value['date_ajout'], $value['image'], $nbJoueurs, $age, $duree, $lesCategories, $value['is_valide']);
             $listeJeux[] = $newjeu;
         }
         return $listeJeux;
@@ -235,7 +229,7 @@ class JeuDAO extends DAO {
             $duree = $daoduree->find($value['id_duree']);
             $daocat = new CategorieDAO();
             $lesCategories = $daocat->findAllByJeu($value['id_jeu']);
-            $newjeu = new Jeu($value['id_jeu'], $value['nom'], $value['descriptif'], $value['etat'], $value['note'], $value['date_ajout'], $value['image'], $nbJoueurs, $age, $duree, $lesCategories);
+            $newjeu = new Jeu($value['id_jeu'], $value['nom'], $value['descriptif'], $value['etat'], $value['note'], $value['date_ajout'], $value['image'], $nbJoueurs, $age, $duree, $lesCategories, $value['is_valide']);
             $listeJeux[] = $newjeu;
         }
         return $listeJeux;

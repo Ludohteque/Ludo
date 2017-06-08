@@ -1,7 +1,7 @@
 <?php
 
-define('LIEN_IMAGE', 'Vue/img/');
 session_start();
+define('LIEN_IMAGE', 'Vue/img/');
 
 require_once('DAO/Connexion.php');
 require_once('DAO/DAO.php');

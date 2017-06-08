@@ -39,9 +39,6 @@ class Exemplaire {
         return $this->disponibilite;
     }
     
-    function setDisponibilite($disponilite) {
-        $this->disponibilite = $disponilite;
-    }
 
     function setIdUser($idUser) {
         $this->idUser = $idUser;
@@ -58,6 +55,11 @@ class Exemplaire {
     function setEtat($etat) {
         $this->etat = $etat;
     }
+    function setDisponibilite($disponibilite) {
+        $this->disponibilite = $disponibilite;
+    }
+
+
 
 }
 ?>

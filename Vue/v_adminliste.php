@@ -1,7 +1,10 @@
 <?php include('v_header.php'); ?>
-
-
 <h5>Administration des <?php echo $titre; ?> :</h5></br></br>
+<?php
+if (isset($resultat)) {
+    echo "<div class='message'>" . $resultat . "</div>";
+}
+?>
 <table class="tableau width90">
     <tr class="tableauTete">
         <?php if ($titre == "utilisateurs") { ?>

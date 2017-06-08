@@ -1,7 +1,8 @@
 <?php
+
 require_once ('DAO/EvenementDAO.php');
-if(!isset($_GET['action'])){
-	$_GET['action'] = 'evenement';
+if (!isset($_GET['action'])) {
+    $_GET['action'] = 'evenement';
 }
 
 $action = $_GET['action'];
@@ -17,5 +18,14 @@ switch ($action) {
         $daoeven = new EvenementDAO();
         $even = $daoeven->find($id);
         include_once 'Vue/v_admin_evenement.php';
+        break;
+    case "supprEvenement":
+        $id = $_GET['id'];
+        $daoeven = new EvenementDAO();
+        $even = $daoeven->find($id);
+        $daoeven->delete($even);
+        $items = $daoeven->findAll();
+        $titre = "évènements";
+        include_once 'Vue/v_adminliste.php';
         break;
 }

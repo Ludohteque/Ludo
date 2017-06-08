@@ -109,7 +109,6 @@
                 <td><?php if ($unitem->getLienImage()) { ?><img width="200" height="100" src="<?php echo $unitem->getLienImage(); ?>" /><?php } ?></td>
                 <td><?php echo $unitem->getDateAjout(); ?></td>
                 <td><?php echo "<a class=\"btn btn-xs btn-danger confirm\" href=\"index.php?uc=admin&action=deleteEvenement&id=".$unitem->getIdEvenement()."\">Supprimer evenement</a>" ?></td>
-                <td><?php echo "<a class=\"btn btn-xs btn-danger\" href=\"index.php?uc=evenement&action=supprEvenement&id=".$unitem->getIdEvenement()."\">Supprimer evenement</a>" ?></td>
                 <td><?php echo "<a class=\"btn btn-xs btn-danger\" href=\"index.php?uc=admin&action=demModifEvenement&id=".$unitem->getIdEvenement()."\">Modifier evenement</a>" ?></td>
                     <?php
             }

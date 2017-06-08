@@ -25,7 +25,7 @@ class EvenementDAO extends DAO {
 
         $idEvenement = $obj->getIdEvenement();
 
-        $stmt = Connexion::prepare("DELETE FROM " . self::$table . " WHERE " . self::$cleprimaire . " = " . $idEvenement . ";");
+        $stmt = Connexion::prepare("DELETE FROM " . self::$table . " WHERE " . self::$clePrimaire . " = " . $idEvenement . ";");
         $stmt->execute();
     }
 

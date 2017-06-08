@@ -175,3 +175,14 @@ $(".confirm").click(function (e) {
             window.location.href = theHREF;
         });
 
+//$(document).ready(function () { 
+        $('#newjeuvld').click(function (e) {
+            checked = $("input[type=checkbox]:checked").length;
+            alert(checked);
+            if (!checked) {
+                alert("Vous devez choisir au moins une catégorie !");
+                return false;
+            }
+
+        });
+//    });

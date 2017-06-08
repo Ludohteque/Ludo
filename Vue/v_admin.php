@@ -43,7 +43,7 @@ if (isset($messageEnvoye)) {
                             echo "<a class=\"btn btn-sm btn-block btn-info\" href=\"index.php?uc=dashboard&action=reponseAdmin&id=".$unmessage->getIdMessage()."\">Répondre</a>";
                             ?></td>
                         <td class="mini"><?php
-                            echo "<a class=\"btn btn-sm btn-block btn-danger\" href=\"index.php?uc=admin&action=effacerSignalement&id=".$unmessage->getIdMessage()."\">Annuler</a>";
+                            echo "<a class=\"btn btn-sm btn-block btn-danger confirm\" href=\"index.php?uc=admin&action=effacerSignalement&id=".$unmessage->getIdMessage()."\">Supprimer</a>";
                         }
                         ?></td>
                     </tr>
@@ -74,7 +74,7 @@ if (isset($messageEnvoye)) {
                             echo "<a class=\"btn btn-sm btn-block btn-info\" href=\"index.php?uc=dashboard&action=reponseAdmin&id=".$unmessage->getIdMessage()."\">Répondre</a>";
                             ?></td>
                         <td class="mini"><?php
-                            echo "<a class=\"btn btn-sm btn-block btn-danger\" href=\"index.php?uc=admin&action=effacerRenseignement&id=".$unmessage->getIdMessage()."\">Annuler</a>";
+                            echo "<a class=\"btn btn-sm btn-block btn-danger confirm\" href=\"index.php?uc=admin&action=effacerRenseignement&id=".$unmessage->getIdMessage()."\">Supprimer</a>";
                         }
                         ?></td>
                     </tr>
@@ -123,11 +123,11 @@ if (isset($messageEnvoye)) {
                             echo "<a class=\"btn btn-sm btn-block btn-info\" href=\"index.php?uc=admin&action=valideAjout&id=".$unjeu->getIdJeu()."\">Valider</a>";
                             ?></td>
                         <td class="mini"><?php
-                            echo "<a class=\"btn btn-sm btn-block btn-danger\" href=\"index.php?uc=admin&action=deleteJeu&id=".$unjeu->getIdJeu()."\">Annuler</a>";
+                            echo "<a class=\"btn btn-sm btn-block btn-danger confirm\" href=\"index.php?uc=admin&action=deleteJeu&id=".$unjeu->getIdJeu()."\">Supprimer</a>";
                         
                         ?></td>
                         <td class="mini"><?php
-                            echo "<a class=\"btn btn-sm btn-block btn-danger\" href=\"index.php?uc=admin&action=modifDemandeJeu&id=".$unjeu->getIdJeu()."\">modifier</a>";
+                            echo "<a class=\"btn btn-sm btn-block btn-danger\" href=\"index.php?uc=admin&action=modifDemandeJeu&id=".$unjeu->getIdJeu()."\">Modifier</a>";
                         }
                         ?></td>
                     </tr>

@@ -5,10 +5,10 @@ if (!isset($_GET['action'])) {
 }
 $action = $_GET['action'];
 switch ($action) {
-    case 'demandeDashboard':
+    case 'demandeDashboard': // affiche la dashboard
         include('Vue/v_dashboard.php');
         break;
-    case 'repondreMessage':
+    case 'repondreMessage': // Appelle le formulaire permettant de répondre à un message
         $user = null;
         if (isset($_GET['id'])) {
             $destinataire = $_GET['id'];
@@ -19,7 +19,7 @@ switch ($action) {
         include('Vue/v_dashboard_message.php');
         break;
 
-    case 'reponseAdmin':
+    case 'reponseAdmin': // Permet à l'admin de répondre à un message de signalment ou de renseignement.
         $destinataire = null;
         if (isset($_GET['id'])) {
             $message = $_GET['id'];
@@ -33,7 +33,7 @@ switch ($action) {
         include('Vue/v_dashboard_message.php');
         break;
 
-    case 'envoyerMessage':
+    case 'envoyerMessage': //permet d'envoyer un message
         $expediteur = $_POST['expediteur'];
         $sujet = $_POST['sujet'];
         $destinataire = $_POST['destinataire'];
@@ -69,12 +69,12 @@ switch ($action) {
         }
         include('Vue/v_dashboard.php');
         break;
-    case 'ajouterExemplaire':
+    case 'ajouterExemplaire': // appelle formulaire d'nregistrment d'exemplaire
         $daojeu = new JeuDAO();
         $jeux = $daojeu->getAll();
         include('Vue/v_dashboard_ajout_exemplaire.php');
         break;
-    case 'enregistrerExemplaire':
+    case 'enregistrerExemplaire': //Signifie à l'application que je possède un jeu générique
         $nom = $_POST['jeu'];
         $etat = $_POST['etat'];
         $dispo = $_POST['dispo'];
@@ -130,7 +130,7 @@ switch ($action) {
         $utils = $userdao->findAll();
         include('Vue/v_listeutilisateurs.php');
         break;
-    case 'demarrerEmprunt':
+    case 'demarrerEmprunt': //affiche la vue emprunt selon le propriétaire
         $preteur = null;
         if (isset($_POST['preteur'])) {
             $preteur = $_POST['preteur'];
@@ -139,7 +139,7 @@ switch ($action) {
         $user = $userdao->find($preteur);
         include('Vue/v_dashboard_emprunt.php');
         break;
-    case 'ajoutPret':
+    case 'ajoutPret': // démarre un emprunt
         $daouser = new UserDAO();
         $emprunteur = $daouser->find($_SESSION['id']);
         $daoexemplaire = new ExemplaireDAO();
@@ -150,7 +150,7 @@ switch ($action) {
         $resultat = "La demande d'emprunt a bien été envoyé au prêteur.";
         include('Vue/v_dashboard.php');
         break;
-    case 'validerEmprunt':
+    case 'validerEmprunt': //emprunt valide
         $daoemprunt = new EmpruntDAO();
         $emprunt = $daoemprunt->find($_GET['id']);
         $emprunt->setStatut("En cours");
@@ -159,7 +159,7 @@ switch ($action) {
         $resultat = "L'emprunt a été enregistré en tant qu'emprunt en cours.";
         include('Vue/v_dashboard.php');
         break;
-    case 'remiseJeu':
+    case 'remiseJeu': //signifie que le jeu emprunté a été rendu
         $id = $_GET['id'];
         $daoemprunt = new EmpruntDAO();
         $emprunt = $daoemprunt->find($id);
@@ -169,7 +169,7 @@ switch ($action) {
         $resultat = "Le jeu a bien été enregistré comme rendu.";
         include('Vue/v_dashboard.php');
         break;
-    case 'annulerEmprunt':
+    case 'annulerEmprunt': //annule l'emprunt => statut
         $id = $_GET['id'];
         $daoemprunt = new EmpruntDAO();
         $emprunt = $daoemprunt->find($id);
@@ -178,11 +178,11 @@ switch ($action) {
         $resultat = "L'emprunt proposé a été refusé.";
         include('Vue/v_dashboard.php');
         break;
-    case 'changementDate':
+    case 'changementDate': //apelle la vue pour changer la date de rendu d'un jeu
         $id = $_GET['id'];
         include('Vue/v_changementdate.php');
         break;
-    case 'validerDate':
+    case 'validerDate': //voir précédent
         $id = $_POST['id'];
         $daoemprunt = new EmpruntDAO();
         $emprunt = $daoemprunt->find($id);
@@ -191,12 +191,12 @@ switch ($action) {
         $resultat = "La date a été modifié.";
         include('Vue/v_dashboard.php');
         break;
-    case 'contactAdmin':
+    case 'contactAdmin': //affiche le formulaire permettant de contacter l'admin
         $userdao = new UserDAO();
         $user = $userdao->find($_GET['id']);
         include('Vue/v_dashboard_messageadmin.php');
         break;
-    case 'confirmContactAdmin':
+    case 'confirmContactAdmin': //contactye l'admin : voir précédent
         $corps = $_POST['corps'];
         $sujet = $_POST['sujet'];
         $type = $_POST['type'];
@@ -212,13 +212,13 @@ switch ($action) {
         include('Vue/v_dashboard.php');
         break;
 
-    case 'modifierInfos':
+    case 'modifierInfos': //affiche le formulaire permettant de modifier son profil
         $id = $_SESSION['id'];
         $userdao = new UserDAO();
         $user = $userdao->find($id);
         include ('Vue/v_dashboard_profil.php');
         break;
-    case 'modifProfil':
+    case 'modifProfil': //modifie le profil => voir précédent
         $pseudo = $_POST['Pseudo'];
         $ville = $_POST['Ville'];
         $mail = $_POST['Email'];

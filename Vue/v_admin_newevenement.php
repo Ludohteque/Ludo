@@ -21,7 +21,7 @@
 	<div class="form-group">
                             <label for="image" class="col-lg-2 control-label">Illustration :</label>
                             <div class="col-lg-10">
-                                <input type="file" class="form-control" id="image" name="image" accept="image/*"></input><span class="red">*</span>
+                                <input type="file" class="form-control heightfix" id="image" name="image" accept="image/*" required></input><span class="red">*</span>
                             </div>
                         </div>
         <div class="form-group">

@@ -161,4 +161,17 @@ $("#connexion").click(function () {
     $("body").addClass("grey");
 });
 
+$(".confirm").click(function (e) {
+            e.preventDefault();
+            theHREF = $(this).attr("href");
+            $("#cModal").modal("show");
+        });
+
+        $("#Non").click(function (e) {
+            $("#cModal").modal("hide");
+        });
+
+        $("#Yes").click(function (e) {
+            window.location.href = theHREF;
+        });
 

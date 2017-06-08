@@ -1,6 +1,7 @@
 <?php include('v_header.php'); ?>
-<h5>Administration des <?php echo $titre; ?> :</h5></br></br>
 
+
+<h5>Administration des <?php echo $titre; ?> :</h5></br></br>
 <table class="tableau width90">
     <tr class="tableauTete">
         <?php if ($titre == "utilisateurs") { ?>
@@ -81,7 +82,7 @@
                     echo "<a class=\"btn btn-xs btn-success\" href=\"index.php?uc=admin&action=debanUser&id=".$unitem->getIdUser()."\">De-ban l'utilisateur</a>";
                             
                     }?></td>
-                    <td class="mini"><?php echo "<a class=\"btn btn-xs btn-danger\" href=\"index.php?uc=admin&action=deleteUser&id=".$unitem->getIdUser()."\">supprimer utilisateur</a>" ?></td>
+                    <td class="mini"><?php echo "<a class=\"btn btn-xs btn-danger confirm\" href=\"index.php?uc=admin&action=deleteUser&id=".$unitem->getIdUser()."\">supprimer utilisateur</a>" ?></td>
 
     <?php } else if ($titre == "jeux") { ?>
                 <td><?php echo $unitem->getIdJeu(); ?></td>
@@ -100,13 +101,14 @@
                 <td><?php echo $unitem->getNote(); ?></td>
                 <td><?php echo $unitem->getDateAjout(); ?></td>
                 <td><?php if ($unitem->getImage()) { ?><img width="150" height="100" src="Vue/img/jeu/<?php echo $unitem->getImage(); ?>" /><?php } ?></td>
-                <td><?php echo "<a class=\"btn btn-xs btn-danger\" href=\"index.php?uc=admin&action=deleteJeu&id=".$unitem->getIdJeu()."\">supprimer jeu</a>" ?></td>
+                <td><?php echo "<a class=\"btn btn-xs btn-danger confirm\" href=\"index.php?uc=admin&action=deleteJeu&id=".$unitem->getIdJeu()."\">supprimer jeu</a>" ?></td>
     <?php } else if ($titre == "évènements") { ?>
                 <td><?php echo $unitem->getIdEvenement(); ?></td>
                 <td><?php echo $unitem->getTitre(); ?></td>
                 <td><?php echo htmlentities($unitem->getEvenement()); ?></td>
                 <td><?php if ($unitem->getLienImage()) { ?><img width="200" height="100" src="<?php echo $unitem->getLienImage(); ?>" /><?php } ?></td>
                 <td><?php echo $unitem->getDateAjout(); ?></td>
+                <td><?php echo "<a class=\"btn btn-xs btn-danger confirm\" href=\"index.php?uc=admin&action=deleteEvenement&id=".$unitem->getIdEvenement()."\">Supprimer evenement</a>" ?></td>
                 <td><?php echo "<a class=\"btn btn-xs btn-danger\" href=\"index.php?uc=evenement&action=supprEvenement&id=".$unitem->getIdEvenement()."\">Supprimer evenement</a>" ?></td>
                 <td><?php echo "<a class=\"btn btn-xs btn-danger\" href=\"index.php?uc=admin&action=demModifEvenement&id=".$unitem->getIdEvenement()."\">Modifier evenement</a>" ?></td>
                     <?php
@@ -133,7 +135,7 @@
                     }
                     ?></td>
                 <td class="mini"><?php echo "<a class=\"btn btn-xs btn-success\" href=\"index.php?uc=admin&action=debanUser&id=".$unitem->getIdUser()."\">De-ban l'utilisateur</a>" ?>
-                <td class="mini">    <?php echo "<a class=\"btn btn-xs btn-danger\" href=\"index.php?uc=admin&action=deleteUser&id=".$unitem->getIdUser()."\">supprimer utilisateur</a>" ?>
+                <td class="mini">    <?php echo "<a class=\"btn btn-xs btn-danger confirm\" href=\"index.php?uc=admin&action=deleteUser&id=".$unitem->getIdUser()."\">supprimer utilisateur</a>" ?>
                 </td>
                 </td>
     <?php
@@ -142,5 +144,7 @@
 ?>
     </tr>
 </table>
+
+
 
 <?php include('v_footer.php'); ?>

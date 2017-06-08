@@ -2,7 +2,7 @@
 <h5>Administration des <?php echo $titre; ?> :</h5></br></br>
 <table class="tableau width90">
     <tr class="tableauTete">
-        <?php if ($titre == "jeux_empruntes") {
+        <?php if ($titre == "emprunte") {
             ?>
             <th style="text-align:center;">Jeu(x)</th>
             <th style="text-align:center;">Date emprunt</th>
@@ -19,7 +19,7 @@
     </tr>
     <?php foreach ($items as $item) { ?>
         <tr class="small">
-            <?php if ($titre == "jeux_empruntes") { ?>
+            <?php if ($titre == "emprunte") { ?>
                 <td> <?php echo $item->getIdExemplaire()->getIdJeu()->getnomJeu(); ?></td>
                 <td> <?php echo $item->getDateEmprunts(); ?></td>
                 <td> <?php echo $item->getIdExemplaire()->getIdJeu()->getNote(); ?></td>
@@ -35,10 +35,6 @@
 }
 ?>
 
-
-
-
-
-<?php include('v_footer'); ?>
+<?php include('Vue/v_footer.php'); ?>
 
 

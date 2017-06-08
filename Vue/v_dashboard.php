@@ -45,9 +45,11 @@ if (isset($resultat)) {
                         <td><?php echo $unExemplaire->getIdExemplaire(); ?></td>
                         <td><a href='index.php?uc=jeu&action=affichage&id=<?php echo $unExemplaire->getIdJeu()->getIdJeu(); ?>'><?php echo $unExemplaire->getIdJeu()->getNom(); ?></a></td>
                         <td><?php echo $unExemplaire->getEtat(); ?></td>
-                        <td><?php echo $unExemplaire->getDisponibilite(); ?></td>
+                        <td><?php if ($unExemplaire->getDisponibilite() == 1){
+                            echo "disponible";
+                        }else { echo "indisponible";}?></td>
                         <td>
-                            <a class="btn btn-success" href="index.php?uc=dashboard&action=supprExemplaire&id=<?php echo $unExemplaire->getIdExemplaire(); ?>">Supprimer</a>
+                            <a class="btn btn-success confirm" href="index.php?uc=dashboard&action=supprExemplaire&id=<?php echo $unExemplaire->getIdExemplaire(); ?>">Supprimer</a>
                             <a class="btn btn-success" href="index.php?uc=dashboard&action=modifExemplaire&id=<?php echo $unExemplaire->getIdExemplaire(); ?>">Modifier</a>
                         </td>
                     </tr>
@@ -118,7 +120,7 @@ if (isset($resultat)) {
                         <td><?php echo $unPret->getIdExemplaire()->getEtat(); ?></td>
                         <td>
                             <a class="btn btn-success" href="index.php?uc=dashboard&action=validerEmprunt&id=<?php echo $unPret->getIdEmprunts(); ?>">Valider l'emprunt</a>
-                            <a class="btn btn-success" href="index.php?uc=dashboard&action=annulerEmprunt&id=<?php echo $unPret->getIdEmprunts(); ?>">Refuser l'emprunt</a>
+                            <a class="btn btn-success confirm" href="index.php?uc=dashboard&action=annulerEmprunt&id=<?php echo $unPret->getIdEmprunts(); ?>">Refuser l'emprunt</a>
                         </td>
                     </tr>
                     <?php
@@ -297,7 +299,7 @@ if (isset($resultat)) {
                             <td><?php echo $unMessage->getIdExpediteur()->getPseudo(); ?></td>
                             <td><?php echo $unMessage->getDate() ?></td>
                             <td>
-                                <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#corps<?php echo $unMessage->getIdMessage(); ?>">Voir</button>
+                                <button type="button" class="btn btn-info " data-toggle="collapse" data-target="#corps<?php echo $unMessage->getIdMessage(); ?>">Voir</button>
                                 <a class="btn btn-success" href="index.php?uc=dashboard&action=repondreMessage&id=<?php echo $unMessage->getIdExpediteur()->getIdUser(); ?>">Répondre</a>
                             </td>
                         </tr>
@@ -389,33 +391,14 @@ if (isset($resultat)) {
                     <p><?php echo $user->getVille(); ?></p>
                 </div>
                 <div class="form-group">
-                    <label>Nouvelle ville:</label>
-                    <input type="text" class="form-control" name="ville"/>
-                </div>
-                <div class="form-group">
                     <label>Email:</label>
                     <p><?php echo $user->getMail(); ?></p>
                 </div>
                 <div class="form-group">
-                    <label>Nouvelle email:</label>
-                    <input type="text" class="form-control" name="mail"/>
-                </div>
-                <div class="form-group">
                     <label>Téléphone:</label>
-                    <p><?php echo $user->getTel(); ?></p>
+                    <p><?php echo "0".$user->getTel(); ?></p>
                 </div>
-                <div class="form-group">
-                    <label>Nouveau téléphone:</label>
-                    <input type="text" class="form-control" name="tel"/>
-                </div>
-                <div class="form-group">
-                    <label>Nouveau mot de passe:</label>
-                    <input type="password" class="form-control" name="pass"/>
-                </div>
-                <div class="form-group">
-                    <label>Confirmer mot de passe:</label>
-                    <input type="password" class="form-control" name="pass1"/>
-                </div>
+                <a class="btn btn-success" href="index.php?uc=dashboard&action=modifierInfos">Modifier</a>
 
             </form>
         </div>

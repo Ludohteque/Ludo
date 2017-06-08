@@ -38,6 +38,7 @@ class Exemplaire {
     function getDisponibilite() {
         return $this->disponibilite;
     }
+    
 
     function setIdUser($idUser) {
         $this->idUser = $idUser;

@@ -31,8 +31,8 @@ if (UserDAO::estConnecte()) {
                 }
                 ?>
             </table>
-            <a class="btn btn-default" href="#" role="button">Voir plus &raquo;</a></p>
-        </div>
+            <a class="btn btn-default" href="index.php?uc=jeu&action=voirPlus&titre=populaire" role="button">Voir plus &raquo;</a></p>
+        </div> 
         <div class="col-md-4">
             <h2>Nouveautés</h2>
             <p>Ici vont les nouveautés ...</p>
@@ -52,7 +52,7 @@ if (UserDAO::estConnecte()) {
                 }
                 ?>
             </table>
-            <a class="btn btn-default" href="#" role="button">Voir plus &raquo;</a>
+            <a class="btn btn-default" href="index.php?uc=jeu&action=voirPlus&titre=nouveaute" role="button">Voir plus &raquo;</a>
         </div>
         <div class="col-md-4">
             <h2>Derniers jeux empruntés</h2>
@@ -77,7 +77,7 @@ if (UserDAO::estConnecte()) {
                 }
                 ?>
             </table>
-            <a class="btn btn-default" href="#" role="button">Voir plus &raquo;</a></p>
+            <a class="btn btn-default" href="index.php?uc=jeu&action=voirPlus&titre=emprunte" role="button">Voir plus &raquo;</a></p>
         </div>
     </div>
 

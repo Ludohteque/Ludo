@@ -11,4 +11,21 @@ switch($action) {
         $listeExemplaires = $daoexemplaire->findListeExemplaire($jeu->getIdProduit());
         include_once 'Vue/v_jeu.php';
         break;
+    case'voirPlus':
+            $titre = $_GET['titre'];
+            switch ($titre):
+                case "emprunte":
+                    $empruntDAO = new EmpruntDAO();
+                    $items = $empruntDAO->getDerniersEmprunts(False);
+                    break;
+                case "nouveaute":
+                    $jeuxDAO = new JeuDAO();
+                    $items = $jeuxDAO->getNouveautes(False);
+                    break;
+                case "populaire":
+                    $jeuxDAO = new JeuDAO();
+                    $items = $jeuxDAO ->getPopulaires(False);
+                    break;                
+            endswitch;
+            include('Vue/v_voir_plus.php');
 }

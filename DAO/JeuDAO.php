@@ -45,10 +45,12 @@ class JeuDAO extends DAO {
     }
 
     public function delete($obj) {
+        $image = $obj->getImage();
         $stmt = Connexion::prepare("delete from " . self::$tableFille . " where " . self::$clePrimaireFille . " = " . $obj->getIdJeu() . ";");
         $stmt->execute();
 
         $stmt2 = Connexion::prepare("delete from " . self::$tableMere . " where " . self::$clePrimaireMere . " = " . $obj->getIdJeu() . ";");
+        
         $stmt2->execute();
     }
 
@@ -93,24 +95,14 @@ class JeuDAO extends DAO {
         $descriptif = $obj->getDescriptif();
         $etat = $obj->getEtat();
         $nomjeu = $obj->getNomJeu();
-        $dateajouter = $obj->getDateAjout(); //->format('Y-m-d H:i:s');
         $image = $obj->getImage();
         $note = $obj->getNote();
-        $nbjoueurs = $obj->getNbJoueurs()->getIdNbJoueurs();
-        $age = $obj->getIdAge()->getIdAge();
-        $duree = $obj->getIdDuree()->getIdDuree();
-        $stmt = Connexion::prepare("update " . self::$tableFille . " set id_age=?, id_nb_joueurs=?, id_duree=? where " . self::$clePrimaireFille . "=" . $id . ";");
-        $stmt->bindParam(1, $age);
-        $stmt->bindParam(2, $nbjoueurs);
-        $stmt->bindParam(3, $duree);
+        $nbjoueurs = $obj->getNbJoueurs();
+        $age = $obj->getIdAge();
+        $duree = $obj->getIdDuree();
+        $stmt = Connexion::prepare("update " . self::$tableFille . " set id_age=".$age.", id_nb_joueurs=".$nbjoueurs.", id_duree=".$duree." where " . self::$clePrimaireFille . "=" . $id . ";");
         $stmt->execute();
-        $stmt2 = Connexion::prepare("update " . self::$tableMere . " set nom=?, descriptif=?, etat=?, note=?, date_ajout=?, image=? where " . self::$clePrimaireMere . "=" . $id . ";");
-        $stmt2->bindParam(1, $nomjeu);
-        $stmt2->bindParam(2, $descriptif);
-        $stmt2->bindParam(3, $etat);
-        $stmt2->bindParam(4, $note);
-        $stmt2->bindParam(5, $dateajouter);
-        $stmt2->bindParam(6, $image);
+        $stmt2 = Connexion::prepare("update " . self::$tableMere . " set nom=\"".$nomjeu."\", etat=\"".$etat."\", note=".$note.", descriptif=\"".$descriptif."\", image=\"".$image."\" where " . self::$clePrimaireMere . "=" . $id . ";");
         $stmt2->execute();
         $lescategories = $obj->getLesCategories();
         $stmt3 = Connexion::Prepare("delete from jeucategorie where id_jeu='$id';");
@@ -143,8 +135,14 @@ class JeuDAO extends DAO {
         return $listeJeux;
     }
 
-    public function getNouveautes() {
-        $stmt = Connexion::prepare("select * from " . self::$tableMere . " inner join " . self::$tableFille . " on " . self::$tableFille . "." . self::$clePrimaireFille . "=" . self::$tableMere . "." . self::$clePrimaireMere . " ORDER BY " . self::$dateAjout . " DESC LIMIT 10;");
+    public function getNouveautes($limite) {
+                if ($limite){
+            $lim = 'LIMIT 10';
+        }else{
+            $lim = '';
+        }
+           
+        $stmt = Connexion::prepare("select * from " . self::$tableMere . " inner join " . self::$tableFille . " on " . self::$tableFille . "." . self::$clePrimaireFille . "=" . self::$tableMere . "." . self::$clePrimaireMere . " ORDER BY " . self::$dateAjout . " DESC ".$lim.";");
         $stmt->execute();
         $result = $stmt->fetchAll();
         $listeJeux = array();
@@ -165,8 +163,13 @@ class JeuDAO extends DAO {
     }
 
     // renvoie une liste d'objet Jeu
-    public function getPopulaires() {
-        $stmt = Connexion::prepare("select * from " . self::$tableMere . " inner join " . self::$tableFille . " on " . self::$tableFille . "." . self::$clePrimaireFille . "=" . self::$tableMere . "." . self::$clePrimaireMere . " ORDER BY note DESC LIMIT 10;");
+    public function getPopulaires($limite) {
+        if ($limite){
+            $lim = 'LIMIT 10';
+        }else{
+            $lim = '';
+        }
+        $stmt = Connexion::prepare("select * from " . self::$tableMere . " inner join " . self::$tableFille . " on " . self::$tableFille . "." . self::$clePrimaireFille . "=" . self::$tableMere . "." . self::$clePrimaireMere . " ORDER BY note DESC ".$lim.";");
         $stmt->execute();
         $result = $stmt->fetchAll();
         $listeJeux = array();
@@ -210,6 +213,26 @@ class JeuDAO extends DAO {
         $id = $obj->getIdJeu();
         $stmt = Connexion::prepare("UPDATE " . self::$tableFille . " SET is_valide = 1 WHERE " . self::$clePrimaireFille . " = " . $id . ";");
         $stmt->execute();
+    }
+    
+    public function getListeJeuxValides() {
+        $stmt = Connexion::prepare("select * from " . self::$tableMere . " inner join " . self::$tableFille . " on " . self::$tableFille . "." . self::$clePrimaireFille . "=" . self::$tableMere . "." . self::$clePrimaireMere . " WHERE " . self::$tableFille . ".is_valide = '1' ;");
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $listeJeux = array();
+        foreach ($result as $value) {
+            $nbjoueeursdao = new NombreJoueursDAO();
+            $nbJoueurs = $nbjoueeursdao->find($value['id_nb_joueurs']);
+            $daoage = new TrancheAgeDAO();
+            $age = $daoage->find($value['id_age']);
+            $daoduree = new DureeDAO();
+            $duree = $daoduree->find($value['id_duree']);
+            $daocat = new CategorieDAO();
+            $lesCategories = $daocat->findAllByJeu($value['id_jeu']);
+            $newjeu = new Jeu($value['id_jeu'], $value['nom'], $value['descriptif'], $value['etat'], $value['note'], $value['date_ajout'], $value['image'], $nbJoueurs, $age, $duree, $lesCategories);
+            $listeJeux[] = $newjeu;
+        }
+        return $listeJeux;
     }
 
     // public function fileupload() {

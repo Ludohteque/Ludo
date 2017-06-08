@@ -5,7 +5,6 @@
     <form id="form-horizontal" action="index.php?uc=admin&action=valideModifEven&id=<?php echo $evenement->getIdEvenement(); ?>" method="POST" enctype="multipart/form-data">
         <h2>Formulaire de modification d'événement :</h2>
         </br>
-        <?php var_dump($evenement); ?>
 	<div class="form-group">
 		<label class="control-label col-sm-2" for="evenement">Titre de l'événement :</label>
                 <div class="col-sm-10">
@@ -22,13 +21,23 @@
 	<div class="form-group">
                             <label for="image" class="col-lg-2 control-label">Illustration :</label>
                             <div class="col-lg-10">
-                                <input type="file" class="form-control" id="image" name="image" accept="image/*"></input><span class="red">*</span>
+                                <input type="file" class="form-control heightfix" id="image" name="image" accept="image/*"></input><span class="red">*</span>
                             </div>
                         </div>
+        <?php
+        if ($evenement->getLien()) {
+            ?>
+            <div class="form-group">
+                <label for="dummy" class="col-lg-2 control-label">Image actuelle :</label>
+                <div class="col-lg-10">
+                    <img width="200" height="100" src="Vue/img/evenement/<?php echo $evenement->getLien(); ?>" />
+                </div>
+            </div>
+        <?php } ?>
+        </br>
         <div class="form-group">
-        
 		<button class="submit" id="go">Envoyer</button>
-                <button class="reset" type="reset" id="gfy">Retour</button>
+                <button class="reset" type="reset" id="gfy" onClick="history.back()">Retour</button>
         </div>
     </form>
 </section>

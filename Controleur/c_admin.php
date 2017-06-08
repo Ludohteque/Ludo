@@ -12,7 +12,8 @@ switch ($action) {
     case "demandeAdmin":
         $messagedao = new MessageDAO();
         $jeudao = new JeuDAO();
-        $signalements = $messagedao->getMessagesSignalement();
+        $signalements = $messagedao->getMessagesSignalement($_SESSION['id']);
+        $renseignements = $messagedao->getRenseignements($_SESSION['id']);
         $demandesajout = $jeudao->getJeuxInvalides();
         include_once 'Vue/v_admin.php';
         break;
@@ -43,13 +44,23 @@ switch ($action) {
                     $jeudao->create($nouveaujeu);
                     //$resultat = "Votre jeu a bien été ajouté !";
                 }//TODO
-                $items = $jeudao->getAll();
+                $items = $jeudao->getListeJeuxValides();
                 $titre = "jeux";
-                include_once 'Vue/v_adminliste.php';
+                if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
+                    include_once 'Vue/v_adminliste.php';
+                } else {
+                    $jeuDAO = new JeuDAO();
+                    $empruntDAO = new EmpruntDAO();
+                    $lesNouveautes = $jeuDAO->getNouveautes(True);
+                    $lesPopulaires = $jeuDAO->getPopulaires(True);
+                    $lesEmpruntes = $empruntDAO->getDerniersEmprunts(True);
+                    include("Vue/v_main.php");
+                }
             } else {
                 $jeudao = new JeuDAO;
                 $messagedao = new MessageDAO();
-                $signalements = $messagedao->getMessagesSignalement();
+                $signalements = $messagedao->getMessagesSignalement($_SESSION['id']);
+                $renseignements = $messagedao->getRenseignements($_SESSION['id']);
                 $demandesajout = $jeudao->getJeuxInvalides();
                 $resultat = "Ajout impossible ! il manque des informations !";
                 include_once 'Vue/v_admin.php';
@@ -98,9 +109,10 @@ switch ($action) {
                 $jeudao = new JeuDAO();
                 $id = $_GET['id'];
                 $jeu = $jeudao->find($id);
+                unlink("Vue/img/jeu/" . $jeu->getImage());
                 $jeudao->delete($jeu);
             }
-            $items = $jeudao->getAll();
+            $items = $jeudao->getListeJeuxValides();
             $titre = "jeux";
             include_once 'Vue/v_adminliste.php';
             break;
@@ -119,50 +131,45 @@ switch ($action) {
     case 'okmodifDemandeJeu': {
             if (isset($_POST['nom']) && isset($_POST['descriptif']) && isset($_POST['etat']) && isset($_POST['age']) && isset($_POST['categories']) && isset($_POST['nbjoueurs']) && isset($_POST['duree'])) { //&& is_uploaded_file($_FILES['image']['tmp_name'])
                 $id = $_GET['id'];
-                $nom = $_POST['nom'];
-                $descriptif = $_POST['descriptif'];
-                $etat = $_POST['etat'];
-                $tranchedage = $_POST['age'];
-                $categories = $_POST['categories'];
-                $nbjoueurs = $_POST['nbjoueurs'];
-                $duree = $_POST['duree'];
                 $jeudao = new JeuDAO();
-                $jeu = $jeudao->find($id);
-                $jeu->setNom($nom);
-                $jeu->setDescriptif($descriptif);
-                $jeu->setEtat($etat);
-                $daoage = new TrancheAgeDAO();
-                $trancheAge = $daoage->find($tranchedage);
-                $jeu->setIdAge($trancheAge);
-                $jeu->setLesCategories($categories);
-                $daoNbJoueurs = new NombreJoueursDAO();
-                $nbJoueurs = $daoNbJoueurs->find($nbjoueurs);
-                $jeu->setNbJoueurs($nbJoueurs);
-                $daoduree = new DureeDAO();
-                $jeuduree = $daoduree->find($duree);
-                $jeu->setIdDuree($jeuduree);
-                $jeu->setValide(0);
+                $jeuoriginal = $jeudao->find($id);
+
+                $jeuoriginal->setNom($_POST['nom']);
+                $jeuoriginal->setDescriptif($_POST['descriptif']);
+                $jeuoriginal->setEtat($_POST['etat']);
+                $jeuoriginal->setIdAge($_POST['age']);
+                $jeuoriginal->setLesCategories($_POST['categories']);
+                $jeuoriginal->setNbJoueurs($_POST['nbjoueurs']);
+                $jeuoriginal->setIdDuree($_POST['duree']);
+                $ancienneImage = "Vue/img/jeu/" . $jeuoriginal->getImage();
                 $message = "";
                 if (is_uploaded_file($_FILES['image']['tmp_name'])) {
                     define('TARGET', 'Vue/img/jeu/');
                     fileupload();
                     $message = MESSAGE;
+                    if ($message == 'Upload réussi !') {
+                        unlink($ancienneImage);
+                    }
                     $nomImage = NOM_IMAGE;
-                    $jeu->setImage($nomImage);
-                }
-                if ($message != 'Upload réussi !' && $message != "") {
-                    $resultat = $message;
                 } else {
-                    $jeudao->update($jeu);
-                    $resultat = "Le jeu a bien été modifié. ";
+                    $nomImage = $jeuoriginal->getImage();
                 }
-                $items = $jeudao->getAll();
+
+                $isvalide = 0;
+                //if ($message == 'Upload réussi !') { //valable sur create, pas sur update
+                //$nouveaujeu = new jeu($id, $nom, $descriptif, $etat, $note, $date, $nomImage, $nbjoueurs, $tranchedage, $duree, $categories);
+                $jeuoriginal->setImage($nomImage);
+                $jeudao->update($jeuoriginal);
+                //$resultat = "Votre jeu a bien été ajouté !";
+                //}//TODO
+                $items = $jeudao->getListeJeuxValides();
                 $titre = "jeux";
                 include_once 'Vue/v_adminliste.php';
             } else {
                 $jeudao = new JeuDAO;
                 $messagedao = new MessageDAO();
-                $signalements = $messagedao->getMessagesSignalement();
+                $signalements = $messagedao->getMessagesSignalement($_SESSION['id']);
+                $renseignements = $messagedao->getRenseignements($_SESSION['id']);
                 $demandesajout = $jeudao->getJeuxInvalides();
                 $resultat = "Ajout impossible ! il manque des informations !";
                 include_once 'Vue/v_admin.php';
@@ -174,10 +181,13 @@ switch ($action) {
             if (isset($_GET['id'])) {
                 $id = $_GET['id'];
                 $jeu = $jeudao->find($id);
+                $ancienneImage = "Vue/img/jeu/" . $jeu->getImage();
+                unlink($ancienneImage);
                 $jeudao->delete($jeu);
-                $messagedao = new MessageDAO();
             }
-            $signalements = $messagedao->getMessagesSignalement();
+            $messagedao = new MessageDAO();
+            $signalements = $messagedao->getMessagesSignalement($_SESSION['id']);
+            $renseignements = $messagedao->getRenseignements($_SESSION['id']);
             $demandesajout = $jeudao->getJeuxInvalides();
             include_once 'Vue/v_admin.php';
             break;
@@ -201,21 +211,29 @@ switch ($action) {
                 $date = $evenementOriginal->getDateAjout();
                 $evenementOriginal->setTitre($_POST['titre']);
                 $evenementOriginal->setEvenement($_POST['evenement']);
+                $ancienneImage = $evenementOriginal->getLienImage();
                 if (is_uploaded_file($_FILES['image']['tmp_name'])) {
                     define('TARGET', 'Vue/img/evenement/');
                     fileupload();
                     $nomImage = NOM_IMAGE;
-                    $evenementOriginal->setLienImage($nomImage);
                     $message = MESSAGE;
+                    if ($message == 'Upload réussi !') {
+                        $evenementOriginal->setLienImage($nomImage);
+                        unlink($ancienneImage);
+                    }
                 }
 
+
+                //if ($message == 'Upload réussi !') {
+                //$evenementOriginal->setLienImage($nomImage);
                 $evenementdao->update($evenementOriginal);
                 $resultat = "Votre evenement a bien été ajouté !";
                 $items = $evenementdao->findAll();
                 $titre = "évènements";
                 include_once 'Vue/v_adminliste.php';
+                //include_once 'Vue/v_modifEvenement.php';
+                //}
             }
-            break;
         }
 
     case 'effacerSignalement':
@@ -227,7 +245,23 @@ switch ($action) {
             $message = $messagedao->find($id);
             $messagedao->delete($message);
         }
-        $signalements = $messagedao->getMessagesSignalement();
+        $signalements = $messagedao->getMessagesSignalement($_SESSION['id']);
+        $renseignements = $messagedao->getRenseignements($_SESSION['id']);
+        $demandesajout = $jeudao->getJeuxInvalides();
+        include('Vue/v_admin.php');
+        break;
+
+    case 'effacerRenseignement':
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+
+            $messagedao = new MessageDAO;
+            $jeudao = new JeuDAO;
+            $message = $messagedao->find($id);
+            $messagedao->delete($message);
+        }
+        $signalements = $messagedao->getMessagesSignalement($_SESSION['id']);
+        $renseignements = $messagedao->getRenseignements($_SESSION['id']);
         $demandesajout = $jeudao->getJeuxInvalides();
         include('Vue/v_admin.php');
         break;
@@ -256,7 +290,7 @@ switch ($action) {
 
     case 'jeuxAdmin': {
             $jeudao = new JeuDAO();
-            $items = $jeudao->getAll();
+            $items = $jeudao->getListeJeuxValides();
             $titre = "jeux";
             include_once 'Vue/v_adminliste.php';
             break;
@@ -269,13 +303,14 @@ switch ($action) {
             include_once 'Vue/v_adminliste.php';
             break;
         }
-    case 'deleteEvenements': {
+    case 'deleteEvenement': {
             $evendao = new EvenementDAO();
             $id = $_GET['id'];
             $even = $evendao->find($id);
+            unlink($even->getLienImage());
             $evendao->delete($even);
             $items = $evendao->findAll();
-            $titre = "evenements";
+            $titre = "évènements";
             include_once 'Vue/v_adminliste.php';
             break;
         }
@@ -293,20 +328,22 @@ switch ($action) {
                 if (is_uploaded_file($_FILES['image']['tmp_name'])) {
                     define('TARGET', 'Vue/img/evenement/');
                     fileupload();
+                    $message = MESSAGE;
+                    $nomImage = NOM_IMAGE;
                 }
-                $message = MESSAGE;
-                $nomImage = NOM_IMAGE;
-                if ($message == 'Upload réussi !') {
-                    $newevent = new evenement(-1, $even, $nomImage, $titreeven, new \DateTime());
-                    $eventdao->create($newevent);
-                    $resultat = "Votre evenement a bien été ajouté !";
-                    $items = $eventdao->findAll();
-                    $titre = "évènements";
-                    include_once 'Vue/v_adminliste.php';
-                }
+                $message = "";
+                //if ($message == 'Upload réussi !') {
+                $newevent = new evenement(-1, $even, $nomImage, $titreeven, new \DateTime());
+                $eventdao->create($newevent);
+                $resultat = "Votre evenement a bien été ajouté !";
+                $items = $eventdao->findAll();
+                $titre = "évènements";
+                include_once 'Vue/v_adminliste.php';
+                //}
             } else {
                 $messagedao = new MessageDAO();
-                $signalements = $messagedao->getMessagesSignalement();
+                $signalements = $messagedao->getMessagesSignalement($_SESSION['id']);
+                $renseignements = $messagedao->getRenseignements($_SESSION['id']);
                 $demandesajout = $jeudao->getJeuxInvalides();
                 $resultat = "Ajout impossible ! il manque des informations !";
                 include_once 'Vue/v_admin.php';
@@ -320,7 +357,8 @@ switch ($action) {
             $jeu = $jeudao->find($id);
             $jeudao->valideAjout($jeu);
             $messagedao = new MessageDAO();
-            $signalements = $messagedao->getMessagesSignalement();
+            $signalements = $messagedao->getMessagesSignalement($_SESSION['id']);
+            $renseignements = $messagedao->getRenseignements($_SESSION['id']);
             $demandesajout = $jeudao->getJeuxInvalides();
             include_once 'Vue/v_admin.php';
             break;
@@ -391,3 +429,5 @@ function fileupload() {
 
 // getMesssages( ... , type='signalement');
 
+
+    

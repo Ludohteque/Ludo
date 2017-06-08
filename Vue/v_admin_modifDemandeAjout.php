@@ -9,7 +9,7 @@ $dureedao = new DureeDAO;
 <section class='container'>
     <h2>Modification d'un jeu</h2></br>
 
-    <form class="form-horizontal" id="demandeJeuModif" action="index.php?uc=admin&action=okmodifDemandeJeu&id=<?php echo $jeu->getIdJeu(); ?>" method="POST" enctype="multipart/form-data">
+    <form class="form-horizontal" id="newjeuform" action="index.php?uc=admin&action=okmodifDemandeJeu&id=<?php echo $jeu->getIdJeu(); ?>" method="POST" enctype="multipart/form-data">
 
 
         <div class="form-group">

@@ -20,8 +20,8 @@
         <link rel="stylesheet" href="Vue/css/myslider.css">
         <link rel="stylesheet" href="Vue/css/main.css">
 
-        <!--<script type="text/javascript" src="Vue/js/vendor/jquery-1.11.2.min.js" ></script>-->
-<!--        <script type="text/javascript" src="Vue/js/vendor/bootstrap.js" ></script>
+<!--        <script src="Vue/js/vendor/jquery-1.11.2.min.js"></script>
+        <script src="Vue/js/vendor/bootstrap.min.js" type="text/javascript"></script>
 
         <script src="Vue/js/ism-2.2.min.js"></script>-->
         <!--<script src="Vue/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>-->
@@ -31,6 +31,23 @@
         <?php require_once('DAO/UserDAO.php'); ?>
     </head>
     <body>
+        <div class="modal fade" id="cModal" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3><span class="red">Veuillez confirmer la suppression ...</span></h3>
+                </div>
+                <div class="modal-body">
+                    <p>Etes-vous sûr de vouloir supprimer cet élément ?</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-default" id="Non">Non</a>
+                    <a href="#" class="btn btn-danger" id="Yes">Oui</a>
+                </div>
+            </div>
+        </div>
+    </div>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -57,14 +74,15 @@
                         <?php
                         if (!UserDAO::estConnecte()) {
                             echo "<a class=\"btn btn-success\" id=\"inscription\" href=\"index.php?uc=inscription&action=demandeInscription\">S'enregistrer</a>";
-                            ?><span> </span><?php echo "<a class=\"btn btn-success\" id=\"connexion\" href=\"index.php?uc=connexion&action=demandeConnexion\">S'identifier</a>";
-                        }
-                        if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
-                            echo "<a class=\"btn btn-warning\" href=\"index.php?uc=admin&action=demandeAdmin\">Administration</a>";
-                            ?><span> </span><?php echo "<a class=\"btn btn-success\" href=\"index.php?uc=dashboard&action=demandeDashboard\">Ma Dashboard</a>";
-                            ?><span> </span><?php echo "<a class=\"btn btn-danger\" href=\"index.php?uc=connexion&action=deconnexion\">Déconnexion</a>";
-                        }
-                        else if (UserDAO::estConnecte()) {
+                            ?><span> </span><?php
+                                echo "<a class=\"btn btn-success\" id=\"connexion\" href=\"index.php?uc=connexion&action=demandeConnexion\">S'identifier</a>";
+                            }
+                            if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
+                                echo "<a class=\"btn btn-warning\" href=\"index.php?uc=admin&action=demandeAdmin\">Administration</a>";
+                                ?><span> </span><?php echo "<a class=\"btn btn-success\" href=\"index.php?uc=dashboard&action=demandeDashboard\">Ma Dashboard</a>";
+                                ?><span> </span><?php
+                            echo "<a class=\"btn btn-danger\" href=\"index.php?uc=connexion&action=deconnexion\">Déconnexion</a>";
+                        } else if (UserDAO::estConnecte()) {
                             echo "<a class=\"btn btn-success\" href=\"index.php?uc=dashboard&action=demandeDashboard\">Ma Dashboard</a>";
                             ?><span> </span><?php
                             echo "<a class=\"btn btn-danger\" href=\"index.php?uc=connexion&action=deconnexion\">Déconnexion</a>";

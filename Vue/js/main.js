@@ -137,7 +137,20 @@ function verifTel(champ) {
         return true;
     }
 }
-
+function validation(f) {
+  if (f.mdp1.value !== f.mdp2.value) {
+    alert('Ce ne sont pas les mêmes mots de passe!');
+    f.mdp1.focus();
+    return false;
+    }
+  else if (f.mdp1.value === f.mdp2.value) {
+    return true;
+    }
+  else {
+    f.mdp1.focus();
+    return false;
+    }
+  }
 
 
 $("#inscription").click(function () {
@@ -148,4 +161,17 @@ $("#connexion").click(function () {
     $("body").addClass("grey");
 });
 
+$(".confirm").click(function (e) {
+            e.preventDefault();
+            theHREF = $(this).attr("href");
+            $("#cModal").modal("show");
+        });
+
+        $("#Non").click(function (e) {
+            $("#cModal").modal("hide");
+        });
+
+        $("#Yes").click(function (e) {
+            window.location.href = theHREF;
+        });
 

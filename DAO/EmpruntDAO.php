@@ -64,8 +64,14 @@ class EmpruntDAO extends DAO {
         $stmt->execute();
     }
 
-    public function getDerniersEmprunts() {
-        $stmt = Connexion::prepare("select * from " . self::$table . " ORDER BY date_emprunts DESC LIMIT 10;");
+    public function getDerniersEmprunts($limite) {
+        if ($limite){
+            $lim = 'LIMIT 10';
+        }else{
+            $lim = '';
+        }
+            
+        $stmt = Connexion::prepare("select * from " . self::$table . " ORDER BY date_emprunts DESC ".$lim.';');
         $stmt->execute();
         $result = $stmt->fetchAll();
         $listeEmprunts = array();

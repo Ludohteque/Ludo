@@ -40,7 +40,7 @@ switch ($action) {
                 $nomImage = NOM_IMAGE;
                 $isvalide = 0;
                 if ($message == 'Upload réussi !') {
-                    $nouveaujeu = new jeu(-1, $nom, $descriptif, $etat, 3, new \DateTime(), $nomImage, $nbjoueurs, $tranchedage, $duree, $categories);
+                    $nouveaujeu = new jeu(-1, $nom, $descriptif, $etat, 3, new \DateTime(), $nomImage, $nbjoueurs, $tranchedage, $duree, $categories, 0);
                     $jeudao->create($nouveaujeu);
                     //$resultat = "Votre jeu a bien été ajouté !";
                 }//TODO
@@ -63,7 +63,7 @@ switch ($action) {
                 $renseignements = $messagedao->getRenseignements($_SESSION['id']);
                 $demandesajout = $jeudao->getJeuxInvalides();
                 $resultat = "Ajout impossible ! il manque des informations !";
-                include_once 'Vue/v_admin.php';
+                include_once 'Vue/v_main.php';
             }
             break;
         }

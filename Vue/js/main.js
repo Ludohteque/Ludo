@@ -150,7 +150,7 @@ function validation(f) {
     }
 }
 
-function verifCat(f) {
+function verifCat() {
     if ($('div.checkbox-group.required :checkbox:checked').length > 0) {
         return true;
     } else {
@@ -182,15 +182,6 @@ $("#Yes").click(function (e) {
     window.location.href = theHREF;
 });
 
-
 //$(document).ready(function () { 
-        $('#newjeuvld').click(function (e) {
-            checked = $("input[type=checkbox]:checked").length;
-            alert(checked);
-            if (!checked) {
-                alert("Vous devez choisir au moins une catégorie !");
-                return false;
-            }
 
-        });
 //    });

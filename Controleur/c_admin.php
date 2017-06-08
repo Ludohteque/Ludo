@@ -44,10 +44,12 @@ switch ($action) {
                     $jeudao->create($nouveaujeu);
                     //$resultat = "Votre jeu a bien été ajouté !";
                 }//TODO
-                $items = $jeudao->getListeJeuxValides();
-                $titre = "jeux";
+                $messagedao = new MessageDAO();
+                $signalements = $messagedao->getMessagesSignalement($_SESSION['id']);
+                $renseignements = $messagedao->getRenseignements($_SESSION['id']);
+                $demandesajout = $jeudao->getJeuxInvalides();
                 if (UserDAO::estConnecte() && UserDAO::isAdmin()) {
-                    include_once 'Vue/v_adminliste.php';
+                    include_once 'Vue/v_admin.php';
                 } else {
                     $jeuDAO = new JeuDAO();
                     $empruntDAO = new EmpruntDAO();

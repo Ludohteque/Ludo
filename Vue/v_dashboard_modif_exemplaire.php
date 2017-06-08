@@ -2,8 +2,8 @@
 
 <section class='container'>
     <h2>Modifier votre jeu</h2>
-    <form class="form-horizontal" action="index.php?uc=dashboard&action=valideModifExemplaire&id=<?php echo $exemplaire->getIdExemplaire(); ?>" method="POST">
-
+    <form class="form-horizontal" action="index.php?uc=dashboard&action=valideModifExemplaire" method="POST">
+        <input hidden="" name="id" value="<?php echo $exemplaire->getIdExemplaire(); ?>"/>
         <div class="form-group">
             <label class="control-label col-sm-2" for="jeu">Choisissez un jeu:</label>
             <div class="col-sm-10">

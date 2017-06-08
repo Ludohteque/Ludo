@@ -87,42 +87,41 @@ switch ($action) {
         $daoexemplaire->create($exemplaire);
         include('Vue/v_dashboard.php');
         break;
-    
-    case 'supprExemplaire': //permet de supprimùer un exemplaire
+
+    case 'supprExemplaire':
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
-            $exemplairedao= new ExemplaireDAO();
+            $exemplairedao = new ExemplaireDAO();
             $exemplaire = $exemplairedao->find($id);
             $exemplairedao->delete($exemplaire);
         }
-        // raffiche la vue dashboard
-            include_once 'Vue/v_dashboard.php';
-            break;
-            
-    case 'modifExemplaire': //appelle le formulaire de modification d'exemplaire
+        include_once 'Vue/v_dashboard.php';
+        break;
+
+    case 'modifExemplaire':
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
-            $exemplairedao= new ExemplaireDAO();
+            $exemplairedao = new ExemplaireDAO();
             $exemplaire = $exemplairedao->find($id);
         }
         include_once('Vue/v_dashboard_modif_exemplaire.php');
         break;
-    
-    case 'valideModifExemplaire': //Prends les valeurs de modification d'exemplaire du formulaire associé, et modifie un exemplaire.
-          if (isset($_GET['id'])) {
+
+    case 'valideModifExemplaire':
+        if (isset($_POST['id'])) {
             $exemplairedao = new ExemplaireDAO();
-            $id = $_GET['id'];
+            $id = $_POST['id'];
             $etat = $_POST['etat'];
             $dispo = $_POST['dispo'];
             $exemplaire = $exemplairedao->find($id);
             $exemplaire->setEtat($etat);
             $exemplaire->setDisponibilite($dispo);
             $exemplairedao->update($exemplaire);
-          }
+        }
         include_once 'Vue/v_dashboard.php';
         break;
-        
-    case 'choixPreteur': //choix du propriétaire
+
+    case 'choixPreteur':
         $destinataire = null;
         if (isset($_GET['id'])) {
             $destinataire = $_GET['id'];
@@ -252,8 +251,6 @@ switch ($action) {
 
         include('Vue/v_dashboard.php');
         break;
-        
-        
 }
 // a décommenter pour que cela demande la connexion, et avoir un truc fonctionnel... 
 // Commenté a des fins de tests.

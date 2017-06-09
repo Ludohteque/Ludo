@@ -13,7 +13,7 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway|Open+Sans" rel="stylesheet">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
         <link href="https://fonts.googleapis.com/css?family=Eczar" rel="stylesheet">
-
+        
 
         <link rel="stylesheet" href="Vue/css/bootstrap.min.css">
         <link rel="stylesheet" href="Vue/css/bootstrap-theme.min.css">
@@ -23,10 +23,10 @@
 <!--        <script src="Vue/js/vendor/jquery-1.11.2.min.js"></script>
         <script src="Vue/js/vendor/bootstrap.min.js" type="text/javascript"></script>
 
-        <script src="Vue/js/ism-2.2.min.js"></script>
-        <script src="Vue/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        <script src="Vue/js/ism-2.2.min.js"></script>-->
+        <!--<script src="Vue/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>-->
 
-        <script src="Vue/js/main.js"></script>-->
+        <!--<script src="Vue/js/main.js"></script>-->
 
         <?php require_once('DAO/UserDAO.php'); ?>
     </head>

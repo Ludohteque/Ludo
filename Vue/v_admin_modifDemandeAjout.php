@@ -9,7 +9,7 @@ $dureedao = new DureeDAO;
 <section class='container'>
     <h2>Modification d'un jeu</h2></br>
 
-    <form class="form-horizontal" id="newjeuform" action="index.php?uc=admin&action=okmodifDemandeJeu&id=<?php echo $jeu->getIdJeu(); ?>" method="POST" enctype="multipart/form-data">
+    <form class="form-horizontal" id="newjeuform" action="index.php?uc=admin&action=okmodifDemandeJeu&id=<?php echo $jeu->getIdJeu(); ?>" method="POST" enctype="multipart/form-data" onsubmit="return verifCat()">
 
 
         <div class="form-group">
@@ -72,7 +72,7 @@ $dureedao = new DureeDAO;
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2" for="categories">Catégories :</label>
-            <div class="col-sm-10">
+            <div class="col-sm-10 checkbox-group required">
                 <?php $categories = $categoriedao->findCategories(); ?>
                 <?php foreach ($categories as $unecategorie) { ?>                      
                     <input type="checkbox" class="categories[]" name="categories[]" value="<?php echo $unecategorie; ?>" <?php

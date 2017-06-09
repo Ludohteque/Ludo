@@ -235,7 +235,7 @@ switch ($action) {
                 include_once 'Vue/v_adminliste.php';
                 //include_once 'Vue/v_modifEvenement.php';
                 //}
-            }
+            }break;
         }
 
     case 'effacerSignalement':
